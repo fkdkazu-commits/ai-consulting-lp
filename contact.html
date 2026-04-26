@@ -291,7 +291,13 @@
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ ...data, replyto: data.email })
+        body: JSON.stringify({
+            ...data,
+            replyto: data.email,
+            autoresponse: true,
+            autoresponse_subject: '【お問合せ受付完了】福田和弘 AI業務自動化支援',
+            autoresponse_message: `${data.name} 様\n\nお問合せいただきありがとうございます。\n以下の内容でお問合せを受け付けました。\n\n---\n【お名前】${data.name}\n【種別】${data.category}\n【内容】${data.message}\n---\n\n通常2営業日以内にご返信いたします。\n\n福田和弘 | AI業務自動化支援\nhttps://fkdkazu-commits.github.io/ai-consulting-lp/`
+          })
       });
       const json = await res.json();
       if (json.success) {
