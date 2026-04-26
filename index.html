@@ -209,6 +209,49 @@
     line-height: 1.9;
   }
 
+  /* ===== NEWS ===== */
+  .news-section { padding: 56px 40px; border-bottom: 1px solid #e2e8f0; }
+  .news-list { margin-top: 28px; list-style: none; }
+  .news-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #f0f4f8;
+    flex-wrap: wrap;
+  }
+  .news-item:last-child { border-bottom: none; }
+  .news-date {
+    font-size: 13px;
+    color: #718096;
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 80px;
+  }
+  .news-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .news-badge-new { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+  .news-badge-result { background: #ebf8ff; color: #1e40af; border: 1px solid #bfdbfe; }
+  .news-title {
+    font-size: 14px;
+    color: #2d3748;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    flex: 1;
+  }
+  .news-title:hover { color: #2b6cb0; text-decoration: underline; }
+  @media (max-width: 640px) {
+    .news-section { padding: 40px 20px; }
+    .news-item { gap: 8px; }
+    .news-title { width: 100%; }
+  }
+
   /* ===== PAIN ===== */
   .pain { background: #f7fafc; }
   .pain-grid {
@@ -786,6 +829,41 @@
         <div class="stat-label">自社・支援先への導入実績</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news-section" id="news">
+  <div class="section-inner">
+    <div class="section-tag">NEWS</div>
+    <h2 class="section-title">新着情報</h2>
+    <ul class="news-list">
+      <li class="news-item">
+        <span class="news-date">2026.04.26</span>
+        <span class="news-badge news-badge-new">新規公開</span>
+        <a href="contact.html" class="news-title">AI業務自動化支援サービス、お問合せフォームを公開しました</a>
+      </li>
+      <li class="news-item">
+        <span class="news-date">2026.04.25</span>
+        <span class="news-badge news-badge-result">実績公開</span>
+        <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/faq-agent.html" target="_blank" rel="noopener" class="news-title">大手機器メーカー向けFAQエージェント構築の実績ページを公開しました</a>
+      </li>
+      <li class="news-item">
+        <span class="news-date">2026.04.25</span>
+        <span class="news-badge news-badge-result">実績公開</span>
+        <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/screening.html" target="_blank" rel="noopener" class="news-title">採用支援AI Phase2（スクリーニング自動採点）の詳細ページを公開しました</a>
+      </li>
+      <li class="news-item">
+        <span class="news-date">2026.04.25</span>
+        <span class="news-badge news-badge-result">実績公開</span>
+        <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/recruitment-tool.html" target="_blank" rel="noopener" class="news-title">採用支援AI Phase1（求人票・スカウト文自動生成）の詳細ページを公開しました</a>
+      </li>
+      <li class="news-item">
+        <span class="news-date">2026.04.25</span>
+        <span class="news-badge news-badge-result">実績公開</span>
+        <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/" target="_blank" rel="noopener" class="news-title">AI業務自動化アプリ 導入実績まとめページを公開しました</a>
+      </li>
+    </ul>
   </div>
 </section>
 
