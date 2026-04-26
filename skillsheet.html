@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>スキルシート｜福田 和弘</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', 'Hiragino Sans', 'Meiryo', sans-serif;
+    color: #1a202c;
+    background: #f0f4f8;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  /* ===== 印刷ボタン ===== */
+  .print-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #1a365d;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .print-bar-title { color: rgba(255,255,255,0.8); font-size: 13px; }
+  .print-btn {
+    background: #f6ad55;
+    color: #1a202c;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 8px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: #ed8936; }
+
+  /* ===== 用紙 ===== */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 56px auto 40px;
+    background: #fff;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    padding: 16mm 16mm 12mm;
+  }
+
+  /* ===== ヘッダー ===== */
+  .doc-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: start;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 3px solid #1a365d;
+  }
+  .doc-title {
+    font-size: 9px;
+    font-weight: 700;
+    color: #718096;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .doc-name {
+    font-size: 26px;
+    font-weight: 900;
+    color: #1a365d;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  .doc-role {
+    font-size: 12px;
+    color: #4a5568;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+  .doc-meta {
+    text-align: right;
+    font-size: 11px;
+    color: #718096;
+    line-height: 2;
+  }
+  .doc-meta strong { color: #2d3748; }
+
+  /* ===== セクション ===== */
+  .section { margin-bottom: 14px; }
+  .section-title {
+    font-size: 11px;
+    font-weight: 900;
+    color: #fff;
+    background: #1a365d;
+    padding: 4px 12px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .section-content { padding: 0 4px; }
+
+  /* ===== 要約 ===== */
+  .summary-text {
+    font-size: 12px;
+    color: #2d3748;
+    line-height: 1.9;
+  }
+
+  /* ===== 2カラムレイアウト ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* ===== 対応領域 ===== */
+  .area-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px 12px;
+    background: #f8fafc;
+  }
+  .area-title {
+    font-size: 11px;
+    font-weight: 900;
+    color: #1a365d;
+    margin-bottom: 6px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .area-list {
+    list-style: none;
+    font-size: 11px;
+    color: #4a5568;
+  }
+  .area-list li {
+    padding: 2px 0;
+    padding-left: 12px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .area-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #2b6cb0;
+    font-size: 9px;
+    top: 3px;
+  }
+
+  /* ===== 実績 ===== */
+  .result-block {
+    border-left: 3px solid #2b6cb0;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    background: #f8fafc;
+    border-radius: 0 6px 6px 0;
+  }
+  .result-title {
+    font-size: 12px;
+    font-weight: 900;
+    color: #1a365d;
+    margin-bottom: 4px;
+  }
+  .result-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2px 12px;
+    font-size: 11px;
+  }
+  .result-label {
+    font-weight: 700;
+    color: #4a5568;
+    white-space: nowrap;
+  }
+  .result-val { color: #2d3748; }
+  .result-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+  }
+  .result-tag {
+    font-size: 10px;
+    background: #ebf8ff;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+    padding: 1px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .result-tag-green {
+    background: #f0fff4;
+    color: #276749;
+    border-color: #9ae6b4;
+  }
+
+  /* ===== ツール ===== */
+  .tool-group { margin-bottom: 8px; }
+  .tool-group-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: #718096;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .tool-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .tool-tag {
+    font-size: 10px;
+    background: #f7fafc;
+    border: 1px solid #e2e8f0;
+    color: #2d3748;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  /* ===== 稼働条件 ===== */
+  .condition-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    font-size: 11px;
+  }
+  .condition-item {
+    display: flex;
+    gap: 8px;
+    padding: 6px 10px;
+    background: #f8fafc;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+  }
+  .condition-icon { font-size: 13px; flex-shrink: 0; }
+  .condition-text { color: #2d3748; line-height: 1.5; }
+
+  /* ===== 自己PR ===== */
+  .pr-text {
+    font-size: 12px;
+    color: #2d3748;
+    line-height: 1.9;
+    background: linear-gradient(135deg, #ebf8ff, #e6f0ff);
+    border: 1px solid #bee3f8;
+    border-radius: 6px;
+    padding: 12px 16px;
+  }
+
+  /* ===== フッター ===== */
+  .doc-footer {
+    margin-top: 16px;
+    padding-top: 10px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #a0aec0;
+  }
+
+  /* ===== 印刷設定 ===== */
+  @media print {
+    html, body { background: #fff; width: 100%; }
+    .print-bar { display: none !important; }
+    .page {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+      min-height: auto;
+    }
+    @page {
+      size: A4 portrait;
+      margin: 12mm 14mm;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .page { width: 100%; margin: 48px 0 0; padding: 20px; }
+    .two-col { grid-template-columns: 1fr; }
+    .three-col { grid-template-columns: 1fr 1fr; }
+    .doc-header { grid-template-columns: 1fr; }
+    .doc-meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="print-bar">
+  <span class="print-bar-title">スキルシート｜福田 和弘</span>
+  <button class="print-btn" id="downloadBtn" onclick="downloadPDF()">📄 PDFとして保存</button>
+</div>
+
+<div class="page" id="printPage">
+
+  <!-- ヘッダー -->
+  <div class="doc-header">
+    <div>
+      <div class="doc-title">SKILL SHEET</div>
+      <div class="doc-name">福田 和弘</div>
+      <div class="doc-role">AI業務効率化・自動化支援 ／ DX推進 ／ SEOディレクター</div>
+    </div>
+    <div class="doc-meta">
+      <div><strong>所属（本業）</strong>　富士ソフト株式会社</div>
+      <div><strong>副業形態</strong>　業務委託</div>
+      <div><strong>IT業界経験</strong>　20年以上</div>
+      <div><strong>PM・PL・マネジメント</strong>　20年以上</div>
+    </div>
+  </div>
+
+  <!-- 職務要約 -->
+  <div class="section">
+    <div class="section-title">職務要約</div>
+    <div class="section-content">
+      <p class="summary-text">
+        富士ソフト株式会社として大手機器メーカー様の組込開発エンジニア・PL・PMとして長年従事し、最大150名超のプロジェクトマネジメントを経験。現在は同社にてDX領域の新規事業立ち上げ責任者として、PLM事業の推進を担当。PLM導入支援の中でお客様が抱える課題を分析した結果、問い合わせ対応の属人化・ナレッジ分散が根本課題と特定。Copilot Studio・Power Automateを活用したFAQエージェントを提案〜導入まで一気通貫で対応し、AI一次回答率約70%・問い合わせ対応時間約50%削減を達成。<br>
+        副業では、SEOディレクター・AI業務効率化/自動化支援を中心に活動。Claude Codeを活用し、業務改善・問い合わせ削減・AIエージェント構築・業務自動化の設計〜実装〜運用定着まで一気通貫で支援。業務全体を俯瞰した「仕組み化」と、現場で使われる運用設計を強みとしています。
+      </p>
+    </div>
+  </div>
+
+  <!-- 対応可能領域 -->
+  <div class="section">
+    <div class="section-title">対応可能領域</div>
+    <div class="section-content">
+      <div class="two-col">
+        <div class="area-card">
+          <div class="area-title">① AIシステム・AIエージェント構築</div>
+          <ul class="area-list">
+            <li>Copilot Studio を活用したFAQエージェント構築</li>
+            <li>Claude Code を活用した業務自動化アプリ開発</li>
+            <li>ChatGPT / Claude を活用した業務改善設計</li>
+            <li>プロンプト設計・品質改善・運用設計</li>
+            <li>LLMを活用した業務支援ツール設計</li>
+          </ul>
+        </div>
+        <div class="area-card">
+          <div class="area-title">② 業務自動化・効率化システム開発</div>
+          <ul class="area-list">
+            <li>Power Automate を活用した自動化フロー構築</li>
+            <li>UiPath を活用したRPA構築経験</li>
+            <li>Gmail → LINE通知 / Googleカレンダー自動化</li>
+            <li>API連携によるデータ統合・通知設計</li>
+            <li>ノーコード / ローコードを活用した改善提案</li>
+          </ul>
+        </div>
+        <div class="area-card">
+          <div class="area-title">③ DX推進・要件定義</div>
+          <ul class="area-list">
+            <li>業務課題の可視化・As-Is / To-Be整理</li>
+            <li>要件定義・PoC設計・改善提案</li>
+            <li>デモ環境構築 → 提案 → 導入 → 定着支援</li>
+            <li>PM / PMO / 品質管理</li>
+            <li>顧客折衝・経営層向け提案資料作成</li>
+          </ul>
+        </div>
+        <div class="area-card">
+          <div class="area-title">④ SEO × AI活用支援</div>
+          <ul class="area-list">
+            <li>SEO記事制作パイプライン構築</li>
+            <li>記事生成 / 品質チェック / ファクトチェック自動化</li>
+            <li>GSCカニバリ分析ツール</li>
+            <li>顧客育成ジャーニー設計AI</li>
+            <li>SNS × CRM統合マーケティング戦略ツール</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 主な実績 -->
+  <div class="section">
+    <div class="section-title">主な実績</div>
+    <div class="section-content">
+
+      <div class="result-block">
+        <div class="result-title">① Copilot Studio + Power Automate によるFAQエージェント構築</div>
+        <div class="result-grid">
+          <span class="result-label">概要</span>
+          <span class="result-val">大手機器メーカー向けに、問い合わせ対応の属人化解消を目的としたFAQエージェントを構築</span>
+          <span class="result-label">担当範囲</span>
+          <span class="result-val">現状ヒアリング・課題整理・デモ構築・提案・要件定義・ナレッジ設計・Copilot Studio構築・Power Automate連携・導入〜運用定着支援</span>
+          <span class="result-label">成果</span>
+          <span class="result-val">AI一次回答率 約70%達成 ／ 問い合わせ対応時間 約50%削減 ／ 属人化解消・ナレッジ資産化 ／ 対応品質の標準化</span>
+        </div>
+        <div class="result-tags">
+          <span class="result-tag">Copilot Studio</span>
+          <span class="result-tag">Power Automate</span>
+          <span class="result-tag">FAQエージェント</span>
+          <span class="result-tag">大手機器メーカー</span>
+          <span class="result-tag-green result-tag">AI一次回答率70%</span>
+          <span class="result-tag-green result-tag">対応時間50%削減</span>
+        </div>
+      </div>
+
+      <div class="html2pdf__page-break"></div>
+      <div style="height: 12mm;"></div>
+
+      <div class="result-block">
+        <div class="result-title">② SEO記事自動化パイプライン構築（Claude API / Claude Code × FastAPI × Next.js）</div>
+        <div class="result-grid">
+          <span class="result-label">概要</span>
+          <span class="result-val">SEO記事作成の全工程（リサーチ→構成案→執筆→ファクトチェック→URL検証→品質チェック→内部リンク設計→Google Docs保存）をAIで一気通貫自動化。FastAPI（バックエンド）＋Next.js（フロントエンド）による本格Webアプリ</span>
+          <span class="result-label">処理フロー</span>
+          <span class="result-val">Perplexityリサーチ（Prompt A）→ 構成案・執筆（Prompt B）→ ファクトチェック（Prompt C）→ URL検証・置換（Prompt C'）→ 品質チェック（Prompt D）→ 内部リンク設計（Prompt E）→ Google Docs自動保存</span>
+          <span class="result-label">成果</span>
+          <span class="result-val">1記事あたりの作業工数 約80%削減 ／ 品質の安定化・ムラ解消 ／ 内部リンク切れ自動チェックにより記事品質を担保</span>
+        </div>
+        <div class="result-tags">
+          <span class="result-tag">Claude API</span>
+          <span class="result-tag">Claude Code</span>
+          <span class="result-tag">FastAPI</span>
+          <span class="result-tag">Next.js</span>
+          <span class="result-tag">SEO自動化</span>
+          <span class="result-tag-green result-tag">工数80%削減</span>
+          <span class="result-tag-green result-tag">品質安定化</span>
+        </div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-title">③ Claude Code による業務自動化アプリ開発（複数本）</div>
+        <div class="result-grid">
+          <span class="result-label">開発実績</span>
+          <span class="result-val">ローカルダッシュボード / Gmail LINE通知 / GSCカニバリ分析 / SEO記事自動化パイプライン / AI役員チーム / SNS投稿自動生成 / Gmail→カレンダー自動化 / 顧客育成ジャーニー設計AI / SNS×CRM統合ツール</span>
+          <span class="result-label">特徴</span>
+          <span class="result-val">複数業務を横断した管理環境・ダッシュボード設計を重視。再利用性と継続運用を前提とした仕組み化を実施</span>
+        </div>
+        <div class="result-tags">
+          <span class="result-tag">Claude Code</span>
+          <span class="result-tag">Python</span>
+          <span class="result-tag">Node.js</span>
+          <span class="result-tag">API連携</span>
+          <span class="result-tag">業務自動化</span>
+        </div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-title">④ SEOディレクター / SEOコンサル支援</div>
+        <div class="result-grid">
+          <span class="result-label">実績</span>
+          <span class="result-val">IT関連サイトをはじめとしてさまざまなジャンルで年600記事以上対応 ／ 約50%が検索上位10位以内</span>
+          <span class="result-label">改善成果</span>
+          <span class="result-val">PV 2.95倍（0.7K→2.1K）／ PV 1.32倍（6.5K→8.6K）／ PV 2.0倍（34K→69K）／ 売上 1.5倍</span>
+          <span class="result-label">対応内容</span>
+          <span class="result-val">KW選定・構成作成・SEO記事制作・ディレクション・AI活用による制作効率改善</span>
+        </div>
+        <div class="result-tags">
+          <span class="result-tag">SEOディレクション</span>
+          <span class="result-tag">KW選定</span>
+          <span class="result-tag">記事制作</span>
+          <span class="result-tag">AI活用</span>
+          <span class="result-tag-green result-tag">PV最大2.95倍</span>
+          <span class="result-tag-green result-tag">売上1.5倍</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ツール・技術 -->
+  <div class="section">
+    <div class="section-title">使用ツール・技術</div>
+    <div class="section-content">
+      <div class="three-col">
+        <div>
+          <div class="tool-group">
+            <div class="tool-group-title">AI / LLM</div>
+            <div class="tool-tags">
+              <span class="tool-tag">Claude / Claude Code</span>
+              <span class="tool-tag">ChatGPT</span>
+              <span class="tool-tag">Gemini</span>
+              <span class="tool-tag">Copilot Studio</span>
+              <span class="tool-tag">Dify</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="tool-group">
+            <div class="tool-group-title">自動化 / ノーコード</div>
+            <div class="tool-tags">
+              <span class="tool-tag">Power Automate</span>
+              <span class="tool-tag">UiPath</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="tool-group">
+            <div class="tool-group-title">開発 / その他</div>
+            <div class="tool-tags">
+              <span class="tool-tag">API連携</span>
+              <span class="tool-tag">SharePoint</span>
+              <span class="tool-tag">WordPress</span>
+              <span class="tool-tag">GSC</span>
+              <span class="tool-tag">GA4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 稼働条件・自己PR 2カラム -->
+  <div class="two-col">
+    <div class="section">
+      <div class="section-title">稼働条件</div>
+      <div class="section-content">
+        <div class="condition-grid">
+          <div class="condition-item">
+            <span class="condition-icon">🗓️</span>
+            <div class="condition-text"><strong>平日</strong><br>18:00以降（日中MTG調整可）</div>
+          </div>
+          <div class="condition-item">
+            <span class="condition-icon">🗓️</span>
+            <div class="condition-text"><strong>土日祝</strong><br>終日対応可</div>
+          </div>
+          <div class="condition-item">
+            <span class="condition-icon">💬</span>
+            <div class="condition-text"><strong>チャット連絡</strong><br>基本1時間以内返信</div>
+          </div>
+          <div class="condition-item">
+            <span class="condition-icon">📹</span>
+            <div class="condition-text"><strong>Zoom</strong><br>顔出し対応可</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">自己PR</div>
+      <div class="section-content">
+        <p class="pr-text">
+          AI導入は「ツールを入れること」ではなく、「現場で使われる仕組みを作ること」が重要だと考えています。<br><br>
+          業務課題の整理から、要件定義、AIアプリ構築、運用定着まで一気通貫で支援できることが強みです。現場の業務理解とプロジェクト推進力を活かし、単発開発ではなく継続的に成果が出る設計を重視しています。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- フッター -->
+  <div class="doc-footer">
+    <span>CONFIDENTIAL — 本資料は採用・業務委託検討目的のみにご使用ください</span>
+    <span>福田 和弘　fkdkazu@gmail.com</span>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+<script>
+  function downloadPDF() {
+    const btn = document.getElementById('downloadBtn');
+    btn.textContent = '生成中…';
+    btn.disabled = true;
+
+    const opt = {
+      margin: 0,
+      filename: '福田和弘_スキルシート.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff'
+      },
+      jsPDF: {
+        unit: 'mm',
+        format: 'a4',
+        orientation: 'portrait'
+      }
+    };
+
+    html2pdf().set(opt).from(document.getElementById('printPage')).save().then(() => {
+      btn.textContent = '📄 PDFとして保存';
+      btn.disabled = false;
+    });
+  }
+</script>
+
+</body>
+</html>
