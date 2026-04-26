@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問合せ | 福田和弘 AI業務自動化支援</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+    color: #1a202c;
+    background: #f7fafc;
+    line-height: 1.8;
+    font-size: 16px;
+  }
+
+  /* HEADER */
+  .site-header {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0 40px;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .logo {
+    font-size: 17px;
+    font-weight: 900;
+    color: #1a365d;
+    text-decoration: none;
+  }
+  .logo span { color: #2b6cb0; }
+  .header-back {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4a5568;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+  .header-back:hover { color: #2b6cb0; }
+
+  /* MAIN */
+  .contact-wrap {
+    max-width: 680px;
+    margin: 60px auto;
+    padding: 0 24px 80px;
+  }
+  .contact-tag {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2b6cb0;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .contact-title {
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 900;
+    color: #1a365d;
+    margin-bottom: 12px;
+  }
+  .contact-lead {
+    font-size: 15px;
+    color: #4a5568;
+    margin-bottom: 40px;
+    line-height: 1.9;
+  }
+  .contact-lead a { color: #2b6cb0; }
+
+  /* FORM */
+  .contact-form {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  .form-group {
+    margin-bottom: 24px;
+  }
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 8px;
+  }
+  label .required {
+    color: #e53e3e;
+    font-size: 12px;
+    margin-left: 4px;
+  }
+  label .optional {
+    color: #a0aec0;
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 4px;
+  }
+  input[type="text"],
+  input[type="email"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #1a202c;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #2b6cb0;
+    box-shadow: 0 0 0 3px rgba(43,108,176,0.12);
+  }
+  textarea { resize: vertical; min-height: 140px; line-height: 1.7; }
+  .form-divider {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 32px 0;
+  }
+  .submit-btn {
+    width: 100%;
+    background: #1a365d;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 0.03em;
+  }
+  .submit-btn:hover { background: #2b6cb0; transform: translateY(-1px); }
+  .submit-btn:disabled { background: #a0aec0; cursor: not-allowed; transform: none; }
+  .form-note {
+    margin-top: 16px;
+    font-size: 12px;
+    color: #a0aec0;
+    text-align: center;
+    line-height: 1.7;
+  }
+
+  /* SUCCESS */
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .success-msg .success-icon { font-size: 56px; margin-bottom: 16px; }
+  .success-msg h2 { font-size: 22px; font-weight: 900; color: #1a365d; margin-bottom: 12px; }
+  .success-msg p { font-size: 15px; color: #4a5568; line-height: 1.8; margin-bottom: 28px; }
+  .back-btn {
+    display: inline-block;
+    background: #2b6cb0;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 12px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .back-btn:hover { background: #1a4f8a; }
+
+  /* ERROR */
+  .error-msg {
+    display: none;
+    background: #fff5f5;
+    border: 1px solid #feb2b2;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: #c53030;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 640px) {
+    .site-header { padding: 0 20px; }
+    .contact-form { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">福田和弘<span> | AI業務自動化</span></a>
+    <a href="index.html" class="header-back">← トップに戻る</a>
+  </div>
+</header>
+
+<div class="contact-wrap">
+  <div class="contact-tag">CONTACT</div>
+  <h1 class="contact-title">お問合せ</h1>
+  <p class="contact-lead">
+    「こんなことを自動化したい」「自社に合うか相談したい」など、お気軽にご連絡ください。<br>
+    通常2営業日以内にご返信いたします。<br>
+    X（DM）でのご連絡は <a href="https://x.com/Marketer_kazuf" target="_blank" rel="noopener">@Marketer_kazuf</a> まで。
+  </p>
+
+  <div class="contact-form">
+    <div class="error-msg" id="errorMsg">送信中にエラーが発生しました。時間をおいて再度お試しください。</div>
+
+    <form id="contactForm">
+      <!-- Web3Forms アクセスキー（要設定） -->
+      <input type="hidden" name="access_key" value="f52b6018-916c-40c4-bbbd-79964f0c6609">
+      <input type="hidden" name="subject" value="【AI業務自動化支援】お問合せが届きました">
+      <input type="hidden" name="from_name" value="福田和弘 AI業務自動化支援">
+      <input type="checkbox" name="botcheck" style="display:none">
+
+      <div class="form-group">
+        <label>お名前 <span class="required">必須</span></label>
+        <input type="text" name="name" placeholder="山田 太郎" required>
+      </div>
+
+      <div class="form-group">
+        <label>メールアドレス <span class="required">必須</span></label>
+        <input type="email" name="email" placeholder="example@gmail.com" required>
+      </div>
+
+      <div class="form-group">
+        <label>会社名・屋号 <span class="optional">任意</span></label>
+        <input type="text" name="company" placeholder="株式会社〇〇 / 個人事業主">
+      </div>
+
+      <div class="form-group">
+        <label>お問合せ種別 <span class="required">必須</span></label>
+        <select name="category" required>
+          <option value="" disabled selected>選択してください</option>
+          <option value="サービス内容について">サービス内容について</option>
+          <option value="料金・見積もりについて">料金・見積もりについて</option>
+          <option value="導入事例・実績について">導入事例・実績について</option>
+          <option value="その他">その他</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>お問合せ内容 <span class="required">必須</span></label>
+        <textarea name="message" placeholder="自動化したい業務の内容や、現在お困りの課題などをご記入ください。" required></textarea>
+      </div>
+
+      <hr class="form-divider">
+
+      <button type="submit" class="submit-btn" id="submitBtn">送信する</button>
+      <p class="form-note">
+        送信後、ご入力のメールアドレス宛に受付確認メールをお送りします。<br>
+        メールが届かない場合は迷惑メールフォルダをご確認ください。
+      </p>
+    </form>
+
+    <div class="success-msg" id="successMsg">
+      <div class="success-icon">✅</div>
+      <h2>送信完了しました</h2>
+      <p>お問合せありがとうございます。<br>ご入力のメールアドレスに受付確認メールをお送りしました。<br>通常2営業日以内にご返信いたします。</p>
+      <a href="index.html" class="back-btn">トップページに戻る</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const errMsg = document.getElementById('errorMsg');
+    errMsg.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = '送信中…';
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ ...data, replyto: data.email })
+      });
+      const json = await res.json();
+      if (json.success) {
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+      } else {
+        throw new Error('送信失敗');
+      }
+    } catch {
+      errMsg.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = '送信する';
+    }
+  });
+</script>
+</body>
+</html>

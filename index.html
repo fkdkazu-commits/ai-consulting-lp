@@ -435,6 +435,36 @@
     color: #a0aec0;
     text-align: center;
   }
+  .plans-notice {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 28px 0 40px;
+    background: #fff;
+    border: 1px solid #bee3f8;
+    border-radius: 12px;
+    padding: 24px 28px;
+  }
+  .plans-notice-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: #4a5568;
+    line-height: 1.7;
+  }
+  .plans-notice-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .plans-notice-item strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a365d;
+    margin-bottom: 2px;
+  }
 
   /* ===== RESULTS ===== */
   .results-grid {
@@ -532,6 +562,44 @@
     padding: 4px 12px;
     border-radius: 20px;
   }
+  .profile-detail-link {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 2px solid #bee3f8;
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .profile-detail-link:hover { color: #1a4f8a; border-color: #2b6cb0; }
+  .result-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .result-card-link:hover { box-shadow: 0 8px 32px rgba(43,108,176,0.15); transform: translateY(-3px); }
+  .result-link-label {
+    margin-top: 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #2b6cb0;
+  }
+  .results-more-link {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #2b6cb0;
+    text-decoration: none;
+    border: 2px solid #bee3f8;
+    padding: 12px 32px;
+    border-radius: 8px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .results-more-link:hover { background: #ebf8ff; border-color: #2b6cb0; }
 
   /* ===== FAQ ===== */
   .faq-list { margin-top: 48px; max-width: 800px; }
@@ -679,7 +747,7 @@
       <a href="#results">実績</a>
       <a href="#profile">プロフィール</a>
       <a href="#faq">FAQ</a>
-      <span class="header-cta" style="cursor:default">fkdkazu@gmail.com</span>
+      <a href="contact.html" class="header-cta">お問合せ</a>
     </nav>
   </div>
 </header>
@@ -811,7 +879,31 @@
   <div class="section-inner">
     <div class="section-tag">PRICING</div>
     <h2 class="section-title">料金プラン</h2>
-    <p class="section-lead">課題の規模や予算に合わせて、3つのプランからお選びいただけます。</p>
+    <p class="section-lead">Claude Codeを活用した業務自動化支援の3プランです。課題の規模や予算に合わせてお選びください。</p>
+
+    <div class="plans-notice">
+      <div class="plans-notice-item">
+        <span class="plans-notice-icon">🖥️</span>
+        <div>
+          <strong>環境構築について</strong>
+          貴社PCへの導入レクチャーを行います。既存の業務環境にそのまま組み込めるよう丁寧にご案内します。
+        </div>
+      </div>
+      <div class="plans-notice-item">
+        <span class="plans-notice-icon">⚙️</span>
+        <div>
+          <strong>アプリ構築について</strong>
+          ①貴社環境でのレクチャー形式、または②私の環境で構築して納品→貴社環境で動作確認、のいずれかをご選択いただけます。
+        </div>
+      </div>
+      <div class="plans-notice-item">
+        <span class="plans-notice-icon">👥</span>
+        <div>
+          <strong>複数メンバーへのサポートについて</strong>
+          チーム全体への展開・複数人サポートも別途ご相談いただけます。お気軽にお声がけください。
+        </div>
+      </div>
+    </div>
 
     <div class="plans-grid">
       <div class="plan-card">
@@ -866,6 +958,7 @@
       <div class="plan-option-name">
         FAQエージェント構築
         <span>Copilot Studio + Power Automateを活用した問い合わせ自動対応システム</span>
+        <span style="color:#e53e3e;font-size:12px;margin-top:4px;display:block">※ ナレッジの内容・ボリュームによっては追加料金が発生する場合があります。可能な限りこの金額での対応を目指します。</span>
       </div>
       <div class="plan-option-price">¥30,000 <small>/ +10日〜</small></div>
     </div>
@@ -882,24 +975,33 @@
     <p class="section-lead">自社業務および支援先企業での実績をご紹介します。</p>
 
     <div class="results-grid">
-      <div class="result-card">
+      <a class="result-card result-card-link" href="https://fkdkazu-commits.github.io/ai-efficiency-article/#app04" target="_blank" rel="noopener">
         <span class="result-tag">SEO・コンテンツ</span>
         <h3 class="result-title">SEO記事制作の完全自動化パイプライン</h3>
         <p class="result-text">キーワード選定から記事執筆・入稿まで一気通貫で自動化。外注コストと作業時間を大幅削減。</p>
         <div class="result-num">約80%<small> コスト削減</small></div>
-      </div>
-      <div class="result-card">
+        <div class="result-link-label">詳細を見る →</div>
+      </a>
+      <a class="result-card result-card-link" href="https://fkdkazu-commits.github.io/ai-efficiency-article/faq-agent.html" target="_blank" rel="noopener">
         <span class="result-tag">問い合わせ対応</span>
         <h3 class="result-title">大手機器メーカー向け FAQエージェント</h3>
         <p class="result-text">DXシステム導入時の問い合わせ急増に対応。Copilot Studio + Power AutomateでAI一次回答率約70%を実現。</p>
         <div class="result-num">AI一次回答率<small> 約70%</small></div>
-      </div>
-      <div class="result-card">
+        <div class="result-link-label">詳細を見る →</div>
+      </a>
+      <a class="result-card result-card-link" href="https://fkdkazu-commits.github.io/ai-efficiency-article/recruitment-tool.html" target="_blank" rel="noopener">
         <span class="result-tag">採用・HR</span>
         <h3 class="result-title">採用支援AI（求人票・スクリーニング自動化）</h3>
         <p class="result-text">求人票の自動生成からPDF履歴書の自動採点・マッチングスコア算出まで対応。採用業務の大幅効率化を実現。</p>
         <div class="result-num">採用工数<small> 大幅削減</small></div>
-      </div>
+        <div class="result-link-label">詳細を見る →</div>
+      </a>
+    </div>
+
+    <div style="text-align:center; margin-top:40px;">
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/" target="_blank" rel="noopener" class="results-more-link">
+        その他の導入実績はこちら →
+      </a>
     </div>
   </div>
 </section>
@@ -917,7 +1019,7 @@
       </div>
       <div>
         <h3 class="profile-name">福田 和弘</h3>
-        <p class="profile-role">AI/DX推進支援 · SEO · YouTube · 法人研修</p>
+        <p class="profile-role">AI/DX推進支援 · SEO全般 · 法人サポート・個別サポート</p>
         <p class="profile-bio">
           IT企業にてマネジメント職を20年以上経験し、DX事業の立ち上げを担当。<br>
           現在はClaude CodeをはじめとしたAIツールを活用した業務自動化支援を行っています。<br><br>
@@ -930,8 +1032,11 @@
           <span class="profile-tag">DX推進</span>
           <span class="profile-tag">ITマネジメント20年+</span>
           <span class="profile-tag">SEO</span>
-          <span class="profile-tag">法人研修</span>
+          <span class="profile-tag">法人サポート・個別サポート</span>
         </div>
+        <a href="https://fukuda-seo-u6n7h7l.gamma.site/marketer-kazuf" target="_blank" rel="noopener" class="profile-detail-link">
+          プロフィール詳細を見る →
+        </a>
       </div>
     </div>
   </div>
