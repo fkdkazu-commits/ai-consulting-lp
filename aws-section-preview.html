@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【サンプル確認用】AWS納品モデル セクション</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans JP','Hiragino Sans',sans-serif; color: #1a202c; background: #f7fafc; font-size: 16px; line-height: 1.8; }
+
+  .preview-note {
+    background: #fff3cd; border: 2px solid #ffc107; padding: 16px 28px;
+    font-size: 14px; font-weight: 700; color: #856404; text-align: center;
+  }
+
+  section { padding: 80px 40px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-tag { display: inline-block; font-size: 12px; font-weight: 700; color: #2b6cb0; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+  .section-title { font-size: clamp(24px,3vw,36px); font-weight: 900; color: #1a365d; line-height: 1.4; margin-bottom: 16px; }
+  .section-lead { font-size: 16px; color: #4a5568; max-width: 680px; line-height: 1.9; }
+
+  /* ===== AWS SECTION ===== */
+  .aws { background: #fff; }
+
+  /* 2択カード */
+  .delivery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 48px 0 56px;
+  }
+  .delivery-card {
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 32px 28px;
+    position: relative;
+    transition: box-shadow .2s;
+  }
+  .delivery-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.08); }
+  .delivery-card.featured { border-color: #2b6cb0; box-shadow: 0 8px 40px rgba(43,108,176,.12); }
+  .delivery-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: #e2e8f0;
+    border-radius: 14px 14px 0 0;
+  }
+  .delivery-card.featured::before { background: linear-gradient(90deg,#2b6cb0,#63b3ed); }
+  .delivery-badge {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: #2b6cb0; color: #fff; font-size: 12px; font-weight: 700;
+    padding: 4px 16px; border-radius: 20px; white-space: nowrap;
+  }
+  .delivery-icon { font-size: 36px; margin-bottom: 14px; }
+  .delivery-title { font-size: 20px; font-weight: 900; color: #1a365d; margin-bottom: 8px; }
+  .delivery-sub { font-size: 13px; color: #718096; margin-bottom: 18px; }
+  .delivery-items { list-style: none; margin-bottom: 20px; }
+  .delivery-items li {
+    font-size: 14px; color: #2d3748; padding: 5px 0 5px 22px;
+    position: relative; line-height: 1.6; border-bottom: 1px solid #f0f4f8;
+  }
+  .delivery-items li:last-child { border-bottom: none; }
+  .delivery-items li::before { content: '✓'; position: absolute; left: 0; color: #2b6cb0; font-weight: 700; }
+  .delivery-tag {
+    display: inline-block; font-size: 12px; font-weight: 700;
+    padding: 3px 12px; border-radius: 20px; margin-top: 4px;
+  }
+  .tag-blue { background: #ebf8ff; color: #1e40af; border: 1px solid #bfdbfe; }
+  .tag-green { background: #f0fff4; color: #276749; border: 1px solid #9ae6b4; }
+
+  /* アーキテクチャ図 */
+  .arch-wrap {
+    background: linear-gradient(135deg,#1a365d,#2a4a7f);
+    border-radius: 16px;
+    padding: 40px;
+    margin: 0 0 48px;
+    overflow-x: auto;
+  }
+  .arch-title { color: rgba(255,255,255,.6); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 28px; }
+  .arch-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 16px;
+  }
+  .arch-node {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 12px;
+    padding: 14px 18px;
+    text-align: center;
+    min-width: 110px;
+    backdrop-filter: blur(4px);
+  }
+  .arch-node .node-icon { font-size: 22px; margin-bottom: 6px; }
+  .arch-node .node-label { color: #fff; font-size: 12px; font-weight: 700; line-height: 1.4; }
+  .arch-node .node-sub { color: rgba(255,255,255,.55); font-size: 10px; margin-top: 3px; }
+  .arch-arrow {
+    color: rgba(255,255,255,.4);
+    font-size: 20px;
+    padding: 0 8px;
+    flex-shrink: 0;
+  }
+  .arch-node.highlight {
+    background: rgba(99,179,237,.2);
+    border-color: rgba(99,179,237,.5);
+  }
+  .arch-note {
+    margin-top: 20px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .arch-note-item {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 12px; color: rgba(255,255,255,.6);
+  }
+  .arch-note-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* コスト表 */
+  .cost-section { margin-bottom: 48px; }
+  .cost-title { font-size: 18px; font-weight: 900; color: #1a365d; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .cost-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .cost-card {
+    background: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .cost-card-header {
+    background: linear-gradient(135deg,#1a365d,#2a4a7f);
+    padding: 14px 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .cost-card-header .icon { font-size: 18px; }
+  .cost-card-header .label { color: #fff; font-size: 14px; font-weight: 700; }
+  .cost-card-header .note { color: rgba(255,255,255,.6); font-size: 11px; margin-left: auto; }
+  .cost-table { width: 100%; border-collapse: collapse; }
+  .cost-table tr { border-bottom: 1px solid #e2e8f0; }
+  .cost-table tr:last-child { border-bottom: none; }
+  .cost-table td { padding: 10px 16px; font-size: 13px; }
+  .cost-table td:first-child { color: #4a5568; }
+  .cost-table td:last-child { font-weight: 700; color: #1a365d; text-align: right; }
+  .cost-table tfoot td {
+    font-size: 14px; font-weight: 900; color: #2b6cb0;
+    background: #ebf8ff; padding: 12px 16px;
+  }
+  .cost-table tfoot td:first-child { border-radius: 0 0 0 12px; }
+  .cost-table tfoot td:last-child { font-size: 16px; text-align: right; }
+
+  /* 規模別目安 */
+  .scale-table-wrap {
+    border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; margin-bottom: 48px;
+  }
+  .scale-table { width: 100%; border-collapse: collapse; }
+  .scale-table thead th {
+    background: #f7fafc; padding: 12px 20px;
+    font-size: 13px; font-weight: 700; color: #4a5568;
+    text-align: left; border-bottom: 2px solid #e2e8f0;
+  }
+  .scale-table tbody tr { border-bottom: 1px solid #e2e8f0; transition: background .1s; }
+  .scale-table tbody tr:last-child { border-bottom: none; }
+  .scale-table tbody tr:hover { background: #f7fafc; }
+  .scale-table tbody td { padding: 14px 20px; font-size: 14px; }
+  .scale-total { font-weight: 900; color: #2b6cb0; font-size: 15px; }
+
+  /* セキュリティポイント */
+  .security-box {
+    background: linear-gradient(135deg,#f0fff4,#e6fffa);
+    border: 2px solid #9ae6b4;
+    border-radius: 14px;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+  }
+  .sec-item { display: flex; gap: 12px; align-items: flex-start; }
+  .sec-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+  .sec-label { font-size: 14px; font-weight: 700; color: #1a365d; margin-bottom: 4px; }
+  .sec-text { font-size: 13px; color: #4a5568; line-height: 1.7; }
+
+  @media (max-width: 768px) {
+    section { padding: 60px 20px; }
+    .delivery-grid { grid-template-columns: 1fr; }
+    .cost-grid { grid-template-columns: 1fr; }
+    .security-box { grid-template-columns: 1fr; }
+    .arch-flow { gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-note">
+  ⚠️ これはサンプル確認用ファイルです。本番サイトへの追加前にデザイン・内容をご確認ください。
+</div>
+
+<!-- ===== AWS 納品・運用環境セクション ===== -->
+<section class="aws" id="aws-delivery">
+  <div class="section-inner">
+    <div class="section-tag">DELIVERY MODEL</div>
+    <h2 class="section-title">作ったアプリを、<br>チーム全員で使える環境へ</h2>
+    <p class="section-lead">
+      Claude Codeで構築したアプリは、担当者1人のPC上で使うだけでなく、
+      AWSを活用することで社内の従業員全員がブラウザからアクセスできる
+      本番環境として展開できます。
+    </p>
+
+    <!-- 2つの納品モデル -->
+    <div class="delivery-grid">
+      <div class="delivery-card">
+        <div class="delivery-icon">💻</div>
+        <div class="delivery-title">① ローカル PC 納品</div>
+        <div class="delivery-sub">担当者のPCにインストールして利用</div>
+        <ul class="delivery-items">
+          <li>インストール・設定レクチャー込み</li>
+          <li>追加サーバー費用ゼロ</li>
+          <li>1〜2名での利用に最適</li>
+          <li>API費用のみ実費</li>
+        </ul>
+        <span class="delivery-tag tag-blue">現行プランの標準納品形式</span>
+      </div>
+
+      <div class="delivery-card featured">
+        <div class="delivery-badge">チーム利用・全社展開に</div>
+        <div class="delivery-icon">☁️</div>
+        <div class="delivery-title">② AWS クラウド展開</div>
+        <div class="delivery-sub">自社AWSに構築し、全員がブラウザでアクセス</div>
+        <ul class="delivery-items">
+          <li>従業員全員がブラウザで即アクセス</li>
+          <li>データは貴社のAWS内に完全保存</li>
+          <li>ID・パスワードでログイン管理</li>
+          <li>インストール不要・デバイス問わず利用可</li>
+          <li>スマートフォン・タブレットにも対応</li>
+        </ul>
+        <span class="delivery-tag tag-green">別途お見積もり対応</span>
+      </div>
+    </div>
+
+    <!-- アーキテクチャ図 -->
+    <div class="arch-wrap">
+      <div class="arch-title">🏗️ AWS クラウド展開 — システム構成イメージ</div>
+      <div class="arch-flow">
+        <div class="arch-node">
+          <div class="node-icon">👥</div>
+          <div class="node-label">従業員PC/<br>スマホ</div>
+          <div class="node-sub">ブラウザのみ</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node highlight">
+          <div class="node-icon">🌐</div>
+          <div class="node-label">フロント<br>エンド</div>
+          <div class="node-sub">操作画面</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node highlight">
+          <div class="node-icon">⚙️</div>
+          <div class="node-label">アプリ<br>サーバー</div>
+          <div class="node-sub">EC2</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node highlight">
+          <div class="node-icon">🗄️</div>
+          <div class="node-label">データ<br>ベース</div>
+          <div class="node-sub">RDS</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node">
+          <div class="node-icon">🤖</div>
+          <div class="node-label">Claude<br>API</div>
+          <div class="node-sub">AI処理</div>
+        </div>
+      </div>
+      <div class="arch-note">
+        <div class="arch-note-item">
+          <div class="arch-note-dot" style="background:#63b3ed;"></div>
+          貴社AWS内（データ完全保持）
+        </div>
+        <div class="arch-note-item">
+          <div class="arch-note-dot" style="background:rgba(255,255,255,.4);"></div>
+          外部サービス（AI処理のみ）
+        </div>
+        <div class="arch-note-item">
+          <div class="arch-note-dot" style="background:#48bb78;"></div>
+          SSL暗号化通信
+        </div>
+      </div>
+    </div>
+
+    <!-- 運用コスト -->
+    <div class="cost-section">
+      <div class="cost-title">💰 AWS 運用コストの目安</div>
+      <div class="cost-grid">
+        <div class="cost-card">
+          <div class="cost-card-header">
+            <span class="icon">🏗️</span>
+            <span class="label">インフラ費（固定）</span>
+            <span class="note">AWS 東京リージョン</span>
+          </div>
+          <table class="cost-table">
+            <tbody>
+              <tr><td>アプリサーバー（EC2）</td><td>約 ¥2,500</td></tr>
+              <tr><td>データベース（RDS）</td><td>約 ¥2,700</td></tr>
+              <tr><td>ドメイン・SSL証明書</td><td>約 ¥200</td></tr>
+              <tr><td>監視・ログ（CloudWatch）</td><td>約 ¥400</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><td>合計</td><td>約 ¥6,000 / 月</td></tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="cost-card">
+          <div class="cost-card-header">
+            <span class="icon">🤖</span>
+            <span class="label">AI利用費（変動）</span>
+            <span class="note">Claude API 利用料</span>
+          </div>
+          <table class="cost-table">
+            <tbody>
+              <tr><td>〜10名・少量利用</td><td>約 ¥1,000〜3,000</td></tr>
+              <tr><td>10〜50名・中量利用</td><td>約 ¥3,000〜10,000</td></tr>
+              <tr><td>50〜100名・高頻度利用</td><td>約 ¥10,000〜25,000</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><td>利用量に応じて変動</td><td>実費精算</td></tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 規模別月額目安 -->
+    <div class="cost-title" style="font-size:18px;font-weight:900;color:#1a365d;margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+      📊 規模別 月額ランニングコスト目安
+    </div>
+    <div class="scale-table-wrap">
+      <table class="scale-table">
+        <thead>
+          <tr>
+            <th>規模</th>
+            <th>従業員数</th>
+            <th>インフラ費</th>
+            <th>AI利用費</th>
+            <th>月額合計目安</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>小規模</strong></td>
+            <td>〜20名</td>
+            <td>¥6,000</td>
+            <td>¥1,000〜3,000</td>
+            <td class="scale-total">¥7,000〜9,000</td>
+          </tr>
+          <tr>
+            <td><strong>中規模</strong></td>
+            <td>20〜50名</td>
+            <td>¥6,000〜8,000</td>
+            <td>¥3,000〜10,000</td>
+            <td class="scale-total">¥9,000〜18,000</td>
+          </tr>
+          <tr>
+            <td><strong>大規模</strong></td>
+            <td>50〜100名</td>
+            <td>¥8,000〜15,000</td>
+            <td>¥10,000〜25,000</td>
+            <td class="scale-total">¥18,000〜40,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:#a0aec0;margin-bottom:48px;">※ AWS費用は東京リージョン・2026年5月時点の目安です。利用量・構成により変動します。初期構築費は別途お見積もり。</p>
+
+    <!-- セキュリティポイント -->
+    <div class="cost-title" style="font-size:18px;font-weight:900;color:#1a365d;margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+      🔒 データセキュリティについて
+    </div>
+    <div class="security-box">
+      <div class="sec-item">
+        <div class="sec-icon">🏢</div>
+        <div>
+          <div class="sec-label">データは自社AWSに保存</div>
+          <div class="sec-text">業務データはすべて貴社が契約するAWSアカウント内に保存。弊社や第三者がアクセスすることはありません。</div>
+        </div>
+      </div>
+      <div class="sec-item">
+        <div class="sec-icon">🔑</div>
+        <div>
+          <div class="sec-label">アクセス管理・権限設定</div>
+          <div class="sec-text">ログインID・パスワードで従業員を管理。管理者・一般ユーザーなど権限ごとに表示できる情報を制御できます。</div>
+        </div>
+      </div>
+      <div class="sec-item">
+        <div class="sec-icon">🌐</div>
+        <div>
+          <div class="sec-label">SSL暗号化・HTTPS通信</div>
+          <div class="sec-text">すべての通信はSSL証明書（HTTPS）で暗号化。社外からのアクセスも安全に利用できます。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
