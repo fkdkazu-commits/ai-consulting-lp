@@ -776,6 +776,176 @@
     .pain-grid { grid-template-columns: 1fr; }
     .results-grid { grid-template-columns: 1fr; }
   }
+
+  /* ===== AWS DELIVERY ===== */
+  .aws-delivery { background: #f7fafc; }
+  .delivery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 48px 0 52px;
+  }
+  .delivery-card {
+    background: #fff;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 28px 22px;
+    position: relative;
+    transition: box-shadow .2s, transform .2s;
+  }
+  .delivery-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.08); transform: translateY(-2px); }
+  .delivery-card.dv-green { border-color: #38a169; box-shadow: 0 4px 20px rgba(56,161,105,.1); }
+  .delivery-card.dv-blue  { border-color: #2b6cb0; box-shadow: 0 4px 20px rgba(43,108,176,.1); }
+  .delivery-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 4px; background: #e2e8f0; border-radius: 14px 14px 0 0;
+  }
+  .delivery-card.dv-green::before { background: linear-gradient(90deg,#38a169,#68d391); }
+  .delivery-card.dv-blue::before  { background: linear-gradient(90deg,#2b6cb0,#63b3ed); }
+  .dv-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    font-size: 11px; font-weight: 700; padding: 3px 14px; border-radius: 20px; white-space: nowrap;
+  }
+  .dv-badge-green { background: #38a169; color: #fff; }
+  .dv-badge-blue  { background: #2b6cb0; color: #fff; }
+  .dv-num  { font-size: 11px; font-weight: 700; color: #a0aec0; letter-spacing: .05em; margin-bottom: 8px; }
+  .dv-icon { font-size: 30px; margin-bottom: 10px; }
+  .dv-title { font-size: 16px; font-weight: 900; color: #1a365d; margin-bottom: 6px; line-height: 1.4; }
+  .dv-sub   { font-size: 12px; color: #718096; margin-bottom: 14px; line-height: 1.6; }
+  .dv-list  { list-style: none; margin-bottom: 16px; }
+  .dv-list li {
+    font-size: 13px; color: #2d3748; padding: 4px 0 4px 20px;
+    position: relative; border-bottom: 1px solid #f0f4f8; line-height: 1.6;
+  }
+  .dv-list li:last-child { border-bottom: none; }
+  .dv-list li::before { content: '✓'; position: absolute; left: 0; color: #2b6cb0; font-weight: 700; }
+  .dv-list li.dv-caution::before { content: '△'; color: #dd6b20; }
+  .dv-tag {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    padding: 2px 11px; border-radius: 20px;
+  }
+  .dv-tag-gray  { background: #edf2f7; color: #4a5568; border: 1px solid #e2e8f0; }
+  .dv-tag-green { background: #f0fff4; color: #276749; border: 1px solid #9ae6b4; }
+  .dv-tag-blue  { background: #ebf8ff; color: #1e40af; border: 1px solid #bfdbfe; }
+
+  /* arch */
+  .arch-tabs { display: flex; gap: 4px; }
+  .arch-tab {
+    padding: 9px 22px; border-radius: 8px 8px 0 0; border: none;
+    font-size: 13px; font-weight: 700; cursor: pointer;
+    background: rgba(255,255,255,.15); color: rgba(255,255,255,.6);
+    transition: all .15s; font-family: inherit;
+  }
+  .arch-tab.active { background: rgba(255,255,255,.25); color: #fff; }
+  .arch-box {
+    background: linear-gradient(135deg,#1a365d,#2a4a7f);
+    border-radius: 0 12px 12px 12px;
+    padding: 28px 36px 32px;
+    margin: 0 0 44px;
+    overflow-x: auto;
+  }
+  .arch-panel { display: none; }
+  .arch-panel.active { display: block; }
+  .arch-lbl { color: rgba(255,255,255,.5); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 20px; }
+  .arch-flow { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; row-gap: 10px; }
+  .arch-node {
+    background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+    border-radius: 10px; padding: 11px 14px; text-align: center; min-width: 95px;
+  }
+  .arch-node.hl-g { background: rgba(104,211,145,.2); border-color: rgba(104,211,145,.45); }
+  .arch-node.hl-b { background: rgba(99,179,237,.2);  border-color: rgba(99,179,237,.45); }
+  .arch-node .n-icon  { font-size: 18px; margin-bottom: 4px; }
+  .arch-node .n-lbl   { color: #fff; font-size: 11px; font-weight: 700; line-height: 1.3; }
+  .arch-node .n-sub   { color: rgba(255,255,255,.5); font-size: 10px; margin-top: 2px; }
+  .arch-arr { color: rgba(255,255,255,.35); font-size: 16px; padding: 0 5px; flex-shrink: 0; }
+  .arch-notes { margin-top: 16px; display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
+  .arch-note-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(255,255,255,.5); }
+  .arch-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .arch-merit {
+    margin-top: 16px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.13);
+    border-radius: 8px; padding: 12px 18px; font-size: 13px; color: rgba(255,255,255,.78); line-height: 1.7;
+  }
+
+  /* compare */
+  .compare-wrap { border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; margin: 16px 0 44px; }
+  .cmp-tbl { width: 100%; border-collapse: collapse; }
+  .cmp-tbl thead th {
+    background: #1a365d; color: #fff; padding: 12px 16px;
+    font-size: 12px; font-weight: 700; text-align: center;
+  }
+  .cmp-tbl thead th:first-child { text-align: left; background: #2d3748; }
+  .cmp-tbl tbody tr { border-bottom: 1px solid #e2e8f0; transition: background .1s; }
+  .cmp-tbl tbody tr:last-child { border-bottom: none; }
+  .cmp-tbl tbody tr:hover { background: #f7fafc; }
+  .cmp-tbl td { padding: 11px 16px; font-size: 13px; text-align: center; }
+  .cmp-tbl td:first-child { text-align: left; font-weight: 700; color: #1a365d; }
+  .c-g { color: #276749; font-weight: 700; }
+  .c-m { color: #744210; font-weight: 600; }
+  .c-n { color: #a0aec0; }
+
+  /* cost tabs */
+  .cost-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .cost-tab {
+    padding: 8px 20px; border-radius: 8px; border: 2px solid #e2e8f0;
+    font-size: 13px; font-weight: 700; cursor: pointer; background: #fff;
+    color: #4a5568; transition: all .15s; font-family: inherit;
+  }
+  .cost-tab.active { background: #1a365d; border-color: #1a365d; color: #fff; }
+  .cost-panel { display: none; }
+  .cost-panel.active { display: block; }
+  .cost-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 16px; }
+  .cost-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
+  .cost-hd {
+    background: linear-gradient(135deg,#1a365d,#2a4a7f);
+    padding: 12px 18px; display: flex; align-items: center; gap: 9px;
+  }
+  .cost-hd .c-icon { font-size: 16px; }
+  .cost-hd .c-lbl  { color: #fff; font-size: 13px; font-weight: 700; }
+  .cost-hd .c-note { color: rgba(255,255,255,.5); font-size: 11px; margin-left: auto; }
+  .cost-tbl { width: 100%; border-collapse: collapse; }
+  .cost-tbl tr { border-bottom: 1px solid #e2e8f0; }
+  .cost-tbl tr:last-child { border-bottom: none; }
+  .cost-tbl td { padding: 9px 15px; font-size: 13px; }
+  .cost-tbl td:first-child { color: #4a5568; }
+  .cost-tbl td:last-child { font-weight: 700; color: #1a365d; text-align: right; }
+  .cost-tbl tfoot td { font-size: 13px; font-weight: 900; color: #2b6cb0; background: #ebf8ff; padding: 10px 15px; }
+  .cost-tbl tfoot td:last-child { font-size: 15px; text-align: right; }
+  .free-note {
+    background: #f0fff4; border: 1px solid #9ae6b4; border-radius: 8px;
+    padding: 12px 18px; font-size: 13px; color: #276749; font-weight: 600;
+    display: flex; align-items: center; gap: 9px; margin-bottom: 16px;
+  }
+  .scale-wrap { border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; }
+  .scale-tbl { width: 100%; border-collapse: collapse; }
+  .scale-tbl thead th {
+    background: #f7fafc; padding: 10px 16px;
+    font-size: 12px; font-weight: 700; color: #4a5568; text-align: left;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  .scale-tbl tbody tr { border-bottom: 1px solid #e2e8f0; }
+  .scale-tbl tbody tr:last-child { border-bottom: none; }
+  .scale-tbl tbody tr:hover { background: #f7fafc; }
+  .scale-tbl td { padding: 11px 16px; font-size: 13.5px; }
+  .tot-g { font-weight: 900; color: #38a169; }
+  .tot-b { font-weight: 900; color: #2b6cb0; }
+  .aws-fn { font-size: 12px; color: #a0aec0; margin-top: 8px; margin-bottom: 44px; }
+  .aws-sub { font-size: 17px; font-weight: 900; color: #1a365d; margin: 44px 0 14px; display: flex; align-items: center; gap: 8px; }
+  .security-box {
+    background: linear-gradient(135deg,#f0fff4,#e6fffa);
+    border: 2px solid #9ae6b4; border-radius: 14px;
+    padding: 26px 28px;
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 18px;
+  }
+  .sec-item { display: flex; gap: 11px; align-items: flex-start; }
+  .sec-icon { font-size: 21px; flex-shrink: 0; margin-top: 2px; }
+  .sec-lbl  { font-size: 13px; font-weight: 700; color: #1a365d; margin-bottom: 3px; }
+  .sec-txt  { font-size: 12px; color: #4a5568; line-height: 1.7; }
+
+  @media (max-width: 900px) {
+    .delivery-grid { grid-template-columns: 1fr; }
+    .cost-grid { grid-template-columns: 1fr; }
+    .security-box { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -789,6 +959,7 @@
       <a href="#plans">料金</a>
       <a href="#results">実績</a>
       <a href="#profile">プロフィール</a>
+      <a href="#aws-delivery">環境・費用</a>
       <a href="#faq">FAQ</a>
       <a href="contact.html" class="header-cta">お問合せ</a>
     </nav>
@@ -1050,6 +1221,233 @@
   </div>
 </section>
 
+<!-- AWS DELIVERY -->
+<section class="aws-delivery" id="aws-delivery">
+  <div class="section-inner">
+    <div class="section-tag">DELIVERY MODEL</div>
+    <h2 class="section-title">作ったアプリを、<br>チーム全員で使える環境へ</h2>
+    <p class="section-lead">
+      Claude Codeで構築したアプリは、担当者1人のPC上だけでなく、AWSを活用して
+      社内全員がブラウザからアクセスできる本番環境として展開できます。
+      用途・規模・コストに合わせて3つの納品モデルからお選びいただけます。
+    </p>
+
+    <!-- 3択カード -->
+    <div class="delivery-grid">
+      <div class="delivery-card">
+        <div class="dv-num">PATTERN 01</div>
+        <div class="dv-icon">💻</div>
+        <div class="dv-title">ローカルPC 納品</div>
+        <div class="dv-sub">担当者のPCにインストールして利用。追加サーバー費用ゼロ。</div>
+        <ul class="dv-list">
+          <li>インストール・設定レクチャー込み</li>
+          <li>追加サーバー費用ゼロ</li>
+          <li>API費用のみ実費</li>
+          <li class="dv-caution">複数人での共有は別途対応が必要</li>
+        </ul>
+        <span class="dv-tag dv-tag-gray">現行プランの標準形式</span>
+      </div>
+      <div class="delivery-card dv-green">
+        <div class="dv-badge dv-badge-green">軽量・低コストに最適</div>
+        <div class="dv-num">PATTERN 02</div>
+        <div class="dv-icon">⚡</div>
+        <div class="dv-title">AWS Lambda<br>サーバーレス展開</div>
+        <div class="dv-sub">使った分だけ課金。AI問い合わせ・フォーム処理など軽量用途に。</div>
+        <ul class="dv-list">
+          <li>月100万リクエストまで無料枠あり</li>
+          <li>サーバー管理がほぼ不要</li>
+          <li>全員がブラウザでアクセス可能</li>
+          <li>データ保存が少ない用途に最適</li>
+          <li class="dv-caution">大量データ処理・常時接続には不向き</li>
+        </ul>
+        <span class="dv-tag dv-tag-green">小〜中規模チームに推奨</span>
+      </div>
+      <div class="delivery-card dv-blue">
+        <div class="dv-badge dv-badge-blue">フル機能・全社展開に</div>
+        <div class="dv-num">PATTERN 03</div>
+        <div class="dv-icon">☁️</div>
+        <div class="dv-title">AWS EC2<br>フルサーバー展開</div>
+        <div class="dv-sub">自社AWSに専用サーバーを構築。大規模・データ蓄積・複雑な処理に対応。</div>
+        <ul class="dv-list">
+          <li>データをDBに蓄積・管理できる</li>
+          <li>複雑な処理・大量データに対応</li>
+          <li>権限管理・ログ管理が充実</li>
+          <li>全員がブラウザでアクセス可能</li>
+          <li>カスタマイズの自由度が最も高い</li>
+        </ul>
+        <span class="dv-tag dv-tag-blue">中〜大規模・本格運用に</span>
+      </div>
+    </div>
+
+    <!-- 構成図タブ -->
+    <div class="arch-tabs">
+      <button class="arch-tab active" onclick="switchArch(this,'alambda')">⚡ Lambda 構成</button>
+      <button class="arch-tab" onclick="switchArch(this,'aec2')">☁️ EC2 構成</button>
+    </div>
+    <div class="arch-box">
+      <div class="arch-panel active" id="arch-alambda">
+        <div class="arch-lbl">⚡ AWS Lambda — サーバーレス構成</div>
+        <div class="arch-flow">
+          <div class="arch-node"><div class="n-icon">👥</div><div class="n-lbl">従業員PC/<br>スマホ</div><div class="n-sub">ブラウザのみ</div></div>
+          <div class="arch-arr">→</div>
+          <div class="arch-node hl-g"><div class="n-icon">🌐</div><div class="n-lbl">静的サイト</div><div class="n-sub">S3 / Netlify</div></div>
+          <div class="arch-arr">→</div>
+          <div class="arch-node hl-g"><div class="n-icon">⚡</div><div class="n-lbl">Lambda<br>関数</div><div class="n-sub">処理・API</div></div>
+          <div class="arch-arr">→</div>
+          <div class="arch-node"><div class="n-icon">🤖</div><div class="n-lbl">Claude<br>API</div><div class="n-sub">AI処理</div></div>
+        </div>
+        <div class="arch-notes">
+          <div class="arch-note-item"><div class="arch-dot" style="background:#68d391;"></div>貴社AWS内</div>
+          <div class="arch-note-item"><div class="arch-dot" style="background:rgba(255,255,255,.4);"></div>外部サービス</div>
+          <div class="arch-note-item"><div class="arch-dot" style="background:#48bb78;"></div>SSL暗号化通信</div>
+        </div>
+        <div class="arch-merit">💡 <strong>Lambda のポイント：</strong>サーバーを常時起動しないため、使われていない時間は課金されません。月100万リクエスト・40万GB秒まで<strong>無料枠</strong>があり、小規模利用ならインフラ費用をほぼ¥0に抑えられます。</div>
+      </div>
+      <div class="arch-panel" id="arch-aec2">
+        <div class="arch-lbl">☁️ AWS EC2 — フルサーバー構成</div>
+        <div class="arch-flow">
+          <div class="arch-node"><div class="n-icon">👥</div><div class="n-lbl">従業員PC/<br>スマホ</div><div class="n-sub">ブラウザのみ</div></div>
+          <div class="arch-arr">→</div>
+          <div class="arch-node hl-b"><div class="n-icon">🌐</div><div class="n-lbl">フロント<br>エンド</div><div class="n-sub">操作画面</div></div>
+          <div class="arch-arr">→</div>
+          <div class="arch-node hl-b"><div class="n-icon">⚙️</div><div class="n-lbl">アプリ<br>サーバー</div><div class="n-sub">EC2</div></div>
+          <div class="arch-arr">→</div>
+          <div class="arch-node hl-b"><div class="n-icon">🗄️</div><div class="n-lbl">データ<br>ベース</div><div class="n-sub">RDS</div></div>
+          <div class="arch-arr">→</div>
+          <div class="arch-node"><div class="n-icon">🤖</div><div class="n-lbl">Claude<br>API</div><div class="n-sub">AI処理</div></div>
+        </div>
+        <div class="arch-notes">
+          <div class="arch-note-item"><div class="arch-dot" style="background:#63b3ed;"></div>貴社AWS内（データ完全保持）</div>
+          <div class="arch-note-item"><div class="arch-dot" style="background:rgba(255,255,255,.4);"></div>外部サービス</div>
+          <div class="arch-note-item"><div class="arch-dot" style="background:#48bb78;"></div>SSL暗号化通信</div>
+        </div>
+        <div class="arch-merit">💡 <strong>EC2 のポイント：</strong>専用サーバーが常時起動しているため、データの蓄積・履歴管理・複雑な処理が得意です。ユーザー管理・権限設定・ログ管理など、本格的な業務システムとして運用できます。</div>
+      </div>
+    </div>
+
+    <!-- 比較表 -->
+    <div class="aws-sub">📋 3パターン 機能・コスト比較</div>
+    <div class="compare-wrap">
+      <table class="cmp-tbl">
+        <thead>
+          <tr><th>比較項目</th><th>① ローカルPC</th><th>② Lambda</th><th>③ EC2</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>複数人での共有</td><td class="c-n">✗ 担当者のみ</td><td class="c-g">◎ 全員ブラウザ</td><td class="c-g">◎ 全員ブラウザ</td></tr>
+          <tr><td>インフラ月額費用</td><td class="c-g">◎ 無料</td><td class="c-g">◎ 無料〜数百円</td><td class="c-m">△ 約¥6,000〜</td></tr>
+          <tr><td>データの蓄積・管理</td><td class="c-n">✗ なし</td><td class="c-m">△ 簡易的に可</td><td class="c-g">◎ フル対応</td></tr>
+          <tr><td>処理の重さ・複雑さ</td><td class="c-g">◎ 制限なし</td><td class="c-m">△ 軽量向け</td><td class="c-g">◎ 制限なし</td></tr>
+          <tr><td>スマホ・タブレット対応</td><td class="c-n">✗ PC専用</td><td class="c-g">◎ 対応</td><td class="c-g">◎ 対応</td></tr>
+          <tr><td>向いている用途</td><td>1〜2名の担当者ツール</td><td>AI問い合わせ・フォーム・定期処理</td><td>全社システム・データ蓄積・管理機能</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 運用コスト タブ -->
+    <div class="aws-sub">💰 運用コストの目安</div>
+    <div class="cost-tabs">
+      <button class="cost-tab active" onclick="switchCostTab(this,'cp-lambda')">⚡ Lambda パターン</button>
+      <button class="cost-tab" onclick="switchCostTab(this,'cp-ec2')">☁️ EC2 パターン</button>
+    </div>
+
+    <div class="cost-panel active" id="cp-lambda">
+      <div class="free-note">🎉 月100万リクエスト・40万GB秒まで無料枠あり。小規模利用ならインフラ費用ほぼ¥0で運用できます。</div>
+      <div class="cost-grid">
+        <div class="cost-card">
+          <div class="cost-hd"><span class="c-icon">⚡</span><span class="c-lbl">Lambda インフラ費（変動）</span><span class="c-note">使った分だけ</span></div>
+          <table class="cost-tbl">
+            <tbody>
+              <tr><td>〜月100万リクエスト</td><td style="color:#276749;font-weight:700;">無料（AWS無料枠）</td></tr>
+              <tr><td>月100万超・少量利用</td><td>約 ¥100〜500</td></tr>
+              <tr><td>静的サイトホスティング</td><td style="color:#276749;font-weight:700;">無料（S3/Netlify）</td></tr>
+              <tr><td>ドメイン・SSL</td><td>約 ¥200</td></tr>
+            </tbody>
+            <tfoot><tr><td>小規模利用時の合計目安</td><td>約 ¥0〜1,000 / 月</td></tr></tfoot>
+          </table>
+        </div>
+        <div class="cost-card">
+          <div class="cost-hd"><span class="c-icon">🤖</span><span class="c-lbl">AI利用費（変動）</span><span class="c-note">Claude API 利用料</span></div>
+          <table class="cost-tbl">
+            <tbody>
+              <tr><td>〜10名・少量利用</td><td>約 ¥1,000〜3,000</td></tr>
+              <tr><td>10〜50名・中量利用</td><td>約 ¥3,000〜10,000</td></tr>
+              <tr><td>50〜100名・高頻度利用</td><td>約 ¥10,000〜25,000</td></tr>
+            </tbody>
+            <tfoot><tr><td>利用量に応じて変動</td><td>実費精算</td></tr></tfoot>
+          </table>
+        </div>
+      </div>
+      <div class="scale-wrap">
+        <table class="scale-tbl">
+          <thead><tr><th>規模</th><th>従業員数</th><th>Lambdaインフラ費</th><th>AI利用費</th><th>月額合計目安</th></tr></thead>
+          <tbody>
+            <tr><td><strong>小規模</strong></td><td>〜20名</td><td style="color:#276749;font-weight:700;">¥0〜500</td><td>¥1,000〜3,000</td><td class="tot-g">¥1,000〜3,500</td></tr>
+            <tr><td><strong>中規模</strong></td><td>20〜50名</td><td>¥500〜1,000</td><td>¥3,000〜10,000</td><td class="tot-g">¥3,500〜11,000</td></tr>
+            <tr><td><strong>大規模</strong></td><td>50〜100名</td><td>¥1,000〜3,000</td><td>¥10,000〜25,000</td><td class="tot-g">¥11,000〜28,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="cost-panel" id="cp-ec2">
+      <div class="cost-grid">
+        <div class="cost-card">
+          <div class="cost-hd"><span class="c-icon">🏗️</span><span class="c-lbl">EC2 インフラ費（固定）</span><span class="c-note">AWS 東京リージョン</span></div>
+          <table class="cost-tbl">
+            <tbody>
+              <tr><td>アプリサーバー（EC2）</td><td>約 ¥2,500</td></tr>
+              <tr><td>データベース（RDS）</td><td>約 ¥2,700</td></tr>
+              <tr><td>ドメイン・SSL証明書</td><td>約 ¥200</td></tr>
+              <tr><td>監視・ログ（CloudWatch）</td><td>約 ¥400</td></tr>
+            </tbody>
+            <tfoot><tr><td>合計</td><td>約 ¥6,000 / 月</td></tr></tfoot>
+          </table>
+        </div>
+        <div class="cost-card">
+          <div class="cost-hd"><span class="c-icon">🤖</span><span class="c-lbl">AI利用費（変動）</span><span class="c-note">Claude API 利用料</span></div>
+          <table class="cost-tbl">
+            <tbody>
+              <tr><td>〜10名・少量利用</td><td>約 ¥1,000〜3,000</td></tr>
+              <tr><td>10〜50名・中量利用</td><td>約 ¥3,000〜10,000</td></tr>
+              <tr><td>50〜100名・高頻度利用</td><td>約 ¥10,000〜25,000</td></tr>
+            </tbody>
+            <tfoot><tr><td>利用量に応じて変動</td><td>実費精算</td></tr></tfoot>
+          </table>
+        </div>
+      </div>
+      <div class="scale-wrap">
+        <table class="scale-tbl">
+          <thead><tr><th>規模</th><th>従業員数</th><th>EC2インフラ費</th><th>AI利用費</th><th>月額合計目安</th></tr></thead>
+          <tbody>
+            <tr><td><strong>小規模</strong></td><td>〜20名</td><td>¥6,000</td><td>¥1,000〜3,000</td><td class="tot-b">¥7,000〜9,000</td></tr>
+            <tr><td><strong>中規模</strong></td><td>20〜50名</td><td>¥6,000〜8,000</td><td>¥3,000〜10,000</td><td class="tot-b">¥9,000〜18,000</td></tr>
+            <tr><td><strong>大規模</strong></td><td>50〜100名</td><td>¥8,000〜15,000</td><td>¥10,000〜25,000</td><td class="tot-b">¥18,000〜40,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="aws-fn">※ AWS費用は東京リージョン・2026年5月時点の目安。利用量・構成により変動します。初期構築費は別途お見積もり。</p>
+
+    <!-- セキュリティ -->
+    <div class="aws-sub">🔒 データセキュリティについて</div>
+    <div class="security-box">
+      <div class="sec-item">
+        <div class="sec-icon">🏢</div>
+        <div><div class="sec-lbl">データは自社AWSに保存</div><div class="sec-txt">業務データはすべて貴社が契約するAWSアカウント内に保存。弊社や第三者がアクセスすることはありません。</div></div>
+      </div>
+      <div class="sec-item">
+        <div class="sec-icon">🔑</div>
+        <div><div class="sec-lbl">アクセス管理・権限設定</div><div class="sec-txt">ログインID・パスワードで従業員を管理。管理者・一般ユーザーなど権限ごとに表示できる情報を制御できます。</div></div>
+      </div>
+      <div class="sec-item">
+        <div class="sec-icon">🌐</div>
+        <div><div class="sec-lbl">SSL暗号化・HTTPS通信</div><div class="sec-txt">すべての通信はSSL証明書（HTTPS）で暗号化。社外からのアクセスも安全に利用できます。</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- RESULTS -->
 <section id="results">
   <div class="section-inner">
@@ -1191,6 +1589,18 @@
       btn.closest('.faq-item').classList.toggle('open');
     });
   });
+  function switchArch(btn, id) {
+    btn.closest('.arch-tabs').querySelectorAll('.arch-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    btn.closest('div').nextElementSibling.querySelectorAll('.arch-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('arch-' + id).classList.add('active');
+  }
+  function switchCostTab(btn, id) {
+    btn.closest('.cost-tabs').querySelectorAll('.cost-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('#aws-delivery .cost-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
 </script>
 </body>
 </html>
