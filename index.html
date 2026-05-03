@@ -789,14 +789,14 @@
     .header-nav {
       display: none;
       flex-direction: column;
-      position: fixed;
-      top: 64px; left: 0; right: 0;
+      position: absolute;
+      top: 64px; left: -20px; right: -20px;
       background: rgba(255,255,255,0.98);
       backdrop-filter: blur(8px);
       padding: 16px 24px 28px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.12);
       border-top: 1px solid #e2e8f0;
-      z-index: 99;
+      z-index: 150;
     }
     .header-nav.open { display: flex; }
     .header-nav a {
