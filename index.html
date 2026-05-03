@@ -783,13 +783,6 @@
   .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
   .hamburger.open span:nth-child(2) { opacity: 0; }
   .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-  .nav-backdrop {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 140;
-  }
-  .nav-backdrop.open { display: block; }
 
   /* ===== MOBILE ===== */
   @media (max-width: 768px) {
@@ -1030,7 +1023,6 @@
     </button>
   </div>
 </header>
-<div class="nav-backdrop" id="navBackdrop"></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -1663,22 +1655,19 @@
 
   const hamburger = document.getElementById('hamburger');
   const nav = document.getElementById('headerNav');
-  const backdrop = document.getElementById('navBackdrop');
   function closeNav() {
     nav.classList.remove('open');
     hamburger.classList.remove('open');
-    backdrop.classList.remove('open');
     hamburger.setAttribute('aria-expanded', 'false');
   }
-  hamburger.addEventListener('click', () => {
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
     const isOpen = nav.classList.toggle('open');
     hamburger.classList.toggle('open', isOpen);
-    backdrop.classList.toggle('open', isOpen);
     hamburger.setAttribute('aria-expanded', isOpen);
   });
-  backdrop.addEventListener('click', closeNav);
-  nav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeNav);
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target)) closeNav();
   });
 
   function switchArch(btn, id) {
