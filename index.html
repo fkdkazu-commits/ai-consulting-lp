@@ -1389,29 +1389,10 @@
 
     <!-- 構成図タブ -->
     <div class="arch-tabs">
-      <button class="arch-tab active" onclick="switchArch(this,'alambda')">⚡ Lambda 構成</button>
-      <button class="arch-tab" onclick="switchArch(this,'aec2')">☁️ EC2 構成</button>
+      <button class="arch-tab active" onclick="switchArch(this,'aec2')">☁️ EC2 構成</button>
     </div>
     <div class="arch-box">
-      <div class="arch-panel active" id="arch-alambda">
-        <div class="arch-lbl">⚡ AWS Lambda — サーバーレス構成</div>
-        <div class="arch-flow">
-          <div class="arch-node"><div class="n-icon">👥</div><div class="n-lbl">従業員PC/<br>スマホ</div><div class="n-sub">ブラウザのみ</div></div>
-          <div class="arch-arr">→</div>
-          <div class="arch-node hl-g"><div class="n-icon">🌐</div><div class="n-lbl">静的サイト</div><div class="n-sub">S3 / Netlify</div></div>
-          <div class="arch-arr">→</div>
-          <div class="arch-node hl-g"><div class="n-icon">⚡</div><div class="n-lbl">Lambda<br>関数</div><div class="n-sub">処理・API</div></div>
-          <div class="arch-arr">→</div>
-          <div class="arch-node"><div class="n-icon">🤖</div><div class="n-lbl">Claude<br>API</div><div class="n-sub">AI処理</div></div>
-        </div>
-        <div class="arch-notes">
-          <div class="arch-note-item"><div class="arch-dot" style="background:#68d391;"></div>貴社AWS内</div>
-          <div class="arch-note-item"><div class="arch-dot" style="background:rgba(255,255,255,.4);"></div>外部サービス</div>
-          <div class="arch-note-item"><div class="arch-dot" style="background:#48bb78;"></div>SSL暗号化通信</div>
-        </div>
-        <div class="arch-merit">💡 <strong>Lambda のポイント：</strong>サーバーを常時起動しないため、使われていない時間は課金されません。月100万リクエスト・40万GB秒まで<strong>無料枠</strong>があり、小規模利用ならインフラ費用をほぼ¥0に抑えられます。</div>
-      </div>
-      <div class="arch-panel" id="arch-aec2">
+      <div class="arch-panel active" id="arch-aec2">
         <div class="arch-lbl">☁️ AWS EC2 — フルサーバー構成</div>
         <div class="arch-flow">
           <div class="arch-node"><div class="n-icon">👥</div><div class="n-lbl">従業員PC/<br>スマホ</div><div class="n-sub">ブラウザのみ</div></div>
