@@ -70,7 +70,7 @@
     background:
       linear-gradient(135deg, rgba(26,54,93,0.91) 0%, rgba(42,74,127,0.87) 50%, rgba(30,58,95,0.93) 100%),
       url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80') center/cover no-repeat;
-    padding: 100px 40px 110px;
+    padding: 100px 40px 155px;
     position: relative;
     overflow: hidden;
   }
@@ -167,10 +167,14 @@
   .btn-secondary:hover { background: rgba(255,255,255,0.2); }
   .hero-stats {
     display: flex;
-    gap: 40px;
+    gap: 64px;
     flex-wrap: wrap;
   }
-  .stat-item {}
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
   .stat-num {
     font-size: 32px;
     font-weight: 900;
@@ -181,7 +185,7 @@
   .stat-label {
     font-size: 12px;
     color: rgba(255,255,255,0.55);
-    margin-top: 4px;
+    margin-top: 8px;
   }
 
   /* ===== マーキー（横スクロール） ===== */
@@ -869,12 +873,12 @@
       border-radius: 6px;
       padding: 10px 16px;
     }
-    .hero { padding: 64px 20px 90px; }
+    .hero { padding: 64px 20px 130px; }
     section { padding: 60px 20px; }
     .profile-inner { grid-template-columns: 1fr; gap: 32px; text-align: center; }
     .profile-tags { justify-content: center; }
     .cta-section { padding: 64px 20px; }
-    .hero-stats { gap: 24px; }
+    .hero-stats { gap: 40px; }
     .plan-option { flex-direction: column; gap: 12px; }
   }
   @media (max-width: 480px) {
@@ -934,6 +938,10 @@
   .dv-tag-gray  { background: #edf2f7; color: #4a5568; border: 1px solid #e2e8f0; }
   .dv-tag-green { background: #f0fff4; color: #276749; border: 1px solid #9ae6b4; }
   .dv-tag-blue  { background: #ebf8ff; color: #1e40af; border: 1px solid #bfdbfe; }
+  .dv-example { margin-top: 14px; padding: 10px 14px; background: #f0fff4; border-radius: 8px; border: 1px solid #9ae6b4; }
+  .dv-example-label { font-size: .72rem; font-weight: 700; color: #276749; margin-bottom: 6px; letter-spacing: .03em; }
+  .dv-example-link { display: block; font-size: .82rem; color: #276749; text-decoration: none; font-weight: 600; }
+  .dv-example-link:hover { text-decoration: underline; }
 
   /* arch */
   .arch-tabs { display: flex; gap: 4px; }
@@ -1477,6 +1485,12 @@
           <li class="dv-caution">大量データ処理・常時接続には不向き</li>
         </ul>
         <span class="dv-tag dv-tag-green">小〜中規模チームに推奨</span>
+        <div class="dv-example">
+          <div class="dv-example-label">▶ 実現したシステム例</div>
+          <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/invoice.html" class="dv-example-link" target="_blank" rel="noopener">
+            📄 請求書管理システム（AWS × Claude Vision）
+          </a>
+        </div>
       </div>
       <div class="delivery-card dv-blue">
         <div class="dv-badge dv-badge-blue">フル機能・全社展開に</div>
