@@ -184,6 +184,55 @@
     margin-top: 4px;
   }
 
+  /* ===== マーキー（横スクロール） ===== */
+  .marquee-wrap {
+    margin-top: 48px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    overflow: hidden;
+    background: rgba(0,0,0,0.18);
+    backdrop-filter: blur(4px);
+  }
+  .marquee-row {
+    display: flex;
+    padding: 12px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .marquee-row:last-child { border-bottom: none; }
+  .marquee-track {
+    display: flex;
+    animation: marquee-scroll 36s linear infinite;
+    will-change: transform;
+  }
+  .marquee-row:nth-child(2) .marquee-track {
+    animation-direction: reverse;
+    animation-duration: 44s;
+  }
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 28px;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.8);
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+  .marquee-dot {
+    width: 5px;
+    height: 5px;
+    background: #63b3ed;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
   /* ===== SECTION BASE ===== */
   section { padding: 80px 40px; }
   .section-inner { max-width: 1100px; margin: 0 auto; }
@@ -1060,6 +1109,50 @@
       <div class="stat-item">
         <div class="stat-num">10<span>本+</span></div>
         <div class="stat-label">自社・支援先への導入実績</div>
+      </div>
+    </div>
+
+    <!-- 横スクロール：導入実績アプリ一覧 -->
+    <div class="marquee-wrap">
+      <div class="marquee-row">
+        <div class="marquee-track">
+          <span class="marquee-item"><span class="marquee-dot"></span>採用支援AI — 求人票・スカウト文 自動生成</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>スクリーニング 自動採点AI</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>面談メモ AI構造化</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>請求書管理システム — AWS × Claude Vision</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>FAQエージェント — 大手機器メーカー導入実績</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>SEO記事自動化パイプライン</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>顧客育成ジャーニー設計AI</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Gmail × LINE 自動連携</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>採用支援AI — 求人票・スカウト文 自動生成</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>スクリーニング 自動採点AI</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>面談メモ AI構造化</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>請求書管理システム — AWS × Claude Vision</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>FAQエージェント — 大手機器メーカー導入実績</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>SEO記事自動化パイプライン</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>顧客育成ジャーニー設計AI</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Gmail × LINE 自動連携</span>
+        </div>
+      </div>
+      <div class="marquee-row">
+        <div class="marquee-track">
+          <span class="marquee-item"><span class="marquee-dot"></span>GSCカニバリゼーション分析ツール</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Gmail → カレンダー 自動登録</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>SNS投稿 自動生成ツール</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>会社経営 AI役員チーム</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>DXスターターパック — FAX・Excel 業務のシステム化</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Claude Code × AWS Lambda チーム展開</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>YouTube 動画収集・分析ツール</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>作業時間を月320時間削減</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>GSCカニバリゼーション分析ツール</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Gmail → カレンダー 自動登録</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>SNS投稿 自動生成ツール</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>会社経営 AI役員チーム</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>DXスターターパック — FAX・Excel 業務のシステム化</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>Claude Code × AWS Lambda チーム展開</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>YouTube 動画収集・分析ツール</span>
+          <span class="marquee-item"><span class="marquee-dot"></span>作業時間を月320時間削減</span>
+        </div>
       </div>
     </div>
   </div>
