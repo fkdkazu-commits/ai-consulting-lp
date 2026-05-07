@@ -70,7 +70,7 @@
     background:
       linear-gradient(135deg, rgba(26,54,93,0.91) 0%, rgba(42,74,127,0.87) 50%, rgba(30,58,95,0.93) 100%),
       url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80') center/cover no-repeat;
-    padding: 100px 40px 120px;
+    padding: 100px 40px 110px;
     position: relative;
     overflow: hidden;
   }
@@ -186,12 +186,13 @@
 
   /* ===== マーキー（横スクロール） ===== */
   .marquee-wrap {
-    margin-top: 48px;
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    z-index: 4;
     border-top: 1px solid rgba(255,255,255,0.12);
-    border-bottom: 1px solid rgba(255,255,255,0.12);
     overflow: hidden;
-    background: rgba(0,0,0,0.18);
-    backdrop-filter: blur(4px);
+    background: rgba(10,20,50,0.82);
+    backdrop-filter: blur(8px);
   }
   .marquee-row {
     display: flex;
@@ -1111,9 +1112,10 @@
         <div class="stat-label">自社・支援先への導入実績</div>
       </div>
     </div>
+  </div>
 
-    <!-- 横スクロール：導入実績アプリ一覧 -->
-    <div class="marquee-wrap">
+  <!-- 横スクロール：導入実績アプリ一覧（全幅） -->
+  <div class="marquee-wrap">
       <div class="marquee-row">
         <div class="marquee-track">
           <span class="marquee-item"><span class="marquee-dot"></span>採用支援AI — 求人票・スカウト文 自動生成</span>
@@ -1155,7 +1157,6 @@
         </div>
       </div>
     </div>
-  </div>
 </section>
 
 <!-- NEWS -->
