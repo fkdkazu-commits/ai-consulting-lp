@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DXスターターパック リーフレット</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #e2e8f0;
+  display: flex; justify-content: center; align-items: flex-start;
+  padding: 32px 16px; min-height: 100vh;
+  color: #1a202c; line-height: 1.6;
+}
+
+/* A4 page wrapper */
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  background: #fff;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Header ── */
+.lf-header {
+  background: linear-gradient(135deg, #1a365d 0%, #2a4a7f 60%, #2b6cb0 100%);
+  padding: 14px 20px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.lf-header-left { flex: 1; }
+.lf-brand {
+  font-size: 9pt;
+  font-weight: 700;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.08em;
+  margin-bottom: 3px;
+}
+.lf-title {
+  font-size: 18pt;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.lf-title em { font-style: normal; color: #f6ad55; }
+.lf-tagline {
+  font-size: 8.5pt;
+  color: rgba(255,255,255,0.75);
+  margin-top: 4px;
+}
+.lf-price-box {
+  background: rgba(246,173,85,0.18);
+  border: 1.5px solid rgba(246,173,85,0.6);
+  border-radius: 10px;
+  padding: 8px 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.lf-price-normal {
+  font-size: 8pt;
+  color: rgba(255,255,255,0.45);
+  text-decoration: line-through;
+  margin-bottom: 1px;
+}
+.lf-price-val {
+  font-size: 22pt;
+  font-weight: 900;
+  color: #f6ad55;
+  line-height: 1;
+}
+.lf-price-val small { font-size: 12pt; }
+.lf-price-label {
+  font-size: 7.5pt;
+  color: rgba(255,255,255,0.65);
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* ── Tech badges ── */
+.lf-tech {
+  background: #1a365d;
+  padding: 5px 20px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.lf-tech span {
+  font-size: 7.5pt;
+  color: #90cdf4;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* ── Body (2-col) ── */
+.lf-body {
+  display: flex;
+  flex: 1;
+  gap: 0;
+}
+.lf-left {
+  flex: 1.15;
+  padding: 13px 14px 13px 20px;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.lf-right {
+  flex: 1;
+  padding: 13px 20px 13px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+/* ── Section headings ── */
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 7px;
+}
+.sec-tag {
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #4299e1;
+  background: rgba(66,153,225,0.1);
+  border: 1px solid rgba(66,153,225,0.3);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+.sec-title {
+  font-size: 10.5pt;
+  font-weight: 900;
+  color: #1a365d;
+}
+.sec-title em { font-style: normal; color: #2b6cb0; }
+
+/* ── Catch box ── */
+.catch-box {
+  background: linear-gradient(135deg, #ebf8ff, #e6fffa);
+  border: 1.5px solid #bee3f8;
+  border-radius: 8px;
+  padding: 13px 14px;
+  font-size: 9pt;
+  font-weight: 700;
+  color: #1a365d;
+  line-height: 1.75;
+  text-align: center;
+}
+.catch-box em { font-style: normal; color: #2b6cb0; }
+
+/* ── Pack cards ── */
+.pack-row {
+  display: flex;
+  gap: 8px;
+}
+.pack-card {
+  flex: 1;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 11px;
+  position: relative;
+}
+.pack-card.featured { border-color: #4299e1; background: #f0f9ff; }
+.pack-badge {
+  position: absolute;
+  top: -8px; left: 50%; transform: translateX(-50%);
+  background: linear-gradient(135deg, #1a365d, #2b6cb0);
+  color: #fff; font-size: 6.5pt; font-weight: 700;
+  padding: 2px 10px; border-radius: 20px;
+  white-space: nowrap; letter-spacing: 0.04em;
+}
+.pack-label {
+  font-size: 7pt; font-weight: 700; color: #4299e1; margin-bottom: 3px; letter-spacing: 0.08em;
+}
+.pack-name {
+  font-size: 9.5pt; font-weight: 900; color: #1a365d; margin-bottom: 4px; line-height: 1.3;
+}
+.pack-target {
+  font-size: 7pt; font-weight: 700; color: #fff;
+  background: #4299e1; display: inline-block;
+  padding: 1px 8px; border-radius: 20px; margin-bottom: 5px;
+}
+.pack-desc {
+  font-size: 7.5pt; color: #4a5568; line-height: 1.6;
+}
+.pack-copy {
+  margin-top: 6px;
+  font-size: 7pt; color: #2b6cb0; font-weight: 600;
+  border-left: 2px solid #4299e1; padding-left: 6px;
+  font-style: italic; line-height: 1.5;
+}
+
+/* ── Team strip ── */
+.team-strip {
+  display: flex;
+  gap: 7px;
+}
+.team-card {
+  flex: 1;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 11px 8px;
+  text-align: center;
+  background: #fff;
+}
+.team-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #bee3f8;
+  display: block; margin: 0 auto 5px;
+  background: #e2e8f0;
+}
+.team-role {
+  font-size: 6.5pt; font-weight: 700; color: #4299e1; margin-bottom: 2px; line-height: 1.3;
+}
+.team-name {
+  font-size: 8pt; font-weight: 900; color: #1a365d; margin-bottom: 3px;
+}
+.team-desc {
+  font-size: 6.5pt; color: #718096; line-height: 1.5;
+}
+
+/* ── Pain list ── */
+.pain-list { display: flex; flex-direction: column; gap: 5px; }
+.pain-item {
+  display: flex; gap: 7px; align-items: flex-start;
+  background: linear-gradient(135deg, #fff5f5, #fce7f3);
+  border: 1px solid rgba(239,68,68,0.12);
+  border-radius: 6px; padding: 8px 10px;
+}
+.pain-item.freee {
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border-color: rgba(217,119,6,0.2);
+}
+.pain-icon { font-size: 13pt; line-height: 1; flex-shrink: 0; margin-top: 1px; }
+.pain-title { font-size: 8pt; font-weight: 700; color: #c53030; margin-bottom: 1px; }
+.pain-item.freee .pain-title { color: #b45309; }
+.pain-desc { font-size: 7pt; color: #4a5568; line-height: 1.5; }
+
+/* ── Expand grid ── */
+.expand-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+.expand-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 8px 9px;
+  display: flex; gap: 6px; align-items: flex-start;
+  background: #fff;
+}
+.expand-item.featured { border-color: #4299e1; background: #f0f9ff; }
+.expand-icon { font-size: 11pt; flex-shrink: 0; line-height: 1.2; }
+.expand-title { font-size: 7.5pt; font-weight: 700; color: #1a365d; margin-bottom: 1px; }
+.expand-desc { font-size: 6.5pt; color: #718096; line-height: 1.4; }
+
+/* ── Why box ── */
+.why-box {
+  background: linear-gradient(135deg, #1a365d 0%, #2a4a7f 60%, #2b6cb0 100%);
+  border-radius: 8px;
+  padding: 11px 14px;
+  color: #fff;
+}
+.why-box-title {
+  font-size: 8pt; font-weight: 900; margin-bottom: 8px; color: #f6ad55;
+}
+.why-list { display: flex; flex-direction: column; gap: 5px; }
+.why-item {
+  display: flex; gap: 7px; align-items: flex-start; font-size: 7.5pt; color: rgba(255,255,255,0.9); line-height: 1.55;
+}
+.why-item-icon { flex-shrink: 0; font-size: 10pt; line-height: 1.3; }
+
+/* ── Flow strip ── */
+.flow-strip {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+.flow-step {
+  flex: 1;
+  text-align: center;
+}
+.flow-num {
+  width: 22px; height: 22px;
+  background: linear-gradient(135deg, #1a365d, #2b6cb0);
+  border-radius: 50%; color: #fff;
+  font-size: 8pt; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 4px;
+}
+.flow-label { font-size: 6.5pt; font-weight: 700; color: #1a365d; line-height: 1.35; }
+.flow-arrow {
+  font-size: 10pt; color: #cbd5e0;
+  padding-top: 4px; flex-shrink: 0;
+}
+
+/* ── CTA box ── */
+.cta-box {
+  background: linear-gradient(135deg, #1a365d, #2b6cb0);
+  border-radius: 8px;
+  padding: 16px 14px;
+  color: #fff;
+  text-align: center;
+}
+.cta-title { font-size: 10pt; font-weight: 900; margin-bottom: 5px; }
+.cta-sub { font-size: 7.5pt; color: rgba(255,255,255,0.8); margin-bottom: 8px; line-height: 1.6; }
+.cta-url {
+  font-size: 8pt; font-weight: 700;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 5px; padding: 4px 10px;
+  color: #90cdf4; letter-spacing: 0.03em;
+  display: inline-block;
+}
+
+/* ── Screenshot strip ── */
+.lf-screens {
+  border-top: 1px solid #e2e8f0;
+  padding: 10px 20px 10px;
+  background: #f7fafc;
+}
+.lf-screens-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.lf-screens-tag {
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #4299e1;
+  background: rgba(66,153,225,0.1);
+  border: 1px solid rgba(66,153,225,0.3);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+.lf-screens-title {
+  font-size: 9pt;
+  font-weight: 900;
+  color: #1a365d;
+}
+.lf-screens-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.lf-screen-item { text-align: center; }
+.lf-screen-item img {
+  width: 100%; height: auto; display: block;
+  border-radius: 5px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(26,54,93,0.1);
+}
+.lf-screen-label {
+  font-size: 6.5pt;
+  font-weight: 700;
+  color: #4a5568;
+  margin-top: 4px;
+  letter-spacing: 0.02em;
+}
+
+/* ── Footer ── */
+.lf-footer {
+  background: #f7fafc;
+  border-top: 1px solid #e2e8f0;
+  padding: 6px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.lf-footer-note {
+  font-size: 6.5pt; color: #94a3b8; line-height: 1.5;
+}
+.lf-footer-tech {
+  font-size: 7pt; font-weight: 700; color: #4299e1;
+}
+
+/* ── Print ── */
+@media print {
+  body { background: none; padding: 0; }
+  .page { box-shadow: none; width: 100%; min-height: auto; }
+  @page { size: A4; margin: 0; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="lf-header">
+    <div class="lf-header-left">
+      <div class="lf-brand">PARTNER SERVICE ｜ 中小企業向け 3名専門家チーム</div>
+      <div class="lf-title"><em>DX スターターパック</em></div>
+      <div class="lf-tagline">FAX・紙・Excel で回っている業務を「1業務だけ」小さくシステム化する、現場密着型 DX サービス</div>
+    </div>
+    <div class="lf-price-box">
+      <div class="lf-price-normal">通常 90万円</div>
+      <div class="lf-price-val">65<small>万円</small></div>
+      <div class="lf-price-label">サービス開始特別価格</div>
+    </div>
+  </div>
+
+  <!-- Tech badges -->
+  <div class="lf-tech">
+    <span>⚡ Claude Code 高速開発</span>
+    <span>☁️ AWS サーバーレス構成</span>
+    <span>🤖 AI-OCR（Textract + Claude Vision）</span>
+    <span>🔧 完全カスタム・既製品なし</span>
+    <span>⏱ 1〜2ヶ月納品</span>
+  </div>
+
+  <!-- Body -->
+  <div class="lf-body">
+
+    <!-- LEFT -->
+    <div class="lf-left">
+
+      <!-- Catch -->
+      <div class="catch-box">
+        「DXは必要だが<em>大手SIerは費用が合わない</em>」<br>
+        「freeeは使っているが<em>自社独自のルールに対応できない</em>」<br>
+        そんな中小企業のために、<em>1業務・65万円・1〜2ヶ月</em>で始められるDXを作りました。
+      </div>
+
+      <!-- Packs -->
+      <div>
+        <div class="sec-head">
+          <div class="sec-tag">SERVICE PACKS</div>
+          <div class="sec-title"><em>2つ</em>のパックから選べます</div>
+        </div>
+        <div class="pack-row">
+          <div class="pack-card">
+            <div class="pack-label">PACK A</div>
+            <div class="pack-name">FAX・紙注文書<br>AI-OCR パック</div>
+            <div class="pack-target">製造業・卸売業 向け</div>
+            <div class="pack-desc">
+              FAX・PDFをアップロードするだけで <strong>Amazon Textract + Claude Vision</strong> が自動読み取り。
+              現場のFAX運用はそのまま。読み取り項目・出力形式は<strong>御社専用にカスタム</strong>します。
+            </div>
+            <div class="pack-copy">「FAXをやめなくていい。入力作業だけをゼロにしましょう。」</div>
+          </div>
+          <div class="pack-card featured">
+            <div class="pack-badge">最多ご相談</div>
+            <div class="pack-label">PACK B</div>
+            <div class="pack-name">Excel業務<br>ミニシステム化パック</div>
+            <div class="pack-target">属人化Excelを抱える企業 向け</div>
+            <div class="pack-desc">
+              属人化Excelを入力フォーム・一覧・検索付きの<strong>会社専用Webシステム</strong>に置き換え。
+              業務フローはそのまま、一番困っているExcelだけを対象に。将来の機能追加の<strong>土台になる設計</strong>で作ります。
+            </div>
+            <div class="pack-copy">「まず1つのExcelを65万円でシステム化。それが脱Excelの第一歩です。」</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team -->
+      <div>
+        <div class="sec-head">
+          <div class="sec-tag">OUR TEAM</div>
+          <div class="sec-title"><em>3名</em>の専門家がチームで対応します</div>
+        </div>
+        <div class="team-strip">
+          <div class="team-card">
+            <img class="team-avatar" src="https://unavatar.io/twitter/koba_webct" alt="小林 健">
+            <div class="team-role">SALES & NETWORK</div>
+            <div class="team-name">小林 健（こば）</div>
+            <div class="team-desc">動画制作・SNS運用で急成長中のIDEAL代表。幅広い業種の経営者ネットワークを活かし、ヒアリング〜提案まで担当。</div>
+          </div>
+          <div class="team-card">
+            <img class="team-avatar" src="https://unavatar.io/twitter/dady56baby2" alt="太田 肇">
+            <div class="team-role">IT STRATEGY × AI/DX</div>
+            <div class="team-name">太田 肇（はじめ）</div>
+            <div class="team-desc">IT戦略の上流設計から現場課題を整理。DX導入の勘所を押さえ、「何から始めるか」を明確に導きます。</div>
+          </div>
+          <div class="team-card">
+            <img class="team-avatar" src="https://unavatar.io/twitter/Marketer_kazuf" alt="福田 和弘">
+            <div class="team-role">CLAUDE CODE × AWS</div>
+            <div class="team-name">福田 和弘（kazu）</div>
+            <div class="team-desc">Claude Code × AWSで高速開発。Lambda・DynamoDBのサーバーレス構成で月数千円運用、1〜2ヶ月納品を実現。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why 65万円 -->
+      <div class="why-box">
+        <div class="why-box-title">⚡ なぜ 65万円・1〜2ヶ月で実現できるのか？</div>
+        <div class="why-list">
+          <div class="why-item">
+            <div class="why-item-icon">🤖</div>
+            <div><strong>Claude Code で開発速度を10倍に</strong> — AIがコードを自動生成し、実装時間を大幅に短縮。品質を保ちながら小規模案件でも採算が取れます。</div>
+          </div>
+          <div class="why-item">
+            <div class="why-item-icon">☁️</div>
+            <div><strong>AWSサーバーレスで初期費用ゼロ</strong> — サーバー購入不要。Lambda・S3・DynamoDBで月数千円〜の運用コストを実現します。</div>
+          </div>
+          <div class="why-item">
+            <div class="why-item-icon">🎯</div>
+            <div><strong>対象を「1業務」に絞る</strong> — 全社展開ではなく1業務だけに集中するため、要件がシンプルに保たれ、短期間・低コストで納品できます。</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="lf-right">
+
+      <!-- Pain points -->
+      <div>
+        <div class="sec-head">
+          <div class="sec-tag">PROBLEM</div>
+          <div class="sec-title">こんな<em>お困りごと</em>はありませんか？</div>
+        </div>
+        <div class="pain-list">
+          <div class="pain-item">
+            <div class="pain-icon">📠</div>
+            <div>
+              <div class="pain-title">FAX注文書を毎日Excelに手入力</div>
+              <div class="pain-desc">転記ミス・入力漏れが多発し、確認作業に時間が奪われています。</div>
+            </div>
+          </div>
+          <div class="pain-item">
+            <div class="pain-icon">📊</div>
+            <div>
+              <div class="pain-title">Excelが増えすぎて管理不能・属人化</div>
+              <div class="pain-desc">担当者しか使えないExcelが業務を止め、引き継ぎリスクが深刻です。</div>
+            </div>
+          </div>
+          <div class="pain-item">
+            <div class="pain-icon">💸</div>
+            <div>
+              <div class="pain-title">大手SIerの提案は高額すぎて踏み切れない</div>
+              <div class="pain-desc">数百万〜数千万の提案では小規模案件の費用対効果が見えません。</div>
+            </div>
+          </div>
+          <div class="pain-item freee">
+            <div class="pain-icon">🟡</div>
+            <div>
+              <div class="pain-title" style="color:#b45309;">freeeでは自社固有のルールに対応できない</div>
+              <div class="pain-desc">独自の承認フロー・帳票フォーマット・社内連携は、パッケージの枠を超えた完全カスタム開発でしか実現できません。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expansion -->
+      <div>
+        <div class="sec-head">
+          <div class="sec-tag">EXPANSION</div>
+          <div class="sec-title">第一歩の次に<em>広がる拡張例</em></div>
+        </div>
+        <div class="expand-grid">
+          <div class="expand-item featured">
+            <div class="expand-icon">🔗</div>
+            <div>
+              <div class="expand-title">freee API 連携</div>
+              <div class="expand-desc">承認済みデータをfreeeへ自動連携。freee単体では無理な自社ルールも対応。</div>
+            </div>
+          </div>
+          <div class="expand-item">
+            <div class="expand-icon">✅</div>
+            <div>
+              <div class="expand-title">多段階承認フロー</div>
+              <div class="expand-desc">金額・部門ごとに承認ルートを分岐。社内規程に完全対応。</div>
+            </div>
+          </div>
+          <div class="expand-item">
+            <div class="expand-icon">💬</div>
+            <div>
+              <div class="expand-title">LINE / Slack 通知</div>
+              <div class="expand-desc">承認依頼・期限アラートをチャットへ自動送信。</div>
+            </div>
+          </div>
+          <div class="expand-item">
+            <div class="expand-icon">📱</div>
+            <div>
+              <div class="expand-title">モバイル対応</div>
+              <div class="expand-desc">スマートフォンから承認・入力。現場スタッフも活用できる。</div>
+            </div>
+          </div>
+          <div class="expand-item">
+            <div class="expand-icon">🔄</div>
+            <div>
+              <div class="expand-title">基幹系・販売管理連携</div>
+              <div class="expand-desc">受注・在庫データを既存システムへ自動取り込み。</div>
+            </div>
+          </div>
+          <div class="expand-item">
+            <div class="expand-icon">📈</div>
+            <div>
+              <div class="expand-title">月次レポート自動生成</div>
+              <div class="expand-desc">処理件数・金額集計レポートをPDF／メールで定期配信。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flow -->
+      <div>
+        <div class="sec-head">
+          <div class="sec-tag">HOW IT WORKS</div>
+          <div class="sec-title"><em>導入の流れ</em>（1〜2ヶ月）</div>
+        </div>
+        <div class="flow-strip">
+          <div class="flow-step">
+            <div class="flow-num">1</div>
+            <div class="flow-label">無料相談<br>ヒアリング</div>
+          </div>
+          <div class="flow-arrow">›</div>
+          <div class="flow-step">
+            <div class="flow-num">2</div>
+            <div class="flow-label">技術判定<br>提案書</div>
+          </div>
+          <div class="flow-arrow">›</div>
+          <div class="flow-step">
+            <div class="flow-num">3</div>
+            <div class="flow-label">契約・<br>開発開始</div>
+          </div>
+          <div class="flow-arrow">›</div>
+          <div class="flow-step">
+            <div class="flow-num">4</div>
+            <div class="flow-label">開発・<br>テスト</div>
+          </div>
+          <div class="flow-arrow">›</div>
+          <div class="flow-step">
+            <div class="flow-num">5</div>
+            <div class="flow-label">納品・<br>運用定着</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-box">
+        <div class="cta-title">まずは、FAXやExcelを見せてください</div>
+        <div class="cta-sub">
+          FAX注文書・Excelファイルをご共有いただければ、<br>
+          65万円の範囲で対応できるか<strong>無料で判断します。</strong>
+        </div>
+        <div class="cta-url">fkdkazu-commits.github.io/ai-consulting-lp/dx-starter-pack.html</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Screenshot strip -->
+  <div class="lf-screens">
+    <div class="lf-screens-head">
+      <div class="lf-screens-tag">SYSTEM PREVIEW</div>
+      <div class="lf-screens-title">完成イメージ — 請求書 AI-OCR 管理システム（実稼働画面）</div>
+    </div>
+    <div class="lf-screens-grid">
+      <div class="lf-screen-item">
+        <img src="screen-dashboard.png" alt="ダッシュボード">
+        <div class="lf-screen-label">① ダッシュボード — 処理状況を一目で把握</div>
+      </div>
+      <div class="lf-screen-item">
+        <img src="screen-ocr.png" alt="OCR結果確認">
+        <div class="lf-screen-label">② AI-OCR 結果確認 — AIが自動読み取り・即修正</div>
+      </div>
+      <div class="lf-screen-item">
+        <img src="screen-approval.png" alt="承認フロー">
+        <div class="lf-screen-label">③ 承認フロー — ワンクリックで承認・差し戻し</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="lf-footer">
+    <div class="lf-footer-note">
+      ※ 65万円は1業務・画面1〜2・出力1種類が対象。外部連携・複数業務・追加画面は別途お見積もり。<br>
+      ※ 外部API利用料（AWS実費など）は別途実費。導入期間は業務内容により変動する場合があります。
+    </div>
+    <div class="lf-footer-tech">⚡ Powered by Claude Code × AWS</div>
+  </div>
+
+</div>
+</body>
+</html>
