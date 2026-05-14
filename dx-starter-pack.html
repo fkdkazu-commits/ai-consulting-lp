@@ -69,6 +69,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 .hero-nums {
   display: flex;
   justify-content: center;
+  align-items: stretch;
   flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 36px;
@@ -80,6 +81,17 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   padding: 16px 28px;
   text-align: center;
   min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hero-num-strike {
+  font-size: 12px;
+  color: rgba(255,255,255,0.38);
+  text-decoration: line-through;
+  margin-bottom: 2px;
+  font-weight: 600;
 }
 .hero-num-val {
   font-size: 30px;
@@ -615,11 +627,37 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 }
 .showcase-img-wrap {
   padding: 0 20px 20px;
+  position: relative;
 }
 .showcase-img-wrap img {
   width: 100%; height: auto; display: block;
   border-radius: 10px; border: 1px solid #e2e8f0;
   box-shadow: 0 2px 12px rgba(26,54,93,0.08);
+  cursor: zoom-in;
+  transition: opacity 0.15s;
+}
+.showcase-img-wrap img:hover { opacity: 0.92; }
+.zoom-hint {
+  text-align: right;
+  font-size: 11px; color: #94a3b8;
+  margin-top: 6px; letter-spacing: 0.03em;
+}
+/* lightbox */
+.lb-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.88); z-index: 9999;
+  justify-content: center; align-items: center; cursor: zoom-out;
+}
+.lb-overlay.active { display: flex; }
+.lb-overlay img {
+  max-width: 94vw; max-height: 90vh;
+  border-radius: 8px; box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+  cursor: default;
+}
+.lb-close {
+  position: fixed; top: 20px; right: 28px;
+  color: #fff; font-size: 36px; font-weight: 300;
+  cursor: pointer; line-height: 1; user-select: none; z-index: 10000;
 }
 
 @media (max-width: 640px) {
@@ -653,7 +691,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
     </div>
     <div class="hero-nums">
       <div class="hero-num-item">
-        <div class="hero-num-val"><s>90万円</s><br>65<small>万円</small></div>
+        <div class="hero-num-strike">通常 90万円</div>
+        <div class="hero-num-val">65<small>万円</small></div>
         <div class="hero-num-label">サービス開始特別価格</div>
       </div>
       <div class="hero-num-item">
@@ -911,7 +950,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
         </div>
       </div>
       <div class="showcase-img-wrap">
-        <img src="screen-dashboard.png" alt="ダッシュボード画面">
+        <img src="screen-dashboard.png" alt="ダッシュボード画面" onclick="openLb(this)">
+        <p class="zoom-hint">🔍 クリックで拡大</p>
       </div>
     </div>
 
@@ -924,7 +964,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
         </div>
       </div>
       <div class="showcase-img-wrap">
-        <img src="screen-upload.png" alt="請求書アップロード画面">
+        <img src="screen-upload.png" alt="請求書アップロード画面" onclick="openLb(this)">
+        <p class="zoom-hint">🔍 クリックで拡大</p>
       </div>
     </div>
 
@@ -937,7 +978,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
         </div>
       </div>
       <div class="showcase-img-wrap">
-        <img src="screen-ocr.png" alt="OCR結果確認画面">
+        <img src="screen-ocr.png" alt="OCR結果確認画面" onclick="openLb(this)">
+        <p class="zoom-hint">🔍 クリックで拡大</p>
       </div>
     </div>
 
@@ -950,7 +992,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
         </div>
       </div>
       <div class="showcase-img-wrap">
-        <img src="screen-approval.png" alt="承認フロー画面">
+        <img src="screen-approval.png" alt="承認フロー画面" onclick="openLb(this)">
+        <p class="zoom-hint">🔍 クリックで拡大</p>
       </div>
     </div>
 
@@ -963,7 +1006,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
         </div>
       </div>
       <div class="showcase-img-wrap">
-        <img src="screen-status.png" alt="ステータス一覧画面">
+        <img src="screen-status.png" alt="ステータス一覧画面" onclick="openLb(this)">
+        <p class="zoom-hint">🔍 クリックで拡大</p>
       </div>
     </div>
 
@@ -1117,5 +1161,24 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   </div>
 
 </div>
+
+<!-- lightbox overlay -->
+<div class="lb-overlay" id="lbOverlay" onclick="closeLb()">
+  <span class="lb-close" onclick="closeLb()">×</span>
+  <img id="lbImg" src="" alt="" onclick="event.stopPropagation()">
+</div>
+<script>
+function openLb(img) {
+  document.getElementById('lbImg').src = img.src;
+  document.getElementById('lbImg').alt = img.alt;
+  document.getElementById('lbOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  document.getElementById('lbOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+</script>
 </body>
 </html>
