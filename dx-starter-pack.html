@@ -491,6 +491,107 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 .flow-title { font-size: 14px; font-weight: 700; color: #1a365d; margin-bottom: 4px; }
 .flow-desc { font-size: 13px; color: #718096; line-height: 1.65; }
 
+/* ── 価格設計テーブル ── */
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+.pricing-table th {
+  background: #1a365d;
+  color: #fff;
+  padding: 11px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.pricing-table th:nth-child(2) { text-align: right; }
+.pricing-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: middle;
+  line-height: 1.6;
+}
+.pricing-table td:nth-child(2) { text-align: right; font-weight: 900; color: #1a365d; font-size: 15px; white-space: nowrap; }
+.pricing-table tr:last-child td { border-bottom: none; }
+.pricing-table tr:nth-child(even) td { background: #f7fafc; }
+.pricing-table tr.featured td { background: linear-gradient(135deg, #fffbeb, #fef3c7); }
+.pricing-table tr.featured td:first-child { border-left: 3px solid #f6ad55; }
+.pt-label {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  padding: 2px 10px; border-radius: 20px;
+  margin-bottom: 3px;
+}
+.pt-label.base { background: #ebf8ff; color: #2b6cb0; border: 1px solid #bee3f8; }
+.pt-label.special { background: #fffbeb; color: #b45309; border: 1px solid #f6e05e; }
+.pt-label.monthly { background: #f0fff4; color: #276749; border: 1px solid #9ae6b4; }
+.pt-label.add { background: #faf5ff; color: #6b46c1; border: 1px solid #d6bcfa; }
+.pt-note { font-size: 13px; color: #718096; line-height: 1.8; margin-bottom: 48px; }
+
+/* ── FAQ ── */
+.faq-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 64px; }
+.faq-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+.faq-q {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a365d;
+  line-height: 1.55;
+  user-select: none;
+}
+.faq-q:hover { background: #f7fafc; }
+.faq-q-icon {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  background: linear-gradient(135deg, #1a365d, #2b6cb0);
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; margin-top: 1px;
+  font-style: normal;
+}
+.faq-a-icon {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  background: #ebf8ff;
+  color: #2b6cb0;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; margin-top: 1px;
+}
+.faq-chevron {
+  margin-left: auto; flex-shrink: 0;
+  color: #94a3b8; font-size: 18px; line-height: 1;
+  transition: transform 0.2s;
+}
+.faq-item.open .faq-chevron { transform: rotate(180deg); }
+.faq-a {
+  display: none;
+  padding: 0 20px 16px 56px;
+  font-size: 13.5px;
+  color: #4a5568;
+  line-height: 1.85;
+  border-top: 1px solid #f0f4f8;
+}
+.faq-a-inner {
+  display: flex; gap: 12px; padding-top: 14px;
+}
+.faq-item.open .faq-a { display: block; }
+.faq-a strong { color: #1a365d; }
+
 /* ── CTA ── */
 .cta-box {
   background: linear-gradient(135deg, #1a365d 0%, #2a4a7f 60%, #2b6cb0 100%);
@@ -1147,6 +1248,158 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
     </div>
   </div>
 
+  <div class="divider"></div>
+
+  <!-- 価格設計 -->
+  <div class="sec-tag">PRICING DETAIL</div>
+  <h2 class="sec-title"><em>価格設計</em>の考え方</h2>
+  <p class="sec-lead" style="margin-bottom:28px">
+    65万円は「値引き」ではなく、サービス開始時の実績づくり価格です。<br>
+    初期導入後の保守・追加開発まで、段階的にご支援します。
+  </p>
+  <table class="pricing-table">
+    <thead>
+      <tr>
+        <th style="border-radius:8px 0 0 0;">価格区分</th>
+        <th>金額</th>
+        <th>位置づけ</th>
+        <th style="border-radius:0 8px 0 0;">営業上の見せ方</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="pt-label base">通常価格</span><br><strong>通常価格</strong></td>
+        <td>90万円</td>
+        <td>標準提供価格</td>
+        <td>同等内容を通常提供する場合の基準価格</td>
+      </tr>
+      <tr class="featured">
+        <td><span class="pt-label special">初期限定</span><br><strong>サービス開始特別価格</strong></td>
+        <td style="color:#b45309;">65万円</td>
+        <td>初期導入価格</td>
+        <td>初期実績づくりのための限定価格</td>
+      </tr>
+      <tr>
+        <td><span class="pt-label monthly">継続収益</span><br><strong>月額保守</strong></td>
+        <td>1万〜数万円<small style="font-size:11px;font-weight:400;color:#718096;">/月</small></td>
+        <td>継続サポート</td>
+        <td>問い合わせ対応・軽微修正・改善提案に応じて段階化</td>
+      </tr>
+      <tr>
+        <td><span class="pt-label add">アップセル</span><br><strong>追加開発</strong></td>
+        <td>10万〜65万円</td>
+        <td>機能拡張</td>
+        <td>画面追加・帳票追加・別業務展開・freee連携を別見積化</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="pt-note">
+    ※ 月額保守の金額・内容は導入後にご相談のうえ決定します。<br>
+    ※ 追加開発は内容・規模によって別途お見積もりとなります。<br>
+    ※ AWS 実費（Lambda・S3・DynamoDB等）は別途実費となります。
+  </p>
+
+  <div class="divider"></div>
+
+  <!-- FAQ -->
+  <div class="sec-tag">FAQ</div>
+  <h2 class="sec-title">よくある<em>ご質問</em></h2>
+  <p class="sec-lead" style="margin-bottom:28px">導入検討時によくいただくご質問をまとめました。</p>
+  <div class="faq-list">
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <span class="faq-q-icon">Q</span>
+        会計ソフト（例：freee）と何が違うのですか？
+        <span class="faq-chevron">⌄</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">
+          <span class="faq-a-icon">A</span>
+          <div>
+            freee などの会計ソフトは<strong>汎用パッケージ</strong>であるため、あらかじめ決まった仕様の範囲内でしか使えません。自社独自の承認フロー・勘定科目ルール・帳票フォーマット・他システムとの連携など、<strong>業務固有の要件には対応できない</strong>ことが多くあります。<br><br>
+            当サービスは Claude Code × AWS で<strong>御社専用に一から開発</strong>するため、freee が苦手とする「自社の業務ルールに完全に合わせたシステム」を実現できます。また、freee との API 連携オプションを追加することで、承認済みデータを freee へ自動連携することも可能です。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <span class="faq-q-icon">Q</span>
+        AWS の保守・運用はしてもらえますか？
+        <span class="faq-chevron">⌄</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">
+          <span class="faq-a-icon">A</span>
+          <div>
+            はい、対応しています。納品後の月額保守プランでは、<strong>AWS環境の監視・軽微な修正・動作確認・改善提案</strong>を継続してサポートします。<br><br>
+            AWS のサーバーレス構成（Lambda・S3・DynamoDB）はサーバー管理が不要な設計のため、保守コストを最小限に抑えられます。月額保守の内容・金額は導入後にご相談のうえ決定します。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <span class="faq-q-icon">Q</span>
+        手書きの領収書や請求書も読み取れますか？
+        <span class="faq-chevron">⌄</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">
+          <span class="faq-a-icon">A</span>
+          <div>
+            はい、<strong>手書き帳票にも高精度で対応</strong>しています。Amazon Textract による標準 OCR に加え、<strong>Claude Vision（AI画像解析）</strong>を組み合わせることで、既存の OCR ツールでは読み取れなかった崩れた手書き文字・薄い印字・複雑なレイアウトの帳票も正確に抽出できます。<br><br>
+            印刷された FAX・手書きの受領書・領収書・注文書など、すべて同じ画面からアップロードするだけで処理できます。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <span class="faq-q-icon">Q</span>
+        65万円の範囲に何が含まれますか？追加費用はありますか？
+        <span class="faq-chevron">⌄</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">
+          <span class="faq-a-icon">A</span>
+          <div>
+            65万円には<strong>ヒアリング・設計・開発・テスト・納品・操作マニュアル作成</strong>が含まれます。対象は「1業務・画面1〜2・出力1種類」の範囲内です。<br><br>
+            以下は<strong>別途</strong>となります：
+            <ul style="margin-top:8px;padding-left:18px;line-height:2;">
+              <li>AWS 実費（Lambda・S3・DynamoDB 等の利用料 ／ 月数千円〜）</li>
+              <li>追加画面・複数業務・外部システム連携（別途お見積もり）</li>
+              <li>納品後の月額保守（内容・金額は別途ご相談）</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">
+        <span class="faq-q-icon">Q</span>
+        導入後に機能を追加・変更することはできますか？
+        <span class="faq-chevron">⌄</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">
+          <span class="faq-a-icon">A</span>
+          <div>
+            はい、対応可能です。65万円パックは<strong>将来の拡張を前提とした設計</strong>で開発するため、運用に慣れてから必要な機能だけを追加できます。<br><br>
+            追加の例：freee API 連携 / 多段階承認フロー / LINE・Slack 通知 / モバイル対応 / 別業務への展開など。<br>
+            追加開発は内容に応じて<strong>10万〜65万円</strong>の範囲で別途お見積もりします。
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   <!-- CTA -->
   <div class="cta-box">
     <div class="cta-box-inner">
@@ -1175,6 +1428,9 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   <img id="lbImg" src="" alt="" onclick="event.stopPropagation()">
 </div>
 <script>
+function toggleFaq(el) {
+  el.classList.toggle('open');
+}
 function openLb(img) {
   document.getElementById('lbImg').src = img.src;
   document.getElementById('lbImg').alt = img.alt;
