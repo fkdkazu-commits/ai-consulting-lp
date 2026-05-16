@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DXスターターパック 料金セクション追記 プレビュー</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1a2e; padding: 40px 20px; }
+
+.preview-label {
+  position: fixed; top: 12px; left: 12px; z-index: 999;
+  background: #b45309; color: #fff; font-weight: 900; font-size: 13px;
+  padding: 6px 14px; border-radius: 4px; font-family: sans-serif;
+}
+
+.wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+  background: #f7fafc;
+  padding: 48px 32px;
+  border-radius: 20px;
+}
+
+/* 既存の plans-note 再現 */
+.plans-note {
+  text-align: center;
+  font-size: 13px;
+  color: #718096;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* ── DXスターターパック告知ブロック ── */
+.dx-banner {
+  margin-top: 32px;
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border: 1.5px solid rgba(217, 119, 6, 0.35);
+  border-radius: 16px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.dx-banner-icon { font-size: 36px; flex-shrink: 0; line-height: 1; }
+.dx-banner-body { flex: 1; min-width: 240px; }
+.dx-banner-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  color: #b45309;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+.dx-banner-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: #1a1a2e;
+  margin-bottom: 10px;
+}
+.dx-banner-desc {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.85;
+  margin-bottom: 14px;
+}
+.dx-banner-desc strong { color: #b45309; }
+.dx-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+.dx-tag {
+  background: rgba(217, 119, 6, 0.12);
+  border: 1px solid rgba(217, 119, 6, 0.35);
+  color: #92400e;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 20px;
+}
+
+/* 区切り線 */
+.divider {
+  border: none;
+  border-top: 1px dashed #d1d5db;
+  margin: 48px 0 32px;
+}
+.section-label {
+  text-align: center;
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 16px;
+  letter-spacing: 0.08em;
+}
+</style>
+</head>
+<body>
+
+<div class="preview-label">プレビュー｜料金セクション追記案</div>
+
+<div class="wrapper">
+
+  <p class="section-label">↑ 既存の料金プランカード（省略）</p>
+
+  <!-- 既存のfootnote再現 -->
+  <p class="plans-note">※ 外部API利用料（OpenAI・Anthropic等）は別途実費となります</p>
+
+  <hr class="divider">
+
+  <!-- ── 追記ブロック ── -->
+  <div class="dx-banner">
+    <div class="dx-banner-icon">🏭</div>
+    <div class="dx-banner-body">
+      <div class="dx-banner-eyebrow">COMING SOON｜パートナー協業サービス</div>
+      <div class="dx-banner-title">中小企業向け DXスターターパック</div>
+      <p class="dx-banner-desc">
+        FAX・紙・Excelで回っている業務を「1業務だけ」小さくシステム化する、現場密着型のDXサービスを準備中です。<br>
+        <strong>営業・顧客開拓・技術開発の3つの専門家がチームを組み、受注から納品・運用定着まで一貫して対応。</strong>
+        大手SIerでは費用が合わない小規模案件にも、万全の体制でお応えします。
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:16px">
+        <div style="background:rgba(255,255,255,0.7);border:1px solid rgba(217,119,6,0.2);border-radius:12px;padding:14px 16px">
+          <div style="font-size:11px;font-weight:700;color:#b45309;margin-bottom:6px">🤝 顧客開拓・ネットワーク</div>
+          <div style="font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:4px">信頼ある紹介</div>
+          <div style="font-size:12px;color:#6b7280;line-height:1.6">既存ネットワークを活用し、検討段階から確かな入口をつくります</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.7);border:1px solid rgba(217,119,6,0.2);border-radius:12px;padding:14px 16px">
+          <div style="font-size:11px;font-weight:700;color:#b45309;margin-bottom:6px">💼 DXアドバイザー × AI/DX × 営業</div>
+          <div style="font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:4px">戦略立案・要件整理・提案</div>
+          <div style="font-size:12px;color:#6b7280;line-height:1.6">IT戦略の上流から現場課題を整理。DX導入の勘所を押さえた提案で、意思決定をスムーズに進めます</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.7);border:1px solid rgba(217,119,6,0.2);border-radius:12px;padding:14px 16px">
+          <div style="font-size:11px;font-weight:700;color:#b45309;margin-bottom:6px">⚙️ Claude Code × AWS 開発・実装</div>
+          <div style="font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:4px">短期納品・クラウド構築</div>
+          <div style="font-size:12px;color:#6b7280;line-height:1.6">Claude Codeで高速開発し、AWSで本番環境を構築。1〜2ヶ月で現場稼働まで対応します</div>
+        </div>
+      </div>
+      <div class="dx-tags">
+        <span class="dx-tag">📠 FAX・紙注文書 AI-OCR化</span>
+        <span class="dx-tag">📊 Excel業務 ミニシステム化</span>
+        <span class="dx-tag">🔍 DX業務診断・ロードマップ</span>
+        <span class="dx-tag">🏭 製造・卸売・建設関連業 対応</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
