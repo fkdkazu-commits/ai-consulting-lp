@@ -79,17 +79,21 @@
   .nav-dropdown-menu {
     display: none;
     position: absolute;
-    top: calc(100% + 12px);
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
+    padding-top: 12px;
+    min-width: 220px;
+    z-index: 200;
+    white-space: nowrap;
+  }
+  .nav-dropdown-menu-inner {
     background: #fff;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.1);
     padding: 6px 0;
-    min-width: 220px;
-    z-index: 200;
-    white-space: nowrap;
+    overflow: hidden;
   }
   .nav-dropdown:hover .nav-dropdown-menu { display: block; }
   .nav-dropdown-menu a {
@@ -1141,9 +1145,11 @@
       <div class="nav-dropdown">
         <span class="nav-dropdown-trigger">サービス</span>
         <div class="nav-dropdown-menu">
-          <a href="#plans">Claude Code 導入支援</a>
-          <a href="dx-starter-pack.html">DXスターターパック<span class="menu-badge badge-orange">NEW</span></a>
-          <a href="https://fkdkazu-commits.github.io/mentor-lp/" target="_blank" rel="noopener">Claude Code 個別家庭教師<span class="menu-badge badge-blue">NEW</span></a>
+          <div class="nav-dropdown-menu-inner">
+            <a href="#plans">Claude Code 導入支援</a>
+            <a href="dx-starter-pack.html">DXスターターパック<span class="menu-badge badge-orange">NEW</span></a>
+            <a href="https://fkdkazu-commits.github.io/mentor-lp/" target="_blank" rel="noopener">Claude Code 個別家庭教師<span class="menu-badge badge-blue">NEW</span></a>
+          </div>
         </div>
       </div>
       <a href="#aws-delivery">環境・費用</a>
