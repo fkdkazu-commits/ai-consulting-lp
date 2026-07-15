@@ -114,6 +114,7 @@
   }
   .badge-orange { background: rgba(217,119,6,0.1); color: #92400e; border: 1px solid rgba(217,119,6,0.25); }
   .badge-blue   { background: rgba(37,99,235,0.08); color: #1d4ed8; border: 1px solid rgba(37,99,235,0.2); }
+  .badge-teal   { background: rgba(13,148,136,0.1); color: #0f766e; border: 1px solid rgba(13,148,136,0.25); }
   .header-cta {
     background: #2b6cb0;
     color: #fff !important;
@@ -1146,7 +1147,8 @@
         <span class="nav-dropdown-trigger">サービス</span>
         <div class="nav-dropdown-menu">
           <div class="nav-dropdown-menu-inner">
-            <a href="#plans">Claude Code 導入支援</a>
+            <a href="#plans">Claude Code スポット開発支援</a>
+            <a href="#retainer">Claude Code 業務委託支援<span class="menu-badge badge-teal">NEW</span></a>
             <a href="dx-starter-pack.html">DXスターターパック<span class="menu-badge badge-orange">NEW</span></a>
             <a href="https://fkdkazu-commits.github.io/mentor-lp/" target="_blank" rel="noopener">Claude Code 個別家庭教師<span class="menu-badge badge-blue">NEW</span></a>
           </div>
@@ -1252,6 +1254,11 @@
     <div class="section-tag">NEWS</div>
     <h2 class="section-title">新着情報</h2>
     <ul class="news-list">
+      <li class="news-item">
+        <span class="news-date">2026.07.15</span>
+        <span class="news-badge news-badge-new">新着</span>
+        <a href="#retainer" class="news-title">Claude Code 業務委託支援（月額顧問契約・ご紹介キャッシュバック制度あり）を開始しました</a>
+      </li>
       <li class="news-item">
         <span class="news-date">2026.07.12</span>
         <span class="news-badge news-badge-result">実績公開</span>
@@ -1390,8 +1397,8 @@
 <section class="plans" id="plans">
   <div class="section-inner">
     <div class="section-tag">PRICING</div>
-    <h2 class="section-title">Claude Code 導入支援プラン</h2>
-    <p class="section-lead">貴社環境へのClaude Code導入をサポートする個人向けプランです。環境構築・ツール作成・操作レクチャーまで一貫して対応。<span style="white-space:nowrap">課題の規模や予算に合わせてお選びください。</span></p>
+    <h2 class="section-title">Claude Code スポット開発支援</h2>
+    <p class="section-lead">Claude Codeを使ったAIアプリ開発を単発でご依頼いただけるサービスです。環境構築・ツール作成・操作レクチャーまで一貫して対応。<span style="white-space:nowrap">課題の規模や予算に合わせてお選びください。</span></p>
 
     <div class="plans-notice">
       <div class="plans-notice-item">
@@ -1405,7 +1412,7 @@
         <span class="plans-notice-icon">⚙️</span>
         <div>
           <strong>アプリ構築について</strong>
-          ①貴社環境でのレクチャー形式、または②私の環境で構築して納品→貴社環境で動作確認、のいずれかをご選択いただけます。
+          ベーシックは基本的なAIアプリの作り方をレクチャー、スタンダードはご希望のAIアプリを1本構築、プレミアムはCoworkまたはAWSで本番公開まで対応します。プランに応じて、関わる工程の深さが変わります。
         </div>
       </div>
       <div class="plans-notice-item">
@@ -1421,7 +1428,7 @@
       <div class="plan-card">
         <div class="plan-name">ベーシック</div>
         <div class="plan-price"><span>¥</span>10,000</div>
-        <div class="plan-period">納期 1日〜</div>
+        <div class="plan-period">税抜 ／ 納期 1日〜</div>
         <hr class="plan-divider">
         <ul class="plan-items">
           <li>Claude Code環境構築＋初期設定（セキュリティ設定含む）</li>
@@ -1433,8 +1440,8 @@
       <div class="plan-card featured">
         <div class="plan-badge">人気 No.1</div>
         <div class="plan-name">スタンダード</div>
-        <div class="plan-price"><span>¥</span>30,000</div>
-        <div class="plan-period">納期 10日〜</div>
+        <div class="plan-price"><span>¥</span>30,000<span style="font-size:16px">〜</span></div>
+        <div class="plan-period">税抜 ／ 納期 10日〜</div>
         <hr class="plan-divider">
         <ul class="plan-items">
           <li>環境構築</li>
@@ -1446,8 +1453,8 @@
 
       <div class="plan-card">
         <div class="plan-name">プレミアム</div>
-        <div class="plan-price"><span>¥</span>50,000</div>
-        <div class="plan-period">納期 21日〜</div>
+        <div class="plan-price"><span>¥</span>50,000<span style="font-size:16px">〜</span></div>
+        <div class="plan-period">税抜 ／ 納期 21日〜</div>
         <hr class="plan-divider">
         <ul class="plan-items">
           <li>スタンダードの内容</li>
@@ -1457,13 +1464,71 @@
       </div>
     </div>
 
-    <p class="plans-note">※ 外部API利用料（OpenAI・Anthropic等）は別途実費となります</p>
+    <p class="plans-note">※ 表示価格はすべて税抜です。外部API利用料（OpenAI・Anthropic等）は別途実費となります</p>
+
+    <!-- 業務委託支援 ヘッダー -->
+    <div id="retainer" style="margin-top:64px;padding-top:48px;border-top:2px dashed #e2e8f0">
+      <div class="section-tag">MONTHLY RETAINER</div>
+      <h3 class="section-title">Claude Code 業務委託支援<br><span style="font-size:0.5em;color:#4a5568;font-weight:700">－継続的なAI開発・活用支援が必要な方へ</span></h3>
+      <p class="section-lead">単発のスポット開発支援では対応しきれない、継続的な開発・技術相談が必要な中小企業・フリーランス・個人事業主の方向けに、月次の業務委託（継続契約前提）でご支援します。<br>AIツールの開発を担う「AIエンジニア」と、AIを活用して業務課題の整理や解決を相談できる「AI顧問」、両方の役割を1人で担います。</p>
+    </div>
+
+    <!-- 業務委託支援 告知 -->
+    <div style="margin-top:32px;background:linear-gradient(135deg,#f0fdfa,#ccfbf1);border:1.5px solid rgba(13,148,136,0.3);border-radius:16px;padding:28px 32px">
+      <div style="display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:24px">
+        <div style="font-size:36px;flex-shrink:0;line-height:1">🤝</div>
+        <div style="flex:1;min-width:240px">
+          <div style="font-size:11px;font-weight:700;color:#0f766e;letter-spacing:0.08em;margin-bottom:6px">NEW｜継続支援サービス</div>
+          <div style="font-size:18px;font-weight:900;color:#1a1a2e;margin-bottom:10px">サービス内容・料金プラン</div>
+          <p style="font-size:14px;color:#4b5563;line-height:1.85">
+            Claude CodeでのAIツール開発・改善を、単発ではなく<strong style="color:#0f766e">継続的な業務委託契約</strong>としてお引き受けします。
+            新規ツールの開発だけでなく、既存ツールの改善・保守、技術的な相談相手としての「AI顧問」的な関わり方も可能です。
+          </p>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:20px">
+        <div style="background:#fff;border:1px solid rgba(13,148,136,0.25);border-radius:14px;padding:24px">
+          <div style="font-size:12px;font-weight:700;color:#0f766e;margin-bottom:6px">ライトプラン</div>
+          <div style="font-size:28px;font-weight:900;color:#1a1a2e;margin-bottom:2px">月額 50,000円<span style="font-size:13px;font-weight:700;color:#6b7280">〜</span></div>
+          <div style="font-size:12px;color:#6b7280;margin-bottom:16px">税抜 ／ 目安 稼働 15h／月</div>
+          <ul style="list-style:none;font-size:13px;color:#374151;line-height:2">
+            <li>✓ AIツールの新規開発・改善</li>
+            <li>✓ 技術相談・活用方針のアドバイス</li>
+            <li>✓ チャット・オンラインでの継続サポート</li>
+          </ul>
+        </div>
+        <div style="background:#fff;border:2px solid #0f766e;border-radius:14px;padding:24px;position:relative">
+          <div style="position:absolute;top:-12px;left:20px;background:#0f766e;color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px">おすすめ</div>
+          <div style="font-size:12px;font-weight:700;color:#0f766e;margin-bottom:6px">スタンダードプラン</div>
+          <div style="font-size:28px;font-weight:900;color:#1a1a2e;margin-bottom:2px">月額 100,000円<span style="font-size:13px;font-weight:700;color:#6b7280">〜</span></div>
+          <div style="font-size:12px;color:#6b7280;margin-bottom:16px">税抜 ／ 目安 稼働 30h／月</div>
+          <ul style="list-style:none;font-size:13px;color:#374151;line-height:2">
+            <li>✓ ライトプランの内容すべて</li>
+            <li>✓ 複数ツールの並行開発・運用に対応</li>
+            <li>✓ AI活用の中長期ロードマップ相談</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.7);border:1px solid rgba(13,148,136,0.25);border-radius:12px;padding:16px 20px;margin-bottom:20px">
+        <div style="font-size:13px;font-weight:700;color:#0f766e;margin-bottom:4px">🎁 ご紹介キャッシュバック制度</div>
+        <div style="font-size:13px;color:#374151;line-height:1.8">ご紹介者様からのご紹介がきっかけで業務委託契約に至った場合、契約が継続している限り、<strong style="color:#0f766e">毎月の契約金額の20%</strong>をご紹介者様に還元します。</div>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <a href="contact.html" style="display:inline-flex;align-items:center;gap:8px;background:#0f766e;color:#fff;font-size:14px;font-weight:700;padding:12px 28px;border-radius:8px;text-decoration:none;letter-spacing:0.03em">
+          ✉ ご興味ある方はお気軽に無料相談
+        </a>
+      </div>
+      <p style="font-size:11px;color:#94a3b8;margin-top:12px">※ 稼働時間・料金は業務内容により変動します。まずは無料相談にてご要望をお伺いします。</p>
+    </div>
 
     <!-- DXスターターパック ヘッダー -->
     <div id="dx-starter" style="margin-top:64px;padding-top:48px;border-top:2px dashed #e2e8f0">
       <div class="section-tag">PARTNER SERVICE</div>
       <h3 class="section-title">より大きなDX変革が必要な方へ</h3>
-      <p class="section-lead">個人プランでは対応しきれない規模・複雑さの案件は、複数の専門家チームで一貫してサポートします。<br>Claude Code × AWSを組み合わせることで、FAX・紙帳票のAI-OCR自動処理・ExcelのWebシステム化・社内向けAIチャットボット構築など、現場で実際に動く本格的なシステムを1〜2ヶ月で構築します。</p>
+      <p class="section-lead">個人向けサービスでは対応しきれない規模・複雑さの案件は、複数の専門家チームで一貫してサポートします。<br>Claude Code × AWSを組み合わせることで、FAX・紙帳票のAI-OCR自動処理・ExcelのWebシステム化・社内向けAIチャットボット構築など、現場で実際に動く本格的なシステムを1〜2ヶ月で構築します。</p>
     </div>
 
     <!-- DXスターターパック 告知 -->
