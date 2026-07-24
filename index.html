@@ -127,12 +127,77 @@
 
   /* ===== HERO ===== */
   .hero {
-    background:
-      linear-gradient(135deg, rgba(26,54,93,0.91) 0%, rgba(42,74,127,0.87) 50%, rgba(30,58,95,0.93) 100%),
-      url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80') center/cover no-repeat;
+    background: linear-gradient(135deg, #16305a 0%, #1e3f70 45%, #17325c 100%);
     padding: 100px 40px 155px;
     position: relative;
     overflow: hidden;
+  }
+
+  /* ===== HERO 背景アニメーション（CSS/SVG・動画不使用） ===== */
+  .hero-bg-anim {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.4;
+    animation: heroOrbFloat 16s ease-in-out infinite;
+    will-change: transform;
+  }
+  .hero-orb--1 { width: 460px; height: 460px; background: #2b6cb0; top: -140px; left: -100px; animation-delay: 0s; }
+  .hero-orb--2 { width: 360px; height: 360px; background: #63b3ed; bottom: -160px; right: -80px; animation-delay: -5s; }
+  .hero-orb--3 { width: 280px; height: 280px; background: #90cdf4; top: 25%; left: 55%; opacity: 0.28; animation-delay: -10s; }
+  @keyframes heroOrbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(36px, -28px) scale(1.12); }
+  }
+  .hero-bg-anim svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: screen;
+    opacity: 0.55;
+  }
+  .hero-bg-anim .hbg-line {
+    stroke: #63b3ed;
+    stroke-width: 1;
+    fill: none;
+    opacity: 0.35;
+    stroke-dasharray: 6 10;
+    animation: heroLineFlow 6s linear infinite;
+  }
+  @keyframes heroLineFlow {
+    to { stroke-dashoffset: -160; }
+  }
+  .hero-bg-anim .hbg-node {
+    fill: #90cdf4;
+  }
+  .hero-shimmer {
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 40%;
+    height: 200%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.10) 45%, rgba(255,255,255,0.16) 50%, rgba(255,255,255,0.10) 55%, transparent);
+    transform: rotate(8deg);
+    animation: heroShimmer 7s ease-in-out infinite;
+  }
+  @keyframes heroShimmer {
+    0%   { left: -60%; }
+    45%  { left: 120%; }
+    100% { left: 120%; }
+  }
+  @media (max-width: 640px) {
+    .hero-bg-anim { opacity: 0.6; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-orb, .hero-shimmer, .hbg-line { animation: none; }
   }
   .hero::before {
     content: '';
@@ -1168,6 +1233,35 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg-anim" aria-hidden="true">
+    <div class="hero-orb hero-orb--1"></div>
+    <div class="hero-orb hero-orb--2"></div>
+    <div class="hero-orb hero-orb--3"></div>
+    <svg viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <g class="hbg-line">
+        <path d="M 80 90 L 300 160 L 520 70 L 760 180 L 980 100" />
+        <path d="M 60 320 L 260 260 L 480 360 L 720 280 L 940 370 L 1140 300" />
+        <path d="M 300 160 L 480 360" />
+        <path d="M 520 70 L 720 280" />
+        <path d="M 760 180 L 940 370" />
+        <path d="M 260 260 L 80 90" />
+      </g>
+      <g class="hbg-node">
+        <circle cx="80"  cy="90"  r="4"><animate attributeName="r" values="3;6;3" dur="3.2s" begin="0s"   repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;1;0.5" dur="3.2s" begin="0s" repeatCount="indefinite"/></circle>
+        <circle cx="300" cy="160" r="4"><animate attributeName="r" values="3;6;3" dur="3.2s" begin="0.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;1;0.5" dur="3.2s" begin="0.4s" repeatCount="indefinite"/></circle>
+        <circle cx="520" cy="70"  r="4"><animate attributeName="r" values="3;6;3" dur="3.2s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;1;0.5" dur="3.2s" begin="0.8s" repeatCount="indefinite"/></circle>
+        <circle cx="760" cy="180" r="4"><animate attributeName="r" values="3;6;3" dur="3.2s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;1;0.5" dur="3.2s" begin="1.2s" repeatCount="indefinite"/></circle>
+        <circle cx="980" cy="100" r="4"><animate attributeName="r" values="3;6;3" dur="3.2s" begin="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;1;0.5" dur="3.2s" begin="1.6s" repeatCount="indefinite"/></circle>
+        <circle cx="60"  cy="320" r="4"><animate attributeName="r" values="3;6;3" dur="3.6s" begin="0.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;1;0.5" dur="3.6s" begin="0.2s" repeatCount="indefinite"/></circle>
+        <circle cx="260" cy="260" r="4"><animate attributeName="r" values="3;6;3" dur="3.6s" begin="0.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;1;0.5" dur="3.6s" begin="0.6s" repeatCount="indefinite"/></circle>
+        <circle cx="480" cy="360" r="4"><animate attributeName="r" values="3;6;3" dur="3.6s" begin="1.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;1;0.5" dur="3.6s" begin="1.0s" repeatCount="indefinite"/></circle>
+        <circle cx="720" cy="280" r="4"><animate attributeName="r" values="3;6;3" dur="3.6s" begin="1.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;1;0.5" dur="3.6s" begin="1.4s" repeatCount="indefinite"/></circle>
+        <circle cx="940" cy="370" r="4"><animate attributeName="r" values="3;6;3" dur="3.6s" begin="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;1;0.5" dur="3.6s" begin="1.8s" repeatCount="indefinite"/></circle>
+        <circle cx="1140" cy="300" r="4"><animate attributeName="r" values="3;6;3" dur="3.6s" begin="2.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;1;0.5" dur="3.6s" begin="2.2s" repeatCount="indefinite"/></circle>
+      </g>
+    </svg>
+    <div class="hero-shimmer"></div>
+  </div>
   <div class="hero-inner">
     <div class="hero-tag">✦ AI業務自動化支援 / Claude Code × 業務設計</div>
     <h1 class="hero-title">
@@ -1177,7 +1271,7 @@
     <p class="hero-sub">
       ITマネジメント20年以上の経験をもとに、<br>
       貴社の業務課題を整理し、Claude Codeで自動化ツールを設計・実装。<br>
-      AWSで使える状態まで、一貫して対応します。
+      AWSをはじめ、さまざまな環境で使える状態まで、一貫して対応します。
     </p>
     <div class="hero-cta">
       <a href="https://x.com/Marketer_kazuf" target="_blank" rel="noopener" class="btn-primary">
