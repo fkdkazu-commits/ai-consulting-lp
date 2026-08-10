@@ -912,6 +912,103 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   .cta-box { padding: 36px 20px; }
   .pack-grid { grid-template-columns: 1fr; }
 }
+
+/* ══ 目次ナビ ══ */
+.page-nav {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+  padding: 14px 18px; margin-bottom: 56px;
+}
+.page-nav-label { font-size: 11px; font-weight: 700; color: #a0aec0; letter-spacing: 0.08em; margin-right: 6px; }
+.page-nav a {
+  font-size: 13px; font-weight: 700; color: #2b6cb0; text-decoration: none;
+  padding: 6px 14px; border-radius: 20px; background: #ebf4ff; transition: background 0.2s, color 0.2s;
+}
+.page-nav a:hover { background: #2b6cb0; color: #fff; }
+
+/* ══ 追従CTA ══ */
+.sticky-cta {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 80;
+  background: rgba(26,54,93,0.97); color: #fff;
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.18);
+  transform: translateY(110%); transition: transform 0.3s ease;
+}
+.sticky-cta.is-shown { transform: translateY(0); }
+.sticky-cta-inner {
+  max-width: 900px; margin: 0 auto; padding: 12px 24px;
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+}
+.sticky-cta-text { flex: 1; min-width: 220px; line-height: 1.5; }
+.sticky-cta-text strong { display: block; font-size: 14px; font-weight: 900; }
+.sticky-cta-text span { font-size: 11.5px; color: rgba(255,255,255,0.7); }
+.sticky-cta-btn {
+  background: #f6ad55; color: #1a365d; font-size: 14px; font-weight: 900;
+  padding: 12px 26px; border-radius: 8px; text-decoration: none; white-space: nowrap;
+}
+@media (max-width: 640px) {
+  .sticky-cta-inner { padding: 10px 16px; gap: 10px; }
+  .sticky-cta-text span { display: none; }
+  .sticky-cta-btn { width: 100%; text-align: center; }
+}
+
+/* ══ 事例：全幅の色帯にして区切りを明確にする ══ */
+#case-study {
+  background: #f4f8fc;
+  margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+  padding: 64px calc(50vw - 50% + 24px);
+}
+
+/* ══ 事例：一覧表 ══ */
+#case-study .cs-table-wrap { background: #fff; border-radius: 14px; padding: 22px 24px; margin-bottom: 34px; box-shadow: 0 2px 10px rgba(18,41,74,0.06); }
+#case-study .cs-table-title { font-size: 13px; font-weight: 900; color: #12294a; margin-bottom: 14px; }
+#case-study .cs-table { width: 100%; border-collapse: collapse; }
+#case-study .cs-table th {
+  font-size: 11px; color: #90a0b4; font-weight: 700; text-align: left;
+  padding: 8px 10px; border-bottom: 2px solid #e2e8f0; white-space: nowrap;
+}
+#case-study .cs-table td { font-size: 13px; padding: 11px 10px; border-bottom: 1px solid #eef2f7; white-space: nowrap; }
+#case-study .cs-table tr:last-child td { border-bottom: 0; }
+#case-study .cs-td-name a { color: #12294a; font-weight: 900; text-decoration: none; border-bottom: 2px solid #cfe0f2; }
+#case-study .cs-td-name a:hover { color: #2b6cb0; border-color: #2b6cb0; }
+#case-study .cs-td-n { text-align: right; font-variant-numeric: tabular-nums; color: #4a5568; }
+#case-study .cs-td-arrow { color: #cbd5e0; text-align: center; padding: 0 2px; }
+#case-study .cs-td-after { color: #2b6cb0; font-weight: 700; }
+#case-study .cs-td-cut { color: #b45309; font-weight: 900; }
+#case-study .cs-table-note { font-size: 11px; color: #90a0b4; margin-top: 12px; }
+@media (max-width: 640px) {
+  #case-study .cs-table-wrap { overflow-x: auto; }
+  #case-study .cs-table { min-width: 560px; }
+}
+
+/* ══ 事例：詳細の折りたたみ ══ */
+#case-study .cs-more { margin-top: 4px; }
+#case-study .cs-more > summary {
+  cursor: pointer; list-style: none; text-align: center;
+  font-size: 13.5px; font-weight: 900; color: #2b6cb0;
+  background: #eef4fb; border-radius: 8px; padding: 13px;
+}
+#case-study .cs-more > summary::-webkit-details-marker { display: none; }
+#case-study .cs-more > summary::after { content: ' ▼'; font-size: 10px; }
+#case-study .cs-more[open] > summary::after { content: ' ▲'; }
+#case-study .cs-more > summary:hover { background: #e2edf9; }
+#case-study .cs-more-close { display: none; }
+#case-study .cs-more[open] .cs-more-open { display: none; }
+#case-study .cs-more[open] .cs-more-close { display: inline; }
+#case-study .cs-more-body { padding-top: 24px; }
+
+/* ══ 事例：全画面ギャラリー（旧 SYSTEM PREVIEW） ══ */
+#case-study .cs-gallery { margin-bottom: 26px; background: #f4f8fc; border-radius: 10px; }
+#case-study .cs-gallery > summary {
+  cursor: pointer; list-style: none;
+  font-size: 13px; font-weight: 900; color: #2b6cb0; padding: 14px 20px;
+}
+#case-study .cs-gallery > summary::-webkit-details-marker { display: none; }
+#case-study .cs-gallery > summary::before { content: '＋ '; }
+#case-study .cs-gallery[open] > summary::before { content: '− '; }
+#case-study .cs-gallery-body { padding: 0 20px 20px; }
+#case-study .cs-gallery-lead { font-size: 12.5px; color: #5a6b80; line-height: 1.9; margin-bottom: 18px; }
+#case-study .cs-gallery-body .showcase-item { margin-bottom: 24px; }
+#case-study .cs-gallery-body .showcase-item:last-child { margin-bottom: 0; }
 </style>
 </head>
 <body>
@@ -954,6 +1051,17 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 </div>
 
 <div class="container">
+
+  <!-- 目次 -->
+  <nav class="page-nav">
+    <span class="page-nav-label">このページの内容</span>
+    <a href="#problem">お困りごと</a>
+    <a href="#packs">3つのパック</a>
+    <a href="#case-study">導入事例</a>
+    <a href="#pricing">料金</a>
+    <a href="#flow">導入の流れ</a>
+    <a href="#faq">よくある質問</a>
+  </nav>
 
   <!-- キャッチ -->
   <div class="catch-box">
@@ -1016,7 +1124,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   <div class="divider"></div>
 
   <!-- 課題 -->
-  <div class="sec-tag">PROBLEM</div>
+  <div class="sec-tag" id="problem">PROBLEM</div>
   <h2 class="sec-title">こんな<em>お困りごと</em>はありませんか？</h2>
   <p class="sec-lead">地方の中小企業に多く残る、FAX・紙・Excel 業務の現場課題です。</p>
   <div class="pain-grid">
@@ -1055,7 +1163,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   <div class="divider"></div>
 
   <!-- 2パック -->
-  <div class="sec-tag">SERVICE PACKS</div>
+  <div class="sec-tag" id="packs">SERVICE PACKS</div>
   <h2 class="sec-title"><em>脱 Excel・脱 FAX</em> の<br>第一歩を選んでください</h2>
   <p class="sec-lead">
     2つのパックはいずれも「1業務だけ・65万円・完全カスタム」で成立します。<br>
@@ -1180,14 +1288,182 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 
   <div class="divider"></div>
 
-  <!-- サンプル画面 -->
-  <div class="sec-tag">SYSTEM PREVIEW</div>
-  <h2 class="sec-title"><em>完成イメージ</em> — 実際に稼働するシステム例</h2>
-  <p class="sec-lead" style="margin-bottom:32px">
-    請求書 AI-OCR 管理システムの実画面です。<strong>Claude Code × AWS</strong>（Amplify / Textract / Lambda / DynamoDB）で構築した本番稼働中のシステムをそのままご覧いただけます。<br>
-    <span style="font-size:13px;color:#718096">お客様の帳票・業務フローに合わせて、同様の仕組みを完全カスタムで構築します。</span>
-  </p>
+  <!-- 導入事例 -->
+  <section id="case-study">
 
+    <!-- 事例カードで使うアイコン -->
+    <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+      <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM8 13h8v2H8v-2zm0 4h8v2H8v-2z"/></symbol>
+      <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 2a1.5 1.5 0 0 1 1.5 1.5V5H18a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3h4.5V3.5A1.5 1.5 0 0 1 12 2zM8.5 10a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm7 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM8 15.5h8V17H8v-1.5z"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 14.6-4-4 1.6-1.6 2.4 2.4 5.2-5.2 1.6 1.6-6.8 6.8z"/></symbol>
+      <symbol id="i-export" viewBox="0 0 24 24"><path d="M13 3v10.2l3.1-3.1 1.4 1.4-5.5 5.5-5.5-5.5 1.4-1.4L11 13.2V3h2zM5 19h14v2H5v-2z"/></symbol>
+      <symbol id="i-box" viewBox="0 0 24 24"><path d="M12 2 2 7v10l10 5 10-5V7L12 2zm0 2.3 6.9 3.4L12 11.1 5.1 7.7 12 4.3zM4 9.3l7 3.5v6.9l-7-3.5V9.3zm9 10.4v-6.9l7-3.5v6.9l-7 3.5z"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 0 0 2.5-2.5h-5A2.5 2.5 0 0 0 12 22zm7-6v-5a7 7 0 0 0-5.5-6.8V3a1.5 1.5 0 0 0-3 0v1.2A7 7 0 0 0 5 11v5l-2 2v1h18v-1l-2-2z"/></symbol>
+      <symbol id="i-mobile" viewBox="0 0 24 24"><path d="M17 1H7a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm0 17H7V5h10v13zm-5 3.2a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4z"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><path d="M15.5 14h-.8l-.3-.3a6.5 6.5 0 1 0-.7.7l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16v2H4v-2zM6 10h3v8H6v-8zm4.5-6h3v14h-3V4zM15 13h3v5h-3v-5z"/></symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M12 5V2L8 6l4 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></symbol>
+      <symbol id="i-camera" viewBox="0 0 24 24"><path d="M9 3 7.2 5H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.2L15 3H9zm3 5.5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></symbol>
+      <symbol id="i-cart" viewBox="0 0 24 24"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM6.2 6h14.3l-2.3 8H8.1L6.2 6zM2 2h3l.9 2H22l-3 10H7.5l-.4 1.6H19v2H5.6L2.6 4H2V2z"/></symbol>
+    </svg>
+
+    <div class="sec-tag">CASE STUDY</div>
+    <h2 class="sec-title">導入で<em>何がどう変わったか</em></h2>
+    <p class="sec-lead" style="margin-bottom:28px">
+      「時間が減りました」だけでは判断できません。<strong>何を・どう測って・どれだけ変わったか</strong>を、算出根拠まで公開します。
+    </p>
+
+    <!-- サマリー -->
+    <div class="cs-summary">
+      <div class="cs-summary-title">5つの業務領域で、こう変わりました</div>
+      <div class="cs-summary-grid">
+        <div class="cs-summary-item">
+          <div class="cs-summary-value">▲30<small> h/月</small></div>
+          <div class="cs-summary-label">最大の作業時間削減</div>
+        </div>
+        <div class="cs-summary-item">
+          <div class="cs-summary-value">94<small> %</small></div>
+          <div class="cs-summary-label">手書き帳票の読み取り一致率</div>
+        </div>
+        <div class="cs-summary-item">
+          <div class="cs-summary-value">11〜22<small> ヶ月</small></div>
+          <div class="cs-summary-label">投資回収の目安</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-legend">
+      <div class="cs-legend-item"><span class="cs-badge cs-badge--measured">実測</span> 導入前後を実際に計測した値</div>
+      <div class="cs-legend-item"><span class="cs-badge cs-badge--model">モデルケース</span> 前提条件を明記した試算（実績ではありません）</div>
+    </div>
+
+
+    <div class="cs-table-wrap">
+      <div class="cs-table-title">5つの事例のまとめ</div>
+      <table class="cs-table">
+        <thead>
+          <tr><th>業務</th><th>Before</th><th></th><th>After</th><th>削減</th><th>回収目安</th><th>種別</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cs-td-name"><a href="#cs-01">請求書処理</a></td>
+            <td class="cs-td-n">月33h</td><td class="cs-td-arrow">→</td><td class="cs-td-n cs-td-after">月7h</td>
+            <td class="cs-td-n cs-td-cut">▲26h</td><td class="cs-td-n">約13ヶ月</td>
+            <td><span class="cs-badge cs-badge--measured">実測</span></td>
+          </tr>
+          <tr>
+            <td class="cs-td-name"><a href="#cs-02">受発注業務</a></td>
+            <td class="cs-td-n">月40h</td><td class="cs-td-arrow">→</td><td class="cs-td-n cs-td-after">月10h</td>
+            <td class="cs-td-n cs-td-cut">▲30h</td><td class="cs-td-n">約11ヶ月</td>
+            <td><span class="cs-badge cs-badge--model">試算</span></td>
+          </tr>
+          <tr>
+            <td class="cs-td-name"><a href="#cs-03">在庫・発注</a></td>
+            <td class="cs-td-n">月14h</td><td class="cs-td-arrow">→</td><td class="cs-td-n cs-td-after">月4h</td>
+            <td class="cs-td-n cs-td-cut">▲10h</td><td class="cs-td-n">約13ヶ月</td>
+            <td><span class="cs-badge cs-badge--model">試算</span></td>
+          </tr>
+          <tr>
+            <td class="cs-td-name"><a href="#cs-04">日報・点検</a></td>
+            <td class="cs-td-n">月33h</td><td class="cs-td-arrow">→</td><td class="cs-td-n cs-td-after">月6h</td>
+            <td class="cs-td-n cs-td-cut">▲27h</td><td class="cs-td-n">約12ヶ月</td>
+            <td><span class="cs-badge cs-badge--model">試算</span></td>
+          </tr>
+          <tr>
+            <td class="cs-td-name"><a href="#cs-05">経営ダッシュボード</a></td>
+            <td class="cs-td-n">月20h</td><td class="cs-td-arrow">→</td><td class="cs-td-n cs-td-after">月2h</td>
+            <td class="cs-td-n cs-td-cut">▲18h</td><td class="cs-td-n">約18ヶ月</td>
+            <td><span class="cs-badge cs-badge--model">試算</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="cs-table-note">気になる業務の行をクリックすると、その事例へ移動します。詳細は各カードの「詳しく見る」から開けます。</div>
+    </div>
+
+    <!-- CASE 01 -->
+    <div class="cs-case" id="cs-01">
+      <div class="cs-hero" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80')">
+        <div class="cs-topline">
+          <span class="cs-num">CASE 01</span>
+          <span class="cs-badge cs-badge--measured">実測</span>
+          <span class="cs-scope">経理・バックオフィス ／ PACK A</span>
+        </div>
+        <div class="cs-tool">請求書 AI-OCR 管理システム</div>
+        <div class="cs-lead">受領した請求書を目視で確認し、Excel に手入力していた業務を、確認作業だけに。</div>
+      </div>
+      <div class="cs-body">
+
+        <div class="cs-stats">
+          <div class="cs-stat cs-stat--dark">
+            <div class="cs-stat-label">作業時間</div>
+            <div class="cs-stat-value">▲26<small> h/月</small></div>
+            <div class="cs-stat-sub">33h → 7h（79% 減）</div>
+          </div>
+          <div class="cs-stat cs-stat--blue">
+            <div class="cs-stat-label">手書きの読み取り一致率</div>
+            <div class="cs-stat-value">94<small> %</small></div>
+            <div class="cs-stat-sub">従来OCR 52% → 94%</div>
+          </div>
+          <div class="cs-stat cs-stat--amber">
+            <div class="cs-stat-label">投資回収の目安</div>
+            <div class="cs-stat-value">約13<small> ヶ月</small></div>
+            <div class="cs-stat-sub">月52,000円相当の削減</div>
+          </div>
+        </div>
+
+        <details class="cs-more">
+          <summary><span class="cs-more-open">この事例を詳しく見る</span><span class="cs-more-close">閉じる</span></summary>
+          <div class="cs-more-body">
+
+        <div class="cs-block-title">作業時間の変化</div>
+        <div class="cs-bars">
+          <div class="cs-bar-row">
+            <div class="cs-bar-name">BEFORE</div>
+            <div class="cs-bar-track"><div class="cs-bar-fill cs-bar-fill--before" style="width:100%">月 33<small> 時間</small></div></div>
+          </div>
+          <div class="cs-bar-sub">月400件 × 1件あたり約5分（目視確認 → Excel手入力）</div>
+          <div class="cs-bar-row">
+            <div class="cs-bar-name is-after">AFTER</div>
+            <div class="cs-bar-track"><div class="cs-bar-fill cs-bar-fill--after" style="width:21%">月 7<small> 時間</small></div></div>
+          </div>
+          <div class="cs-bar-sub">月400件 × 1件あたり約1分（自動読取 → 確認・修正のみ）</div>
+          <div class="cs-bar-delta">年間に換算すると約 312 時間の削減</div>
+        </div>
+
+        <div class="cs-gauge-wrap">
+          <div class="cs-gauge-title">あわせて検証｜手書き帳票の読み取り精度（同一サンプル50枚で比較）</div>
+          <div class="cs-gauge-row">
+            <span class="cs-gauge-name">従来のOCR</span>
+            <span class="cs-gauge-track"><span class="cs-gauge-fill cs-gauge-fill--old" style="width:52%"></span></span>
+            <span class="cs-gauge-num">52%</span>
+          </div>
+          <div class="cs-gauge-row">
+            <span class="cs-gauge-name">Claude Vision</span>
+            <span class="cs-gauge-track"><span class="cs-gauge-fill cs-gauge-fill--new" style="width:94%"></span></span>
+            <span class="cs-gauge-num">94%</span>
+          </div>
+        </div>
+
+        <div class="cs-block-title">実施した打ち手</div>
+        <div class="cs-actions">
+          <div class="cs-action"><svg><use href="#i-doc"/></svg><span>PDF・画像をドラッグ＆ドロップで一括投入</span></div>
+          <div class="cs-action"><svg><use href="#i-bot"/></svg><span>取引先・金額など主要8項目を自動抽出</span></div>
+          <div class="cs-action"><svg><use href="#i-check"/></svg><span>承認フローと処理状況の可視化</span></div>
+          <div class="cs-action"><svg><use href="#i-export"/></svg><span>会計ソフト取込用の CSV 出力</span></div>
+        </div>
+
+        <div class="cs-shot">
+          <img src="screen-ocr.png" alt="AI-OCR 読み取り結果の確認画面" onclick="openLb(this)">
+          <div class="cs-shot-cap">実際の読み取り結果確認画面。誤読はその場で修正できます。</div>
+        </div>
+
+        <details class="cs-gallery">
+          <summary>このシステムの全画面を見る（5画面）</summary>
+          <div class="cs-gallery-body">
+            <p class="cs-gallery-lead">
+              Claude Code × AWS（Amplify / Textract / Lambda / DynamoDB）で構築し、本番稼働している画面です。
+              お客様の帳票・業務フローに合わせて、同様の仕組みを完全カスタムで構築します。
+            </p>
   <div class="showcase">
 
     <div class="showcase-item">
@@ -1261,130 +1537,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
     </div>
 
   </div>
-
-  <div class="divider"></div>
-
-  <!-- 導入事例 -->
-  <section id="case-study">
-
-    <!-- 事例カードで使うアイコン -->
-    <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
-      <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM8 13h8v2H8v-2zm0 4h8v2H8v-2z"/></symbol>
-      <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 2a1.5 1.5 0 0 1 1.5 1.5V5H18a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3h4.5V3.5A1.5 1.5 0 0 1 12 2zM8.5 10a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm7 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM8 15.5h8V17H8v-1.5z"/></symbol>
-      <symbol id="i-check" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 14.6-4-4 1.6-1.6 2.4 2.4 5.2-5.2 1.6 1.6-6.8 6.8z"/></symbol>
-      <symbol id="i-export" viewBox="0 0 24 24"><path d="M13 3v10.2l3.1-3.1 1.4 1.4-5.5 5.5-5.5-5.5 1.4-1.4L11 13.2V3h2zM5 19h14v2H5v-2z"/></symbol>
-      <symbol id="i-box" viewBox="0 0 24 24"><path d="M12 2 2 7v10l10 5 10-5V7L12 2zm0 2.3 6.9 3.4L12 11.1 5.1 7.7 12 4.3zM4 9.3l7 3.5v6.9l-7-3.5V9.3zm9 10.4v-6.9l7-3.5v6.9l-7 3.5z"/></symbol>
-      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 0 0 2.5-2.5h-5A2.5 2.5 0 0 0 12 22zm7-6v-5a7 7 0 0 0-5.5-6.8V3a1.5 1.5 0 0 0-3 0v1.2A7 7 0 0 0 5 11v5l-2 2v1h18v-1l-2-2z"/></symbol>
-      <symbol id="i-mobile" viewBox="0 0 24 24"><path d="M17 1H7a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm0 17H7V5h10v13zm-5 3.2a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4z"/></symbol>
-      <symbol id="i-search" viewBox="0 0 24 24"><path d="M15.5 14h-.8l-.3-.3a6.5 6.5 0 1 0-.7.7l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></symbol>
-      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16v2H4v-2zM6 10h3v8H6v-8zm4.5-6h3v14h-3V4zM15 13h3v5h-3v-5z"/></symbol>
-      <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M12 5V2L8 6l4 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z"/></symbol>
-      <symbol id="i-camera" viewBox="0 0 24 24"><path d="M9 3 7.2 5H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.2L15 3H9zm3 5.5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></symbol>
-      <symbol id="i-cart" viewBox="0 0 24 24"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM6.2 6h14.3l-2.3 8H8.1L6.2 6zM2 2h3l.9 2H22l-3 10H7.5l-.4 1.6H19v2H5.6L2.6 4H2V2z"/></symbol>
-    </svg>
-
-    <div class="sec-tag">CASE STUDY</div>
-    <h2 class="sec-title">導入で<em>何がどう変わったか</em></h2>
-    <p class="sec-lead" style="margin-bottom:28px">
-      「時間が減りました」だけでは判断できません。<strong>何を・どう測って・どれだけ変わったか</strong>を、算出根拠まで公開します。
-    </p>
-
-    <!-- サマリー -->
-    <div class="cs-summary">
-      <div class="cs-summary-title">5つの業務領域で、こう変わりました</div>
-      <div class="cs-summary-grid">
-        <div class="cs-summary-item">
-          <div class="cs-summary-value">▲30<small> h/月</small></div>
-          <div class="cs-summary-label">最大の作業時間削減</div>
-        </div>
-        <div class="cs-summary-item">
-          <div class="cs-summary-value">94<small> %</small></div>
-          <div class="cs-summary-label">手書き帳票の読み取り一致率</div>
-        </div>
-        <div class="cs-summary-item">
-          <div class="cs-summary-value">11〜22<small> ヶ月</small></div>
-          <div class="cs-summary-label">投資回収の目安</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cs-legend">
-      <div class="cs-legend-item"><span class="cs-badge cs-badge--measured">実測</span> 導入前後を実際に計測した値</div>
-      <div class="cs-legend-item"><span class="cs-badge cs-badge--model">モデルケース</span> 前提条件を明記した試算（実績ではありません）</div>
-    </div>
-
-    <!-- CASE 01 -->
-    <div class="cs-case">
-      <div class="cs-hero" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80')">
-        <div class="cs-topline">
-          <span class="cs-num">CASE 01</span>
-          <span class="cs-badge cs-badge--measured">実測</span>
-          <span class="cs-scope">経理・バックオフィス ／ PACK A</span>
-        </div>
-        <div class="cs-tool">請求書 AI-OCR 管理システム</div>
-        <div class="cs-lead">受領した請求書を目視で確認し、Excel に手入力していた業務を、確認作業だけに。</div>
-      </div>
-      <div class="cs-body">
-
-        <div class="cs-stats">
-          <div class="cs-stat cs-stat--dark">
-            <div class="cs-stat-label">作業時間</div>
-            <div class="cs-stat-value">▲26<small> h/月</small></div>
-            <div class="cs-stat-sub">33h → 7h（79% 減）</div>
           </div>
-          <div class="cs-stat cs-stat--blue">
-            <div class="cs-stat-label">手書きの読み取り一致率</div>
-            <div class="cs-stat-value">94<small> %</small></div>
-            <div class="cs-stat-sub">従来OCR 52% → 94%</div>
-          </div>
-          <div class="cs-stat cs-stat--amber">
-            <div class="cs-stat-label">投資回収の目安</div>
-            <div class="cs-stat-value">約13<small> ヶ月</small></div>
-            <div class="cs-stat-sub">月52,000円相当の削減</div>
-          </div>
-        </div>
-
-        <div class="cs-block-title">作業時間の変化</div>
-        <div class="cs-bars">
-          <div class="cs-bar-row">
-            <div class="cs-bar-name">BEFORE</div>
-            <div class="cs-bar-track"><div class="cs-bar-fill cs-bar-fill--before" style="width:100%">月 33<small> 時間</small></div></div>
-          </div>
-          <div class="cs-bar-sub">月400件 × 1件あたり約5分（目視確認 → Excel手入力）</div>
-          <div class="cs-bar-row">
-            <div class="cs-bar-name is-after">AFTER</div>
-            <div class="cs-bar-track"><div class="cs-bar-fill cs-bar-fill--after" style="width:21%">月 7<small> 時間</small></div></div>
-          </div>
-          <div class="cs-bar-sub">月400件 × 1件あたり約1分（自動読取 → 確認・修正のみ）</div>
-          <div class="cs-bar-delta">年間に換算すると約 312 時間の削減</div>
-        </div>
-
-        <div class="cs-gauge-wrap">
-          <div class="cs-gauge-title">あわせて検証｜手書き帳票の読み取り精度（同一サンプル50枚で比較）</div>
-          <div class="cs-gauge-row">
-            <span class="cs-gauge-name">従来のOCR</span>
-            <span class="cs-gauge-track"><span class="cs-gauge-fill cs-gauge-fill--old" style="width:52%"></span></span>
-            <span class="cs-gauge-num">52%</span>
-          </div>
-          <div class="cs-gauge-row">
-            <span class="cs-gauge-name">Claude Vision</span>
-            <span class="cs-gauge-track"><span class="cs-gauge-fill cs-gauge-fill--new" style="width:94%"></span></span>
-            <span class="cs-gauge-num">94%</span>
-          </div>
-        </div>
-
-        <div class="cs-block-title">実施した打ち手</div>
-        <div class="cs-actions">
-          <div class="cs-action"><svg><use href="#i-doc"/></svg><span>PDF・画像をドラッグ＆ドロップで一括投入</span></div>
-          <div class="cs-action"><svg><use href="#i-bot"/></svg><span>取引先・金額など主要8項目を自動抽出</span></div>
-          <div class="cs-action"><svg><use href="#i-check"/></svg><span>承認フローと処理状況の可視化</span></div>
-          <div class="cs-action"><svg><use href="#i-export"/></svg><span>会計ソフト取込用の CSV 出力</span></div>
-        </div>
-
-        <div class="cs-shot">
-          <img src="screen-ocr.png" alt="AI-OCR 読み取り結果の確認画面" onclick="openLb(this)">
-          <div class="cs-shot-cap">実際の読み取り結果確認画面。誤読はその場で修正できます。</div>
-        </div>
+        </details>
 
         <div class="cs-roi">
           <div class="cs-roi-top">
@@ -1409,11 +1563,14 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
           </div>
         </details>
 
+          </div>
+        </details>
+
       </div>
     </div>
 
     <!-- CASE 02 -->
-    <div class="cs-case">
+    <div class="cs-case" id="cs-02">
       <div class="cs-hero" style="background-image:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80')">
         <div class="cs-topline">
           <span class="cs-num">CASE 02</span>
@@ -1442,6 +1599,10 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
             <div class="cs-stat-sub">月60,000円相当の削減</div>
           </div>
         </div>
+
+        <details class="cs-more">
+          <summary><span class="cs-more-open">この事例を詳しく見る</span><span class="cs-more-close">閉じる</span></summary>
+          <div class="cs-more-body">
 
         <div class="cs-block-title">作業時間の変化</div>
         <div class="cs-bars">
@@ -1494,11 +1655,14 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
           </div>
         </details>
 
+          </div>
+        </details>
+
       </div>
     </div>
 
     <!-- CASE 03 -->
-    <div class="cs-case">
+    <div class="cs-case" id="cs-03">
       <div class="cs-hero" style="background-image:url('https://images.unsplash.com/photo-1553413077-190dd305871c?w=1200&q=80')">
         <div class="cs-topline">
           <span class="cs-num">CASE 03</span>
@@ -1527,6 +1691,10 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
             <div class="cs-stat-sub">月50,000円相当の削減</div>
           </div>
         </div>
+
+        <details class="cs-more">
+          <summary><span class="cs-more-open">この事例を詳しく見る</span><span class="cs-more-close">閉じる</span></summary>
+          <div class="cs-more-body">
 
         <div class="cs-block-title">在庫情報の鮮度</div>
         <div class="cs-bars">
@@ -1579,11 +1747,14 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
           </div>
         </details>
 
+          </div>
+        </details>
+
       </div>
     </div>
 
     <!-- CASE 04 -->
-    <div class="cs-case">
+    <div class="cs-case" id="cs-04">
       <div class="cs-hero" style="background-image:url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80')">
         <div class="cs-topline">
           <span class="cs-num">CASE 04</span>
@@ -1612,6 +1783,10 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
             <div class="cs-stat-sub">月54,000円相当の削減</div>
           </div>
         </div>
+
+        <details class="cs-more">
+          <summary><span class="cs-more-open">この事例を詳しく見る</span><span class="cs-more-close">閉じる</span></summary>
+          <div class="cs-more-body">
 
         <div class="cs-block-title">作業時間の変化</div>
         <div class="cs-bars">
@@ -1664,11 +1839,14 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
           </div>
         </details>
 
+          </div>
+        </details>
+
       </div>
     </div>
 
     <!-- CASE 05 -->
-    <div class="cs-case">
+    <div class="cs-case" id="cs-05">
       <div class="cs-hero" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80')">
         <div class="cs-topline">
           <span class="cs-num">CASE 05</span>
@@ -1697,6 +1875,10 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
             <div class="cs-stat-sub">月36,000円相当の削減</div>
           </div>
         </div>
+
+        <details class="cs-more">
+          <summary><span class="cs-more-open">この事例を詳しく見る</span><span class="cs-more-close">閉じる</span></summary>
+          <div class="cs-more-body">
 
         <div class="cs-block-title">数字が見えるまでの時間</div>
         <div class="cs-bars">
@@ -1749,6 +1931,9 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
           </div>
         </details>
 
+          </div>
+        </details>
+
       </div>
     </div>
 
@@ -1765,7 +1950,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   <div class="divider" style="margin-top:64px"></div>
 
   <!-- 価格 -->
-  <div class="price-box">
+  <div class="price-box" id="pricing">
     <div class="price-box-inner">
       <div class="price-box-tag">PRICING</div>
       <h2>サービス開始特別価格でご提供</h2>
@@ -1794,8 +1979,59 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
     </div>
   </div>
 
+  <!-- 価格設計 -->
+  <div class="sec-tag">PRICING DETAIL</div>
+  <h2 class="sec-title"><em>価格設計</em>の考え方</h2>
+  <p class="sec-lead" style="margin-bottom:28px">
+    65万円は「値引き」ではなく、サービス開始時の実績づくり価格です。<br>
+    初期導入後の保守・追加開発まで、段階的にご支援します。
+  </p>
+  <table class="pricing-table">
+    <thead>
+      <tr>
+        <th style="border-radius:8px 0 0 0;">価格区分</th>
+        <th>金額</th>
+        <th>位置づけ</th>
+        <th style="border-radius:0 8px 0 0;">営業上の見せ方</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="pt-label base">通常価格</span><br><strong>通常価格</strong></td>
+        <td>90万円</td>
+        <td>標準提供価格</td>
+        <td>同等内容を通常提供する場合の基準価格</td>
+      </tr>
+      <tr class="featured">
+        <td><span class="pt-label special">初期限定</span><br><strong>サービス開始特別価格</strong></td>
+        <td style="color:#b45309;">65万円</td>
+        <td>初期導入価格</td>
+        <td>初期実績づくりのための限定価格</td>
+      </tr>
+      <tr>
+        <td><span class="pt-label monthly">継続収益</span><br><strong>月額保守</strong></td>
+        <td>1万〜数万円<small style="font-size:11px;font-weight:400;color:#718096;">/月</small></td>
+        <td>継続サポート</td>
+        <td>問い合わせ対応・軽微修正・改善提案に応じて段階化</td>
+      </tr>
+      <tr>
+        <td><span class="pt-label add">アップセル</span><br><strong>追加開発</strong></td>
+        <td>10万〜65万円</td>
+        <td>機能拡張</td>
+        <td>画面追加・帳票追加・別業務展開・freee連携を別見積化</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="pt-note">
+    ※ 月額保守の金額・内容は導入後にご相談のうえ決定します。<br>
+    ※ 追加開発は内容・規模によって別途お見積もりとなります。<br>
+    ※ AWS 実費（Lambda・S3・DynamoDB等）は別途実費となります。
+  </p>
+
+  <div class="divider"></div>
+
   <!-- 対象業種 -->
-  <div class="sec-tag">TARGET</div>
+  <div class="sec-tag" id="target">TARGET</div>
   <h2 class="sec-title">こんな<em>業種・企業</em>に特に有効です</h2>
   <p class="sec-lead">紙・FAX・Excel が残りやすく、65万円の小規模投資でも効果を実感しやすい業種です。</p>
   <div class="industry-grid">
@@ -1834,7 +2070,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   <div class="divider"></div>
 
   <!-- 導入フロー -->
-  <div class="sec-tag">HOW IT WORKS</div>
+  <div class="sec-tag" id="flow">HOW IT WORKS</div>
   <h2 class="sec-title"><em>導入の流れ</em></h2>
   <p class="sec-lead">初回相談から納品・運用定着まで、チームが一貫してサポートします。</p>
   <div class="flow-list">
@@ -1891,59 +2127,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 
   <div class="divider"></div>
 
-  <!-- 価格設計 -->
-  <div class="sec-tag">PRICING DETAIL</div>
-  <h2 class="sec-title"><em>価格設計</em>の考え方</h2>
-  <p class="sec-lead" style="margin-bottom:28px">
-    65万円は「値引き」ではなく、サービス開始時の実績づくり価格です。<br>
-    初期導入後の保守・追加開発まで、段階的にご支援します。
-  </p>
-  <table class="pricing-table">
-    <thead>
-      <tr>
-        <th style="border-radius:8px 0 0 0;">価格区分</th>
-        <th>金額</th>
-        <th>位置づけ</th>
-        <th style="border-radius:0 8px 0 0;">営業上の見せ方</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="pt-label base">通常価格</span><br><strong>通常価格</strong></td>
-        <td>90万円</td>
-        <td>標準提供価格</td>
-        <td>同等内容を通常提供する場合の基準価格</td>
-      </tr>
-      <tr class="featured">
-        <td><span class="pt-label special">初期限定</span><br><strong>サービス開始特別価格</strong></td>
-        <td style="color:#b45309;">65万円</td>
-        <td>初期導入価格</td>
-        <td>初期実績づくりのための限定価格</td>
-      </tr>
-      <tr>
-        <td><span class="pt-label monthly">継続収益</span><br><strong>月額保守</strong></td>
-        <td>1万〜数万円<small style="font-size:11px;font-weight:400;color:#718096;">/月</small></td>
-        <td>継続サポート</td>
-        <td>問い合わせ対応・軽微修正・改善提案に応じて段階化</td>
-      </tr>
-      <tr>
-        <td><span class="pt-label add">アップセル</span><br><strong>追加開発</strong></td>
-        <td>10万〜65万円</td>
-        <td>機能拡張</td>
-        <td>画面追加・帳票追加・別業務展開・freee連携を別見積化</td>
-      </tr>
-    </tbody>
-  </table>
-  <p class="pt-note">
-    ※ 月額保守の金額・内容は導入後にご相談のうえ決定します。<br>
-    ※ 追加開発は内容・規模によって別途お見積もりとなります。<br>
-    ※ AWS 実費（Lambda・S3・DynamoDB等）は別途実費となります。
-  </p>
-
-  <div class="divider"></div>
-
   <!-- FAQ -->
-  <div class="sec-tag">FAQ</div>
+  <div class="sec-tag" id="faq">FAQ</div>
   <h2 class="sec-title">よくある<em>ご質問</em></h2>
   <p class="sec-lead" style="margin-bottom:28px">導入検討時によくいただくご質問をまとめました。</p>
   <div class="faq-list">
@@ -2063,6 +2248,17 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 
 </div>
 
+<!-- 追従CTA -->
+<div class="sticky-cta">
+  <div class="sticky-cta-inner">
+    <div class="sticky-cta-text">
+      <strong>FAX・Excel・紙帳票を1つ共有ください</strong>
+      <span>5営業日以内に「実現可否」と「65万円でできる範囲」をご提案します</span>
+    </div>
+    <a href="contact.html" class="sticky-cta-btn">無料相談を依頼する</a>
+  </div>
+</div>
+
 <!-- lightbox overlay -->
 <div class="lb-overlay" id="lbOverlay" onclick="closeLb()">
   <span class="lb-close" onclick="closeLb()">×</span>
@@ -2083,6 +2279,18 @@ function closeLb() {
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+  // 追従CTA：ヒーローを過ぎたら表示、フッターのCTA付近で隠す
+  (function () {
+    var bar = document.querySelector('.sticky-cta');
+    var cta = document.querySelector('.cta-box') || document.querySelector('.cta');
+    if (!bar) return;
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY || document.documentElement.scrollTop;
+      var nearEnd = cta ? (cta.getBoundingClientRect().top < window.innerHeight) : false;
+      bar.classList.toggle('is-shown', y > 900 && !nearEnd);
+    }, { passive: true });
+  })();
 </script>
 </body>
 </html>
