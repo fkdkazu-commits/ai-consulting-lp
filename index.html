@@ -449,6 +449,18 @@
     gap: 34px 24px;
   }
   .news-card { display: block; text-decoration: none; color: inherit; }
+  /* 実写バナー版のサムネイル（先頭6件） */
+  .news-thumb-img {
+    width: 100%;
+    height: auto;              /* width/height属性が高さとして効くのを打ち消す */
+    aspect-ratio: 720 / 514;   /* 画像の実寸比に合わせる（切れ防止） */
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+    background: #12294a;
+    transition: opacity 0.2s;
+  }
+  .news-card:hover .news-thumb-img { opacity: 0.92; }
   .news-card.is-hidden { display: none; }
 
   .news-thumb {
@@ -1447,55 +1459,37 @@
     <div class="news-grid" id="newsGrid">
 
       <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/crm-initial-build.html" target="_blank" rel="noopener" class="news-card">
-        <div class="news-thumb news-thumb--case">
-          <span class="news-thumb-tag">実績公開</span>
-          <span class="news-thumb-text">クラウドCRM<br>初期構築（BtoB商社）</span>
-        </div>
+        <img class="news-thumb-img" src="news-crm.png" alt="クラウドCRM 初期構築（BtoB商社）" loading="lazy" width="720" height="514">
         <span class="news-card-date">2026.7.29</span>
         <div class="news-card-title">クラウドCRM 初期構築（BtoB商社）の実績ページを公開しました</div>
       </a>
 
       <a href="retainer.html" class="news-card">
-        <div class="news-thumb news-thumb--new">
-          <span class="news-thumb-tag">新着</span>
-          <span class="news-thumb-text">Claude Code<br>業務委託支援</span>
-        </div>
+        <img class="news-thumb-img" src="news-retainer.png" alt="Claude Code 業務委託支援" loading="lazy" width="720" height="514">
         <span class="news-card-date">2026.7.27</span>
         <div class="news-card-title">Claude Code 業務委託支援のサービス詳細ページを公開しました</div>
       </a>
 
       <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/youtube-note-generator.html" target="_blank" rel="noopener" class="news-card">
-        <div class="news-thumb news-thumb--case">
-          <span class="news-thumb-tag">実績公開</span>
-          <span class="news-thumb-text">YouTube → note<br>記事自動生成</span>
-        </div>
+        <img class="news-thumb-img" src="news-youtube-note.png" alt="YouTube → note 記事自動生成" loading="lazy" width="720" height="514">
         <span class="news-card-date">2026.7.24</span>
         <div class="news-card-title">YouTube → note 記事自動生成ツールの実績ページを公開しました</div>
       </a>
 
       <a href="#retainer" class="news-card">
-        <div class="news-thumb news-thumb--new">
-          <span class="news-thumb-tag">新着</span>
-          <span class="news-thumb-text">月額顧問契約<br>ご紹介還元 20%</span>
-        </div>
+        <img class="news-thumb-img" src="news-referral.png" alt="月額顧問契約・ご紹介還元20%" loading="lazy" width="720" height="514">
         <span class="news-card-date">2026.7.15</span>
         <div class="news-card-title">Claude Code 業務委託支援（月額顧問契約・ご紹介キャッシュバック制度あり）を開始しました</div>
       </a>
 
       <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/wp-auto-insert.html" target="_blank" rel="noopener" class="news-card">
-        <div class="news-thumb news-thumb--case">
-          <span class="news-thumb-tag">実績公開</span>
-          <span class="news-thumb-text">WordPress<br>内部リンク自動挿入</span>
-        </div>
+        <img class="news-thumb-img" src="news-wp-link.png" alt="WordPress 内部リンク自動挿入" loading="lazy" width="720" height="514">
         <span class="news-card-date">2026.7.12</span>
         <div class="news-card-title">WordPress内部リンク自動挿入ツールの実績ページを公開しました</div>
       </a>
 
       <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/hearing-mock.html" target="_blank" rel="noopener" class="news-card">
-        <div class="news-thumb news-thumb--case">
-          <span class="news-thumb-tag">実績公開</span>
-          <span class="news-thumb-text">AIヒアリング →<br>モックアップ自動生成</span>
-        </div>
+        <img class="news-thumb-img" src="news-hearing-mock.png" alt="AIヒアリング → モックアップ自動生成" loading="lazy" width="720" height="514">
         <span class="news-card-date">2026.7.12</span>
         <div class="news-card-title">AIヒアリング〜モックアップ自動生成ツールの実績ページを公開しました</div>
       </a>
