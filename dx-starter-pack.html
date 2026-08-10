@@ -13,21 +13,23 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 
 /* ── Hero ── */
 .hero {
-  background:
-    linear-gradient(135deg, rgba(26,54,93,0.95) 0%, rgba(42,74,127,0.92) 50%, rgba(30,58,95,0.96) 100%),
-    url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80') center/cover no-repeat;
+  /* 写真：大型物流倉庫。左からの濃紺グラデーションで文字の可読性を確保しつつ、右側に写真を見せる */
+  background: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1800&q=80') center/cover no-repeat;
   padding: 90px 24px 120px;
-  text-align: center;
   position: relative;
   overflow: hidden;
 }
 .hero::before {
   content: '';
   position: absolute;
-  top: -80px; right: -80px;
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(66,153,225,0.15), transparent 65%);
-  border-radius: 50%;
+  inset: 0;
+  background:
+    /* スマートファクトリー感を出すグリッド＋青い光 */
+    linear-gradient(rgba(99,179,237,0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,179,237,0.09) 1px, transparent 1px),
+    radial-gradient(circle at 78% 26%, rgba(99,179,237,0.28), transparent 42%),
+    linear-gradient(100deg, rgba(10,26,47,0.96) 0%, rgba(10,26,47,0.90) 42%, rgba(10,26,47,0.46) 70%, rgba(10,26,47,0.18) 100%);
+  background-size: 46px 46px, 46px 46px, 100% 100%, 100% 100%;
 }
 .hero::after {
   content: '';
@@ -37,7 +39,13 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   background: #f7fafc;
   clip-path: ellipse(55% 100% at 50% 100%);
 }
-.hero-inner { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; }
+.hero-inner { position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; }
+/* 文字は左寄せにして、右側に写真を残す */
+.hero-copy { max-width: 660px; }
+/* 「手入力を 1 つ、」「DX サービスです。」など、途中で改行させたくない語句 */
+.nb { white-space: nowrap; }
+/* 狭い画面では折り返しを許可しないと画面からはみ出すため解除する */
+@media (max-width: 700px) { .nb { white-space: normal; } }
 .hero-tag {
   display: inline-block;
   background: rgba(255,255,255,0.12);
@@ -68,7 +76,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 }
 .hero-nums {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: stretch;
   flex-wrap: wrap;
   gap: 12px;
@@ -110,7 +118,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 .hero-num-label { font-size: 11px; color: rgba(255,255,255,0.65); font-weight: 600; }
 .hero-cta {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 14px;
 }
@@ -644,7 +652,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 
 /* ── Tech badge row ── */
 .tech-badges {
-  display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 36px;
+  display: flex; justify-content: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 36px;
 }
 .tech-badge {
   background: rgba(66,153,225,0.12);
@@ -1070,11 +1078,12 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 <!-- Hero -->
 <div class="hero">
   <div class="hero-inner">
+   <div class="hero-copy">
     <div class="hero-tag">✦ 中小企業向け 3名専門家チーム | DXスターターパック</div>
-    <h1>大きな DX はいりません。<br>毎月くり返している<em>手入力を 1 つ</em>、<br>まず減らしませんか？</h1>
+    <h1>大きな DX はいりません。<br><span class="nb">毎月くり返している<em>手入力を 1 つ</em>、</span><br>まず減らしませんか？</h1>
     <p class="hero-sub">
       FAX・紙・Excel で回っている業務を「1業務だけ」小さくシステム化する、<br>
-      営業・DXアドバイザー・技術開発の専門家チームによる現場密着型 DX サービスです。
+      営業・DXアドバイザー・技術開発の専門家チームによる<span class="nb">現場密着型 DX サービスです。</span>
     </p>
     <div class="tech-badges">
       <span class="tech-badge">⚡ Claude Code で高速開発</span>
@@ -1101,6 +1110,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
       <a href="contact.html" class="btn-primary">✉ まずは無料相談</a>
       <a href="index.html" class="btn-secondary">← LP トップに戻る</a>
     </div>
+   </div>
   </div>
 </div>
 
