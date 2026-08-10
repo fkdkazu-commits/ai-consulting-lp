@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>在庫・発注管理 画面モック</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<style>
+/* この画面はサイドバーではなく「上部ナビ」型のレイアウトにする */
+body { display: block; }
+.topnav {
+  height: 52px; background: var(--side-bg); color: #fff;
+  display: flex; align-items: center; gap: 26px; padding: 0 24px;
+}
+.topnav-brand { display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 900; }
+.topnav-brand small { font-size: 9px; font-weight: 400; color: rgba(255,255,255,0.5); display: block; letter-spacing: 0.04em; }
+.topnav-menu { display: flex; gap: 4px; margin-left: 12px; }
+.topnav-item { font-size: 12.5px; color: rgba(255,255,255,0.7); padding: 6px 14px; border-radius: 4px; }
+.topnav-item.is-active { background: rgba(255,255,255,0.14); color: #fff; font-weight: 700; }
+.topnav-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.topnav .search { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); }
+.topnav .btn--ghost { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.22); color: #fff; }
+.page { padding: 18px 24px; }
+.page-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; }
+.page-title { font-size: 17px; font-weight: 900; color: var(--accent-deep); }
+.page-sub { font-size: 11.5px; color: var(--text-mute); }
+.page-act { margin-left: auto; display: flex; gap: 8px; }
+
+/* 在庫カード（テーブルの前に置く） */
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+.card {
+  background: var(--panel-bg); border: 1px solid var(--panel-border);
+  border-radius: 6px; padding: 14px 16px; border-top: 3px solid var(--accent);
+}
+.card.is-alert { border-top-color: #dc2626; }
+.card.is-warn  { border-top-color: #ea580c; }
+.card.is-ok    { border-top-color: #16a34a; }
+.card-code { font-size: 10.5px; color: var(--text-mute); letter-spacing: 0.04em; }
+.card-name { font-size: 13.5px; font-weight: 900; color: var(--accent-deep); margin: 2px 0 8px; }
+.card-qty { font-size: 24px; font-weight: 900; color: var(--accent-deep); line-height: 1; }
+.card-qty small { font-size: 12px; color: var(--text-mute); }
+.card-meta { font-size: 10.5px; color: var(--text-mute); margin-top: 8px; display: flex; justify-content: space-between; }
+.card-bar { height: 6px; background: #eee4d8; border-radius: 3px; margin-top: 8px; overflow: hidden; }
+.card-bar span { display: block; height: 100%; }
+</style>
+</head>
+<body class="theme-amber">
+
+<header class="topnav">
+  <div class="topnav-brand">
+    <div class="side-mark">I</div>
+    <div>在庫・発注管理<small>INVENTORY CONTROL</small></div>
+  </div>
+  <nav class="topnav-menu">
+    <div class="topnav-item is-active">在庫一覧</div>
+    <div class="topnav-item">入出庫登録</div>
+    <div class="topnav-item">発注アラート</div>
+    <div class="topnav-item">棚卸</div>
+    <div class="topnav-item">倉庫マスタ</div>
+  </nav>
+  <div class="topnav-right">
+    <div class="search">🔍 品番・品名・倉庫で検索</div>
+    <div class="btn btn--ghost">棚卸リスト出力</div>
+    <div class="avatar">倉</div>
+  </div>
+</header>
+
+<div class="page">
+
+  <div class="page-head">
+    <div class="page-title">在庫一覧</div>
+    <div class="page-sub">2026年7月31日（金） 09:42 更新 ／ 入出庫の登録と同時に反映されます</div>
+    <div class="page-act">
+      <div class="btn btn--ghost">表示：全倉庫 ▾</div>
+      <div class="btn btn--primary">＋ 入出庫を登録</div>
+    </div>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi">
+      <div class="kpi-label">在庫金額（全倉庫）</div>
+      <div class="kpi-value">48.6<small> 百万円</small></div>
+      <div class="kpi-delta up">▲ 前月比 +2.1</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">発注点を下回った品目</div>
+      <div class="kpi-value" style="color:#dc2626">4<small> 品目</small></div>
+      <div class="kpi-delta down">▼ 要発注</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">過剰在庫（3ヶ月動きなし）</div>
+      <div class="kpi-value">6<small> 品目</small></div>
+      <div class="kpi-delta flat">滞留金額 3.4百万円</div>
+    </div>
+    <div class="kpi kpi--accent">
+      <div class="kpi-label">今月の欠品による緊急手配</div>
+      <div class="kpi-value">2<small> 件</small></div>
+      <div class="kpi-delta">導入前の平均 8件／月</div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card is-alert">
+      <div class="card-code">HK-350175</div>
+      <div class="card-name">H形鋼 H-350×175</div>
+      <div class="card-qty">0.0<small> t 引当可能</small></div>
+      <div class="card-bar"><span style="width:8%;background:#dc2626"></span></div>
+      <div class="card-meta"><span>長崎配送センター</span><span class="tag tag--alert">要発注</span></div>
+    </div>
+    <div class="card is-alert">
+      <div class="card-code">RB-D13</div>
+      <div class="card-name">異形棒鋼 D13 SD295</div>
+      <div class="card-qty">3.4<small> t 引当可能</small></div>
+      <div class="card-bar"><span style="width:17%;background:#dc2626"></span></div>
+      <div class="card-meta"><span>福岡中央倉庫</span><span class="tag tag--alert">要発注</span></div>
+    </div>
+    <div class="card is-warn">
+      <div class="card-code">HK-250125</div>
+      <div class="card-name">H形鋼 H-250×125</div>
+      <div class="card-qty">16.0<small> t 引当可能</small></div>
+      <div class="card-bar"><span style="width:40%;background:#ea580c"></span></div>
+      <div class="card-meta"><span>北九州第一倉庫</span><span class="tag tag--warn">残少</span></div>
+    </div>
+    <div class="card is-ok">
+      <div class="card-code">HK-200100</div>
+      <div class="card-name">H形鋼 H-200×100</div>
+      <div class="card-qty">142.0<small> t 引当可能</small></div>
+      <div class="card-bar"><span style="width:92%;background:#16a34a"></span></div>
+      <div class="card-meta"><span>北九州第一倉庫</span><span class="tag tag--ok">適正</span></div>
+    </div>
+  </div>
+
+  <div class="cols cols--2">
+
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-title">在庫明細</span>
+        <span class="panel-note">発注点を下回った品目を上位に表示</span>
+        <span class="panel-act">すべて表示（284品目）</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>品番</th><th>品名・規格</th><th>倉庫</th><th>在庫数</th>
+            <th>引当済</th><th>発注点</th><th>在庫水準</th><th>状態</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="strong">HK-350175</td><td>H形鋼 H-350×175</td><td>長崎配送センター</td>
+            <td class="num">28.0 t</td><td class="num">28.0 t</td><td class="num">30.0 t</td>
+            <td><span class="mini-track"><span class="mini-fill is-alert" style="width:8%"></span></span></td>
+            <td><span class="tag tag--alert">要発注</span></td>
+          </tr>
+          <tr>
+            <td class="strong">RB-D13</td><td>異形棒鋼 D13 SD295</td><td>福岡中央倉庫</td>
+            <td class="num">12.4 t</td><td class="num">9.0 t</td><td class="num">20.0 t</td>
+            <td><span class="mini-track"><span class="mini-fill is-alert" style="width:17%"></span></span></td>
+            <td><span class="tag tag--alert">要発注</span></td>
+          </tr>
+          <tr>
+            <td class="strong">HK-250125</td><td>H形鋼 H-250×125</td><td>北九州第一倉庫</td>
+            <td class="num">96.0 t</td><td class="num">80.0 t</td><td class="num">40.0 t</td>
+            <td><span class="mini-track"><span class="mini-fill is-warn" style="width:40%"></span></span></td>
+            <td><span class="tag tag--warn">残少</span></td>
+          </tr>
+          <tr>
+            <td class="strong">SQ-100032</td><td>角パイプ 100×100×3.2</td><td>熊本営業所倉庫</td>
+            <td class="num">18.2 t</td><td class="num">4.0 t</td><td class="num">15.0 t</td>
+            <td><span class="mini-track"><span class="mini-fill is-warn" style="width:48%"></span></span></td>
+            <td><span class="tag tag--warn">残少</span></td>
+          </tr>
+          <tr>
+            <td class="strong">HK-200100</td><td>H形鋼 H-200×100</td><td>北九州第一倉庫</td>
+            <td class="num">184.0 t</td><td class="num">42.0 t</td><td class="num">60.0 t</td>
+            <td><span class="mini-track"><span class="mini-fill is-ok" style="width:92%"></span></span></td>
+            <td><span class="tag tag--ok">適正</span></td>
+          </tr>
+          <tr>
+            <td class="strong">SP-SS400-60</td><td>熱延鋼板 SS400 t=6.0</td><td>福岡中央倉庫</td>
+            <td class="num">64.5 t</td><td class="num">18.0 t</td><td class="num">25.0 t</td>
+            <td><span class="mini-track"><span class="mini-fill is-ok" style="width:78%"></span></span></td>
+            <td><span class="tag tag--ok">適正</span></td>
+          </tr>
+          <tr>
+            <td class="strong">CH-10050</td><td>溝形鋼 100×50</td><td>北九州第一倉庫</td>
+            <td class="num">41.0 t</td><td class="num">6.0 t</td><td class="num">12.0 t</td>
+            <td><span class="mini-track"><span class="mini-fill is-ok" style="width:85%"></span></span></td>
+            <td><span class="tag tag--ok">適正</span></td>
+          </tr>
+          <tr>
+            <td class="strong">RB-D25</td><td>異形棒鋼 D25 SD345</td><td>熊本営業所倉庫</td>
+            <td class="num">88.0 t</td><td class="num">0.0 t</td><td class="num">10.0 t</td>
+            <td><span class="mini-track"><span class="mini-fill" style="width:100%"></span></span></td>
+            <td><span class="tag tag--mute">過剰</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <div class="panel" style="margin-bottom:12px">
+        <div class="panel-head">
+          <span class="panel-title">発注アラート</span>
+          <span class="panel-act">発注書を作成</span>
+        </div>
+        <div class="panel-body" style="padding-top:4px;padding-bottom:4px">
+          <div class="list-item">
+            <div class="list-icon list-icon--alert">!</div>
+            <div>
+              <div class="list-title">HK-350175 が発注点を下回りました</div>
+              <div class="list-desc">引当可能 0.0 t ／ 推奨発注量 40 t</div>
+            </div>
+            <div class="list-time">5分前</div>
+          </div>
+          <div class="list-item">
+            <div class="list-icon list-icon--alert">!</div>
+            <div>
+              <div class="list-title">RB-D13 が発注点を下回りました</div>
+              <div class="list-desc">引当可能 3.4 t ／ 推奨発注量 25 t</div>
+            </div>
+            <div class="list-time">1時間前</div>
+          </div>
+          <div class="list-item">
+            <div class="list-icon list-icon--warn">▲</div>
+            <div>
+              <div class="list-title">HK-250125 の引当が急増</div>
+              <div class="list-desc">直近3日で 62 t を引当</div>
+            </div>
+            <div class="list-time">今日 08:10</div>
+          </div>
+          <div class="list-item">
+            <div class="list-icon list-icon--info">i</div>
+            <div>
+              <div class="list-title">RB-D25 が3ヶ月動いていません</div>
+              <div class="list-desc">滞留金額 1.2 百万円</div>
+            </div>
+            <div class="list-time">昨日</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><span class="panel-title">倉庫別の在庫金額</span></div>
+        <div class="panel-body">
+          <div class="hbar"><span class="hbar-name">北九州第一</span><span class="hbar-track"><span class="hbar-fill" style="width:100%"></span></span><span class="hbar-val">21.4M</span></div>
+          <div class="hbar"><span class="hbar-name">福岡中央</span><span class="hbar-track"><span class="hbar-fill" style="width:63%"></span></span><span class="hbar-val">13.5M</span></div>
+          <div class="hbar"><span class="hbar-name">熊本営業所</span><span class="hbar-track"><span class="hbar-fill" style="width:44%"></span></span><span class="hbar-val">9.4M</span></div>
+          <div class="hbar"><span class="hbar-name">長崎配送C</span><span class="hbar-track"><span class="hbar-fill" style="width:20%"></span></span><span class="hbar-val">4.3M</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

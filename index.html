@@ -390,46 +390,133 @@
   }
 
   /* ===== NEWS ===== */
-  .news-section { padding: 56px 40px; border-bottom: 1px solid #e2e8f0; }
-  .news-list { margin-top: 28px; list-style: none; }
-  .news-item {
+  .news-section { padding: 72px 40px; border-bottom: 1px solid #e2e8f0; }
+
+  /* 見出し行（左：タイトル ／ 右：すべて見る） */
+  .news-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+  .news-head-main h2 {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: #1a1a2e;
+  }
+  .news-head-sub {
+    font-size: 13px;
+    font-weight: 700;
+    color: #94a3b8;
+    letter-spacing: 0.06em;
+    margin-top: 6px;
+  }
+  .news-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+  .news-more-circle {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: #1a1a2e;
+    color: #fff;
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 16px 0;
-    border-bottom: 1px solid #f0f4f8;
-    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 17px;
+    transition: background 0.25s, transform 0.25s;
   }
-  .news-item:last-child { border-bottom: none; }
-  .news-date {
-    font-size: 13px;
-    color: #718096;
-    font-weight: 600;
-    white-space: nowrap;
-    min-width: 80px;
+  .news-more:hover .news-more-circle { background: #dd6b20; }
+  .news-more.is-open .news-more-circle { transform: rotate(-90deg); }
+
+  /* カードグリッド */
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 34px 24px;
   }
-  .news-badge {
+  .news-card { display: block; text-decoration: none; color: inherit; }
+  .news-card.is-hidden { display: none; }
+
+  .news-thumb {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 24px;
+    color: #fff;
+  }
+  .news-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.16) 1px, transparent 1px);
+    background-size: 14px 14px;
+    opacity: 0.55;
+  }
+  .news-thumb-tag {
+    position: relative;
+    z-index: 1;
+    align-self: flex-start;
     font-size: 11px;
     font-weight: 700;
-    padding: 3px 10px;
+    letter-spacing: 0.06em;
+    padding: 4px 12px;
     border-radius: 20px;
-    white-space: nowrap;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    margin-bottom: 12px;
   }
-  .news-badge-new { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
-  .news-badge-result { background: #ebf8ff; color: #1e40af; border: 1px solid #bfdbfe; }
-  .news-title {
-    font-size: 14px;
-    color: #2d3748;
-    text-decoration: none;
-    font-weight: 500;
+  .news-thumb-text {
+    position: relative;
+    z-index: 1;
+    font-size: clamp(17px, 2.2vw, 21px);
+    font-weight: 900;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  }
+  .news-thumb--case   { background: linear-gradient(135deg, #12294a 0%, #1e4a80 55%, #2b6cb0 100%); }
+  .news-thumb--new    { background: linear-gradient(135deg, #7c2d12 0%, #b45309 55%, #dd6b20 100%); }
+  .news-thumb--update { background: linear-gradient(135deg, #134e4a 0%, #0f766e 55%, #14b8a6 100%); }
+
+  .news-card-date {
+    display: block;
+    font-size: 13px;
+    color: #94a3b8;
+    font-weight: 600;
+    margin: 16px 0 8px;
+  }
+  .news-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.65;
+    color: #1a1a2e;
     transition: color 0.2s;
-    flex: 1;
   }
-  .news-title:hover { color: #2b6cb0; text-decoration: underline; }
+  .news-card:hover .news-card-title { color: #dd6b20; }
+  .news-card:hover .news-thumb { opacity: 0.92; }
+
   @media (max-width: 640px) {
-    .news-section { padding: 40px 20px; }
-    .news-item { gap: 8px; }
-    .news-title { width: 100%; }
+    .news-section { padding: 48px 20px; }
+    .news-grid { grid-template-columns: 1fr; gap: 28px; }
+    .news-head { margin-bottom: 24px; }
   }
 
   /* ===== PAIN ===== */
@@ -1345,75 +1432,138 @@
 <!-- NEWS -->
 <section class="news-section" id="news">
   <div class="section-inner">
-    <div class="section-tag">NEWS</div>
-    <h2 class="section-title">新着情報</h2>
-    <ul class="news-list">
-      <li class="news-item">
-        <span class="news-date">2026.07.29</span>
-        <span class="news-badge news-badge-result">実績公開</span>
-        <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/crm-initial-build.html" target="_blank" rel="noopener" class="news-title">クラウドCRM 初期構築（BtoB商社）の実績ページを公開しました</a>
-      </li>
-      <li class="news-item">
-        <span class="news-date">2026.07.27</span>
-        <span class="news-badge news-badge-new">新着</span>
-        <a href="retainer.html" class="news-title">Claude Code 業務委託支援のサービス詳細ページを公開しました</a>
-      </li>
-      <li class="news-item">
-        <span class="news-date">2026.07.24</span>
-        <span class="news-badge news-badge-result">実績公開</span>
-        <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/youtube-note-generator.html" target="_blank" rel="noopener" class="news-title">YouTube → note 記事自動生成ツールの実績ページを公開しました</a>
-      </li>
-      <li class="news-item">
-        <span class="news-date">2026.07.15</span>
-        <span class="news-badge news-badge-new">新着</span>
-        <a href="#retainer" class="news-title">Claude Code 業務委託支援（月額顧問契約・ご紹介キャッシュバック制度あり）を開始しました</a>
-      </li>
-      <li class="news-item">
-        <span class="news-date">2026.07.12</span>
-        <span class="news-badge news-badge-result">実績公開</span>
-        <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/wp-auto-insert.html" target="_blank" rel="noopener" class="news-title">WordPress内部リンク自動挿入ツールの実績ページを公開しました</a>
-      </li>
-      <li class="news-item">
-        <span class="news-date">2026.07.12</span>
-        <span class="news-badge news-badge-result">実績公開</span>
-        <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/hearing-mock.html" target="_blank" rel="noopener" class="news-title">AIヒアリング〜モックアップ自動生成ツールの実績ページを公開しました</a>
-      </li>
-      <li class="news-item">
-        <span class="news-date">2026.06.07</span>
-        <span class="news-badge news-badge-result">実績公開</span>
-        <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/internal-link-agent.html" target="_blank" rel="noopener" class="news-title">内部リンク構築AIエージェントの実績ページを公開しました</a>
-      </li>
-      <li class="news-item">
-        <span class="news-date">2026.05.18</span>
-        <span class="news-badge news-badge-new">新着</span>
-        <a href="https://fkdkazu-commits.github.io/mentor-lp/" target="_blank" rel="noopener" class="news-title">Claude Code 個別家庭教師（月額3,000円・完全初心者歓迎）を開始しました</a>
-      </li>
-      <li class="news-item">
-        <span class="news-date">2026.05.05</span>
-        <span class="news-badge news-badge-new">新着</span>
-        <a href="dx-starter-pack.html" class="news-title">中小企業向け DXスターターパック（FAX・Excel業務のシステム化）を公開しました</a>
-      </li>
-      <li class="news-item">
-        <span class="news-date">2026.05.01</span>
-        <span class="news-badge news-badge-new">更新</span>
-        <a href="#aws-delivery" class="news-title">AWS・Lambda を活用したチーム展開モデルと運用コスト目安を掲載しました</a>
-      </li>
-      <li class="news-item">
-        <span class="news-date">2026.04.25</span>
-        <span class="news-badge news-badge-result">実績公開</span>
-        <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/screening.html" target="_blank" rel="noopener" class="news-title">採用支援AI Phase2（スクリーニング自動採点）の詳細ページを公開しました</a>
-      </li>
-      <li class="news-item">
-        <span class="news-date">2026.04.25</span>
-        <span class="news-badge news-badge-result">実績公開</span>
-        <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/recruitment-tool.html" target="_blank" rel="noopener" class="news-title">採用支援AI Phase1（求人票・スカウト文自動生成）の詳細ページを公開しました</a>
-      </li>
-      <li class="news-item">
-        <span class="news-date">2026.04.25</span>
-        <span class="news-badge news-badge-result">実績公開</span>
-        <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/" target="_blank" rel="noopener" class="news-title">AI業務自動化アプリ 導入実績まとめページを公開しました</a>
-      </li>
-    </ul>
+
+    <div class="news-head">
+      <div class="news-head-main">
+        <h2>お知らせ</h2>
+        <div class="news-head-sub">News</div>
+      </div>
+      <button type="button" class="news-more" id="newsMore" aria-expanded="false" aria-controls="newsGrid">
+        <span class="news-more-label">すべて見る</span>
+        <span class="news-more-circle" aria-hidden="true">→</span>
+      </button>
+    </div>
+
+    <div class="news-grid" id="newsGrid">
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/crm-initial-build.html" target="_blank" rel="noopener" class="news-card">
+        <div class="news-thumb news-thumb--case">
+          <span class="news-thumb-tag">実績公開</span>
+          <span class="news-thumb-text">クラウドCRM<br>初期構築（BtoB商社）</span>
+        </div>
+        <span class="news-card-date">2026.7.29</span>
+        <div class="news-card-title">クラウドCRM 初期構築（BtoB商社）の実績ページを公開しました</div>
+      </a>
+
+      <a href="retainer.html" class="news-card">
+        <div class="news-thumb news-thumb--new">
+          <span class="news-thumb-tag">新着</span>
+          <span class="news-thumb-text">Claude Code<br>業務委託支援</span>
+        </div>
+        <span class="news-card-date">2026.7.27</span>
+        <div class="news-card-title">Claude Code 業務委託支援のサービス詳細ページを公開しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/youtube-note-generator.html" target="_blank" rel="noopener" class="news-card">
+        <div class="news-thumb news-thumb--case">
+          <span class="news-thumb-tag">実績公開</span>
+          <span class="news-thumb-text">YouTube → note<br>記事自動生成</span>
+        </div>
+        <span class="news-card-date">2026.7.24</span>
+        <div class="news-card-title">YouTube → note 記事自動生成ツールの実績ページを公開しました</div>
+      </a>
+
+      <a href="#retainer" class="news-card">
+        <div class="news-thumb news-thumb--new">
+          <span class="news-thumb-tag">新着</span>
+          <span class="news-thumb-text">月額顧問契約<br>ご紹介還元 20%</span>
+        </div>
+        <span class="news-card-date">2026.7.15</span>
+        <div class="news-card-title">Claude Code 業務委託支援（月額顧問契約・ご紹介キャッシュバック制度あり）を開始しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/wp-auto-insert.html" target="_blank" rel="noopener" class="news-card">
+        <div class="news-thumb news-thumb--case">
+          <span class="news-thumb-tag">実績公開</span>
+          <span class="news-thumb-text">WordPress<br>内部リンク自動挿入</span>
+        </div>
+        <span class="news-card-date">2026.7.12</span>
+        <div class="news-card-title">WordPress内部リンク自動挿入ツールの実績ページを公開しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/hearing-mock.html" target="_blank" rel="noopener" class="news-card">
+        <div class="news-thumb news-thumb--case">
+          <span class="news-thumb-tag">実績公開</span>
+          <span class="news-thumb-text">AIヒアリング →<br>モックアップ自動生成</span>
+        </div>
+        <span class="news-card-date">2026.7.12</span>
+        <div class="news-card-title">AIヒアリング〜モックアップ自動生成ツールの実績ページを公開しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/internal-link-agent.html" target="_blank" rel="noopener" class="news-card is-hidden">
+        <div class="news-thumb news-thumb--case">
+          <span class="news-thumb-tag">実績公開</span>
+          <span class="news-thumb-text">内部リンク構築<br>AIエージェント</span>
+        </div>
+        <span class="news-card-date">2026.6.7</span>
+        <div class="news-card-title">内部リンク構築AIエージェントの実績ページを公開しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/mentor-lp/" target="_blank" rel="noopener" class="news-card is-hidden">
+        <div class="news-thumb news-thumb--new">
+          <span class="news-thumb-tag">新着</span>
+          <span class="news-thumb-text">Claude Code<br>個別家庭教師</span>
+        </div>
+        <span class="news-card-date">2026.5.18</span>
+        <div class="news-card-title">Claude Code 個別家庭教師（月額3,000円・完全初心者歓迎）を開始しました</div>
+      </a>
+
+      <a href="dx-starter-pack.html" class="news-card is-hidden">
+        <div class="news-thumb news-thumb--new">
+          <span class="news-thumb-tag">新着</span>
+          <span class="news-thumb-text">中小企業向け<br>DXスターターパック</span>
+        </div>
+        <span class="news-card-date">2026.5.5</span>
+        <div class="news-card-title">中小企業向け DXスターターパック（FAX・Excel業務のシステム化）を公開しました</div>
+      </a>
+
+      <a href="#aws-delivery" class="news-card is-hidden">
+        <div class="news-thumb news-thumb--update">
+          <span class="news-thumb-tag">更新</span>
+          <span class="news-thumb-text">AWS・Lambda<br>チーム展開モデル</span>
+        </div>
+        <span class="news-card-date">2026.5.1</span>
+        <div class="news-card-title">AWS・Lambda を活用したチーム展開モデルと運用コスト目安を掲載しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/screening.html" target="_blank" rel="noopener" class="news-card is-hidden">
+        <div class="news-thumb news-thumb--case">
+          <span class="news-thumb-tag">実績公開</span>
+          <span class="news-thumb-text">採用支援AI Phase2<br>スクリーニング自動採点</span>
+        </div>
+        <span class="news-card-date">2026.4.25</span>
+        <div class="news-card-title">採用支援AI Phase2（スクリーニング自動採点）の詳細ページを公開しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/recruitment-tool.html" target="_blank" rel="noopener" class="news-card is-hidden">
+        <div class="news-thumb news-thumb--case">
+          <span class="news-thumb-tag">実績公開</span>
+          <span class="news-thumb-text">採用支援AI Phase1<br>求人票・スカウト文生成</span>
+        </div>
+        <span class="news-card-date">2026.4.25</span>
+        <div class="news-card-title">採用支援AI Phase1（求人票・スカウト文自動生成）の詳細ページを公開しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/" target="_blank" rel="noopener" class="news-card is-hidden">
+        <div class="news-thumb news-thumb--case">
+          <span class="news-thumb-tag">実績公開</span>
+          <span class="news-thumb-text">AI業務自動化アプリ<br>導入実績まとめ</span>
+        </div>
+        <span class="news-card-date">2026.4.25</span>
+        <div class="news-card-title">AI業務自動化アプリ 導入実績まとめページを公開しました</div>
+      </a>
+
+    </div>
   </div>
 </section>
 
@@ -2126,6 +2276,19 @@
   document.addEventListener('click', (e) => {
     if (!nav.contains(e.target)) closeNav();
   });
+
+  // 新着情報：「すべて見る」で残りのカードを表示／格納
+  const newsMore = document.getElementById('newsMore');
+  if (newsMore) {
+    newsMore.addEventListener('click', () => {
+      const isOpen = newsMore.classList.toggle('is-open');
+      newsMore.setAttribute('aria-expanded', isOpen);
+      newsMore.querySelector('.news-more-label').textContent = isOpen ? '閉じる' : 'すべて見る';
+      document.querySelectorAll('#newsGrid .news-card').forEach((card, i) => {
+        if (i >= 6) card.classList.toggle('is-hidden', !isOpen);
+      });
+    });
+  }
 
   // モバイル：サービスプルダウンのタップ開閉
   document.querySelector('.nav-dropdown-trigger').addEventListener('click', (e) => {

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>受発注管理 画面モック</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+</head>
+<body class="theme-teal">
+
+<aside class="side">
+  <div class="side-logo">
+    <div class="side-mark">O</div>
+    <div class="side-name">受発注管理<small>ORDER SYSTEM</small></div>
+  </div>
+  <div class="side-sec">受注</div>
+  <div class="side-item is-active"><span class="side-dot"></span>受注一覧<span class="side-badge">5</span></div>
+  <div class="side-item"><span class="side-dot"></span>注文書アップロード</div>
+  <div class="side-item"><span class="side-dot"></span>読み取り結果の確認</div>
+  <div class="side-item"><span class="side-dot"></span>出荷指示</div>
+  <div class="side-sec">マスタ</div>
+  <div class="side-item"><span class="side-dot"></span>取引先マスタ</div>
+  <div class="side-item"><span class="side-dot"></span>商品マスタ</div>
+  <div class="side-sec">その他</div>
+  <div class="side-item"><span class="side-dot"></span>集計・レポート</div>
+  <div class="side-item"><span class="side-dot"></span>操作マニュアル</div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">受注一覧</div>
+      <div class="topbar-sub">2026年7月31日（金） 09:42 時点 ／ FAX・メール自動取込は 5分間隔</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search">🔍 取引先・品番・注文番号で検索</div>
+      <div class="btn btn--ghost">CSV出力</div>
+      <div class="btn btn--primary">＋ 手入力で追加</div>
+      <div class="avatar">営</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="kpis">
+      <div class="kpi">
+        <div class="kpi-label">本日の受注件数</div>
+        <div class="kpi-value">42<small> 件</small></div>
+        <div class="kpi-delta up">▲ 前日比 +6件</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">要確認（読み取り信頼度 低）</div>
+        <div class="kpi-value">5<small> 件</small></div>
+        <div class="kpi-delta down">▼ 未処理 5件</div>
+      </div>
+      <div class="kpi kpi--accent">
+        <div class="kpi-label">自動読み取り率（今月）</div>
+        <div class="kpi-value">96<small> %</small></div>
+        <div class="kpi-delta">1,152件中 1,106件が無修正</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">本日出荷予定</div>
+        <div class="kpi-value">18<small> 件</small></div>
+        <div class="kpi-delta flat">うち緊急対応 2件</div>
+      </div>
+    </div>
+
+    <div class="cols cols--2">
+
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">受注明細</span>
+          <span class="panel-note">FAX・メール・EDI からの自動取込分を含む</span>
+          <span class="panel-act">すべて表示（42件）</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>受注番号</th><th>取引先</th><th>品番 / 品名</th><th>数量</th>
+              <th>納期</th><th>取込元</th><th>読取信頼度</th><th>ステータス</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="strong">SO-260731-018</td><td>九州鋼建工業</td><td>HK-200100 / H形鋼 H-200×100</td>
+              <td class="num">12.0 t</td><td>08/05</td><td><span class="tag tag--info">FAX</span></td>
+              <td><span class="mini-track"><span class="mini-fill is-ok" style="width:99%"></span></span> 99%</td>
+              <td><span class="tag tag--ok">確定</span></td>
+            </tr>
+            <tr>
+              <td class="strong">SO-260731-017</td><td>博多鉄鋼販売</td><td>RB-D16 / 異形棒鋼 D16</td>
+              <td class="num">8.5 t</td><td>08/04</td><td><span class="tag tag--info">メール</span></td>
+              <td><span class="mini-track"><span class="mini-fill is-ok" style="width:97%"></span></span> 97%</td>
+              <td><span class="tag tag--ok">確定</span></td>
+            </tr>
+            <tr>
+              <td class="strong">SO-260731-016</td><td>有明建材センター</td><td>SP-SS400-60 / 熱延鋼板 t=6.0</td>
+              <td class="num">4.2 t</td><td>08/08</td><td><span class="tag tag--info">FAX</span></td>
+              <td><span class="mini-track"><span class="mini-fill is-warn" style="width:74%"></span></span> 74%</td>
+              <td><span class="tag tag--warn">要確認</span></td>
+            </tr>
+            <tr>
+              <td class="strong">SO-260731-015</td><td>筑豊メタルワークス</td><td>CH-10050 / 溝形鋼 100×50</td>
+              <td class="num">2.0 t</td><td>08/06</td><td><span class="tag tag--info">FAX</span></td>
+              <td><span class="mini-track"><span class="mini-fill is-alert" style="width:58%"></span></span> 58%</td>
+              <td><span class="tag tag--alert">数量が不鮮明</span></td>
+            </tr>
+            <tr>
+              <td class="strong">SO-260731-014</td><td>西海プラント工業</td><td>HK-350175 / H形鋼 H-350×175</td>
+              <td class="num">6.0 t</td><td>08/12</td><td><span class="tag tag--mute">EDI</span></td>
+              <td><span class="mini-track"><span class="mini-fill is-ok" style="width:100%"></span></span> 100%</td>
+              <td><span class="tag tag--ok">確定</span></td>
+            </tr>
+            <tr>
+              <td class="strong">SO-260731-013</td><td>大分鋼材センター</td><td>SQ-100032 / 角パイプ 100×100</td>
+              <td class="num">1.6 t</td><td>08/03</td><td><span class="tag tag--info">メール</span></td>
+              <td><span class="mini-track"><span class="mini-fill is-ok" style="width:95%"></span></span> 95%</td>
+              <td><span class="tag tag--ok">出荷準備</span></td>
+            </tr>
+            <tr>
+              <td class="strong">SO-260731-012</td><td>九州鋼建工業</td><td>RB-D13 / 異形棒鋼 D13</td>
+              <td class="num">5.0 t</td><td>08/07</td><td><span class="tag tag--info">FAX</span></td>
+              <td><span class="mini-track"><span class="mini-fill is-ok" style="width:98%"></span></span> 98%</td>
+              <td><span class="tag tag--ok">確定</span></td>
+            </tr>
+            <tr>
+              <td class="strong">SO-260731-011</td><td>博多鉄鋼販売</td><td>HK-250125 / H形鋼 H-250×125</td>
+              <td class="num">3.4 t</td><td>08/09</td><td><span class="tag tag--info">FAX</span></td>
+              <td><span class="mini-track"><span class="mini-fill is-warn" style="width:81%"></span></span> 81%</td>
+              <td><span class="tag tag--warn">要確認</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <div class="panel" style="margin-bottom:12px">
+          <div class="panel-head">
+            <span class="panel-title">注文書の原本プレビュー</span>
+            <span class="panel-act">拡大</span>
+          </div>
+          <div class="panel-body">
+            <div style="background:#f6f9fc;border:1px solid #e2eaf3;border-radius:4px;padding:14px 16px;font-size:11px;color:#45566b;line-height:1.9">
+              <div style="text-align:center;font-weight:900;font-size:13px;color:#12294a;letter-spacing:0.2em;margin-bottom:10px">注　文　書</div>
+              <div style="display:flex;justify-content:space-between;border-bottom:1px dashed #cdd8e4;padding-bottom:6px;margin-bottom:6px">
+                <span>有明建材センター 御中</span><span>2026/07/31</span>
+              </div>
+              <div style="display:flex;justify-content:space-between"><span>品番</span><span style="font-weight:700">SP-SS400-60</span></div>
+              <div style="display:flex;justify-content:space-between"><span>品名</span><span style="font-weight:700">熱延鋼板 SS400 t=6.0</span></div>
+              <div style="display:flex;justify-content:space-between;background:#fff4e0;padding:2px 4px;margin:4px -4px">
+                <span>数量</span><span style="font-weight:900;color:#b45309">4.2 t ／ 要確認</span>
+              </div>
+              <div style="display:flex;justify-content:space-between"><span>納期</span><span style="font-weight:700">2026/08/08</span></div>
+              <div style="margin-top:10px;padding-top:8px;border-top:1px dashed #cdd8e4;font-size:10px;color:#8a99ab">
+                ※ 手書き部分は Claude Vision で抽出。信頼度が低い項目は自動でハイライトされます。
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:12px">
+              <div class="btn btn--ghost" style="flex:1;justify-content:center">修正する</div>
+              <div class="btn btn--primary" style="flex:1;justify-content:center">確認して確定</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">取込元の内訳（今月）</span></div>
+          <div class="panel-body">
+            <div class="hbar"><span class="hbar-name">FAX</span><span class="hbar-track"><span class="hbar-fill" style="width:100%"></span></span><span class="hbar-val">612件</span></div>
+            <div class="hbar"><span class="hbar-name">メール添付</span><span class="hbar-track"><span class="hbar-fill" style="width:62%"></span></span><span class="hbar-val">378件</span></div>
+            <div class="hbar"><span class="hbar-name">EDI</span><span class="hbar-track"><span class="hbar-fill" style="width:22%"></span></span><span class="hbar-val">134件</span></div>
+            <div class="hbar"><span class="hbar-name">電話・手入力</span><span class="hbar-track"><span class="hbar-fill" style="width:5%"></span></span><span class="hbar-val">28件</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

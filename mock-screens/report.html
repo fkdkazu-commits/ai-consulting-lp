@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>日報・点検管理 画面モック</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<style>
+/* この画面は「細いアイコンレール ＋ 現場のスマホ画面」を並べたレイアウトにする */
+.rail {
+  width: 64px; background: var(--side-bg); color: #fff; flex-shrink: 0;
+  display: flex; flex-direction: column; align-items: center; padding: 14px 0; gap: 6px;
+}
+.rail-mark {
+  width: 34px; height: 34px; background: var(--accent); border-radius: 9px;
+  display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 900; margin-bottom: 12px;
+}
+.rail-item {
+  width: 48px; padding: 8px 0; border-radius: 8px; text-align: center;
+  font-size: 9px; color: rgba(255,255,255,0.62); line-height: 1.5;
+}
+.rail-item span { display: block; font-size: 15px; }
+.rail-item.is-active { background: var(--side-active); color: #fff; font-weight: 700; }
+
+.cols--phone { grid-template-columns: 1fr 300px; }
+
+/* スマホ枠 */
+.phone {
+  width: 268px; border: 9px solid #14361f; border-radius: 26px; overflow: hidden;
+  background: #f1f5f2; box-shadow: 0 10px 24px rgba(20,54,31,0.22); margin: 0 auto;
+}
+.phone-status { background: #14361f; color: #fff; font-size: 9px; display: flex; justify-content: space-between; padding: 3px 12px; }
+.phone-bar { background: var(--accent); color: #fff; padding: 9px 12px; font-size: 12.5px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.phone-body { padding: 11px; height: 372px; }
+.phone-card { background: #fff; border-radius: 6px; padding: 10px 11px; margin-bottom: 9px; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
+.phone-label { font-size: 9.5px; color: var(--text-mute); margin-bottom: 3px; }
+.phone-field { font-size: 12px; font-weight: 700; color: #1f2937; border-bottom: 1px solid #dfe7e1; padding-bottom: 5px; }
+.phone-chips { display: flex; gap: 5px; margin-top: 6px; }
+.phone-chip { flex: 1; text-align: center; font-size: 10px; font-weight: 700; padding: 6px 0; border-radius: 4px; background: #eef3ef; color: #55665c; }
+.phone-chip.is-on { background: var(--accent); color: #fff; }
+.phone-photo { display: flex; gap: 6px; margin-top: 6px; }
+.phone-photo div { flex: 1; height: 48px; background: #dfe7e1; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #7f8f86; }
+.phone-submit { background: var(--accent); color: #fff; text-align: center; font-size: 12px; font-weight: 700; padding: 10px; border-radius: 6px; margin-top: 4px; }
+.phone-cap { font-size: 10px; color: var(--text-mute); text-align: center; margin-top: 8px; }
+</style>
+</head>
+<body class="theme-green">
+
+<aside class="rail">
+  <div class="rail-mark">D</div>
+  <div class="rail-item is-active"><span>📋</span>日報</div>
+  <div class="rail-item"><span>🔧</span>点検</div>
+  <div class="rail-item"><span>⚠️</span>異常</div>
+  <div class="rail-item"><span>🏭</span>設備</div>
+  <div class="rail-item"><span>📊</span>集計</div>
+  <div class="rail-item"><span>⚙️</span>設定</div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">日報・点検一覧</div>
+      <div class="topbar-sub">2026年7月31日（金） ／ 現場のスマホから入力された内容をリアルタイムに表示</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search">🔍 日付・担当者・設備で検索</div>
+      <div class="btn btn--ghost">月次集計を出力</div>
+      <div class="btn btn--primary">＋ 日報を入力</div>
+      <div class="avatar">現</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="kpis">
+      <div class="kpi">
+        <div class="kpi-label">本日の提出状況</div>
+        <div class="kpi-value">18<small> / 20 名</small></div>
+        <div class="kpi-delta down">▼ 未提出 2名</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">今月の異常報告</div>
+        <div class="kpi-value" style="color:#c53030">7<small> 件</small></div>
+        <div class="kpi-delta flat">うち対応済み 5件</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">点検完了率（今月）</div>
+        <div class="kpi-value">92<small> %</small></div>
+        <div class="kpi-delta up">▲ 前月比 +8pt</div>
+      </div>
+      <div class="kpi kpi--accent">
+        <div class="kpi-label">転記・集計にかかる時間</div>
+        <div class="kpi-value">0<small> 分</small></div>
+        <div class="kpi-delta">導入前は月33時間</div>
+      </div>
+    </div>
+
+    <div class="cols cols--phone">
+
+      <div>
+        <div class="panel" style="margin-bottom:12px">
+          <div class="panel-head">
+            <span class="panel-title">本日提出された日報</span>
+            <span class="panel-note">異常ありの報告を上位に表示</span>
+            <span class="panel-act">すべて表示（18件）</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>提出時刻</th><th>担当者</th><th>設備・エリア</th><th>作業内容</th>
+                <th>稼働</th><th>点検</th><th>写真</th><th>状態</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="strong">17:42</td><td>村上 誠一</td><td>第2ライン 切断機B</td><td>定常運転・切断加工</td>
+                <td class="num">7.5 h</td><td><span class="tag tag--alert">異常</span></td><td>📷 2</td>
+                <td><span class="tag tag--alert">要対応</span></td>
+              </tr>
+              <tr>
+                <td class="strong">17:35</td><td>井上 由紀</td><td>倉庫A フォークリフト3号</td><td>入出庫作業</td>
+                <td class="num">8.0 h</td><td><span class="tag tag--warn">要観察</span></td><td>📷 1</td>
+                <td><span class="tag tag--warn">確認中</span></td>
+              </tr>
+              <tr>
+                <td class="strong">17:30</td><td>大石 亮</td><td>第1ライン 溶接ロボット</td><td>定常運転</td>
+                <td class="num">8.0 h</td><td><span class="tag tag--ok">正常</span></td><td>—</td>
+                <td><span class="tag tag--ok">承認済</span></td>
+              </tr>
+              <tr>
+                <td class="strong">17:28</td><td>谷口 修</td><td>第2ライン 塗装ブース</td><td>定常運転・清掃</td>
+                <td class="num">7.0 h</td><td><span class="tag tag--ok">正常</span></td><td>📷 1</td>
+                <td><span class="tag tag--ok">承認済</span></td>
+              </tr>
+              <tr>
+                <td class="strong">17:20</td><td>吉村 大輔</td><td>第3ライン プレス機</td><td>金型交換・試験運転</td>
+                <td class="num">8.0 h</td><td><span class="tag tag--ok">正常</span></td><td>📷 3</td>
+                <td><span class="tag tag--ok">承認済</span></td>
+              </tr>
+              <tr>
+                <td class="strong">17:12</td><td>原口 隆</td><td>倉庫B 天井クレーン</td><td>荷役作業</td>
+                <td class="num">6.5 h</td><td><span class="tag tag--ok">正常</span></td><td>—</td>
+                <td><span class="tag tag--ok">承認済</span></td>
+              </tr>
+              <tr>
+                <td class="strong">17:05</td><td>柴田 涼</td><td>第1ライン 切断機A</td><td>定常運転</td>
+                <td class="num">8.0 h</td><td><span class="tag tag--ok">正常</span></td><td>—</td>
+                <td><span class="tag tag--ok">承認済</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cols cols--21">
+          <div class="panel">
+            <div class="panel-head"><span class="panel-title">異常報告の詳細（第2ライン 切断機B）</span><span class="panel-act">対応を登録</span></div>
+            <div class="panel-body">
+              <div style="background:#fdeaea;border-left:3px solid #c53030;padding:10px 12px;margin-bottom:10px">
+                <div style="font-size:12px;font-weight:900;color:#c53030">切断時の異音</div>
+                <div style="font-size:11px;color:#7b4a4a;margin-top:4px;line-height:1.8">
+                  14時ごろから断続的な異音。刃の摩耗と思われる。本日の生産は完了。明日の朝一で刃を交換予定。
+                </div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <div style="flex:1;height:66px;background:#dde8e0;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#6f8377">現場写真 1</div>
+                <div style="flex:1;height:66px;background:#dde8e0;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#6f8377">現場写真 2</div>
+              </div>
+              <div style="font-size:10.5px;color:var(--text-mute);margin-top:9px;line-height:1.7">
+                報告者：村上 誠一 ／ 17:42 スマホから送信<br>過去の同一設備の異常：3件（直近 2026/05/18）
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head"><span class="panel-title">月別の異常報告件数</span></div>
+            <div class="panel-body">
+              <div class="chart" style="height:104px">
+                <div class="chart-col"><span class="chart-val">14</span><span class="chart-bar" style="height:88%"></span></div>
+                <div class="chart-col"><span class="chart-val">12</span><span class="chart-bar" style="height:75%"></span></div>
+                <div class="chart-col"><span class="chart-val">11</span><span class="chart-bar" style="height:69%"></span></div>
+                <div class="chart-col"><span class="chart-val">9</span><span class="chart-bar" style="height:56%"></span></div>
+                <div class="chart-col"><span class="chart-val">8</span><span class="chart-bar" style="height:50%"></span></div>
+                <div class="chart-col"><span class="chart-val">7</span><span class="chart-bar is-hi" style="height:44%"></span></div>
+              </div>
+              <div class="chart-labels">
+                <span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span>
+              </div>
+              <div style="font-size:10.5px;color:var(--text-mute);margin-top:6px;line-height:1.6">
+                記録が残るようになり、予兆段階での対応が増えています。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><span class="panel-title">現場のスマホ入力画面</span></div>
+        <div class="panel-body" style="padding:14px 10px">
+          <div class="phone">
+            <div class="phone-status"><span>17:41</span><span>▲ ■ ●</span></div>
+            <div class="phone-bar">📋 日報を入力</div>
+            <div class="phone-body">
+              <div class="phone-card">
+                <div class="phone-label">設備・エリア</div>
+                <div class="phone-field">第2ライン 切断機B</div>
+              </div>
+              <div class="phone-card">
+                <div class="phone-label">作業内容</div>
+                <div class="phone-field">定常運転・切断加工</div>
+                <div class="phone-label" style="margin-top:8px">稼働時間</div>
+                <div class="phone-field">7.5 時間</div>
+              </div>
+              <div class="phone-card">
+                <div class="phone-label">点検結果</div>
+                <div class="phone-chips">
+                  <div class="phone-chip">正常</div>
+                  <div class="phone-chip">要観察</div>
+                  <div class="phone-chip is-on">異常</div>
+                </div>
+                <div class="phone-photo">
+                  <div>📷 写真1</div>
+                  <div>📷 写真2</div>
+                </div>
+              </div>
+              <div class="phone-submit">送信する</div>
+            </div>
+          </div>
+          <div class="phone-cap">紙の記入・転記が不要になります</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

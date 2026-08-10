@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>経営ダッシュボード 画面モック</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<style>
+/* ダークテーマ向けの微調整 */
+.kpi--accent { background: linear-gradient(135deg,#5b21b6,#8b5cf6); border-color: #8b5cf6; }
+.kpi--accent .kpi-value { color: #fff; }
+.kpi--accent .kpi-label, .kpi--accent .kpi-delta { color: rgba(255,255,255,0.8); }
+.tag--ok { background: rgba(74,222,128,0.16); color: #4ade80; }
+.tag--warn { background: rgba(251,191,36,0.16); color: #fbbf24; }
+.tag--alert { background: rgba(248,113,113,0.16); color: #f87171; }
+.tag--mute { background: rgba(148,163,184,0.16); color: #94a3b8; }
+.list-icon--alert { background: rgba(248,113,113,0.16); color: #f87171; }
+.list-icon--warn { background: rgba(251,191,36,0.16); color: #fbbf24; }
+.chart-bar { background: linear-gradient(180deg,#a78bfa,#7c3aed); }
+.chart-bar.is-hi { background: linear-gradient(180deg,#f0abfc,#c026d3); }
+.kpi-delta.up { color: #4ade80; }
+.kpi-delta.down { color: #f87171; }
+.side-badge { background: #f0abfc; color: #10131c; }
+</style>
+</head>
+<body class="theme-dark">
+
+<aside class="side">
+  <div class="side-logo">
+    <div class="side-mark">K</div>
+    <div class="side-name">経営ダッシュボード<small>MANAGEMENT KPI</small></div>
+  </div>
+  <div class="side-sec">全社</div>
+  <div class="side-item is-active"><span class="side-dot"></span>サマリー</div>
+  <div class="side-item"><span class="side-dot"></span>売上・粗利</div>
+  <div class="side-item"><span class="side-dot"></span>受注・受注残</div>
+  <div class="side-item"><span class="side-dot"></span>入金・与信</div>
+  <div class="side-sec">分析</div>
+  <div class="side-item"><span class="side-dot"></span>取引先別</div>
+  <div class="side-item"><span class="side-dot"></span>商品別</div>
+  <div class="side-item"><span class="side-dot"></span>担当者別</div>
+  <div class="side-sec">その他</div>
+  <div class="side-item"><span class="side-dot"></span>データ連携状況</div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">経営サマリー</div>
+      <div class="topbar-sub">2026年7月度 ／ 本日 06:00 自動更新（受発注・在庫・会計データを集約）</div>
+    </div>
+    <div class="topbar-right">
+      <div class="btn btn--ghost">期間：今月 ▾</div>
+      <div class="btn btn--ghost">PDF出力</div>
+      <div class="btn btn--primary">更新</div>
+      <div class="avatar">経</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="kpis">
+      <div class="kpi kpi--accent">
+        <div class="kpi-label">当月売上（速報）</div>
+        <div class="kpi-value">86.4<small> 百万円</small></div>
+        <div class="kpi-delta">目標達成率 96% ／ 前年同月比 +8%</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">粗利額 / 粗利率</div>
+        <div class="kpi-value">17.2<small> 百万円</small></div>
+        <div class="kpi-delta up">▲ 粗利率 19.9%（前月 18.6%）</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">受注残</div>
+        <div class="kpi-value">124.8<small> 百万円</small></div>
+        <div class="kpi-delta up">▲ 前月比 +12.4</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">与信超過・入金遅延</div>
+        <div class="kpi-value" style="color:#f87171">3<small> 社</small></div>
+        <div class="kpi-delta down">▼ 要確認 3社</div>
+      </div>
+    </div>
+
+    <div class="cols cols--21" style="margin-bottom:12px">
+
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">月別 売上・粗利の推移</span>
+          <span class="panel-note">単位：百万円</span>
+          <span class="panel-act">詳細を見る</span>
+        </div>
+        <div class="panel-body">
+          <div class="chart">
+            <div class="chart-col"><span class="chart-val">71</span><span class="chart-bar" style="height:58%"></span></div>
+            <div class="chart-col"><span class="chart-val">68</span><span class="chart-bar" style="height:55%"></span></div>
+            <div class="chart-col"><span class="chart-val">79</span><span class="chart-bar" style="height:65%"></span></div>
+            <div class="chart-col"><span class="chart-val">74</span><span class="chart-bar" style="height:61%"></span></div>
+            <div class="chart-col"><span class="chart-val">81</span><span class="chart-bar" style="height:66%"></span></div>
+            <div class="chart-col"><span class="chart-val">83</span><span class="chart-bar" style="height:68%"></span></div>
+            <div class="chart-col"><span class="chart-val">86</span><span class="chart-bar is-hi" style="height:71%"></span></div>
+          </div>
+          <div class="chart-labels">
+            <span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><span class="panel-title">商品カテゴリ別の売上構成</span></div>
+        <div class="panel-body">
+          <div class="donut" style="background:conic-gradient(#8b5cf6 0 38%, #a78bfa 38% 63%, #22d3ee 63% 82%, #f0abfc 82% 94%, #4b5563 94% 100%)">
+            <div class="donut-hole">
+              <span class="donut-val">86.4M</span>
+              <span class="donut-lab">当月売上</span>
+            </div>
+          </div>
+          <div class="legend-list">
+            <div class="legend-row"><span class="legend-chip" style="background:#8b5cf6"></span>形鋼<span class="legend-val">38%</span></div>
+            <div class="legend-row"><span class="legend-chip" style="background:#a78bfa"></span>棒鋼<span class="legend-val">25%</span></div>
+            <div class="legend-row"><span class="legend-chip" style="background:#22d3ee"></span>鋼板<span class="legend-val">19%</span></div>
+            <div class="legend-row"><span class="legend-chip" style="background:#f0abfc"></span>鋼管<span class="legend-val">12%</span></div>
+            <div class="legend-row"><span class="legend-chip" style="background:#4b5563"></span>その他<span class="legend-val">6%</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cols cols--21">
+
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">取引先別 売上（当月上位）</span>
+          <span class="panel-act">すべて表示</span>
+        </div>
+        <table>
+          <thead>
+            <tr><th>取引先</th><th>当月売上</th><th>粗利率</th><th>前月比</th><th>受注残</th><th>与信残枠</th><th>状態</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="strong">九州鋼建工業</td><td class="num">28.4 M</td><td class="num">21.2%</td>
+              <td class="num" style="color:#4ade80">+12%</td><td class="num">42.0 M</td><td class="num">42.0 M</td>
+              <td><span class="tag tag--ok">良好</span></td>
+            </tr>
+            <tr>
+              <td class="strong">西海プラント工業</td><td class="num">18.6 M</td><td class="num">19.8%</td>
+              <td class="num" style="color:#4ade80">+6%</td><td class="num">31.5 M</td><td class="num">27.3 M</td>
+              <td><span class="tag tag--ok">良好</span></td>
+            </tr>
+            <tr>
+              <td class="strong">博多鉄鋼販売</td><td class="num">14.2 M</td><td class="num">18.4%</td>
+              <td class="num" style="color:#f87171">−4%</td><td class="num">19.8 M</td><td class="num">4.5 M</td>
+              <td><span class="tag tag--warn">与信残少</span></td>
+            </tr>
+            <tr>
+              <td class="strong">大分鋼材センター</td><td class="num">9.8 M</td><td class="num">17.9%</td>
+              <td class="num" style="color:#4ade80">+2%</td><td class="num">12.4 M</td><td class="num">12.4 M</td>
+              <td><span class="tag tag--ok">良好</span></td>
+            </tr>
+            <tr>
+              <td class="strong">有明建材センター</td><td class="num">8.1 M</td><td class="num">16.2%</td>
+              <td class="num" style="color:#f87171">−9%</td><td class="num">10.2 M</td><td class="num">0.4 M</td>
+              <td><span class="tag tag--alert">与信超過</span></td>
+            </tr>
+            <tr>
+              <td class="strong">筑豊メタルワークス</td><td class="num">4.3 M</td><td class="num">22.6%</td>
+              <td class="num" style="color:#4ade80">+18%</td><td class="num">6.1 M</td><td class="num">3.0 M</td>
+              <td><span class="tag tag--ok">良好</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><span class="panel-title">要確認アラート</span></div>
+        <div class="panel-body" style="padding-top:4px;padding-bottom:4px">
+          <div class="list-item">
+            <div class="list-icon list-icon--alert">!</div>
+            <div>
+              <div class="list-title">有明建材センター が与信限度額を超過</div>
+              <div class="list-desc">残枠 0.4M ／ 受注残 10.2M</div>
+            </div>
+            <div class="list-time">今朝</div>
+          </div>
+          <div class="list-item">
+            <div class="list-icon list-icon--warn">▲</div>
+            <div>
+              <div class="list-title">博多鉄鋼販売 の売上が2ヶ月連続で減少</div>
+              <div class="list-desc">前月比 −4%（2ヶ月合計 −11%）</div>
+            </div>
+            <div class="list-time">今朝</div>
+          </div>
+          <div class="list-item">
+            <div class="list-icon list-icon--warn">▲</div>
+            <div>
+              <div class="list-title">入金予定日を超過：2社</div>
+              <div class="list-desc">合計 3.8M ／ 最長 12日超過</div>
+            </div>
+            <div class="list-time">今朝</div>
+          </div>
+          <div class="list-item">
+            <div class="list-icon list-icon--info">i</div>
+            <div>
+              <div class="list-title">粗利率が目標（19%）を上回りました</div>
+              <div class="list-desc">当月 19.9%（前月 18.6%）</div>
+            </div>
+            <div class="list-time">今朝</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
