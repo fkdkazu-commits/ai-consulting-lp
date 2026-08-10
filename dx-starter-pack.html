@@ -913,6 +913,63 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   .pack-grid { grid-template-columns: 1fr; }
 }
 
+/* ══ パック以外も対応できることの訴求 ══ */
+.anypack {
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #12294a 0%, #1e4a80 60%, #2b6cb0 100%);
+  border-radius: 18px; padding: 38px 40px; margin-top: 34px; color: #fff;
+  box-shadow: 0 10px 30px rgba(18,41,74,0.22);
+}
+.anypack::before {
+  content: ''; position: absolute; top: -90px; right: -60px;
+  width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(246,173,85,0.22), transparent 65%);
+}
+.anypack > * { position: relative; z-index: 1; }
+.anypack-badge {
+  display: inline-block; background: #f6ad55; color: #12294a;
+  font-size: 12px; font-weight: 900; letter-spacing: 0.06em;
+  padding: 6px 16px; border-radius: 20px; margin-bottom: 18px;
+}
+.anypack-title {
+  font-size: clamp(20px, 3vw, 28px); font-weight: 900; line-height: 1.5;
+  letter-spacing: -0.01em; margin-bottom: 16px;
+}
+.anypack-title em { font-style: normal; color: #f6ad55; }
+.anypack-lead { font-size: 14.5px; line-height: 2; color: rgba(255,255,255,0.88); margin-bottom: 24px; }
+.anypack-lead strong { color: #fff; }
+
+.anypack-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+.anypack-chips span {
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 24px; padding: 8px 16px; font-size: 13px; font-weight: 700;
+}
+
+.anypack-foot {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 14px; padding: 22px 24px;
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.anypack-foot-text { flex: 1; min-width: 260px; font-size: 13.5px; line-height: 1.95; color: rgba(255,255,255,0.86); }
+.anypack-foot-text strong { display: block; color: #f6ad55; font-size: 15px; margin-bottom: 4px; }
+.anypack-foot-text b { color: #fff; }
+.anypack-btns { display: flex; flex-direction: column; align-items: stretch; gap: 10px; }
+.anypack-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: #f6ad55; color: #12294a; font-size: 15px; font-weight: 900;
+  padding: 15px 32px; border-radius: 10px; text-decoration: none; white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(246,173,85,0.28); transition: transform 0.2s;
+}
+.anypack-btn:hover { transform: translateY(-2px); }
+.anypack-link { font-size: 12.5px; font-weight: 700; color: rgba(255,255,255,0.82); text-decoration: none; text-align: center; }
+.anypack-link:hover { color: #f6ad55; }
+
+@media (max-width: 640px) {
+  .anypack { padding: 28px 20px; }
+  .anypack-foot { padding: 18px; }
+  .anypack-btns { width: 100%; }
+}
+
 /* ══ 目次ナビ ══ */
 .page-nav {
   display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
@@ -1168,7 +1225,10 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   <p class="sec-lead">
     2つのパックはいずれも「1業務だけ・65万円・完全カスタム」で成立します。<br>
     市販パッケージでは絶対に実現できない、<strong>あなたの会社専用システム</strong>を Claude Code × AWS で構築します。<br>
-    まず 1 業務だけシステム化し、大手 SIer では採算が取れない小規模カスタマイズの土台を、<strong>65万円でつくる第一歩</strong>です。
+    まず 1 業務だけシステム化し、大手 SIer では採算が取れない小規模カスタマイズの土台を、<strong>65万円でつくる第一歩</strong>です。<br>
+    <span style="display:inline-block;margin-top:10px;background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:8px 16px;font-size:14px;color:#92400e;font-weight:700">
+      ※ この2つは<u>ご相談の多い代表例</u>です。当てはまらない業務も柔軟に対応できます（下記参照）
+    </span>
   </p>
   <div class="pack-grid">
 
@@ -1220,6 +1280,40 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
       <div class="pack-copy">「Excel を全部やめる必要はありません。まず一番困っている Excel だけを 65万円でシステム化する——それが脱 Excel の第一歩であり、カスタム拡張の土台になります。」</div>
     </div>
 
+  </div>
+
+  <!-- どちらにも当てはまらない場合 -->
+  <div class="anypack" id="anypack">
+    <div class="anypack-badge">2つのパック以外もOK</div>
+    <h3 class="anypack-title">「うちの業務は、どちらにも当てはまらない」<br><em>——その場合もご相談ください。</em></h3>
+    <p class="anypack-lead">
+      パックはあくまで<strong>ご相談の多い代表例</strong>です。<br>
+      完全カスタム開発なので、<strong>毎日くり返している手作業</strong>であれば、業務の種類を問わず対象になります。
+    </p>
+
+    <div class="anypack-chips">
+      <span>📥 受発注の自動化</span>
+      <span>📦 在庫・発注の見える化</span>
+      <span>📋 日報・点検のデータ化</span>
+      <span>📊 経営ダッシュボード</span>
+      <span>👥 顧客・案件管理</span>
+      <span>🧮 見積・請求書の作成</span>
+      <span>🕒 シフト・勤怠の集計</span>
+      <span>💬 問い合わせ対応の効率化</span>
+      <span>📑 社内申請・承認フロー</span>
+      <span>🔗 既存システムとの連携</span>
+    </div>
+
+    <div class="anypack-foot">
+      <div class="anypack-foot-text">
+        <strong>「これはできますか？」の判断だけでも、無料でお答えします。</strong>
+        書類やExcelを1つ共有いただければ、<b>5営業日以内</b>に「実現可否」と「65万円でできる範囲」をお伝えします。
+      </div>
+      <div class="anypack-btns">
+        <a href="contact.html" class="anypack-btn">✉ できるか無料で聞いてみる</a>
+        <a href="#case-study" class="anypack-link">対応事例を見る →</a>
+      </div>
+    </div>
   </div>
 
   <div class="divider" style="margin-top:40px;"></div>
