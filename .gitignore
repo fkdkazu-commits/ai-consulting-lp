@@ -1,0 +1,20 @@
+# 動作確認・比較用の一時ファイル（公開対象ではない）
+_tmp_*.html
+_ref_*.html
+*-preview.html
+*.bak
+
+# 不採用となった色相回転版サムネイル（アイソメトリック版に差し替え中）
+_recolor/
+
+# 依存関係・環境
+node_modules/
+.env
+.env.*
+venv/
+__pycache__/
+*.pyc
+
+# OS
+Thumbs.db
+.DS_Store
