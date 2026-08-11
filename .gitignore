@@ -4,8 +4,11 @@ _ref_*.html
 *-preview.html
 *.bak
 
-# 不採用となった色相回転版サムネイル（アイソメトリック版に差し替え中）
+# 不採用となった色相回転版サムネイル（アイソメトリック版に差し替え済み）
 _recolor/
+
+# _illust/build.html の書き出し先。中身は本番の news-*.png と同一なので追跡しない
+_illust/out/
 
 # 依存関係・環境
 node_modules/

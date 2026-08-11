@@ -26,6 +26,9 @@ function card(cfg) {
     <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="6"/>
     </filter>
+    <filter id="lift" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#04122c" flood-opacity="0.38"/>
+    </filter>
     <pattern id="dots-${key}" width="18" height="18" patternUnits="userSpaceOnUse">
       <circle cx="2" cy="2" r="1.5" fill="#fff" fill-opacity="0.10"/>
     </pattern>
@@ -49,37 +52,63 @@ function card(cfg) {
 </svg>`;
 }
 
+/* ── 共通パーツ ─────────────────────────────────
+   panelR: 画面右向きの立て板。内部は 1アイソメ単位 = 100 で描ける（sc=0.01固定） */
+const PANEL = { t: '#eef4ff', l: '#ffffff', r: '#dfe8f5' };
+function panelR(m, x, y, z, d, h, inner, face = PANEL, thick = 0.14) {
+  m.box(x, y, z, thick, d, h, face, 'filter="url(#lift)"');
+  m.faceR(x + thick, y, z + h, `<g transform="scale(0.01)">${inner}</g>`);
+}
+function panelL(m, x, y, z, w, h, inner, face = PANEL, thick = 0.14) {
+  m.box(x, y, z, w, thick, h, face, 'filter="url(#lift)"');
+  m.faceL(x, y + thick, z + h, `<g transform="scale(0.01)">${inner}</g>`);
+}
+/* 板の中心を画面上の (u,v) に置く版。板は x 方向に幅 w を持ち、面は画面右を向く。
+   内容は faceL 側に貼るので、inner は通常どおり左→右に読める向きで描ける */
+function panelUV(m, u, v, z, w, h, inner, face = PANEL) {
+  const [cx, cy] = m.toXY(u, v);
+  panelL(m, cx - w / 2, cy, z, w, h, inner, face);
+}
+/* 床の敷き */
+function pad(m, x0, y0, x1, y1) {
+  m.poly([[x0, y0], [x1, y0], [x1, y1], [x0, y1]], 'rgba(255,255,255,0.055)');
+  m.poly([[x0, y0], [x1, y0], [x1, y1], [x0, y1]], 'none', 'stroke="rgba(255,255,255,0.18)" stroke-width="1"');
+}
+/* テキスト行のダミー（幅の配列） */
+const lines = (x, y, ws, gap = 20, hh = 11, fill = '#c8d4e6') =>
+  ws.map((w, i) => `<rect x="${x}" y="${y + i * gap}" width="${w}" height="${hh}" rx="${hh / 2}" fill="${fill}"/>`).join('');
+
 /* ── CASE: クラウドCRM 初期構築 ─────────────────── */
 function sceneCRM() {
-  const m = mk(516, 268, 13.2);
+  const m = mk(516, 268, 17);
   const desk = { t: '#eaf0f9', l: '#c3d0e4', r: '#a9b9d2' };
   const dark = { t: '#2f4a76', l: '#1e3357', r: '#182a49' };
 
   // 床の敷き
-  m.poly([[-1.5, -1.5], [10.5, -1.5], [10.5, 8.5], [-1.5, 8.5]], 'rgba(255,255,255,0.05)');
-  m.poly([[-1.5, -1.5], [10.5, -1.5], [10.5, 8.5], [-1.5, 8.5]], 'none', 'stroke="rgba(255,255,255,0.16)" stroke-width="1"');
+  m.poly([[-0.8, -0.8], [9.8, -0.8], [9.8, 7.6], [-0.8, 7.6]], 'rgba(255,255,255,0.055)');
+  m.poly([[-0.8, -0.8], [9.8, -0.8], [9.8, 7.6], [-0.8, 7.6]], 'none', 'stroke="rgba(255,255,255,0.18)" stroke-width="1"');
 
-  // 上空のクラウドとデータの線
-  const [mx, my] = m.XY(4.5, 1.2, 6.6);
-  const [cx2, cy2] = m.XY(1.2, -0.6, 9.4);
-  m.add(`<path d="M${cx2} ${cy2} C ${cx2 + 10} ${cy2 + 42}, ${mx - 44} ${my - 46}, ${mx - 10} ${my - 6}" stroke="#8fd0ff" stroke-opacity="0.55" stroke-width="2" fill="none" stroke-dasharray="5 5"/>`);
-  m.at(1.2, -0.6, 9.4, `
-    <path d="M-30 6 a13 13 0 0 1 6 -25 a17 17 0 0 1 32 -3 a12 12 0 0 1 4 28 z" fill="#ffffff" fill-opacity="0.95"/>
-    <path d="M-30 6 a13 13 0 0 1 6 -25 a17 17 0 0 1 32 -3 a12 12 0 0 1 4 28 z" fill="none" stroke="#cfe3ff" stroke-width="1.5"/>
-    <circle cx="-8" cy="-6" r="3.2" fill="#2f7de1"/>
-    <path d="M-8 -6 l-11 8 M-8 -6 l12 6 M-8 -6 l1 -12" stroke="#2f7de1" stroke-width="1.8"/>
-    <circle cx="-19" cy="2" r="2.4" fill="#7fb2f0"/><circle cx="4" cy="0" r="2.4" fill="#7fb2f0"/><circle cx="-7" cy="-18" r="2.4" fill="#7fb2f0"/>`, 1.05);
+  // 上空のクラウド → モニターへ流れるデータ
+  const [mx, my] = m.XY(6.6, 1.9, 6.6);
+  const [cx2, cy2] = m.XY(8.6, -0.9, 8.2);
+  m.add(`<path d="M${cx2} ${cy2 + 6} C ${cx2 - 6} ${cy2 + 40}, ${mx + 40} ${my - 40}, ${mx + 6} ${my - 4}" stroke="#8fd0ff" stroke-opacity="0.6" stroke-width="2.2" fill="none" stroke-dasharray="6 6"/>`);
+  m.at(8.6, -0.9, 8.2, `
+    <path d="M-32 7 a14 14 0 0 1 7 -27 a18 18 0 0 1 34 -3 a13 13 0 0 1 4 30 z" fill="#ffffff" fill-opacity="0.96"/>
+    <circle cx="-8" cy="-7" r="3.6" fill="#2f7de1"/>
+    <path d="M-8 -7 l-12 9 M-8 -7 l13 6 M-8 -7 l1 -13" stroke="#2f7de1" stroke-width="2"/>
+    <circle cx="-20" cy="2" r="2.7" fill="#7fb2f0"/><circle cx="5" cy="-1" r="2.7" fill="#7fb2f0"/><circle cx="-7" cy="-20" r="2.7" fill="#7fb2f0"/>`, 1.15);
 
-  // 顧客データの浮遊カード（モニター左上）
-  [[-2.2, 0.4, 6.4], [-2.9, 2.6, 5.0]].forEach(([x, y, z], i) => {
-    m.box(x, y, z, 0.16, 1.9, 1.35, { t: '#dbe6f6', l: '#f4f8ff', r: '#c2d2ea' });
-    m.faceR(x + 0.16, y, z + 1.35, `<g transform="scale(0.01)">
-        <circle cx="30" cy="40" r="14" fill="#2f7de1"/>
-        <rect x="52" y="28" width="${i ? 100 : 116}" height="10" rx="5" fill="#93a8c6"/>
-        <rect x="52" y="46" width="72" height="8" rx="4" fill="#b9c7dd"/>
-        <rect x="18" y="78" width="150" height="8" rx="4" fill="#cdd8e8"/>
-        <rect x="18" y="96" width="112" height="8" rx="4" fill="#cdd8e8"/></g>`);
-  });
+  // 顧客レコードの浮遊カード（モニター左上）
+  panelUV(m, -4.3, 2.2, 5.7, 2.6, 2.0, `
+      <rect width="260" height="200" rx="10" fill="#ffffff"/>
+      <circle cx="44" cy="46" r="20" fill="#2f7de1"/>
+      <path d="M44 36 a8 8 0 1 1 0 16 a8 8 0 1 1 0 -16 M30 62 a14 14 0 0 1 28 0 z" fill="#fff"/>
+      <rect x="76" y="32" width="128" height="13" rx="6.5" fill="#7f93b3"/>
+      <rect x="76" y="54" width="86" height="11" rx="5.5" fill="#b9c7dd"/>
+      <rect x="26" y="92" width="178" height="11" rx="5.5" fill="#cdd8e8"/>
+      <rect x="26" y="114" width="140" height="11" rx="5.5" fill="#cdd8e8"/>
+      <rect x="26" y="142" width="88" height="24" rx="12" fill="#dcebff"/>
+      <rect x="38" y="150" width="64" height="8" rx="4" fill="#2f7de1"/>`);
 
   // デスク
   [[0.35, 0.35], [8.3, 0.35], [0.35, 4.3], [8.3, 4.3]].forEach(([lx, ly]) =>
@@ -87,45 +116,264 @@ function sceneCRM() {
   m.box(0, 0, 2.4, 9, 5, 0.34, desk);
 
   // モニター（スタンド → 本体 → 画面）
-  m.box(4.1, 2.1, 2.74, 0.8, 0.7, 0.22, { t: '#8d9db6', l: '#78889f', r: '#67768c' });
-  m.box(4.35, 2.3, 2.96, 0.3, 0.3, 0.75, { t: '#9caac0', l: '#8493a9', r: '#75839a' });
-  m.box(2.2, 2.2, 3.62, 4.6, 0.3, 2.95, dark);
-  m.faceL(2.34, 2.5, 6.43, `<g transform="scale(0.0075)">
-      <rect width="576" height="356" rx="6" fill="#f7fafe"/>
-      <rect width="576" height="34" fill="#20355c"/>
-      <circle cx="18" cy="17" r="5" fill="#5c7cb0"/><rect x="34" y="12" width="88" height="10" rx="5" fill="#43608f"/>
-      <rect x="470" y="10" width="90" height="14" rx="7" fill="#33507f"/>
-      <rect y="34" width="120" height="322" fill="#2b4472"/>
-      ${[0, 1, 2, 3, 4].map(i => `<rect x="16" y="${56 + i * 34}" width="${i === 2 ? 84 : 68}" height="11" rx="5.5" fill="${i === 2 ? '#7fb2f0' : '#4f6c9c'}"/>`).join('')}
-      <rect x="140" y="52" width="196" height="128" rx="7" fill="#fff" stroke="#dde5f1"/>
-      <rect x="154" y="66" width="72" height="9" rx="4.5" fill="#a9bad3"/>
-      <rect x="154" y="86" width="126" height="20" rx="6" fill="#20355c"/>
-      ${[38, 62, 48, 84, 70, 100].map((hh, i) => `<rect x="${156 + i * 29}" y="${164 - hh}" width="18" height="${hh}" rx="3" fill="${i === 5 ? '#2f7de1' : '#9fc4f0'}"/>`).join('')}
-      <rect x="352" y="52" width="208" height="128" rx="7" fill="#fff" stroke="#dde5f1"/>
-      <circle cx="404" cy="118" r="40" fill="none" stroke="#e3ebf6" stroke-width="18"/>
-      <path d="M404 78 a40 40 0 0 1 34 61" fill="none" stroke="#2f7de1" stroke-width="18"/>
-      <path d="M438 139 a40 40 0 0 1 -30 19" fill="none" stroke="#7fb2f0" stroke-width="18"/>
-      ${[0, 1, 2].map(i => `<rect x="466" y="${92 + i * 20}" width="${64 - i * 12}" height="9" rx="4.5" fill="${['#2f7de1', '#7fb2f0', '#cddff5'][i]}"/>`).join('')}
-      <rect x="140" y="196" width="420" height="140" rx="7" fill="#fff" stroke="#dde5f1"/>
-      <polyline points="164,308 214,286 264,296 314,252 364,264 414,224 464,236 534,208" fill="none" stroke="#2f7de1" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M164 308 214 286 264 296 314 252 364 264 414 224 464 236 534 208 534 320 164 320 Z" fill="#2f7de1" fill-opacity="0.10"/>
-      ${[214, 314, 414, 534].map((xx, i) => `<circle cx="${xx}" cy="${[286, 252, 224, 208][i]}" r="5" fill="#fff" stroke="#2f7de1" stroke-width="3"/>`).join('')}
-      <rect x="156" y="212" width="86" height="9" rx="4.5" fill="#a9bad3"/>
+  m.box(3.7, 2.0, 2.74, 0.9, 0.8, 0.22, { t: '#8d9db6', l: '#78889f', r: '#67768c' });
+  m.box(3.95, 2.2, 2.96, 0.4, 0.4, 0.8, { t: '#9caac0', l: '#8493a9', r: '#75839a' });
+  m.box(1.5, 2.1, 3.7, 5.6, 0.3, 3.5, dark);
+  m.faceL(1.64, 2.4, 7.06, `<g transform="scale(0.0082)">
+      <rect width="649" height="410" rx="7" fill="#f7fafe"/>
+      <rect width="649" height="42" fill="#20355c"/>
+      <circle cx="22" cy="21" r="7" fill="#5c7cb0"/><rect x="42" y="14" width="104" height="13" rx="6.5" fill="#43608f"/>
+      <rect x="524" y="12" width="106" height="18" rx="9" fill="#33507f"/>
+      <rect y="42" width="128" height="368" fill="#2b4472"/>
+      ${[0, 1, 2, 3, 4].map(i => `<rect x="20" y="${72 + i * 42}" width="${i === 1 ? 90 : 72}" height="14" rx="7" fill="${i === 1 ? '#7fb2f0' : '#4f6c9c'}"/>`).join('')}
+      ${[['#2f7de1', '1,248'], ['#22a06b', '92%'], ['#f0913a', '34']].map(([c, v], i) => `
+        <rect x="${150 + i * 165}" y="66" width="148" height="104" rx="9" fill="#fff" stroke="#dde5f1"/>
+        <rect x="166" y="84" width="${[62, 48, 54][i]}" height="10" rx="5" fill="#aabbd3" transform="translate(${i * 165} 0)"/>
+        <text x="${166 + i * 165}" y="146" font-family="Noto Sans JP" font-size="40" font-weight="900" fill="${c}">${v}</text>`).join('')}
+      <rect x="150" y="186" width="480" height="204" rx="9" fill="#fff" stroke="#dde5f1"/>
+      <rect x="168" y="204" width="104" height="11" rx="5.5" fill="#aabbd3"/>
+      ${[54, 88, 70, 116, 96, 140, 124, 168].map((hh, i) => `<rect x="${172 + i * 56}" y="${370 - hh}" width="34" height="${hh}" rx="4" fill="${i > 5 ? '#2f7de1' : '#9fc4f0'}"/>`).join('')}
+      <polyline points="189,${370 - 54 - 14} 245,${370 - 88 - 14} 301,${370 - 70 - 14} 357,${370 - 116 - 14} 413,${370 - 96 - 14} 469,${370 - 140 - 14} 525,${370 - 124 - 14} 581,${370 - 168 - 14}" fill="none" stroke="#f0913a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
     </g>`);
 
   // キーボード・マグカップ
-  m.box(3.2, 3.5, 2.74, 2.6, 0.9, 0.1, { t: '#dfe7f3', l: '#bccbe1', r: '#aabbd4' });
-  m.faceT(3.2, 3.5, 2.84, `<g transform="scale(0.01)">${[0, 1, 2, 3].map(r => [0, 1, 2, 3, 4, 5, 6, 7].map(c => `<rect x="${8 + c * 31}" y="${8 + r * 20}" width="24" height="15" rx="3" fill="#9fb0c8"/>`).join('')).join('')}</g>`);
-  m.box(6.5, 3.6, 2.74, 0.55, 0.55, 0.7, { t: '#ff9f43', l: '#f08a2c', r: '#d97a24' });
+  m.box(2.9, 3.6, 2.74, 2.9, 1.0, 0.11, { t: '#dfe7f3', l: '#bccbe1', r: '#aabbd4' });
+  m.faceT(2.9, 3.6, 2.85, `<g transform="scale(0.01)">${[0, 1, 2, 3].map(r => [0, 1, 2, 3, 4, 5, 6, 7].map(c => `<rect x="${10 + c * 34}" y="${10 + r * 22}" width="27" height="16" rx="3" fill="#9fb0c8"/>`).join('')).join('')}</g>`);
+  m.box(6.6, 3.7, 2.74, 0.6, 0.6, 0.75, { t: '#ffb066', l: '#f08a2c', r: '#d97a24' });
 
   // 椅子と座る担当者
-  m.shadow(4.0, 6.0, 2.2, 1.4, 0.18);
-  m.at(5.0, 6.6, 0, chair('#3d5a86', '#2b4166', 1.0));
-  m.at(4.85, 6.45, 0, humanSit({ top: '#4a7fd4', bottom: '#22304a', hair: '#2b2f3a', dir: 'r', hairStyle: 'short' }), 1.0);
+  m.shadow(3.6, 6.0, 2.5, 1.6, 0.2);
+  m.at(4.9, 6.8, 0, chair('#3d5a86', '#2b4166', 1.0), 1.08);
+  m.at(4.7, 6.6, 0, humanSit({ top: '#4a7fd4', bottom: '#22304a', hair: '#2b2f3a', dir: 'r', hairStyle: 'short' }), 1.08);
 
   // 立って指差す提案者
-  m.shadow(9.4, 2.2, 2.0, 1.4, 0.18);
-  m.at(10.4, 3.0, 0, human({ top: '#f0f4fa', bottom: '#2f4368', hair: '#3a2f2a', dir: 'l', pose: 'point', hairStyle: 'bun' }), 1.06);
+  m.shadow(10.8, 6.0, 2.2, 1.6, 0.2);
+  m.at(11.8, 6.8, 0, human({ top: '#f0f4fa', bottom: '#2f4368', hair: '#3a2f2a', dir: 'l', pose: 'point', hairStyle: 'bun' }), 1.06);
+
+  return `<g>${m.svg()}</g>`;
+}
+
+/* ── CASE: Claude Code 業務委託支援 ───────────────── */
+function sceneRetainer() {
+  const m = mk(516, 274, 16.5);
+  pad(m, -0.8, -0.8, 9.8, 7.4);
+
+  // 上空に浮く支援メニュー（画面上で横に散らす）
+  const [tx, ty] = m.XYuv(0.4, 3.6, 6.8);
+  [
+    ['M6 4h20l6 6v22a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm5 12h16M11 23h16M11 30h10', -86, -6],
+    ['M18 5l3.4 7 7.6-1.6-2 7.6 6 4.4-6 4.4 2 7.6-7.6-1.6-3.4 7-3.4-7-7.6 1.6 2-7.6-6-4.4 6-4.4-2-7.6 7.6 1.6z', -8, -48],
+    ['M4 32V20h7v12zm10 0V10h7v22zm10 0V4h7v28z', 74, -14],
+  ].forEach(([d, dx, dy]) => {
+    m.add(`<g transform="translate(${(tx + dx).toFixed(1)} ${(ty + dy).toFixed(1)})">
+      <circle r="23" fill="#fff" fill-opacity="0.97"/>
+      <g transform="translate(-18 -18)"><path d="${d}" fill="none" stroke="#e0762c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g></g>`);
+  });
+
+  // デスク
+  [[0.35, 0.35], [8.3, 0.35], [0.35, 4.3], [8.3, 4.3]].forEach(([lx, ly]) =>
+    m.box(lx, ly, 0, 0.35, 0.35, 2.4, { t: '#c98a5e', l: '#b0764e', r: '#9c6742' }));
+  m.box(0, 0, 2.4, 9, 5, 0.34, { t: '#f4e3d2', l: '#dcc3ac', r: '#cbb096' });
+
+  // ノートPC（キーボード面 → 画面）
+  m.box(2.6, 2.6, 2.74, 3.4, 2.1, 0.13, { t: '#e7ecf3', l: '#c3ccdb', r: '#b2bccd' });
+  m.faceT(2.6, 2.6, 2.87, `<g transform="scale(0.01)">
+      <rect x="18" y="18" width="304" height="120" rx="8" fill="#cdd6e3"/>
+      ${[0, 1, 2, 3].map(r => [0, 1, 2, 3, 4, 5, 6, 7].map(c => `<rect x="${30 + c * 35}" y="${28 + r * 26}" width="27" height="18" rx="4" fill="#8f9db1"/>`).join('')).join('')}
+      <rect x="120" y="150" width="100" height="26" rx="6" fill="#dae1eb"/></g>`);
+  m.box(2.6, 2.45, 2.87, 3.4, 0.16, 2.3, { t: '#39414f', l: '#2a313d', r: '#232932' });
+  m.faceL(2.72, 2.61, 5.17, `<g transform="scale(0.0092)">
+      <rect width="333" height="228" rx="5" fill="#1b2330"/>
+      <rect width="333" height="22" fill="#2b3546"/>
+      <circle cx="12" cy="11" r="4" fill="#ef6a5b"/><circle cx="25" cy="11" r="4" fill="#f2c14b"/><circle cx="38" cy="11" r="4" fill="#63c08a"/>
+      ${[[16, 96, '#f0913a'], [30, 132, '#8fb8f0'], [44, 78, '#7fd0a0'], [58, 150, '#c9a6f0'], [72, 108, '#8fb8f0'], [86, 64, '#f0913a'], [100, 140, '#9fb0c8']]
+      .map(([yy, ww, cc]) => `<rect x="16" y="${yy + 22}" width="10" height="8" rx="4" fill="#4a5568"/><rect x="34" y="${yy + 22}" width="${ww}" height="8" rx="4" fill="${cc}"/>`).join('')}
+      <rect x="16" y="192" width="150" height="9" rx="4.5" fill="#3a4557"/>
+      <rect x="16" y="208" width="86" height="9" rx="4.5" fill="#63c08a"/></g>`);
+
+  // マグカップ
+  m.box(6.9, 3.5, 2.74, 0.6, 0.6, 0.72, { t: '#ffffff', l: '#e4ebf4', r: '#cfd8e5' });
+
+  // 座って開発する担当（左手前）
+  m.shadowUV(-2.2, 11.0, 2.6, 1.7);
+  m.atUV(-1.8, 11.6, 0, chair('#8a5a3a', '#6b4227', 1.0), 1.06);
+  m.atUV(-2.1, 11.2, 0, humanSit({ top: '#2f6fd0', bottom: '#22304a', hair: '#2b2f3a', dir: 'r' }), 1.06);
+
+  // 相談するクライアント（右手前）
+  m.shadowUV(5.2, 17.0, 2.3, 1.7);
+  m.atUV(5.2, 17.8, 0, human({ top: '#ffffff', bottom: '#3c4a60', hair: '#2b2f3a', dir: 'l', pose: 'present' }), 1.06);
+
+  return `<g>${m.svg()}</g>`;
+}
+
+/* ── CASE: YouTube → note 記事自動生成 ─────────────── */
+function sceneYoutubeNote() {
+  const m = mk(516, 240, 16.5);
+  pad(m, -1.6, -1.6, 9.6, 7.6);
+
+  // 左：動画プレーヤー
+  panelUV(m, -5.0, 4.4, 1.6, 6.2, 4.9, `<g transform="scale(1.11)">
+      <rect width="560" height="440" rx="12" fill="#1e2a38"/>
+      <rect x="20" y="20" width="520" height="326" rx="8" fill="#0d141c"/>
+      <circle cx="280" cy="183" r="54" fill="#e8402f"/>
+      <path d="M262 153 l42 30 -42 30 z" fill="#fff"/>
+      <rect x="20" y="368" width="520" height="10" rx="5" fill="#3a4756"/>
+      <rect x="20" y="368" width="196" height="10" rx="5" fill="#e8402f"/>
+      <circle cx="216" cy="373" r="9" fill="#ff6a58"/>
+      ${lines(20, 396, [240, 170], 22, 11, '#3f4c5c')}</g>`,
+    { t: '#2b3949', l: '#334252', r: '#1f2b38' });
+
+  // 右：生成された記事
+  panelUV(m, 4.6, 6.0, 1.0, 5.0, 5.2, `
+      <rect width="500" height="520" rx="12" fill="#ffffff"/>
+      <rect x="32" y="34" width="168" height="17" rx="8.5" fill="#17836d"/>
+      <rect x="32" y="68" width="380" height="22" rx="11" fill="#2b3949"/>
+      <rect x="32" y="102" width="300" height="22" rx="11" fill="#2b3949"/>
+      <rect x="32" y="150" width="436" height="128" rx="10" fill="#e7f2ee"/>
+      <path d="M32 262 l86 -58 64 42 54 -34 102 50 v16 a10 10 0 0 1 -10 10 H42 a10 10 0 0 1 -10 -10z" fill="#a8d5c6"/>
+      <circle cx="112" cy="188" r="16" fill="#7cc3ac"/>
+      ${lines(32, 300, [436, 400, 436, 340, 410], 30, 13, '#cfd8e2')}
+      <rect x="32" y="466" width="120" height="30" rx="15" fill="#17836d"/>`);
+
+  // 変換の矢印（2枚の間）
+  const [ax, ay] = m.XYuv(-0.2, 5.4, 3.5);
+  m.add(`<g transform="translate(${ax.toFixed(1)} ${ay.toFixed(1)})">
+      <circle r="30" fill="#fff" fill-opacity="0.97"/>
+      <path d="M-15 -5 h20 v-8 l13 13 -13 13 v-8 h-20 z" fill="#17836d"/>
+      <circle r="38" fill="none" stroke="#8fe0c6" stroke-opacity="0.4" stroke-width="1.6" stroke-dasharray="5 7"/></g>`);
+
+  // 記事を確認する人物
+  m.shadowUV(-2.8, 15.4, 2.3, 1.7);
+  m.atUV(-2.8, 16.2, 0, human({ top: '#ffffff', bottom: '#26404a', hair: '#2b2f3a', dir: 'r', pose: 'present', hairStyle: 'long' }), 1.06);
+  return `<g>${m.svg()}</g>`;
+}
+
+/* ── CASE: 月額顧問契約・ご紹介還元20% ───────────────── */
+function sceneReferral() {
+  const m = mk(534, 252, 16.5);
+  pad(m, -1.4, -1.4, 9.2, 7.4);
+
+  // 左奥：顧問契約書
+  panelUV(m, -6.2, 5.0, 2.0, 4.6, 4.4, `
+      <rect width="460" height="440" rx="12" fill="#ffffff"/>
+      <rect x="34" y="36" width="196" height="17" rx="8.5" fill="#c9911f"/>
+      ${lines(34, 76, [392, 352, 392, 310, 366, 330], 34, 13, '#d7dee8')}
+      <rect x="34" y="304" width="180" height="52" rx="10" fill="#fdf2da"/>
+      <path d="M54 340 q20 -32 40 -3 t38 -17" fill="none" stroke="#c9911f" stroke-width="5" stroke-linecap="round"/>
+      <rect x="34" y="382" width="140" height="26" rx="13" fill="#f1e0b4"/>`);
+
+  // 右上：還元バッジ
+  const [bx, by] = m.XYuv(5.0, 3.4, 6.6);
+  m.add(`<g transform="translate(${bx.toFixed(1)} ${by.toFixed(1)})">
+      <circle r="44" fill="#ffffff"/><circle r="44" fill="none" stroke="#f0b53f" stroke-width="4"/>
+      <text y="6" font-family="Noto Sans JP" font-size="32" font-weight="900" fill="#b8791a" text-anchor="middle">20%</text>
+      <text y="26" font-family="Noto Sans JP" font-size="10" font-weight="700" fill="#c9911f" text-anchor="middle" letter-spacing="1">CASHBACK</text></g>`);
+
+  // 舞うコイン
+  [[3.4, 6.6, 4.6, 1.0], [5.6, 7.8, 3.4, 0.82], [2.4, 8.4, 5.8, 0.72]].forEach(([u, v, z, sc]) =>
+    m.atUV(u, v, z, `<g transform="scale(${sc})">
+        <ellipse cx="0" cy="6" rx="18" ry="7.5" fill="#c9911f"/>
+        <rect x="-18" y="-2" width="36" height="8" fill="#c9911f"/>
+        <ellipse cx="0" cy="-2" rx="18" ry="7.5" fill="#f6d47c"/>
+        <text y="2.5" font-family="Noto Sans JP" font-size="12" font-weight="900" fill="#c9911f" text-anchor="middle">¥</text></g>`));
+
+  // 握手する2人（紹介した方・された方）
+  m.shadowUV(-1.7, 11.8, 2.3, 1.7);
+  m.shadowUV(2.5, 12.4, 2.3, 1.7);
+  m.atUV(-1.7, 12.4, 0, human({ top: '#ffffff', bottom: '#3d4657', hair: '#33383f', dir: 'r', pose: 'shake' }), 1.1);
+  m.atUV(2.5, 13.0, 0, human({ top: '#2f6fd0', bottom: '#26304a', hair: '#2b2f3a', dir: 'l', pose: 'shake', hairStyle: 'long' }), 1.1);
+
+  return `<g>${m.svg()}</g>`;
+}
+
+/* ── CASE: WordPress 内部リンク自動挿入 ──────────────── */
+function sceneWpLink() {
+  const m = mk(528, 250, 16);
+  pad(m, -1.6, -1.6, 9.6, 7.6);
+
+  // 記事ページ3枚を階段状に配置し、内部リンクでつなぐ
+  const arts = [[-5.6, 2.4, 4.2], [0.8, 2.6, 4.6], [-2.2, 9.8, 0.2]];
+  const D = 4.6, HH = 4.35;
+  arts.forEach(([u, v, z], i) => {
+    panelUV(m, u, v, z, D, HH, `<g transform="scale(1.28)">
+        <rect width="360" height="340" rx="11" fill="#ffffff"/>
+        <rect x="26" y="28" width="${[150, 120, 134][i]}" height="15" rx="7.5" fill="#7c5cd6"/>
+        <rect x="26" y="58" width="300" height="17" rx="8.5" fill="#3a3358"/>
+        ${lines(26, 92, [300, 264, 300], 26, 12, '#d5d8e6')}
+        <rect x="26" y="186" width="300" height="76" rx="9" fill="#efe9ff"/>
+        <path d="M26 250 l60 -42 46 30 42 -26 72 36 v10 a9 9 0 0 1 -9 9 H35 a9 9 0 0 1 -9 -9z" fill="#c4b0ff"/>
+        <rect x="26" y="282" width="${[128, 168, 146][i]}" height="14" rx="7" fill="#a894e8"/></g>`);
+  });
+  const link = (a, b, lift) => {
+    const [x1, y1] = m.XYuv(arts[a][0], arts[a][1], arts[a][2] + HH / 2);
+    const [x2, y2] = m.XYuv(arts[b][0], arts[b][1], arts[b][2] + HH / 2);
+    const mx2 = (x1 + x2) / 2 + 26, my2 = (y1 + y2) / 2 + lift;
+    m.add(`<path d="M${x1.toFixed(1)} ${y1.toFixed(1)} Q${(mx2 + 14).toFixed(1)} ${(my2 - 10).toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="#c4b0ff" stroke-opacity="0.9" stroke-width="2.6" fill="none" stroke-dasharray="7 7"/>`);
+    m.add(`<g transform="translate(${mx2.toFixed(1)} ${my2.toFixed(1)})">
+        <circle r="17" fill="#7c5cd6"/><circle r="17" fill="none" stroke="#fff" stroke-opacity="0.6" stroke-width="1.6"/>
+        <g transform="rotate(-35)" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round">
+          <path d="M-7 0 a5 5 0 0 1 5 -5 h4"/><path d="M7 0 a5 5 0 0 1 -5 5 h-4"/><path d="M-3.5 0 h7"/></g></g>`);
+  };
+  link(0, 1, -4); link(0, 2, 6);
+
+  // リンクを提案する人物
+  m.shadowUV(5.0, 12.6, 2.3, 1.7);
+  m.atUV(5.0, 13.4, 0, human({ top: '#ffffff', bottom: '#3a3358', hair: '#2f2a3d', dir: 'l', pose: 'point' }), 1.08);
+  return `<g>${m.svg()}</g>`;
+}
+
+/* ── CASE: AIヒアリング → モックアップ自動生成 ──────────── */
+function sceneHearingMock() {
+  const m = mk(518, 246, 16);
+  pad(m, -1.6, -1.6, 9.6, 7.6);
+
+  // 右：生成されたモックアップ画面
+  panelUV(m, 4.6, 4.6, 1.2, 6.2, 5.4, `
+      <rect width="620" height="540" rx="12" fill="#ffffff"/>
+      <path d="M0 12 a12 12 0 0 1 12 -12 h596 a12 12 0 0 1 12 12 v38 H0z" fill="#0e7490"/>
+      <circle cx="26" cy="25" r="7" fill="#7fd8ef"/><rect x="48" y="18" width="120" height="14" rx="7" fill="#3f9fb8"/>
+      <rect x="470" y="14" width="126" height="22" rx="11" fill="#2b88a4"/>
+      <rect x="34" y="78" width="210" height="17" rx="8.5" fill="#0e7490"/>
+      <rect x="34" y="112" width="552" height="120" rx="10" fill="#e2f4f9"/>
+      <rect x="56" y="136" width="180" height="15" rx="7.5" fill="#8fd0e2"/>
+      <rect x="56" y="162" width="260" height="15" rx="7.5" fill="#b8e2ee"/>
+      <rect x="56" y="188" width="150" height="15" rx="7.5" fill="#b8e2ee"/>
+      <rect x="430" y="158" width="132" height="42" rx="10" fill="#0e7490"/>
+      ${[0, 1, 2].map(i => `<g transform="translate(${34 + i * 190} 258)">
+          <rect width="172" height="140" rx="10" fill="#f4f9fb" stroke="#d6e6ec"/>
+          <circle cx="36" cy="38" r="17" fill="#7fd8ef"/>
+          <rect x="20" y="74" width="128" height="13" rx="6.5" fill="#cbd9e0"/>
+          <rect x="20" y="96" width="88" height="13" rx="6.5" fill="#dde7ec"/></g>`).join('')}
+      <rect x="34" y="424" width="552" height="82" rx="10" fill="#f4f9fb"/>
+      <rect x="56" y="448" width="300" height="14" rx="7" fill="#cbd9e0"/>
+      <rect x="56" y="472" width="220" height="14" rx="7" fill="#dde7ec"/>`);
+
+  // 中央：AIコア
+  const [cx0, cy0] = m.XYuv(1.6, 13.8, 3.2);
+  m.add(`<g transform="translate(${cx0.toFixed(1)} ${cy0.toFixed(1)})">
+      <circle r="50" fill="#7fd8ef" fill-opacity="0.14"/>
+      <circle r="36" fill="#7fd8ef" fill-opacity="0.22"/>
+      <circle r="26" fill="#ffffff"/>
+      <text y="9" font-family="Noto Sans JP" font-size="21" font-weight="900" fill="#0e7490" text-anchor="middle">AI</text>
+      ${[10, 70, 130, 190, 250, 310].map(a => `<circle cx="${(Math.cos(a * Math.PI / 180) * 43).toFixed(1)}" cy="${(Math.sin(a * Math.PI / 180) * 43).toFixed(1)}" r="3.6" fill="#7fd8ef"/>`).join('')}
+      <circle r="43" fill="none" stroke="#7fd8ef" stroke-opacity="0.5" stroke-width="1.4" stroke-dasharray="5 7"/></g>`);
+
+  // 左：ヒアリングの吹き出し → AIコアへ
+  const [hx, hy] = m.XYuv(-1.8, 10.8, 5.6);
+  m.add(`<path d="M${(hx + 34).toFixed(1)} ${(hy + 18).toFixed(1)} Q${((hx + cx0) / 2 + 20).toFixed(1)} ${((hy + cy0) / 2 + 4).toFixed(1)} ${(cx0 - 26).toFixed(1)} ${(cy0 - 6).toFixed(1)}" stroke="#7fd8ef" stroke-opacity="0.6" stroke-width="2.2" fill="none" stroke-dasharray="5 6"/>`);
+  // AI → モックアップ生成の流れ
+  const [gx, gy] = m.XYuv(2.6, 4.0, 2.2);
+  m.add(`<path d="M${(cx0 + 24).toFixed(1)} ${(cy0 - 12).toFixed(1)} Q${(gx - 6).toFixed(1)} ${(gy + 28).toFixed(1)} ${gx.toFixed(1)} ${gy.toFixed(1)}" stroke="#7fd8ef" stroke-opacity="0.6" stroke-width="2.2" fill="none" stroke-dasharray="5 6"/>`);
+  m.add(`<g transform="translate(${hx.toFixed(1)} ${hy.toFixed(1)})">
+      <rect x="-52" y="-34" width="104" height="60" rx="13" fill="#ffffff" fill-opacity="0.97"/>
+      <path d="M-16 25 l4 14 15 -14 z" fill="#ffffff" fill-opacity="0.97"/>
+      ${lines(-36, -20, [72, 52, 62], 15, 9, '#a9c9d6')}</g>`);
+
+  // 左手前：ヒアリングする2人
+  m.shadowUV(-6.0, 13.0, 2.3, 1.7);
+  m.shadowUV(-2.6, 15.0, 2.3, 1.7);
+  m.atUV(-6.0, 13.6, 0, human({ top: '#ffffff', bottom: '#2c4450', hair: '#2b2f3a', dir: 'r', pose: 'talk', hairStyle: 'long' }), 1.08);
+  m.atUV(-2.6, 15.6, 0, human({ top: '#2aa4c4', bottom: '#22374a', hair: '#2b2f3a', dir: 'l', pose: 'talk' }), 1.08);
 
   return `<g>${m.svg()}</g>`;
 }
@@ -139,8 +387,60 @@ const CARDS = [
     bg: ['#0a2a63', '#1b4a9c'], deco: '#4f9dff',
     scene: sceneCRM(),
   }),
+  card({
+    key: 'retainer', badge: '新着',
+    title: ['Claude Code', '業務委託支援'],
+    size: 46, size2: 44,
+    desc: ['Claude Codeの導入・活用を', '業務委託という形で', '全面的にサポートします'],
+    bg: ['#a63f16', '#e0762c'], deco: '#ffb066',
+    scene: sceneRetainer(),
+  }),
+  card({
+    key: 'youtube-note', badge: '実績公開',
+    title: ['YouTube → note', '記事自動生成'],
+    size: 40, size2: 42,
+    desc: ['YouTube動画からnote記事を', '自動生成するツールの', '実績を公開しました'],
+    bg: ['#0c5344', '#17836d'], deco: '#5fd8b4',
+    scene: sceneYoutubeNote(),
+  }),
+  card({
+    key: 'referral', badge: '新着',
+    title: ['月額顧問契約', 'ご紹介還元 20%'],
+    size: 44, size2: 42,
+    desc: ['ご紹介いただいた方・', 'された方の双方に', 'メリットのある制度です'],
+    bg: ['#8a5a10', '#d09a24'], deco: '#ffd77a',
+    scene: sceneReferral(),
+  }),
+  card({
+    key: 'wp-link', badge: '実績公開',
+    title: ['WordPress', '内部リンク自動挿入'],
+    size: 46, size2: 38,
+    desc: ['SEOに強い内部リンクを', '自動で提案・挿入する', 'ツールの実績を公開しました'],
+    bg: ['#332268', '#5f43ad'], deco: '#a98cff',
+    scene: sceneWpLink(),
+  }),
+  card({
+    key: 'hearing-mock', badge: '実績公開',
+    title: ['AIヒアリング →', 'モックアップ自動生成'],
+    size: 42, size2: 36,
+    desc: ['ヒアリング内容をもとに', 'AIが瞬時にモックアップを', '自動生成します'],
+    bg: ['#0a4a66', '#0e7490'], deco: '#6fd6ef',
+    scene: sceneHearingMock(),
+  }),
 ];
 
-document.getElementById('sheet').innerHTML = CARDS.join('\n');
+/* ?only=<key> で1枚だけを余白なしで表示する（本番PNGの書き出し用） */
+const only = new URLSearchParams(location.search).get('only');
+const KEYS = ['crm', 'retainer', 'youtube-note', 'referral', 'wp-link', 'hearing-mock'];
+if (only) {
+  const i = KEYS.indexOf(only);
+  document.documentElement.style.background = '#fff';
+  document.body.style.background = '#fff';
+  document.getElementById('sheet').style.cssText = 'padding:0;gap:0';
+  document.getElementById('sheet').innerHTML = (CARDS[i] || '').replace('box-shadow', 'x-shadow');
+  const s = document.querySelector('svg.card'); if (s) s.style.cssText = 'display:block;box-shadow:none;border-radius:0';
+} else {
+  document.getElementById('sheet').innerHTML = CARDS.join('\n');
+}
 </script>
 </body></html>
