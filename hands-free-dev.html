@@ -129,6 +129,15 @@ a { color: inherit; }
 .tech-list li::before { content: '·'; position: absolute; left: 4px; font-weight: 900; color: #a78bfa; }
 .env-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
 .env-chip { background: #fff; border: 1px solid #e6e6f0; border-radius: 999px; padding: 9px 20px; font-size: 13px; font-weight: 700; color: #2d3748; }
+.env-chip.is-plan { background: #f3f0ff; border-color: #cfc2ff; color: #4c33b8; border-style: dashed; }
+/* 今後の対応予定 */
+.plan-box { margin-top: 26px; background: #fff; border: 1px solid #e6e6f0; border-radius: 16px; padding: 26px 28px; }
+.plan-title { font-size: 15px; font-weight: 900; color: #4c33b8; margin-bottom: 18px; padding-left: 12px; border-left: 3px solid #a78bfa; }
+.plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.plan-item { display: flex; gap: 14px; align-items: flex-start; }
+.plan-icon { font-size: 22px; line-height: 1.3; flex-shrink: 0; }
+.plan-name { font-size: 15px; font-weight: 900; margin-bottom: 6px; }
+.plan-desc { font-size: 13px; color: #64748b; line-height: 1.9; }
 
 /* ── 開発状況・リリース ── */
 .status-box { display: flex; gap: 16px; align-items: flex-start; background: linear-gradient(135deg,#f3f0ff,#eaf0ff); border: 1px solid #cfc2ff; border-left: 4px solid #6d4fe3; border-radius: 12px; padding: 22px 26px; }
@@ -214,7 +223,7 @@ a { color: inherit; }
       <div class="point-card">
         <div class="point-icon">🎙</div>
         <div class="point-title">会話が途切れない</div>
-        <p class="point-desc">一度指示して終わりではありません。相談して要件を固め、進行中の確認に答え、方針を変える——画面を見ずに<strong>何度でも会話を往復</strong>させながら実装まで到達することを目指した設計です。</p>
+        <p class="point-desc">一度指示して終わりではありません。相談しながら要件を固め、作業中に届く確認に答え、必要なら途中で方針を変える。画面を見ずに<strong>何度でも会話を往復させながら</strong>、実装まで到達することを目指した設計です。</p>
       </div>
       <div class="point-card">
         <div class="point-icon">🤝</div>
@@ -483,9 +492,30 @@ a { color: inherit; }
     </div>
     <div class="env-row">
       <span class="env-chip">🪟 Windows PC</span>
-      <span class="env-chip">🍎 Mac / Xcode</span>
       <span class="env-chip">📱 iPhone / Simulator</span>
+      <span class="env-chip is-plan">🍎 Mac / Xcode（対応予定）</span>
     </div>
+
+    <div class="plan-box">
+      <div class="plan-title">今後の対応予定</div>
+      <div class="plan-grid">
+        <div class="plan-item">
+          <span class="plan-icon">🍎</span>
+          <div>
+            <div class="plan-name">Mac 対応</div>
+            <p class="plan-desc">Windows だけでなく Mac でも動くようにします。<strong>Xcode でのビルドやアプリへの反映も、アプリ側からの指示で実行できる</strong>ようになります。</p>
+          </div>
+        </div>
+        <div class="plan-item">
+          <span class="plan-icon">🗂</span>
+          <div>
+            <div class="plan-name">Obsidian 連携／複数プロジェクトの並行開発</div>
+            <p class="plan-desc">Obsidian と連携させることで、<strong>複数のプロジェクトを並行して進められる</strong>ようにします。プロジェクトを切り替えながら、それぞれの文脈を保ったまま会話を続けられます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <p style="font-size:12.5px;color:#94a3b8;margin-top:18px;line-height:1.9">
       ※ PCの画面・キーボード・マウスをエミュレートする方式は採っていません。CLIと直接連携することで、
       画面の状態に左右されず安定して動作させています。
