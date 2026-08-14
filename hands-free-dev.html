@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ハンズフリーAI開発チーム（UNIA）｜話すだけでAIが開発を進める仕組み（福田和弘）</title>
+<meta name="description" content="iPhoneに話しかけるだけで、PC上のClaude Codeが調査・実装・テストまで実行し、結果が音声で返ってくる仕組み。司令塔のAIユナと実行担当のAIレンが複数のAIをひとつのチームとして動かします。">
+<meta property="og:title" content="ハンズフリーAI開発チーム（UNIA）｜話すだけで、AI開発チームを動かす">
+<meta property="og:description" content="画面もキーボードも触らず、音声だけでAI開発チームを指揮する。複数のAIが専門領域で連携して開発を進めます。">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Noto Sans JP', sans-serif; background: #f7f8fc; color: #1a1a2e; line-height: 1.8; }
+a { color: inherit; }
+
+/* ── 共通 ── */
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 72px 0; }
+.section.alt { background: #fff; }
+.sec-tag { font-size: 12px; font-weight: 700; color: #6d4fe3; letter-spacing: 0.14em; margin-bottom: 10px; }
+.sec-title { font-size: clamp(22px, 3.2vw, 34px); font-weight: 900; line-height: 1.35; margin-bottom: 14px; letter-spacing: -0.01em; }
+.sec-lead { font-size: 15px; color: #4a5568; line-height: 1.9; margin-bottom: 36px; }
+
+/* ── ヘッダー ── */
+.site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid #e6e6f0; }
+.header-inner { max-width: 1080px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo { font-size: 15px; font-weight: 900; text-decoration: none; }
+.logo span { font-size: 12px; font-weight: 600; color: #718096; }
+.header-links { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.header-links a { font-size: 13px; font-weight: 700; color: #4a5568; text-decoration: none; }
+.header-links a:hover { color: #6d4fe3; }
+.header-cta { background: #6d4fe3; color: #fff !important; padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none; }
+
+/* ── ヒーロー ── */
+.hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #1b1f4b 0%, #3b2f8f 48%, #1a1f52 100%); padding: 76px 0 0; color: #fff; }
+.hero::before { content: ''; position: absolute; top: -160px; right: -140px; width: 620px; height: 620px; border-radius: 50%; background: radial-gradient(circle, rgba(139,116,255,0.30), transparent 65%); }
+.hero::after { content: ''; position: absolute; bottom: -220px; left: -160px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(80,160,255,0.18), transparent 65%); }
+.hero-inner { position: relative; z-index: 1; }
+.hero-tag { display: inline-block; font-size: 12px; font-weight: 700; color: #c9b8ff; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.22); padding: 6px 20px; border-radius: 24px; margin-bottom: 24px; letter-spacing: 0.05em; }
+.hero h1 { font-size: clamp(28px, 5vw, 52px); font-weight: 900; line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 18px; }
+.hero h1 em { font-style: normal; background: linear-gradient(100deg, #a78bfa, #7dd3fc); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero-sub { font-size: clamp(14px, 1.9vw, 18px); color: rgba(255,255,255,0.86); line-height: 1.95; margin-bottom: 30px; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #f0a54a; color: #1a1a2e; font-size: 15px; font-weight: 700; padding: 15px 34px; border-radius: 999px; text-decoration: none; box-shadow: 0 8px 22px rgba(240,165,74,0.25); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.4); color: #fff; font-size: 15px; font-weight: 700; padding: 15px 30px; border-radius: 999px; text-decoration: none; }
+.hero-visual { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.hero-visual img { width: 100%; height: auto; display: block; border-radius: 14px 14px 0 0; box-shadow: 0 -6px 60px rgba(0,0,0,0.35); background: #fff; }
+.hero-visual figcaption { font-size: 12px; color: rgba(255,255,255,0.6); padding: 10px 2px 18px; text-align: center; }
+
+/* ── 概要の3点 ── */
+.point-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.point-card { background: #fff; border: 1px solid #e8e6f5; border-radius: 16px; padding: 28px 24px; }
+.point-icon { width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg,#6d4fe3,#4f7ef0); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; }
+.point-title { font-size: 16px; font-weight: 900; line-height: 1.6; margin-bottom: 10px; }
+.point-desc { font-size: 13px; color: #64748b; line-height: 1.9; }
+
+/* ── 課題 ── */
+.problem-card { background: #eef0f9; border-radius: 14px; padding: 24px 22px; }
+.problem-head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.problem-icon { font-size: 24px; line-height: 1; flex-shrink: 0; }
+.problem-title { font-size: 15px; font-weight: 700; line-height: 1.6; }
+.problem-desc { font-size: 13px; color: #64748b; line-height: 1.85; }
+
+/* ── 役割（ユナ・レン） ── */
+.role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.role-card { border-radius: 18px; padding: 30px 28px; }
+.role-card.yuna { background: linear-gradient(135deg,#f3f0ff,#e9e4ff); border: 1.5px solid #cfc2ff; }
+.role-card.ren { background: linear-gradient(135deg,#eef4ff,#e2ecff); border: 1.5px solid #bcd2f7; }
+.role-name { font-size: 22px; font-weight: 900; margin-bottom: 4px; }
+.role-card.yuna .role-name { color: #5b3fd6; }
+.role-card.ren .role-name { color: #2563c9; }
+.role-role { font-size: 13px; font-weight: 700; color: #4a5568; margin-bottom: 18px; }
+.role-list { list-style: none; }
+.role-list li { font-size: 14px; line-height: 2.05; padding-left: 24px; position: relative; color: #2d3748; }
+.role-list li::before { content: '✓'; position: absolute; left: 0; font-weight: 900; }
+.role-card.yuna .role-list li::before { color: #6d4fe3; }
+.role-card.ren .role-list li::before { color: #2563c9; }
+
+/* ── AIチーム ── */
+.agent-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.agent-card { background: #fff; border: 1px solid #e6e6f0; border-radius: 14px; padding: 22px 20px; }
+.agent-name { font-size: 16px; font-weight: 900; margin-bottom: 4px; }
+.agent-role { font-size: 11.5px; font-weight: 700; color: #6d4fe3; margin-bottom: 12px; letter-spacing: 0.04em; }
+.agent-list { list-style: none; font-size: 13px; color: #64748b; line-height: 2; }
+
+/* ── フロー ── */
+.flow { display: flex; align-items: stretch; gap: 10px; flex-wrap: wrap; }
+.flow-card { flex: 1 1 170px; background: #fff; border: 1px solid #e6e6f0; border-radius: 14px; padding: 24px 16px; text-align: center; }
+.flow-no { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg,#6d4fe3,#4f7ef0); color: #fff; font-size: 18px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+.flow-title { font-size: 15px; font-weight: 900; margin-bottom: 8px; }
+.flow-who { font-size: 11.5px; font-weight: 700; color: #6d4fe3; margin-bottom: 8px; }
+.flow-desc { font-size: 12.5px; color: #64748b; line-height: 1.8; }
+.flow-arrow { display: flex; align-items: center; color: #a78bfa; font-size: 22px; font-weight: 900; }
+
+/* ── できること ── */
+.can-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.can-item { display: flex; gap: 14px; background: #fff; border: 1px solid #e6e6f0; border-radius: 14px; padding: 20px 22px; }
+.can-icon { font-size: 22px; line-height: 1.3; flex-shrink: 0; }
+.can-title { font-size: 15px; font-weight: 900; margin-bottom: 4px; }
+.can-desc { font-size: 12.5px; color: #64748b; line-height: 1.8; }
+
+/* ── 会話例 ── */
+.talk { max-width: 780px; }
+.talk-row { display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-start; }
+.talk-row.right { flex-direction: row-reverse; }
+.talk-who { flex-shrink: 0; width: 62px; text-align: center; font-size: 11.5px; font-weight: 700; color: #4a5568; }
+.talk-avatar { width: 42px; height: 42px; border-radius: 50%; margin: 0 auto 4px; display: flex; align-items: center; justify-content: center; font-size: 17px; color: #fff; }
+.av-you { background: #475569; }
+.av-yuna { background: linear-gradient(135deg,#7c5cd6,#a78bfa); }
+.av-ren { background: linear-gradient(135deg,#2563c9,#60a5fa); }
+.av-ai { background: #64748b; }
+.talk-bubble { background: #fff; border: 1px solid #e6e6f0; border-radius: 14px; padding: 14px 18px; font-size: 13.5px; line-height: 1.85; color: #2d3748; }
+.talk-row.right .talk-bubble { background: #eef0f9; }
+
+/* ── 技術構成 ── */
+.tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.tech-card { background: #16193d; color: #fff; border-radius: 16px; padding: 26px 24px; }
+.tech-name { font-size: 16px; font-weight: 900; margin-bottom: 6px; color: #c9b8ff; }
+.tech-list { list-style: none; font-size: 13px; line-height: 2.05; color: rgba(255,255,255,0.82); }
+.tech-list li { padding-left: 18px; position: relative; }
+.tech-list li::before { content: '·'; position: absolute; left: 4px; font-weight: 900; color: #a78bfa; }
+.env-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+.env-chip { background: #fff; border: 1px solid #e6e6f0; border-radius: 999px; padding: 9px 20px; font-size: 13px; font-weight: 700; color: #2d3748; }
+
+/* ── 開発状況 ── */
+.status-box { display: flex; gap: 16px; align-items: flex-start; background: #fffbeb; border: 1px solid #fcd34d; border-left: 4px solid #d97706; border-radius: 12px; padding: 20px 24px; }
+.status-icon { font-size: 22px; line-height: 1.3; flex-shrink: 0; }
+.status-title { font-size: 14.5px; font-weight: 900; color: #92400e; margin-bottom: 6px; }
+.status-text { font-size: 13px; color: #78350f; line-height: 1.95; }
+
+/* ── 次のアクション ── */
+.next-card { background: #fff; border: 1px solid #e6e6f0; border-radius: 14px; padding: 24px 26px; text-decoration: none; display: block; }
+.next-label { font-size: 11px; font-weight: 700; color: #718096; letter-spacing: 0.1em; margin-bottom: 8px; }
+.next-title { font-size: 17px; font-weight: 900; margin-bottom: 8px; }
+.next-desc { font-size: 13px; color: #64748b; line-height: 1.85; }
+
+/* ── CTA ── */
+.cta-section { background: #fff; padding: 72px 0; text-align: center; }
+.cta-title { font-size: clamp(22px, 3.4vw, 34px); font-weight: 900; margin-bottom: 12px; }
+.cta-lead { font-size: 15px; color: #4a5568; margin-bottom: 34px; }
+.cta-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 30px; }
+.cta-card { background: #eef0f9; border-radius: 14px; padding: 22px; display: flex; align-items: center; gap: 16px; text-align: left; text-decoration: none; }
+.cta-card-icon { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg,#6d4fe3,#4f7ef0); color: #fff; font-size: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.cta-card-label { font-size: 12px; color: #718096; margin-bottom: 2px; }
+.cta-card-val { font-size: 15px; font-weight: 700; word-break: break-all; }
+.cta-note { font-size: 13px; color: #94a3b8; }
+
+/* ── フッター ── */
+.site-footer { background: #16193d; color: rgba(255,255,255,0.6); padding: 30px 0; font-size: 13px; text-align: center; }
+.site-footer a { color: #c9b8ff; text-decoration: none; }
+
+@media (max-width: 860px) {
+  .flow-arrow { display: none; }
+  .header-links a:not(.header-cta) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">福田和弘<span> | AI業務自動化</span></a>
+    <div class="header-links">
+      <a href="index.html">トップ</a>
+      <a href="#how">仕組み</a>
+      <a href="#flow">処理の流れ</a>
+      <a href="#tech">技術構成</a>
+      <a href="contact.html" class="header-cta">無料相談</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-tag">✦ 自社開発プロジェクト / UNIA（ユニア）</div>
+    <h1>話すだけで、<em>AI開発チーム</em>を動かす。</h1>
+    <p class="hero-sub">
+      iPhoneに話しかけるだけで、PC上のClaude Codeが調査・実装・テストまで実行し、結果が音声で返ってきます。<br>
+      画面もキーボードも触らずに、開発を前に進めるための仕組みです。
+    </p>
+    <div class="hero-btns">
+      <a href="contact.html" class="btn-primary">✉ 同じ仕組みを相談する</a>
+      <a href="#how" class="btn-ghost">仕組みを見る</a>
+    </div>
+  </div>
+  <figure class="hero-visual">
+    <!-- 画像が未配置のうちはリンク切れを見せず、figureごと隠す -->
+    <img src="unia-overview.png" alt="UNIAの世界観：あなたの声で、AI開発チームが動き出す。司令塔のAIユナと技術リーダーのAIレンが、Claude・Codex・Geminiなど複数のAIをひとつのチームとして動かす全体図"
+         onerror="this.closest('.hero-visual').style.display='none'">
+    <figcaption>UNIA の全体像 — あなたの声を起点に、複数のAIが専門領域で連携して成果を出します</figcaption>
+  </figure>
+</section>
+
+<!-- POINTS -->
+<section class="section">
+  <div class="wrap">
+    <div class="point-grid">
+      <div class="point-card">
+        <div class="point-icon">🎙</div>
+        <div class="point-title">完全ハンズフリー</div>
+        <p class="point-desc">話すだけで開発が進みます。画面を見ず、キーボードも触らずに、AIとの連続した会話だけで実装まで到達することを目指した設計です。</p>
+      </div>
+      <div class="point-card">
+        <div class="point-icon">🤝</div>
+        <div class="point-title">マルチAI連携</div>
+        <p class="point-desc">Claude・Codex・Geminiなど複数のAIが、実装・レビュー・調査といった専門領域を分担。1つのAIに全部やらせるより精度が上がります。</p>
+      </div>
+      <div class="point-card">
+        <div class="point-icon">📱</div>
+        <div class="point-title">いつでもどこでも</div>
+        <p class="point-desc">移動中や作業の合間でも、iPhoneから自分のAI開発チームに指示できます。思いついたことをその場で開発に反映できます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-tag">PROBLEM</div>
+    <h2 class="sec-title">「PCの前に座らないと、何も進まない」</h2>
+    <p class="sec-lead">AIで開発が速くなっても、結局はPCの前にいる時間しか進みません。ここを外したいというのが出発点でした。</p>
+    <div class="point-grid">
+      <div class="problem-card">
+        <div class="problem-head"><span class="problem-icon">🚶</span><div class="problem-title">移動中に思いついても、<br>その場では何もできない</div></div>
+        <p class="problem-desc">アイデアが浮かんでもメモを取るだけ。PCの前に戻る頃には熱量も文脈も薄れています。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-head"><span class="problem-icon">⌨️</span><div class="problem-title">指示を文字で書くのが<br>そもそも手間</div></div>
+        <p class="problem-desc">やりたいことは頭の中にあるのに、それを文章にする作業が挟まるだけで着手のハードルが上がります。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-head"><span class="problem-icon">🔀</span><div class="problem-title">AIごとに得意分野が<br>違うのに使い分けが面倒</div></div>
+        <p class="problem-desc">実装が得意なAI、レビューが得意なAI、調査が得意なAI。切り替えと結果の統合を人がやっていては速くなりません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="sec-tag">HOW IT WORKS</div>
+    <h2 class="sec-title">2人のAIが、チーム全体を動かす</h2>
+    <p class="sec-lead">あなたが話す相手は1人だけです。指示の分解も、AIの選定も、結果の統合も、AI側が引き受けます。</p>
+    <div class="role-grid">
+      <div class="role-card yuna">
+        <div class="role-name">AIユナ</div>
+        <div class="role-role">AIチームの司令塔</div>
+        <ul class="role-list">
+          <li>あなたとの会話窓口</li>
+          <li>タスクの理解・分解</li>
+          <li>最適なAIを選定・指揮</li>
+          <li>進捗の管理・調整</li>
+          <li>結果の統合・報告</li>
+        </ul>
+      </div>
+      <div class="role-card ren">
+        <div class="role-name">AIレン</div>
+        <div class="role-role">技術リーダー・実行担当</div>
+        <ul class="role-list">
+          <li>技術的な判断・設計</li>
+          <li>実装の実行・管理</li>
+          <li>コードの品質チェック</li>
+          <li>テスト・デバッグ</li>
+          <li>ビルド・デプロイ</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sec-title" style="font-size:20px;margin-top:52px;margin-bottom:18px">AIチーム（専門AIエージェント）</h3>
+    <div class="agent-grid">
+      <div class="agent-card">
+        <div class="agent-name">Claude</div>
+        <div class="agent-role">実装エージェント</div>
+        <ul class="agent-list"><li>コード生成</li><li>機能実装</li><li>リファクタリング</li></ul>
+      </div>
+      <div class="agent-card">
+        <div class="agent-name">Codex</div>
+        <div class="agent-role">レビューエージェント</div>
+        <ul class="agent-list"><li>コードレビュー</li><li>改善提案</li><li>バグ検出</li></ul>
+      </div>
+      <div class="agent-card">
+        <div class="agent-name">Gemini</div>
+        <div class="agent-role">調査・分析エージェント</div>
+        <ul class="agent-list"><li>情報収集</li><li>技術調査</li><li>ドキュメント作成</li></ul>
+      </div>
+      <div class="agent-card">
+        <div class="agent-name">その他AI</div>
+        <div class="agent-role">専門エージェント群</div>
+        <ul class="agent-list"><li>デザイン生成</li><li>テスト作成</li><li>データ分析 など</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="section alt" id="flow">
+  <div class="wrap">
+    <div class="sec-tag">FLOW</div>
+    <h2 class="sec-title">声をかけてから、成果物が返るまで</h2>
+    <p class="sec-lead">あなたがするのは最初の一言だけ。あとはAIチームの中で処理が進み、結果が音声で返ってきます。</p>
+    <div class="flow">
+      <div class="flow-card">
+        <div class="flow-no">1</div>
+        <div class="flow-title">企画・相談</div>
+        <div class="flow-who">あなたの声</div>
+        <p class="flow-desc">やりたいことを話しかけます。整理されていない状態で構いません。</p>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-card">
+        <div class="flow-no">2</div>
+        <div class="flow-title">タスク分解・指示</div>
+        <div class="flow-who">AIユナ</div>
+        <p class="flow-desc">内容を理解して作業単位に分解し、担当するAIを決めて指示を出します。</p>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-card">
+        <div class="flow-no">3</div>
+        <div class="flow-title">実行</div>
+        <div class="flow-who">AIチーム</div>
+        <p class="flow-desc">実装・レビュー・調査を各AIが並行して進めます。</p>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-card">
+        <div class="flow-no">4</div>
+        <div class="flow-title">レビュー・テスト</div>
+        <div class="flow-who">AIレン</div>
+        <p class="flow-desc">技術面を確認し、テストとビルドまで通します。</p>
+      </div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-card">
+        <div class="flow-no">5</div>
+        <div class="flow-title">統合・報告</div>
+        <div class="flow-who">AIユナ</div>
+        <p class="flow-desc">結果をまとめ、音声で報告します。次の指示をまた声で返せます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONVERSATION -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-tag">CONVERSATION</div>
+    <h2 class="sec-title">実際のやり取り</h2>
+    <p class="sec-lead">ひとこと話しかけるだけで、チーム内で作業が回り、完了が音声で返ってきます。</p>
+    <div class="talk">
+      <div class="talk-row">
+        <div class="talk-who"><div class="talk-avatar av-you">👤</div>あなた</div>
+        <div class="talk-bubble">「ログイン機能を追加して」</div>
+      </div>
+      <div class="talk-row right">
+        <div class="talk-who"><div class="talk-avatar av-yuna">🎧</div>AIユナ</div>
+        <div class="talk-bubble">「了解です！タスクを整理して、AIチームに指示しますね。」</div>
+      </div>
+      <div class="talk-row right">
+        <div class="talk-who"><div class="talk-avatar av-ren">🛠</div>AIレン</div>
+        <div class="talk-bubble">「認証処理の設計を確認します。Claude、実装をお願いします。」</div>
+      </div>
+      <div class="talk-row right">
+        <div class="talk-who"><div class="talk-avatar av-ai">🤖</div>Claude</div>
+        <div class="talk-bubble">「実装が完了しました。テストコードも作成しました。」</div>
+      </div>
+      <div class="talk-row right">
+        <div class="talk-who"><div class="talk-avatar av-ai">🤖</div>Codex</div>
+        <div class="talk-bubble">「レビューが完了しました。軽微な改善点を修正します。」</div>
+      </div>
+      <div class="talk-row right">
+        <div class="talk-who"><div class="talk-avatar av-ren">🛠</div>AIレン</div>
+        <div class="talk-bubble">「修正完了、テストもOKです。ビルドして動作確認します。」</div>
+      </div>
+      <div class="talk-row right">
+        <div class="talk-who"><div class="talk-avatar av-yuna">🎧</div>AIユナ</div>
+        <div class="talk-bubble">「すべて完了しました！アプリをSimulatorで起動しますね。」</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAN DO -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-tag">WHAT YOU CAN DO</div>
+    <h2 class="sec-title">声から進められること</h2>
+    <p class="sec-lead">設計から実装・テスト・公開まで、開発の各工程を音声から動かせます。</p>
+    <div class="can-grid">
+      <div class="can-item"><span class="can-icon">📱</span><div><div class="can-title">iOS / Androidアプリ開発</div><p class="can-desc">設計から実装・テスト・公開まで</p></div></div>
+      <div class="can-item"><span class="can-icon">🌐</span><div><div class="can-title">Webサービス開発</div><p class="can-desc">フロントエンド・バックエンド・DB設計</p></div></div>
+      <div class="can-item"><span class="can-icon">🐛</span><div><div class="can-title">バグ修正・コード改善</div><p class="can-desc">エラー解析から修正・再テストまで</p></div></div>
+      <div class="can-item"><span class="can-icon">📄</span><div><div class="can-title">ドキュメント自動生成</div><p class="can-desc">仕様書・設計書・マニュアルなど</p></div></div>
+      <div class="can-item"><span class="can-icon">🔍</span><div><div class="can-title">技術調査・情報収集</div><p class="can-desc">最新技術の調査や比較検討</p></div></div>
+      <div class="can-item"><span class="can-icon">🔄</span><div><div class="can-title">継続的な開発・運用</div><p class="can-desc">更新・改善・モニタリングまで自動化</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH -->
+<section class="section" id="tech">
+  <div class="wrap">
+    <div class="sec-tag">ARCHITECTURE</div>
+    <h2 class="sec-title">技術構成</h2>
+    <p class="sec-lead">iPhoneアプリは「話す・聞く」に徹し、開発の実行と読み上げ文の生成はPC側のサーバーが担当します。</p>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-name">iPhoneアプリ（SwiftUI）</div>
+        <ul class="tech-list">
+          <li>音声区間検出（VAD）で発話の開始・終了を判定</li>
+          <li>音声認識（STT）で発話を文字に変換</li>
+          <li>読み上げ（TTS）で結果を音声で返す</li>
+          <li>会話状態の管理（割り込み・停止に対応）</li>
+        </ul>
+      </div>
+      <div class="tech-card">
+        <div class="tech-name">PC常駐サーバー（Bridge）</div>
+        <ul class="tech-list">
+          <li>WebSocketでiPhoneと常時接続</li>
+          <li>Claude Code CLI と連携して開発を実行</li>
+          <li>進捗イベントを解析し、読み上げ文を生成</li>
+          <li>セッションとプロジェクトの切り替えを管理</li>
+        </ul>
+      </div>
+    </div>
+    <div class="env-row">
+      <span class="env-chip">🪟 Windows PC</span>
+      <span class="env-chip">🍎 Mac / Xcode</span>
+      <span class="env-chip">📱 iPhone / Simulator</span>
+    </div>
+    <p style="font-size:12.5px;color:#94a3b8;margin-top:18px;line-height:1.9">
+      ※ PCの画面・キーボード・マウスをエミュレートする方式は採っていません。CLIと直接連携することで、
+      画面の状態に左右されず安定して動作させています。
+    </p>
+  </div>
+</section>
+
+<!-- STATUS -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-tag">STATUS</div>
+    <h2 class="sec-title">開発状況</h2>
+    <div class="status-box">
+      <span class="status-icon">🚧</span>
+      <div>
+        <div class="status-title">本プロジェクトは現在開発中です</div>
+        <p class="status-text">
+          自社開発として進めているプロジェクトで、<strong>製品としての提供・販売は行っていません</strong>。
+          掲載している構成・画面は開発中のものであり、今後変更される可能性があります。<br>
+          「音声で連続して対話しながら開発を進められること」を最優先の要件として、Bridge・iOSアプリ・
+          Claude Code CLI連携を実装しています。同様の仕組みを自社で構築したい場合は、ご相談ください。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-tag">RELATED</div>
+    <h2 class="sec-title">関連するご支援メニュー</h2>
+    <p class="sec-lead">同じような仕組みづくりや、AIを使った業務自動化のご相談を承っています。</p>
+    <div class="point-grid">
+      <a href="spot-development.html" class="next-card">
+        <div class="next-label">SPOT DEVELOPMENT</div>
+        <div class="next-title">Claude Code スポット開発支援</div>
+        <p class="next-desc">単発で1本つくって渡すところまで。まず1つ試したい方に。</p>
+      </a>
+      <a href="retainer.html" class="next-card">
+        <div class="next-label">MONTHLY RETAINER</div>
+        <div class="next-title">Claude Code 業務委託支援</div>
+        <p class="next-desc">継続的な開発・改善・技術相談を月額でご支援します。</p>
+      </a>
+      <a href="index.html#results" class="next-card">
+        <div class="next-label">RESULTS</div>
+        <div class="next-title">その他の導入実績</div>
+        <p class="next-desc">経理・SEO・採用・CRMなど、他の自動化事例もご覧いただけます。</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="wrap">
+    <h2 class="cta-title">同じような仕組みを、自社でも</h2>
+    <p class="cta-lead">「こんなことを自動化したい」というアイデアだけでも大歓迎です。</p>
+    <div class="cta-cards">
+      <a href="mailto:fkdkazu@gmail.com" class="cta-card">
+        <div class="cta-card-icon">✉</div>
+        <div><div class="cta-card-label">メール</div><div class="cta-card-val">fkdkazu@gmail.com</div></div>
+      </a>
+      <a href="https://x.com/Marketer_kazuf" target="_blank" rel="noopener" class="cta-card">
+        <div class="cta-card-icon">𝕏</div>
+        <div><div class="cta-card-label">X（DM）</div><div class="cta-card-val">@Marketer_kazuf</div></div>
+      </a>
+      <a href="contact.html" class="cta-card">
+        <div class="cta-card-icon">🔗</div>
+        <div><div class="cta-card-label">お問い合わせフォーム</div><div class="cta-card-val">無料相談を申し込む</div></div>
+      </a>
+    </div>
+    <p class="cta-note">通常1営業日以内にご返信します</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    福田 和弘 / AI業務自動化支援 © 2026 ｜ <a href="index.html">トップページに戻る</a>
+  </div>
+</footer>
+
+</body>
+</html>

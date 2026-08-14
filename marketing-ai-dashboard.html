@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>マーケティングAIダッシュボード｜商談メモが自動でナレッジに育つ仕組み（福田和弘）</title>
+<meta name="description" content="商談メモ・議事録からナレッジを自動抽出・蓄積し、「あなたの判断基準」で動く根拠付きAI診断と提案書の自動生成までを構築します。10万円〜（お試しプラン）／30万円〜（構築）。">
+<meta property="og:title" content="マーケティングAIダッシュボード｜商談メモが自動でナレッジに育つ">
+<meta property="og:description" content="経験と勘に依存していた診断・提案を、根拠付きで自動化。事実整理→5軸診断→改善提案→ロードマップまで自動生成します。">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Noto Sans JP', sans-serif; background: #f6faf8; color: #1a1a2e; line-height: 1.8; }
+a { color: inherit; }
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 72px 0; }
+.section.alt { background: #fff; }
+.sec-tag { font-size: 12px; font-weight: 700; color: #047857; letter-spacing: 0.14em; margin-bottom: 10px; }
+.sec-title { font-size: clamp(22px, 3.2vw, 34px); font-weight: 900; line-height: 1.35; margin-bottom: 14px; letter-spacing: -0.01em; }
+.sec-lead { font-size: 15px; color: #4a5568; line-height: 1.9; margin-bottom: 36px; }
+
+/* ── ヘッダー ── */
+.site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid #e2ece8; }
+.header-inner { max-width: 1080px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo { font-size: 15px; font-weight: 900; text-decoration: none; }
+.logo span { font-size: 12px; font-weight: 600; color: #718096; }
+.header-links { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.header-links a { font-size: 13px; font-weight: 700; color: #4a5568; text-decoration: none; }
+.header-links a:hover { color: #047857; }
+.header-cta { background: #047857; color: #fff !important; padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none; }
+
+/* ── ヒーロー ── */
+.hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #06372c 0%, #0b6b53 52%, #063a2e 100%); padding: 84px 0 96px; color: #fff; }
+.hero::before { content: ''; position: absolute; top: -140px; right: -120px; width: 580px; height: 580px; border-radius: 50%; background: radial-gradient(circle, rgba(94,234,212,0.20), transparent 65%); }
+.hero-inner { position: relative; z-index: 1; }
+.hero-tag { display: inline-block; font-size: 12px; font-weight: 700; color: #99f6e4; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.22); padding: 6px 20px; border-radius: 24px; margin-bottom: 26px; letter-spacing: 0.05em; }
+.hero h1 { font-size: clamp(28px, 5vw, 52px); font-weight: 900; line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 20px; }
+.hero h1 em { font-style: normal; color: #5eead4; }
+.hero-sub { font-size: clamp(14px, 1.9vw, 18px); color: rgba(255,255,255,0.86); line-height: 1.95; margin-bottom: 34px; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 56px; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #f0a54a; color: #1a1a2e; font-size: 15px; font-weight: 700; padding: 15px 34px; border-radius: 999px; text-decoration: none; box-shadow: 0 8px 22px rgba(240,165,74,0.25); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.4); color: #fff; font-size: 15px; font-weight: 700; padding: 15px 30px; border-radius: 999px; text-decoration: none; }
+.hero-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; }
+.hero-num-val { font-size: 42px; font-weight: 900; color: #f0a54a; line-height: 1; margin-bottom: 8px; }
+.hero-num-val small { font-size: 18px; }
+.hero-num-label { font-size: 13px; color: rgba(255,255,255,0.72); }
+
+/* ── グリッド ── */
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+
+.problem-card { background: #eef3f1; border-radius: 14px; padding: 24px 22px; }
+.problem-head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.problem-icon { font-size: 24px; line-height: 1; flex-shrink: 0; }
+.problem-title { font-size: 15px; font-weight: 700; line-height: 1.6; }
+.problem-desc { font-size: 13px; color: #64748b; line-height: 1.85; }
+
+/* ── ナレッジ3階層 ── */
+.layer { display: flex; align-items: center; gap: 18px; background: #fff; border: 1px solid #dcebe5; border-radius: 14px; padding: 22px 24px; margin-bottom: 14px; }
+.layer-no { width: 46px; height: 46px; border-radius: 12px; background: #047857; color: #fff; font-size: 18px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.layer-title { font-size: 16px; font-weight: 900; margin-bottom: 4px; }
+.layer-desc { font-size: 13px; color: #64748b; line-height: 1.85; }
+
+/* ── 機能 ── */
+.feat-item { display: flex; gap: 14px; background: #fff; border: 1px solid #dcebe5; border-radius: 14px; padding: 20px 22px; }
+.feat-icon { font-size: 22px; line-height: 1.3; flex-shrink: 0; }
+.feat-title { font-size: 15px; font-weight: 900; margin-bottom: 4px; }
+.feat-desc { font-size: 12.5px; color: #64748b; line-height: 1.8; }
+
+/* ── フロー ── */
+.steps { display: flex; align-items: stretch; gap: 10px; flex-wrap: wrap; }
+.step-card { flex: 1 1 175px; background: #fff; border: 1px solid #dcebe5; border-radius: 14px; padding: 24px 16px; text-align: center; }
+.step-no { width: 44px; height: 44px; border-radius: 50%; background: #047857; color: #fff; font-size: 19px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+.step-title { font-size: 15px; font-weight: 900; margin-bottom: 8px; }
+.step-desc { font-size: 12.5px; color: #64748b; line-height: 1.8; }
+.step-arrow { display: flex; align-items: center; color: #10b981; font-size: 22px; font-weight: 900; }
+
+/* ── 料金 ── */
+.price-card { border-radius: 16px; padding: 28px 24px; position: relative; }
+.price-card.a { background: #eef3f1; border: 1px solid #d5e5df; }
+.price-card.b { background: #e7f6f0; border: 2px solid #047857; }
+.price-card.c { background: #fdf1e0; border: 1px solid #f0c99a; }
+.price-badge { display: inline-block; color: #fff; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: 8px; margin-bottom: 16px; }
+.price-card.a .price-badge { background: #1f4d40; }
+.price-card.b .price-badge { background: #047857; }
+.price-card.c .price-badge { background: #c05621; }
+.price-recommend { position: absolute; top: -14px; right: 20px; background: #047857; color: #fff; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: 8px; }
+.price-name { font-size: 18px; font-weight: 900; line-height: 1.5; margin-bottom: 16px; }
+.price-val { font-size: 15px; font-weight: 700; color: #4a5568; margin-bottom: 4px; }
+.price-val strong { font-size: 32px; font-weight: 900; color: #1a1a2e; letter-spacing: -0.01em; }
+.price-card.b .price-val strong { color: #047857; }
+.price-card.c .price-val strong { color: #c05621; }
+.price-cond { font-size: 12px; color: #718096; margin-bottom: 18px; }
+.price-desc { font-size: 13px; color: #4a5568; line-height: 1.85; margin-bottom: 16px; }
+.price-list { list-style: none; }
+.price-list li { font-size: 13.5px; color: #374151; line-height: 2.1; padding-left: 20px; position: relative; }
+.price-list li::before { content: '✓'; position: absolute; left: 0; color: #047857; font-weight: 900; }
+.price-note { font-size: 12px; color: #94a3b8; margin-top: 22px; line-height: 1.9; }
+
+/* ── FAQ ── */
+.faq-item { background: #eef3f1; border-radius: 12px; padding: 22px 24px; margin-bottom: 14px; }
+.faq-q { font-size: 15px; font-weight: 900; margin-bottom: 10px; display: flex; gap: 10px; }
+.faq-q span { color: #047857; }
+.faq-a { font-size: 13.5px; color: #64748b; line-height: 1.95; padding-left: 26px; }
+
+/* ── 次のアクション ── */
+.next-card { background: #fff; border: 1px solid #dcebe5; border-radius: 14px; padding: 24px 26px; text-decoration: none; display: block; }
+.next-label { font-size: 11px; font-weight: 700; color: #718096; letter-spacing: 0.1em; margin-bottom: 8px; }
+.next-title { font-size: 17px; font-weight: 900; margin-bottom: 8px; }
+.next-desc { font-size: 13px; color: #64748b; line-height: 1.85; }
+
+/* ── CTA ── */
+.cta-section { background: #fff; padding: 72px 0; text-align: center; }
+.cta-title { font-size: clamp(22px, 3.4vw, 34px); font-weight: 900; margin-bottom: 12px; }
+.cta-lead { font-size: 15px; color: #4a5568; margin-bottom: 34px; }
+.cta-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 30px; }
+.cta-card { background: #eef3f1; border-radius: 14px; padding: 22px; display: flex; align-items: center; gap: 16px; text-align: left; text-decoration: none; }
+.cta-card-icon { width: 48px; height: 48px; border-radius: 50%; background: #047857; color: #fff; font-size: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.cta-card-label { font-size: 12px; color: #718096; margin-bottom: 2px; }
+.cta-card-val { font-size: 15px; font-weight: 700; word-break: break-all; }
+.cta-note { font-size: 13px; color: #94a3b8; }
+
+.site-footer { background: #06372c; color: rgba(255,255,255,0.6); padding: 30px 0; font-size: 13px; text-align: center; }
+.site-footer a { color: #5eead4; text-decoration: none; }
+
+@media (max-width: 860px) {
+  .step-arrow { display: none; }
+  .header-links a:not(.header-cta) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">福田和弘<span> | AI業務自動化</span></a>
+    <div class="header-links">
+      <a href="index.html">トップ</a>
+      <a href="#flow">診断の流れ</a>
+      <a href="#pricing">料金プラン</a>
+      <a href="#faq">よくある質問</a>
+      <a href="contact.html" class="header-cta">無料相談</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-tag">✦ コンサルティング業向け / Claude Code × ナレッジベース</div>
+    <h1>商談メモが、<em>自動でナレッジに育つ</em>。</h1>
+    <p class="hero-sub">
+      あなたの診断・提案ノウハウをAIナレッジ化し、「あなたの判断基準」で動く診断を継続して出力できる環境を構築します。<br>
+      当たり障りのない一般論ではなく、事実と過去の実績に基づいた根拠付きの診断・提案書を自動生成します。
+    </p>
+    <div class="hero-btns">
+      <a href="contact.html" class="btn-primary">✉ まずは無料相談</a>
+      <a href="#pricing" class="btn-ghost">料金プランを見る</a>
+    </div>
+    <div class="hero-nums">
+      <div>
+        <div class="hero-num-val">10<small>万円〜</small></div>
+        <div class="hero-num-label">お試しプラン（診断レポート1件納品）</div>
+      </div>
+      <div>
+        <div class="hero-num-val">5<small>軸</small></div>
+        <div class="hero-num-label">戦略・商品・設計・体制・データで診断</div>
+      </div>
+      <div>
+        <div class="hero-num-val">数千件<small>規模</small></div>
+        <div class="hero-num-label">商談メモの一括ナレッジ化 実装実績</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-tag">PROBLEM</div>
+    <h2 class="sec-title">こんなお悩みはありませんか</h2>
+    <p class="sec-lead">コンサルティング業では、品質そのものが担当者個人に依存しがちです。</p>
+    <div class="grid-3">
+      <div class="problem-card">
+        <div class="problem-head"><span class="problem-icon">🎯</span><div class="problem-title">診断・提案の質が<br>経験と勘に依存している</div></div>
+        <p class="problem-desc">判断基準が言語化されていないため、担当者が変わると品質が揺れ、ノウハウも組織に残りません。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-head"><span class="problem-icon">⏳</span><div class="problem-title">クライアントが増えるほど<br>工数が追いつかない</div></div>
+        <p class="problem-desc">初回診断・提案書作成に時間がかかり、新規相談や既存クライアントへの伴走支援に手が回りません。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-head"><span class="problem-icon">💬</span><div class="problem-title">AIに診断させても<br>一般論しか出てこない</div></div>
+        <p class="problem-desc">汎用のAIに投げるだけでは、どのクライアントにも当てはまる無難な出力にしかなりません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-tag">SOLUTION</div>
+    <h2 class="sec-title">「あなたの判断基準」をAIに移す</h2>
+    <p class="sec-lead">単にAIに診断させるのではなく、過去の商談メモ・診断実績・判断基準からナレッジを構築します。ナレッジは3階層で設計し、蓄積するほど出力が自社仕様に近づきます。</p>
+    <div class="layer">
+      <div class="layer-no">1</div>
+      <div>
+        <div class="layer-title">共通知識</div>
+        <p class="layer-desc">業界一般のセオリーやフレームワーク。どのクライアントにも共通して適用できる土台の部分です。</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-no">2</div>
+      <div>
+        <div class="layer-title">あなた固有の「型」</div>
+        <p class="layer-desc">診断で重視している観点、提案の組み立て方、表現の癖。ヒアリングと過去実績から言語化し、AIの判断基準として組み込みます。</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-no">3</div>
+      <div>
+        <div class="layer-title">個社ノウハウ</div>
+        <p class="layer-desc">クライアントごとの経緯・制約・過去の打ち手。商談メモや議事録から自動で抽出し、診断のたびに参照します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="section alt" id="flow">
+  <div class="wrap">
+    <div class="sec-tag">FLOW</div>
+    <h2 class="sec-title">診断が出るまでの5ステップ</h2>
+    <p class="sec-lead">事実の収集から提案書の生成まで、根拠と品質のチェックを挟みながら進みます。</p>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-no">1</div>
+        <div class="step-title">ヒアリング・データ収集</div>
+        <p class="step-desc">現状・目標をヒアリングし、GA4等の実績データを収集します。</p>
+      </div>
+      <div class="step-arrow">›</div>
+      <div class="step-card">
+        <div class="step-no">2</div>
+        <div class="step-title">5軸診断</div>
+        <p class="step-desc">戦略・商品・設計・体制・データの5軸で、事実とナレッジDBに基づき診断します。</p>
+      </div>
+      <div class="step-arrow">›</div>
+      <div class="step-card">
+        <div class="step-no">3</div>
+        <div class="step-title">根拠チェック</div>
+        <p class="step-desc">診断結果と、参照したナレッジ・事実との整合性を確認します。</p>
+      </div>
+      <div class="step-arrow">›</div>
+      <div class="step-card">
+        <div class="step-no">4</div>
+        <div class="step-title">品質チェック</div>
+        <p class="step-desc">一般論での水増しがないか、文体が適切かをチェックします。</p>
+      </div>
+      <div class="step-arrow">›</div>
+      <div class="step-card">
+        <div class="step-no">5</div>
+        <div class="step-title">提案書生成</div>
+        <p class="step-desc">事実整理→5軸診断→改善提案→年間ロードマップまで、提案書として自動生成します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-tag">FEATURES</div>
+    <h2 class="sec-title">構築する主な機能</h2>
+    <p class="sec-lead">ヒアリングからナレッジ蓄積、提案書の出力までを一気通貫で構築します。</p>
+    <div class="grid-2">
+      <div class="feat-item"><span class="feat-icon">📝</span><div><div class="feat-title">ヒアリングシートのデジタル化</div><p class="feat-desc">診断に必要な項目を構造化し、回答をそのまま診断エンジンに渡せる形にします</p></div></div>
+      <div class="feat-item"><span class="feat-icon">📊</span><div><div class="feat-title">GA4等の実績データ連携</div><p class="feat-desc">感覚ではなく実データを根拠として診断に組み込みます</p></div></div>
+      <div class="feat-item"><span class="feat-icon">🧠</span><div><div class="feat-title">商談メモ・議事録の自動ナレッジ化</div><p class="feat-desc">テキストから要点を抽出し、ナレッジDBへ蓄積。AIの下書きは承認フローを挟み、人の確認を経て正式登録します</p></div></div>
+      <div class="feat-item"><span class="feat-icon">🔎</span><div><div class="feat-title">診断結果への根拠表示</div><p class="feat-desc">どのナレッジ・どの事実を参照したかを明示し、出力の妥当性を確認できるようにします</p></div></div>
+      <div class="feat-item"><span class="feat-icon">📑</span><div><div class="feat-title">提案書の自動生成</div><p class="feat-desc">事実整理→5軸診断→改善提案→年間ロードマップ→90日プランをプレゼン可能な形で出力します</p></div></div>
+      <div class="feat-item"><span class="feat-icon">🔒</span><div><div class="feat-title">ローカル完結の構成</div><p class="feat-desc">お客様のPC上で稼働するため月額サーバー費用は不要。管理画面はローカル限定に制限し、意図しない外部送信が起きない設計にします</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section alt" id="pricing">
+  <div class="wrap">
+    <div class="sec-tag">PRICING</div>
+    <h2 class="sec-title">料金プラン</h2>
+    <p class="sec-lead">まず出力品質を確認してから導入をご判断いただけるよう、お試しプランをご用意しています。</p>
+    <div class="grid-3">
+      <div class="price-card a">
+        <span class="price-badge">LIGHT</span>
+        <div class="price-name">お試しプラン</div>
+        <div class="price-val"><strong>10</strong>万円〜</div>
+        <div class="price-cond">納期目安 2〜3週間</div>
+        <p class="price-desc">導入前にAI診断レポートの品質を確認したい方へ</p>
+        <ul class="price-list">
+          <li>ヒアリング・実データを基にしたAI診断レポート作成（1件）</li>
+          <li>5軸診断＋根拠付き、Googleスライドで納品</li>
+          <li>システムの構築・お渡しは含みません</li>
+        </ul>
+      </div>
+
+      <div class="price-card b">
+        <span class="price-recommend">基本プラン</span>
+        <span class="price-badge">STANDARD</span>
+        <div class="price-name">ダッシュボード構築</div>
+        <div class="price-val"><strong>30</strong>万円〜</div>
+        <div class="price-cond">納期目安 4〜6週間</div>
+        <p class="price-desc">AI診断・ナレッジ蓄積の仕組みを構築したい方へ</p>
+        <ul class="price-list">
+          <li>ダッシュボード本体＋AI診断・提案書自動生成</li>
+          <li>ヒアリングシートのデジタル化・GA4連携</li>
+          <li>商談メモ・議事録からのナレッジ自動抽出・蓄積</li>
+          <li>稼働はご自身のPC上で完結（月額サーバー費用なし）</li>
+        </ul>
+      </div>
+
+      <div class="price-card c">
+        <span class="price-badge">PREMIUM</span>
+        <div class="price-name">伴走支援の自動化</div>
+        <div class="price-val"><strong>要見積もり</strong></div>
+        <div class="price-cond">納期目安 8週間〜</div>
+        <p class="price-desc">伴走支援業務そのものを仕組み化したい方へ</p>
+        <ul class="price-list">
+          <li>定例MTG議事録の自動要約→アクション抽出</li>
+          <li>月次／週次レポートの自動生成・送付</li>
+          <li>KPI進捗の自動モニタリング＋アラート</li>
+          <li>複数クライアントの横断管理ダッシュボード</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="price-note">
+      ※ プレミアムは、ご希望の機能を選定したうえで工数を算出し個別にお見積もりします。<br>
+      ※ 継続コストはNotion（無料プラン可）とClaude（Anthropic）の利用料のみです。AWS等のサーバー導入は別途対応します。<br>
+      ※ 業種は問いません。マーケティングのほか、財務・組織開発など、コンサルティング業全般に応用できます。
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="sec-tag">FAQ</div>
+    <h2 class="sec-title">よくあるご質問</h2>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>マーケティング以外の業種でも対応できますか？</div>
+      <p class="faq-a">対応可能です。財務・組織開発・法務など、業種を問わず、ヒアリング項目やナレッジの分類基準を実際の診断軸に合わせて設計します。</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>自分の話し方・判断基準の癖まで再現されますか？</div>
+      <p class="faq-a">診断エンジンのプロンプトに文体ルールを組み込めます。実際の商談メモ・議事録をナレッジ化していくことで、アウトプットの精度を継続的に高めていきます。</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>ナレッジが誤って登録された場合はどうなりますか？</div>
+      <p class="faq-a">AIが下書きしたナレッジは承認フローを挟み、必ず人の目で確認してから正式登録される仕組みで構築します。誤登録があっても後から編集・除外が可能です。</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>既存の商談メモ・議事録が大量にあるのですが、まとめて取り込めますか？</div>
+      <p class="faq-a">可能です。数千件規模のテキストデータを一括でナレッジ化した実装実績があります。プレミアムプランの機能としてご相談ください。</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>月額のランニングコストはどれくらいかかりますか？</div>
+      <p class="faq-a">システム自体はお客様のPC上で稼働するため、月額サーバー費用は発生しません。Notion（無料プラン可）とClaude（Anthropic）の利用料（従量課金）のみが継続コストとなります。</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>機密情報の取り扱いは大丈夫ですか？</div>
+      <p class="faq-a">クライアントの商談メモなど機密性の高い情報を扱うため、必要に応じてNDA締結に対応します。外部公開しない管理画面はローカル限定でのアクセスに制限し、意図しない外部送信が起きない構成にします。</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>納品後、自分だけで運用を続けられますか？</div>
+      <p class="faq-a">操作方法のレクチャーと、ナレッジを追加登録していくための手順書をお渡しします。以後はご自身での運用が可能です（保守運用のご相談も別途承ります）。</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-tag">RELATED</div>
+    <h2 class="sec-title">関連するご支援メニュー</h2>
+    <div class="grid-3">
+      <a href="spot-development.html" class="next-card">
+        <div class="next-label">SPOT DEVELOPMENT</div>
+        <div class="next-title">Claude Code スポット開発支援</div>
+        <p class="next-desc">単発で1本つくって渡すところまで。まず1つ試したい方に。</p>
+      </a>
+      <a href="retainer.html" class="next-card">
+        <div class="next-label">MONTHLY RETAINER</div>
+        <div class="next-title">Claude Code 業務委託支援</div>
+        <p class="next-desc">構築後の改善・運用も含めて継続的にご支援します。</p>
+      </a>
+      <a href="index.html#results" class="next-card">
+        <div class="next-label">RESULTS</div>
+        <div class="next-title">その他の導入実績</div>
+        <p class="next-desc">経理・SEO・採用・CRMなど、他の自動化事例もご覧いただけます。</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="wrap">
+    <h2 class="cta-title">まずは気軽にご相談ください</h2>
+    <p class="cta-lead">「診断のこの部分を自動化したい」といったご相談だけでも大歓迎です。</p>
+    <div class="cta-cards">
+      <a href="mailto:fkdkazu@gmail.com" class="cta-card">
+        <div class="cta-card-icon">✉</div>
+        <div><div class="cta-card-label">メール</div><div class="cta-card-val">fkdkazu@gmail.com</div></div>
+      </a>
+      <a href="https://x.com/Marketer_kazuf" target="_blank" rel="noopener" class="cta-card">
+        <div class="cta-card-icon">𝕏</div>
+        <div><div class="cta-card-label">X（DM）</div><div class="cta-card-val">@Marketer_kazuf</div></div>
+      </a>
+      <a href="contact.html" class="cta-card">
+        <div class="cta-card-icon">🔗</div>
+        <div><div class="cta-card-label">お問い合わせフォーム</div><div class="cta-card-val">無料相談を申し込む</div></div>
+      </a>
+    </div>
+    <p class="cta-note">通常1営業日以内にご返信します</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    福田 和弘 / AI業務自動化支援 © 2026 ｜ <a href="index.html">トップページに戻る</a>
+  </div>
+</footer>
+
+</body>
+</html>
