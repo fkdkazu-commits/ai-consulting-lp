@@ -33,11 +33,20 @@ a { color: inherit; }
 .header-cta { background: #047857; color: #fff !important; padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none; }
 
 /* ── ヒーロー ── */
-.hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #06372c 0%, #0b6b53 52%, #063a2e 100%); padding: 84px 0 0; color: #fff; }
-.hero-visual { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
-.hero-visual img { width: 100%; height: auto; display: block; border-radius: 14px 14px 0 0; box-shadow: 0 -6px 60px rgba(0,0,0,0.35); background: #fff; }
-.hero-visual figcaption { font-size: 12px; color: rgba(255,255,255,0.6); padding: 10px 2px 18px; text-align: center; }
-.hero::before { content: ''; position: absolute; top: -140px; right: -120px; width: 580px; height: 580px; border-radius: 50%; background: radial-gradient(circle, rgba(94,234,212,0.20), transparent 65%); }
+/* 写真：分析画面。左からの濃緑グラデーションで文字の可読性を確保しつつ、右側に写真を見せる */
+.hero {
+  position: relative; overflow: hidden;
+  background: url('https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=1800&q=80') center/cover no-repeat;
+  padding: 84px 0 96px; color: #fff;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(100deg, rgba(5,50,40,0.97) 0%, rgba(8,84,66,0.92) 44%, rgba(6,58,46,0.62) 100%);
+}
+/* 本文中のスクリーンショット */
+.shot { margin: 0; }
+.shot img { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid #dcebe5; box-shadow: 0 10px 40px rgba(6,55,44,0.16); background: #fff; }
+.shot figcaption { font-size: 12.5px; color: #94a3b8; margin-top: 14px; text-align: center; line-height: 1.85; }
 .hero-inner { position: relative; z-index: 1; }
 .hero-tag { display: inline-block; font-size: 12px; font-weight: 700; color: #99f6e4; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.22); padding: 6px 20px; border-radius: 24px; margin-bottom: 26px; letter-spacing: 0.05em; }
 .hero h1 { font-size: clamp(28px, 5vw, 52px); font-weight: 900; line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 20px; }
@@ -179,10 +188,6 @@ a { color: inherit; }
       </div>
     </div>
   </div>
-  <figure class="hero-visual">
-    <img src="marketing-dashboard-screen.png" alt="マーケティングAIダッシュボードの診断画面。総合診断スコアと5軸（戦略・商品・設計・体制・データ）のスコア、診断スコア推移、AI診断コメント（今月の課題・原因・改善案）、参照した診断根拠ナレッジが表示されている">
-    <figcaption>実際の診断ダッシュボード画面 — 5軸のスコアと、AIが参照した根拠ナレッジまで確認できます（クライアント情報は伏せています）</figcaption>
-  </figure>
 </section>
 
 <!-- PROBLEM -->
@@ -278,8 +283,21 @@ a { color: inherit; }
   </div>
 </section>
 
+<!-- SCREEN -->
+<section class="section" id="screen">
+  <div class="wrap">
+    <div class="sec-tag">SCREEN</div>
+    <h2 class="sec-title">実際の診断画面（サンプル）</h2>
+    <p class="sec-lead">5軸のスコアとその推移、AIによる「今月の課題・原因・改善案」、GA4のチャネル別実績までを1画面で確認できます。診断は画面上の「AI診断実行」から実行し、結果はクライアントごとに蓄積されます。</p>
+    <figure class="shot">
+      <img src="marketing-dashboard-sample.png" alt="マーケティングAIダッシュボードの診断画面。総合診断スコア47と5軸（戦略55・商品65・設計42・体制35・データ38）のスコア、診断スコア推移の軸別内訳グラフ、AI診断コメント（今月の課題・原因・改善案）、軸別評価内容、GA4チャネル別セッション概要が表示されている" loading="lazy">
+      <figcaption>診断ダッシュボードの画面例。数値・コメントはサンプルです（クライアントを特定できる情報は含みません）</figcaption>
+    </figure>
+  </div>
+</section>
+
 <!-- FEATURES -->
-<section class="section">
+<section class="section alt">
   <div class="wrap">
     <div class="sec-tag">FEATURES</div>
     <h2 class="sec-title">構築する主な機能</h2>
@@ -296,7 +314,7 @@ a { color: inherit; }
 </section>
 
 <!-- PRICING -->
-<section class="section alt" id="pricing">
+<section class="section" id="pricing">
   <div class="wrap">
     <div class="sec-tag">PRICING</div>
     <h2 class="sec-title">料金プラン</h2>
@@ -351,7 +369,7 @@ a { color: inherit; }
 </section>
 
 <!-- FAQ -->
-<section class="section" id="faq">
+<section class="section alt" id="faq">
   <div class="wrap">
     <div class="sec-tag">FAQ</div>
     <h2 class="sec-title">よくあるご質問</h2>
@@ -387,7 +405,7 @@ a { color: inherit; }
 </section>
 
 <!-- NEXT -->
-<section class="section alt">
+<section class="section">
   <div class="wrap">
     <div class="sec-tag">RELATED</div>
     <h2 class="sec-title">関連するご支援メニュー</h2>
