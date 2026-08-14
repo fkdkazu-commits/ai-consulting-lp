@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ハンズフリーAI開発チーム（UNIA）｜話すだけでAIが開発を進める仕組み（福田和弘）</title>
-<meta name="description" content="iPhoneに話しかけるだけで、PC上のClaude Codeが調査・実装・テストまで実行し、結果が音声で返ってくる仕組み。司令塔のAIユナと実行担当のAIレンが複数のAIをひとつのチームとして動かします。">
-<meta property="og:title" content="ハンズフリーAI開発チーム（UNIA）｜話すだけで、AI開発チームを動かす">
-<meta property="og:description" content="画面もキーボードも触らず、音声だけでAI開発チームを指揮する。複数のAIが専門領域で連携して開発を進めます。">
+<title>ハンズフリーAI開発チーム（UNIA）｜会話しながらAIが開発を進める仕組み（福田和弘）</title>
+<meta name="description" content="iPhoneに相談しながら要件を固め、PC上のClaude Codeが調査・実装・テストまで実行。途中で判断が必要になれば会話で決めながら最後まで進められます。司令塔のAIユナと実行担当のAIレンが複数のAIをひとつのチームとして動かします。">
+<meta property="og:title" content="ハンズフリーAI開発チーム（UNIA）｜話しながら、AI開発チームとつくり上げる">
+<meta property="og:description" content="画面もキーボードも触らず、会話を往復させながらAI開発チームを動かす。相談・確認・方針変更まで音声で完結します。">
 <meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
@@ -93,6 +93,9 @@ a { color: inherit; }
 .flow-who { font-size: 11.5px; font-weight: 700; color: #6d4fe3; margin-bottom: 8px; }
 .flow-desc { font-size: 12.5px; color: #64748b; line-height: 1.8; }
 .flow-arrow { display: flex; align-items: center; color: #a78bfa; font-size: 22px; font-weight: 900; }
+.loop-note { display: flex; gap: 14px; align-items: flex-start; margin-top: 22px; background: #f3f0ff; border: 1px solid #cfc2ff; border-radius: 12px; padding: 20px 24px; font-size: 13.5px; color: #3d3a5c; line-height: 1.95; }
+.loop-icon { font-size: 22px; line-height: 1.4; flex-shrink: 0; }
+.loop-note strong { color: #4c33b8; }
 
 /* ── できること ── */
 .can-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
@@ -113,6 +116,9 @@ a { color: inherit; }
 .av-ai { background: #64748b; }
 .talk-bubble { background: #fff; border: 1px solid #e6e6f0; border-radius: 14px; padding: 14px 18px; font-size: 13.5px; line-height: 1.85; color: #2d3748; }
 .talk-row.right .talk-bubble { background: #eef0f9; }
+.talk-phase { font-size: 12.5px; font-weight: 900; color: #6d4fe3; letter-spacing: 0.02em; margin: 26px 0 14px; padding-left: 12px; border-left: 3px solid #a78bfa; }
+.talk-phase:first-child { margin-top: 0; }
+.talk-note { max-width: 780px; font-size: 12.5px; color: #94a3b8; line-height: 1.9; margin-top: 22px; }
 
 /* ── 技術構成 ── */
 .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
@@ -153,9 +159,12 @@ a { color: inherit; }
 .site-footer { background: #16193d; color: rgba(255,255,255,0.6); padding: 30px 0; font-size: 13px; text-align: center; }
 .site-footer a { color: #c9b8ff; text-decoration: none; }
 
+.sp-br { display: none; }
+
 @media (max-width: 860px) {
   .flow-arrow { display: none; }
   .header-links a:not(.header-cta) { display: none; }
+  .sp-br { display: inline; }
 }
 </style>
 </head>
@@ -179,10 +188,11 @@ a { color: inherit; }
 <section class="hero">
   <div class="wrap hero-inner">
     <div class="hero-tag">✦ 自社開発プロジェクト / UNIA（ユニア）</div>
-    <h1>話すだけで、<em>AI開発チーム</em>を動かす。</h1>
+    <h1>話しながら、<em>AI開発チーム</em>と<br class="sp-br">つくり上げる。</h1>
     <p class="hero-sub">
-      iPhoneに話しかけるだけで、PC上のClaude Codeが調査・実装・テストまで実行し、結果が音声で返ってきます。<br>
-      画面もキーボードも触らずに、開発を前に進めるための仕組みです。
+      iPhoneに相談しながら要件を固め、そのままPC上のClaude Codeが調査・実装・テストまで進めます。<br>
+      途中で判断が必要になれば、AIから確認が返ってくるので、<strong>会話で決めながら最後まで進められます</strong>。<br>
+      画面もキーボードも触りません。
     </p>
     <div class="hero-btns">
       <a href="contact.html" class="btn-primary">✉ 同じ仕組みを相談する</a>
@@ -203,8 +213,8 @@ a { color: inherit; }
     <div class="point-grid">
       <div class="point-card">
         <div class="point-icon">🎙</div>
-        <div class="point-title">完全ハンズフリー</div>
-        <p class="point-desc">話すだけで開発が進みます。画面を見ず、キーボードも触らずに、AIとの連続した会話だけで実装まで到達することを目指した設計です。</p>
+        <div class="point-title">会話が途切れない</div>
+        <p class="point-desc">一度指示して終わりではありません。相談して要件を固め、進行中の確認に答え、方針を変える——画面を見ずに<strong>何度でも会話を往復</strong>させながら実装まで到達することを目指した設計です。</p>
       </div>
       <div class="point-card">
         <div class="point-icon">🤝</div>
@@ -304,42 +314,50 @@ a { color: inherit; }
 <section class="section alt" id="flow">
   <div class="wrap">
     <div class="sec-tag">FLOW</div>
-    <h2 class="sec-title">声をかけてから、成果物が返るまで</h2>
-    <p class="sec-lead">あなたがするのは最初の一言だけ。あとはAIチームの中で処理が進み、結果が音声で返ってきます。</p>
+    <h2 class="sec-title">相談しながら、完成まで進める</h2>
+    <p class="sec-lead">一方通行の指示ではありません。曖昧なところはAIから質問が返り、途中で判断が必要になればその場で相談できます。決まったことから順に実装が進み、完成するまで会話が続きます。</p>
     <div class="flow">
       <div class="flow-card">
         <div class="flow-no">1</div>
-        <div class="flow-title">企画・相談</div>
-        <div class="flow-who">あなたの声</div>
-        <p class="flow-desc">やりたいことを話しかけます。整理されていない状態で構いません。</p>
+        <div class="flow-title">相談して固める</div>
+        <div class="flow-who">あなた ⇄ AIユナ</div>
+        <p class="flow-desc">やりたいことを話します。整理されていなくて構いません。<strong>足りない条件はAIから質問が返る</strong>ので、答えながら要件を具体化します。</p>
       </div>
       <div class="flow-arrow">›</div>
       <div class="flow-card">
         <div class="flow-no">2</div>
         <div class="flow-title">タスク分解・指示</div>
         <div class="flow-who">AIユナ</div>
-        <p class="flow-desc">内容を理解して作業単位に分解し、担当するAIを決めて指示を出します。</p>
+        <p class="flow-desc">固まった内容を作業単位に分解し、担当するAIを決めて指示を出します。</p>
       </div>
       <div class="flow-arrow">›</div>
       <div class="flow-card">
         <div class="flow-no">3</div>
-        <div class="flow-title">実行</div>
-        <div class="flow-who">AIチーム</div>
-        <p class="flow-desc">実装・レビュー・調査を各AIが並行して進めます。</p>
+        <div class="flow-title">実行・途中の確認</div>
+        <div class="flow-who">AIチーム ⇄ あなた</div>
+        <p class="flow-desc">実装・レビュー・調査を各AIが進めます。<strong>仕様の食い違いや判断が必要な点が出たら、その場で確認が返ってきます</strong>。</p>
       </div>
       <div class="flow-arrow">›</div>
       <div class="flow-card">
         <div class="flow-no">4</div>
         <div class="flow-title">レビュー・テスト</div>
         <div class="flow-who">AIレン</div>
-        <p class="flow-desc">技術面を確認し、テストとビルドまで通します。</p>
+        <p class="flow-desc">技術面を確認し、テストとビルドまで通します。失敗すれば原因を報告し、対処方針を相談します。</p>
       </div>
       <div class="flow-arrow">›</div>
       <div class="flow-card">
         <div class="flow-no">5</div>
-        <div class="flow-title">統合・報告</div>
-        <div class="flow-who">AIユナ</div>
-        <p class="flow-desc">結果をまとめ、音声で報告します。次の指示をまた声で返せます。</p>
+        <div class="flow-title">報告、そして次へ</div>
+        <div class="flow-who">AIユナ ⇄ あなた</div>
+        <p class="flow-desc">結果を音声で報告します。<strong>「ここを直して」「次はこれを」と続けて話せば、そのまま次の開発に入ります</strong>。</p>
+      </div>
+    </div>
+    <div class="loop-note">
+      <span class="loop-icon">🔁</span>
+      <div>
+        <strong>1〜5は一度きりではありません。</strong>
+        方針を変えたくなったら途中で割り込んで指示を出し直せますし、作業を止めることもできます。
+        会話の文脈は保持されるため、「さっきの件だけど」と話しかければ、前のやり取りを踏まえて続きから進みます。
       </div>
     </div>
   </div>
@@ -350,37 +368,73 @@ a { color: inherit; }
   <div class="wrap">
     <div class="sec-tag">CONVERSATION</div>
     <h2 class="sec-title">実際のやり取り</h2>
-    <p class="sec-lead">ひとこと話しかけるだけで、チーム内で作業が回り、完了が音声で返ってきます。</p>
+    <p class="sec-lead">ざっくりした要望から会話で要件を固め、途中で出てきた検討事項もその場で解消しながら最後まで進めます。以下は、ログイン機能を追加するときの一例です。</p>
     <div class="talk">
+      <div class="talk-phase">① 相談しながら要件を固める</div>
       <div class="talk-row">
         <div class="talk-who"><div class="talk-avatar av-you">👤</div>あなた</div>
-        <div class="talk-bubble">「ログイン機能を追加して」</div>
+        <div class="talk-bubble">「ログイン機能を追加したい」</div>
       </div>
       <div class="talk-row right">
         <div class="talk-who"><div class="talk-avatar av-yuna">🎧</div>AIユナ</div>
-        <div class="talk-bubble">「了解です！タスクを整理して、AIチームに指示しますね。」</div>
+        <div class="talk-bubble">「認証方式はメールとパスワードでいいですか？ SNSログインも入れますか？」</div>
+      </div>
+      <div class="talk-row">
+        <div class="talk-who"><div class="talk-avatar av-you">👤</div>あなた</div>
+        <div class="talk-bubble">「まずはメールだけでいい。あとからSNSも足せるようにしておいて」</div>
       </div>
       <div class="talk-row right">
+        <div class="talk-who"><div class="talk-avatar av-yuna">🎧</div>AIユナ</div>
+        <div class="talk-bubble">「わかりました。拡張しやすい形で設計します。AIチームに指示しますね」</div>
+      </div>
+
+      <div class="talk-phase">② 実装が進む</div>
+      <div class="talk-row right">
         <div class="talk-who"><div class="talk-avatar av-ren">🛠</div>AIレン</div>
-        <div class="talk-bubble">「認証処理の設計を確認します。Claude、実装をお願いします。」</div>
+        <div class="talk-bubble">「認証処理の設計を確認しました。Claude、実装をお願いします」</div>
       </div>
       <div class="talk-row right">
         <div class="talk-who"><div class="talk-avatar av-ai">🤖</div>Claude</div>
-        <div class="talk-bubble">「実装が完了しました。テストコードも作成しました。」</div>
+        <div class="talk-bubble">「実装が完了しました。テストコードも作成しました」</div>
       </div>
-      <div class="talk-row right">
-        <div class="talk-who"><div class="talk-avatar av-ai">🤖</div>Codex</div>
-        <div class="talk-bubble">「レビューが完了しました。軽微な改善点を修正します。」</div>
-      </div>
+
+      <div class="talk-phase">③ 途中で出た検討事項を、その場で解消する</div>
       <div class="talk-row right">
         <div class="talk-who"><div class="talk-avatar av-ren">🛠</div>AIレン</div>
-        <div class="talk-bubble">「修正完了、テストもOKです。ビルドして動作確認します。」</div>
+        <div class="talk-bubble">「テストが2件失敗しています。パスワードの最小文字数が、既存の設定と食い違っています」</div>
       </div>
       <div class="talk-row right">
         <div class="talk-who"><div class="talk-avatar av-yuna">🎧</div>AIユナ</div>
-        <div class="talk-bubble">「すべて完了しました！アプリをSimulatorで起動しますね。」</div>
+        <div class="talk-bubble">「8文字に統一しますか？ それとも既存の設定に合わせますか？」</div>
+      </div>
+      <div class="talk-row">
+        <div class="talk-who"><div class="talk-avatar av-you">👤</div>あなた</div>
+        <div class="talk-bubble">「8文字でいい。エラーメッセージも日本語にして」</div>
+      </div>
+      <div class="talk-row right">
+        <div class="talk-who"><div class="talk-avatar av-yuna">🎧</div>AIユナ</div>
+        <div class="talk-bubble">「承知しました。修正して再テストします」</div>
+      </div>
+      <div class="talk-row right">
+        <div class="talk-who"><div class="talk-avatar av-ren">🛠</div>AIレン</div>
+        <div class="talk-bubble">「修正完了、テストもすべて通りました。ビルドして動作確認します」</div>
+      </div>
+
+      <div class="talk-phase">④ 完了、そのまま次の指示へ</div>
+      <div class="talk-row right">
+        <div class="talk-who"><div class="talk-avatar av-yuna">🎧</div>AIユナ</div>
+        <div class="talk-bubble">「すべて完了しました。Simulatorで起動しますね。他に追加したいことはありますか？」</div>
+      </div>
+      <div class="talk-row">
+        <div class="talk-who"><div class="talk-avatar av-you">👤</div>あなた</div>
+        <div class="talk-bubble">「さっきのログイン画面に、パスワード再設定も足しておいて」</div>
+      </div>
+      <div class="talk-row right">
+        <div class="talk-who"><div class="talk-avatar av-yuna">🎧</div>AIユナ</div>
+        <div class="talk-bubble">「了解です。いまの実装を踏まえて、続けて対応します」</div>
       </div>
     </div>
+    <p class="talk-note">※ 作業中でも割り込んで方針を変えたり、止めたりできます。会話の文脈は保持されるため、「さっきの件」と話しかければ前のやり取りを踏まえて続きから進みます。</p>
   </div>
 </section>
 
@@ -388,8 +442,8 @@ a { color: inherit; }
 <section class="section alt">
   <div class="wrap">
     <div class="sec-tag">WHAT YOU CAN DO</div>
-    <h2 class="sec-title">声から進められること</h2>
-    <p class="sec-lead">設計から実装・テスト・公開まで、開発の各工程を音声から動かせます。</p>
+    <h2 class="sec-title">会話から進められること</h2>
+    <p class="sec-lead">設計から実装・テスト・公開まで、開発の各工程を会話で進められます。相談・修正指示・方針変更も、そのまま話しかけるだけです。</p>
     <div class="can-grid">
       <div class="can-item"><span class="can-icon">📱</span><div><div class="can-title">iOS / Androidアプリ開発</div><p class="can-desc">設計から実装・テスト・公開まで</p></div></div>
       <div class="can-item"><span class="can-icon">🌐</span><div><div class="can-title">Webサービス開発</div><p class="can-desc">フロントエンド・バックエンド・DB設計</p></div></div>
