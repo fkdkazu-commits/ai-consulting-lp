@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code スポット開発支援｜1万円〜の単発AIアプリ開発（福田和弘）</title>
+<meta name="description" content="Claude Codeを使ったAIアプリ開発を単発でご依頼いただけるサービス。環境構築・初期設定からアプリ構築・操作レクチャー、Cowork／AWSでの本番公開まで一貫対応。ベーシック10,000円（税抜）〜、納期1日〜。">
+<meta property="og:title" content="Claude Code スポット開発支援｜単発でAIアプリを1本つくる">
+<meta property="og:description" content="環境構築から業務課題の整理、AIアプリの構築・納品まで単発でご依頼いただけます。10,000円（税抜）〜／納期1日〜。">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1a2e; line-height: 1.8; }
+a { color: inherit; }
+
+/* ── 共通 ── */
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 72px 0; }
+.section.alt { background: #fff; }
+.sec-tag { font-size: 12px; font-weight: 700; color: #2563c9; letter-spacing: 0.14em; margin-bottom: 10px; }
+.sec-title { font-size: clamp(22px, 3.2vw, 34px); font-weight: 900; line-height: 1.35; margin-bottom: 14px; letter-spacing: -0.01em; }
+.sec-lead { font-size: 15px; color: #4a5568; line-height: 1.9; margin-bottom: 36px; }
+
+/* ── ヘッダー ── */
+.site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid #e2e8f0; }
+.header-inner { max-width: 1080px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo { font-size: 15px; font-weight: 900; text-decoration: none; }
+.logo span { font-size: 12px; font-weight: 600; color: #718096; }
+.header-links { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.header-links a { font-size: 13px; font-weight: 700; color: #4a5568; text-decoration: none; }
+.header-links a:hover { color: #2563c9; }
+.header-cta { background: #2563c9; color: #fff !important; padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none; }
+
+/* ── ヒーロー ── */
+.hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #123a7a 0%, #1b4a9c 50%, #102f63 100%); padding: 84px 0 96px; color: #fff; }
+.hero::before { content: ''; position: absolute; top: -120px; right: -120px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, rgba(106,168,255,0.22), transparent 65%); }
+.hero-inner { position: relative; z-index: 1; }
+.hero-tag { display: inline-block; font-size: 12px; font-weight: 700; color: #a8c8ff; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.22); padding: 6px 20px; border-radius: 24px; margin-bottom: 26px; letter-spacing: 0.05em; }
+.hero h1 { font-size: clamp(30px, 5.4vw, 58px); font-weight: 900; line-height: 1.28; letter-spacing: -0.02em; margin-bottom: 22px; }
+.hero h1 em { font-style: normal; color: #93c5fd; }
+.hero-sub { font-size: clamp(14px, 1.9vw, 18px); color: rgba(255,255,255,0.85); line-height: 1.95; margin-bottom: 34px; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 56px; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #f0a54a; color: #1a1a2e; font-size: 15px; font-weight: 700; padding: 15px 34px; border-radius: 999px; text-decoration: none; box-shadow: 0 8px 22px rgba(240,165,74,0.25); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.4); color: #fff; font-size: 15px; font-weight: 700; padding: 15px 30px; border-radius: 999px; text-decoration: none; }
+.hero-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; }
+.hero-num-val { font-size: 46px; font-weight: 900; color: #f0a54a; line-height: 1; margin-bottom: 8px; }
+.hero-num-val small { font-size: 20px; }
+.hero-num-label { font-size: 13px; color: rgba(255,255,255,0.72); }
+
+/* ── グリッド ── */
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+
+.problem-card { background: #eef2f9; border-radius: 14px; padding: 24px 22px; }
+.problem-card-head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+.problem-icon { font-size: 26px; line-height: 1; flex-shrink: 0; }
+.problem-title { font-size: 15px; font-weight: 700; line-height: 1.6; }
+.problem-desc { font-size: 13px; color: #64748b; line-height: 1.8; }
+
+/* ── 対応範囲 ── */
+.scope-card { background: #eef2f9; border-radius: 14px; padding: 28px 24px; }
+.scope-icon { font-size: 30px; line-height: 1; margin-bottom: 16px; }
+.scope-title { font-size: 16px; font-weight: 900; line-height: 1.6; margin-bottom: 12px; }
+.scope-desc { font-size: 13px; color: #64748b; line-height: 1.9; }
+
+/* ── 料金 ── */
+.price-card { border-radius: 16px; padding: 28px 24px; position: relative; }
+.price-card.a { background: #eef2f9; border: 1px solid #d7dfeb; }
+.price-card.b { background: #eaf1fd; border: 2px solid #2563c9; }
+.price-card.c { background: #fdf1e0; border: 1px solid #f0c99a; }
+.price-badge { display: inline-block; color: #fff; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: 8px; margin-bottom: 16px; }
+.price-card.a .price-badge { background: #1e3a5f; }
+.price-card.b .price-badge { background: #2563c9; }
+.price-card.c .price-badge { background: #c05621; }
+.price-recommend { position: absolute; top: -14px; right: 20px; background: #2563c9; color: #fff; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: 8px; }
+.price-name { font-size: 18px; font-weight: 900; line-height: 1.5; margin-bottom: 16px; }
+.price-val { font-size: 15px; font-weight: 700; color: #4a5568; margin-bottom: 4px; }
+.price-val strong { font-size: 34px; font-weight: 900; color: #1a1a2e; letter-spacing: -0.01em; }
+.price-card.b .price-val strong { color: #2563c9; }
+.price-card.c .price-val strong { color: #c05621; }
+.price-cond { font-size: 12px; color: #718096; margin-bottom: 18px; }
+.price-desc { font-size: 13px; color: #4a5568; line-height: 1.85; margin-bottom: 16px; }
+.price-list { list-style: none; }
+.price-list li { font-size: 13.5px; color: #374151; line-height: 2.1; padding-left: 20px; position: relative; }
+.price-list li::before { content: '✓'; position: absolute; left: 0; color: #2563c9; font-weight: 900; }
+.price-note { font-size: 12px; color: #94a3b8; margin-top: 22px; }
+
+/* ── ステップ ── */
+.steps { display: flex; align-items: stretch; gap: 10px; flex-wrap: wrap; }
+.step-card { flex: 1 1 190px; background: #eef2f9; border-radius: 14px; padding: 26px 18px; text-align: center; }
+.step-no { width: 46px; height: 46px; border-radius: 50%; background: #2563c9; color: #fff; font-size: 20px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+.step-title { font-size: 16px; font-weight: 900; margin-bottom: 10px; }
+.step-desc { font-size: 13px; color: #64748b; line-height: 1.8; }
+.step-arrow { display: flex; align-items: center; color: #2563c9; font-size: 22px; font-weight: 900; }
+.step-note { margin-top: 22px; background: #16304f; color: #fff; border-radius: 12px; padding: 20px 26px; font-size: 14px; line-height: 1.8; }
+
+/* ── FAQ ── */
+.faq-item { background: #eef2f9; border-radius: 12px; padding: 22px 24px; margin-bottom: 14px; }
+.faq-q { font-size: 15px; font-weight: 900; margin-bottom: 10px; display: flex; gap: 10px; }
+.faq-q span { color: #2563c9; }
+.faq-a { font-size: 13.5px; color: #64748b; line-height: 1.95; padding-left: 26px; }
+
+/* ── 次のステップ ── */
+.next-card { background: #eef2f9; border-radius: 14px; padding: 24px 26px; text-decoration: none; display: block; }
+.next-label { font-size: 11px; font-weight: 700; color: #718096; letter-spacing: 0.1em; margin-bottom: 8px; }
+.next-title { font-size: 17px; font-weight: 900; margin-bottom: 8px; }
+.next-desc { font-size: 13px; color: #64748b; line-height: 1.85; }
+
+/* ── プロフィール ── */
+.profile-section { background: linear-gradient(135deg, #142c4f 0%, #1b3a63 50%, #12294a 100%); color: #fff; padding: 72px 0; }
+.profile-section .sec-tag { color: #90cdf4; }
+.profile-layout { display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: start; }
+.profile-photo { width: 100%; border-radius: 12px; display: block; }
+.profile-name { font-size: 30px; font-weight: 900; margin-bottom: 8px; }
+.profile-role { font-size: 14px; color: #90cdf4; margin-bottom: 20px; }
+.profile-bio { font-size: 14.5px; color: rgba(255,255,255,0.85); line-height: 2; margin-bottom: 24px; }
+.tags { display: flex; flex-wrap: wrap; gap: 10px; }
+.tag { border: 1px solid rgba(255,255,255,0.3); border-radius: 999px; padding: 6px 18px; font-size: 13px; color: rgba(255,255,255,0.9); }
+
+/* ── CTA ── */
+.cta-section { background: #fff; padding: 72px 0; text-align: center; }
+.cta-title { font-size: clamp(22px, 3.4vw, 34px); font-weight: 900; margin-bottom: 12px; }
+.cta-lead { font-size: 15px; color: #4a5568; margin-bottom: 34px; }
+.cta-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 30px; }
+.cta-card { background: #eef2f9; border-radius: 14px; padding: 22px; display: flex; align-items: center; gap: 16px; text-align: left; text-decoration: none; }
+.cta-card-icon { width: 48px; height: 48px; border-radius: 50%; background: #f0a54a; color: #fff; font-size: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.cta-card-label { font-size: 12px; color: #718096; margin-bottom: 2px; }
+.cta-card-val { font-size: 15px; font-weight: 700; word-break: break-all; }
+.cta-note { font-size: 13px; color: #94a3b8; }
+
+/* ── フッター ── */
+.site-footer { background: #16304f; color: rgba(255,255,255,0.6); padding: 30px 0; font-size: 13px; text-align: center; }
+.site-footer a { color: #90cdf4; text-decoration: none; }
+
+@media (max-width: 860px) {
+  .profile-layout { grid-template-columns: 1fr; }
+  .profile-photo { max-width: 200px; }
+  .step-arrow { display: none; }
+  .header-links a:not(.header-cta) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">福田和弘<span> | AI業務自動化</span></a>
+    <div class="header-links">
+      <a href="index.html">トップ</a>
+      <a href="#pricing">料金プラン</a>
+      <a href="#steps">進め方</a>
+      <a href="#faq">よくある質問</a>
+      <a href="contact.html" class="header-cta">無料相談</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-tag">✦ 単発でのAIアプリ開発 / Claude Code</div>
+    <h1>Claude Code <em>スポット開発支援</em></h1>
+    <p class="hero-sub">
+      Claude Codeを使ったAIアプリ開発を、単発でご依頼いただけるサービスです。<br>
+      環境構築・ツール作成・操作レクチャーまで一貫して対応します。
+    </p>
+    <div class="hero-btns">
+      <a href="contact.html" class="btn-primary">✉ まずは無料相談</a>
+      <a href="#pricing" class="btn-ghost">料金プランを見る</a>
+    </div>
+    <div class="hero-nums">
+      <div>
+        <div class="hero-num-val">¥10,000<small>〜</small></div>
+        <div class="hero-num-label">税抜／ベーシックプラン</div>
+      </div>
+      <div>
+        <div class="hero-num-val">1<small>日〜</small></div>
+        <div class="hero-num-label">最短の納期</div>
+      </div>
+      <div>
+        <div class="hero-num-val">20<small>本+</small></div>
+        <div class="hero-num-label">自社・支援先への導入実績</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-tag">PROBLEM</div>
+    <h2 class="sec-title">こんな段階の方に向いています</h2>
+    <p class="sec-lead">継続契約の前に、まず1つだけ試してみたい——そんなご相談を単発でお引き受けします。</p>
+    <div class="grid-3">
+      <div class="problem-card">
+        <div class="problem-card-head">
+          <span class="problem-icon">🧭</span>
+          <div class="problem-title">Claude Codeを入れたいが、<br>環境構築でつまずいている</div>
+        </div>
+        <p class="problem-desc">インストール・初期設定・セキュリティ設定まで、実際に業務で使える状態にして
+          お渡しします。設定の意味もあわせてご説明します。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-head">
+          <span class="problem-icon">🛠️</span>
+          <div class="problem-title">つくりたいツールが<br>1つだけ決まっている</div>
+        </div>
+        <p class="problem-desc">「この作業を自動化したい」が明確なら、単発の開発が向いています。
+          課題整理から設計・構築まで対応し、1本つくってお渡しします。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-head">
+          <span class="problem-icon">🚀</span>
+          <div class="problem-title">つくったものを<br>他の人にも使わせたい</div>
+        </div>
+        <p class="problem-desc">自分の手元で動くだけでなく、Cowork や AWS 上に構築して、
+          社内メンバーやお客様が使える状態まで仕上げることもできます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCOPE -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-tag">SCOPE</div>
+    <h2 class="sec-title">対応する範囲</h2>
+    <p class="sec-lead">プランによって、関わる工程の深さが変わります。</p>
+    <div class="grid-3">
+      <div class="scope-card">
+        <div class="scope-icon">🖥️</div>
+        <div class="scope-title">Claude Code 導入環境について</div>
+        <p class="scope-desc">貴社PCへのClaude Codeインストール・初期設定・動作確認まで対応します。
+          既存の業務環境にそのまま組み込めるよう丁寧にご案内します。</p>
+      </div>
+      <div class="scope-card">
+        <div class="scope-icon">⚙️</div>
+        <div class="scope-title">アプリ構築について</div>
+        <p class="scope-desc">ベーシックは基本的なAIアプリの作り方をレクチャー、スタンダードはご希望のAIアプリを1本構築、
+          プレミアムはCoworkまたはAWSで本番公開まで対応します。</p>
+      </div>
+      <div class="scope-card">
+        <div class="scope-icon">👥</div>
+        <div class="scope-title">複数メンバーへのサポートについて</div>
+        <p class="scope-desc">チーム全体への展開・複数人サポートも別途ご相談いただけます。
+          お気軽にお声がけください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section alt" id="pricing">
+  <div class="wrap">
+    <div class="sec-tag">PRICING</div>
+    <h2 class="sec-title">料金プラン</h2>
+    <p class="sec-lead">課題の規模や予算に合わせてお選びください。表示価格はすべて税抜です。</p>
+
+    <div class="grid-3">
+      <div class="price-card a">
+        <span class="price-badge">BASIC</span>
+        <div class="price-name">ベーシック</div>
+        <div class="price-val">¥<strong>10,000</strong></div>
+        <div class="price-cond">税抜 ／ 納期 1日〜</div>
+        <p class="price-desc">AIで業務効率化・自動化を始めたい方に（レクチャー）</p>
+        <ul class="price-list">
+          <li>Claude Code環境構築＋初期設定（セキュリティ設定含む）</li>
+          <li>簡単なAIアプリ構築方法レクチャー</li>
+        </ul>
+      </div>
+
+      <div class="price-card b">
+        <span class="price-recommend">人気 No.1</span>
+        <span class="price-badge">STANDARD</span>
+        <div class="price-name">スタンダード</div>
+        <div class="price-val">¥<strong>30,000</strong>〜</div>
+        <div class="price-cond">税抜 ／ 納期 10日〜</div>
+        <p class="price-desc">AIを活用した業務改善を具体的に進めたい方に（設計＋構築）</p>
+        <ul class="price-list">
+          <li>環境構築</li>
+          <li>現状業務の課題整理・設計</li>
+          <li>ご希望のAIアプリ構築（1本）</li>
+        </ul>
+      </div>
+
+      <div class="price-card c">
+        <span class="price-badge">PREMIUM</span>
+        <div class="price-name">プレミアム</div>
+        <div class="price-val">¥<strong>50,000</strong>〜</div>
+        <div class="price-cond">税抜 ／ 納期 21日〜</div>
+        <p class="price-desc">開発アプリを他者が使える状態にしたい方に（実装・納品支援）</p>
+        <ul class="price-list">
+          <li>スタンダードの内容</li>
+          <li>納品方法に応じて構築（Cowork or AWS）</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="price-note">
+      ※ スタンダード・プレミアムは内容に応じてお見積りいたします。<br>
+      ※ 外部API利用料（OpenAI・Anthropic等）は別途実費となります。<br>
+      ※ Cowork／AWSでの本番公開については、<a href="index.html#aws-delivery" style="color:#2563c9;font-weight:700">納品環境と費用の考え方</a>もあわせてご覧ください。
+    </p>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="section" id="steps">
+  <div class="wrap">
+    <div class="sec-tag">FLOW</div>
+    <h2 class="sec-title">ご依頼の進め方</h2>
+    <p class="sec-lead">お問い合わせから納品まで、次の流れで進めます。</p>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-no">1</div>
+        <div class="step-title">無料相談</div>
+        <p class="step-desc">やりたいこと・お困りごとをお聞かせください。アイデア段階でも構いません。</p>
+      </div>
+      <div class="step-arrow">›</div>
+      <div class="step-card">
+        <div class="step-no">2</div>
+        <div class="step-title">プラン・お見積り</div>
+        <p class="step-desc">ご要望に合うプランと、納期・費用をご提示します。ここまで費用はかかりません。</p>
+      </div>
+      <div class="step-arrow">›</div>
+      <div class="step-card">
+        <div class="step-no">3</div>
+        <div class="step-title">環境構築・開発</div>
+        <p class="step-desc">環境の準備から、業務課題の整理、アプリの構築までを進めます。</p>
+      </div>
+      <div class="step-arrow">›</div>
+      <div class="step-card">
+        <div class="step-no">4</div>
+        <div class="step-title">納品・レクチャー</div>
+        <p class="step-desc">実際に動かしながら操作をご説明します。ご希望に応じて本番環境へ公開します。</p>
+      </div>
+    </div>
+    <div class="step-note">
+      単発でのご依頼のあと、継続的な開発・改善が必要になった場合は
+      <a href="retainer.html" style="color:#90cdf4;font-weight:700">Claude Code 業務委託支援（月額）</a>へ移行いただくこともできます。
+      まず1本つくってみて、相性を確かめてからで構いません。
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section alt" id="faq">
+  <div class="wrap">
+    <div class="sec-tag">FAQ</div>
+    <h2 class="sec-title">よくあるご質問</h2>
+    <p class="sec-lead"></p>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>プログラミングの知識がなくても依頼できますか？</div>
+      <p class="faq-a">はい。環境構築・初期設定はこちらで対応し、操作方法もあわせてご説明します。
+        ベーシックプランは「これから始めたい方」を想定した内容になっています。</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>どのプランを選べばよいか分かりません。</div>
+      <p class="faq-a">まずは無料相談でやりたいことをお聞かせください。内容をうかがったうえで、
+        適したプランと納期・費用をご提示します。ご相談だけでも構いません。</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>費用は表示価格だけですか？</div>
+      <p class="faq-a">表示価格はすべて税抜です。スタンダード・プレミアムは内容に応じたお見積りとなります。
+        また、OpenAI・Anthropic等の外部API利用料は別途実費となります。</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>つくったツールを社内の他のメンバーにも使わせたいのですが。</div>
+      <p class="faq-a">プレミアムプランで、CoworkまたはAWS上に構築して本番公開まで対応できます。
+        チーム全体への展開・複数人サポートも別途ご相談いただけます。</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>納品後の改善もお願いできますか？</div>
+      <p class="faq-a">継続的な開発・改善・技術相談が必要な場合は、月額の
+        <a href="retainer.html" style="color:#2563c9;font-weight:700">業務委託支援</a>をご用意しています。
+        単発でお試しいただいたあとに移行いただくケースもあります。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 他のサービス -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-tag">OTHER SERVICES</div>
+    <h2 class="sec-title">他のご支援メニュー</h2>
+    <p class="sec-lead">単発ではなく継続的な支援や、より大きな規模のDXをお考えの場合はこちらをご覧ください。</p>
+    <div class="grid-3">
+      <a href="retainer.html" class="next-card">
+        <div class="next-label">MONTHLY RETAINER</div>
+        <div class="next-title">Claude Code 業務委託支援</div>
+        <p class="next-desc">月額5万円〜。AIエンジニアとAI顧問、両方の役割で継続的にご支援します。</p>
+      </a>
+      <a href="dx-starter-pack.html" class="next-card">
+        <div class="next-label">PARTNER SERVICE</div>
+        <div class="next-title">DXスターターパック</div>
+        <p class="next-desc">FAX・紙・Excel業務を「1業務だけ」小さくシステム化。専門家チームで対応します。</p>
+      </a>
+      <a href="https://fkdkazu-commits.github.io/mentor-lp/" target="_blank" rel="noopener" class="next-card">
+        <div class="next-label">MENTORING</div>
+        <div class="next-title">Claude Code 個別家庭教師</div>
+        <p class="next-desc">月額3,000円。環境構築から副業・案件化まで1対1でサポートします。</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section class="profile-section" id="profile">
+  <div class="wrap">
+    <div class="sec-tag">PROFILE</div>
+    <div class="profile-layout">
+      <img src="profile.png" alt="福田 和弘" class="profile-photo">
+      <div>
+        <div class="profile-name">福田 和弘</div>
+        <div class="profile-role">AI/DX推進支援 ・ SEO全般 ・ 法人サポート／個別サポート</div>
+        <p class="profile-bio">
+          IT企業にてマネジメント職を20年以上経験し、DX事業の立ち上げを担当。現在はClaude CodeをはじめとしたAIツールを活用した業務自動化支援を行っています。自社業務で実際に運用している仕組みをベースに、中小企業・個人事業主向けに実装。SEO記事自動化では約80%のコスト削減を実現するなど、現場で動く仕組みづくりを得意としています。
+        </p>
+        <div class="tags">
+          <span class="tag">Claude Code</span>
+          <span class="tag">ChatGPT</span>
+          <span class="tag">Cowork</span>
+          <span class="tag">AWS</span>
+          <span class="tag">業務自動化</span>
+          <span class="tag">マーケティング</span>
+          <span class="tag">DX推進</span>
+          <span class="tag">SEO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="wrap">
+    <h2 class="cta-title">まずは気軽にご相談ください</h2>
+    <p class="cta-lead">「こんなことを自動化したい」というアイデアだけでも大歓迎です。</p>
+    <div class="cta-cards">
+      <a href="mailto:fkdkazu@gmail.com" class="cta-card">
+        <div class="cta-card-icon">✉</div>
+        <div>
+          <div class="cta-card-label">メール</div>
+          <div class="cta-card-val">fkdkazu@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://x.com/Marketer_kazuf" target="_blank" rel="noopener" class="cta-card">
+        <div class="cta-card-icon">𝕏</div>
+        <div>
+          <div class="cta-card-label">X（DM）</div>
+          <div class="cta-card-val">@Marketer_kazuf</div>
+        </div>
+      </a>
+      <a href="contact.html" class="cta-card">
+        <div class="cta-card-icon">🔗</div>
+        <div>
+          <div class="cta-card-label">お問い合わせフォーム</div>
+          <div class="cta-card-val">無料相談を申し込む</div>
+        </div>
+      </a>
+    </div>
+    <p class="cta-note">通常1営業日以内にご返信します</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    福田 和弘 / AI業務自動化支援 © 2026 ｜ <a href="index.html">トップページに戻る</a>
+  </div>
+</footer>
+
+</body>
+</html>
