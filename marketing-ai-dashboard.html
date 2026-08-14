@@ -33,7 +33,10 @@ a { color: inherit; }
 .header-cta { background: #047857; color: #fff !important; padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none; }
 
 /* ── ヒーロー ── */
-.hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #06372c 0%, #0b6b53 52%, #063a2e 100%); padding: 84px 0 96px; color: #fff; }
+.hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #06372c 0%, #0b6b53 52%, #063a2e 100%); padding: 84px 0 0; color: #fff; }
+.hero-visual { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.hero-visual img { width: 100%; height: auto; display: block; border-radius: 14px 14px 0 0; box-shadow: 0 -6px 60px rgba(0,0,0,0.35); background: #fff; }
+.hero-visual figcaption { font-size: 12px; color: rgba(255,255,255,0.6); padding: 10px 2px 18px; text-align: center; }
 .hero::before { content: ''; position: absolute; top: -140px; right: -120px; width: 580px; height: 580px; border-radius: 50%; background: radial-gradient(circle, rgba(94,234,212,0.20), transparent 65%); }
 .hero-inner { position: relative; z-index: 1; }
 .hero-tag { display: inline-block; font-size: 12px; font-weight: 700; color: #99f6e4; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.22); padding: 6px 20px; border-radius: 24px; margin-bottom: 26px; letter-spacing: 0.05em; }
@@ -176,6 +179,10 @@ a { color: inherit; }
       </div>
     </div>
   </div>
+  <figure class="hero-visual">
+    <img src="marketing-dashboard-screen.png" alt="マーケティングAIダッシュボードの診断画面。総合診断スコアと5軸（戦略・商品・設計・体制・データ）のスコア、診断スコア推移、AI診断コメント（今月の課題・原因・改善案）、参照した診断根拠ナレッジが表示されている">
+    <figcaption>実際の診断ダッシュボード画面 — 5軸のスコアと、AIが参照した根拠ナレッジまで確認できます（クライアント情報は伏せています）</figcaption>
+  </figure>
 </section>
 
 <!-- PROBLEM -->
