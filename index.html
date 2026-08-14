@@ -393,7 +393,9 @@
   /* ===== サービスカード（画像クリックで詳細ページへ） ===== */
   .svc-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));  /* 4枚を2×2で見せる */
+    /* 4枚を2×2で見せる。min() を挟まないと、画面幅が400px未満のときに
+       400pxが下限として効いてしまい、横にはみ出す */
+    grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
     gap: 44px 32px;
     margin-top: 52px;   /* リード文と詰まって見えないよう間隔をとる */
   }
@@ -1091,8 +1093,8 @@
     .features-grid { grid-template-columns: 1fr; }
     .pain-grid { grid-template-columns: 1fr; }
     .results-grid { grid-template-columns: 1fr; }
-  }
-
+    .svc-grid { grid-template-columns: 1fr; gap: 34px; margin-top: 36px; }
+    .svc-meta { gap: 8px; }
   }
 </style>
 <script type="text/javascript">
@@ -1434,7 +1436,7 @@
   <div class="section-inner">
     <div class="section-tag">SERVICES</div>
     <h2 class="section-title">ご支援サービス</h2>
-    <p class="section-lead">単発の開発から継続的な業務委託、チームでのDX支援、個別指導まで。ご状況に合わせて4つのサービスをご用意しています。<span style="white-space:nowrap">画像をクリックすると詳細ページへ移動します。</span></p>
+    <p class="section-lead">単発の開発から継続的な業務委託、チームでのDX支援、個別指導まで。ご状況に合わせて4つのサービスをご用意しています。画像をクリックすると詳細ページへ移動します。</p>
 
     <div class="svc-grid">
       <a href="spot-development.html" class="svc-card">
