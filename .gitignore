@@ -3,6 +3,7 @@ _tmp_*.html
 _ref_*.html
 *-preview.html
 *.bak
+*.bak[0-9]
 
 # 不採用となった色相回転版サムネイル（アイソメトリック版に差し替え済み）
 _recolor/
