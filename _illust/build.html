@@ -45,9 +45,10 @@ function card(cfg) {
   <g font-family="Noto Sans JP">
     <rect x="44" y="46" width="${badge.length * 20 + 34}" height="38" rx="19" fill="#fff" fill-opacity="0.16" stroke="#fff" stroke-opacity="0.5"/>
     <text x="${44 + (badge.length * 20 + 34) / 2}" y="71" font-size="17" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="1">${badge}</text>
-    <text x="44" y="${t2 ? 162 : 186}" font-size="${cfg.size || 44}" font-weight="900" fill="#fff" letter-spacing="-0.5">${t1}</text>
-    ${t2 ? `<text x="44" y="216" font-size="${cfg.size2 || 40}" font-weight="900" fill="#fff" letter-spacing="-0.5">${t2}</text>` : ''}
-    ${desc.map((l, i) => `<text x="46" y="${288 + i * 33}" font-size="16.5" font-weight="500" fill="#fff" fill-opacity="0.88">${l}</text>`).join('\n    ')}
+    <!-- 説明文は入れない。カード下のHTMLタイトルと重複するうえ、
+         カード表示（約350px幅＝約48%縮小）では小さすぎて読めないため -->
+    <text x="44" y="${t2 ? 208 : 244}" font-size="${cfg.size || 44}" font-weight="900" fill="#fff" letter-spacing="-0.5">${t1}</text>
+    ${t2 ? `<text x="44" y="266" font-size="${cfg.size2 || 40}" font-weight="900" fill="#fff" letter-spacing="-0.5">${t2}</text>` : ''}
   </g>
 </svg>`;
 }
