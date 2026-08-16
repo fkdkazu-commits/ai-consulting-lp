@@ -99,6 +99,29 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdro
 .res-more{margin-top:34px;text-align:center}
 .res-more a{font-size:14.5px;font-weight:700;color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:3px}
 
+/* 新着情報 */
+.news-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:44px}
+.news-head h2{margin-bottom:4px}
+.news-head-sub{font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--gray)}
+.news-more{display:flex;align-items:center;gap:12px;background:none;border:0;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:700;color:var(--ink);padding:0}
+.news-more-circle{width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;transition:background .2s,transform .2s}
+.news-more:hover .news-more-circle{background:var(--accent)}
+.news-more.is-open .news-more-circle{transform:rotate(-90deg)}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(290px,100%),1fr));gap:36px 26px}
+.news-card{display:block;text-decoration:none;color:inherit}
+.news-card.is-hidden{display:none}
+.news-thumb-img{width:100%;height:auto;aspect-ratio:720/514;object-fit:cover;border-radius:4px;display:block;background:var(--ink);transition:opacity .2s}
+.news-card:hover .news-thumb-img{opacity:.92}
+/* 画像のないお知らせ用（単色。グラデーションは使わない） */
+.news-thumb{position:relative;aspect-ratio:720/514;border-radius:4px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:22px 24px;color:#fff}
+.news-thumb--case{background:var(--ink)}
+.news-thumb--new{background:#8a3d12}
+.news-thumb--update{background:#0f5d55}
+.news-thumb-tag{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.06em;padding:4px 12px;border:1px solid rgba(255,255,255,.4);border-radius:3px;margin-bottom:14px}
+.news-thumb-text{font-size:20px;font-weight:900;line-height:1.5;letter-spacing:-.01em}
+.news-card-date{display:block;font-size:12.5px;color:var(--gray);font-weight:700;margin:16px 0 8px}
+.news-card-title{font-size:15.5px;font-weight:700;line-height:1.7}
+
 /* 相談（濃色・独立） */
 .trial{background:var(--ink-2);color:#fff;padding:88px 0}
 .trial h2{margin-bottom:18px}
@@ -323,6 +346,123 @@ footer a{color:#7fb2f0;text-decoration:none}
   </div>
 </section>
 
+<!-- NEWS -->
+<section class="sec tint" id="news">
+  <div class="wrap">
+
+    <div class="news-head">
+      <div class="news-head-main">
+        <h2>お知らせ</h2>
+        <div class="news-head-sub">News</div>
+      </div>
+      <button type="button" class="news-more" id="newsMore" aria-expanded="false" aria-controls="newsGrid">
+        <span class="news-more-label">すべて見る</span>
+        <span class="news-more-circle" aria-hidden="true">→</span>
+      </button>
+    </div>
+
+    <div class="news-grid" id="newsGrid">
+
+      <a href="hands-free-dev.html" class="news-card">
+        <img class="news-thumb-img" src="news-unia.png" alt="ハンズフリーAI開発チーム（UNIA）" loading="lazy" width="720" height="514">
+        <span class="news-card-date">2026.8.15</span>
+        <div class="news-card-title">ハンズフリーAI開発チーム（UNIA）の紹介ページを公開しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/crm-initial-build.html" target="_blank" rel="noopener" class="news-card">
+        <img class="news-thumb-img" src="news-crm.png" alt="クラウドCRM 初期構築（BtoB商社）" loading="lazy" width="720" height="514">
+        <span class="news-card-date">2026.7.29</span>
+        <div class="news-card-title">クラウドCRM 初期構築（BtoB商社）の実績ページを公開しました</div>
+      </a>
+
+      <a href="retainer.html" class="news-card">
+        <img class="news-thumb-img" src="news-retainer.png" alt="Claude Code 業務委託支援" loading="lazy" width="720" height="514">
+        <span class="news-card-date">2026.7.27</span>
+        <div class="news-card-title">Claude Code 業務委託支援のサービス詳細ページを公開しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/youtube-note-generator.html" target="_blank" rel="noopener" class="news-card">
+        <img class="news-thumb-img" src="news-youtube-note.png" alt="YouTube → note 記事自動生成" loading="lazy" width="720" height="514">
+        <span class="news-card-date">2026.7.24</span>
+        <div class="news-card-title">YouTube → note 記事自動生成ツールの実績ページを公開しました</div>
+      </a>
+
+      <a href="retainer.html" class="news-card">
+        <img class="news-thumb-img" src="news-referral.png" alt="月額顧問契約・ご紹介還元20%" loading="lazy" width="720" height="514">
+        <span class="news-card-date">2026.7.15</span>
+        <div class="news-card-title">Claude Code 業務委託支援（月額顧問契約・ご紹介キャッシュバック制度あり）を開始しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/wp-auto-insert.html" target="_blank" rel="noopener" class="news-card">
+        <img class="news-thumb-img" src="news-wp-link.png" alt="WordPress 内部リンク自動挿入" loading="lazy" width="720" height="514">
+        <span class="news-card-date">2026.7.12</span>
+        <div class="news-card-title">WordPress内部リンク自動挿入ツールの実績ページを公開しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/hearing-mock.html" target="_blank" rel="noopener" class="news-card is-hidden">
+        <img class="news-thumb-img" src="news-hearing-mock.png" alt="AIヒアリング → モックアップ自動生成" loading="lazy" width="720" height="514">
+        <span class="news-card-date">2026.7.12</span>
+        <div class="news-card-title">AIヒアリング〜モックアップ自動生成ツールの実績ページを公開しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/internal-link-agent.html" target="_blank" rel="noopener" class="news-card is-hidden">
+        <div class="news-thumb news-thumb--case">
+          <span class="news-thumb-tag">実績公開</span>
+          <span class="news-thumb-text">内部リンク構築<br>AIエージェント</span>
+        </div>
+        <span class="news-card-date">2026.6.7</span>
+        <div class="news-card-title">内部リンク構築AIエージェントの実績ページを公開しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/mentor-lp/" target="_blank" rel="noopener" class="news-card is-hidden">
+        <div class="news-thumb news-thumb--new">
+          <span class="news-thumb-tag">新着</span>
+          <span class="news-thumb-text">Claude Code<br>個別家庭教師</span>
+        </div>
+        <span class="news-card-date">2026.5.18</span>
+        <div class="news-card-title">Claude Code 個別家庭教師（月額3,000円・完全初心者歓迎）を開始しました</div>
+      </a>
+
+      <a href="dx-starter-pack.html" class="news-card is-hidden">
+        <div class="news-thumb news-thumb--new">
+          <span class="news-thumb-tag">新着</span>
+          <span class="news-thumb-text">中小企業向け<br>DXスターターパック</span>
+        </div>
+        <span class="news-card-date">2026.5.5</span>
+        <div class="news-card-title">中小企業向け DXスターターパック（FAX・Excel業務のシステム化）を公開しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/screening.html" target="_blank" rel="noopener" class="news-card is-hidden">
+        <div class="news-thumb news-thumb--case">
+          <span class="news-thumb-tag">実績公開</span>
+          <span class="news-thumb-text">採用支援AI Phase2<br>スクリーニング自動採点</span>
+        </div>
+        <span class="news-card-date">2026.4.25</span>
+        <div class="news-card-title">採用支援AI Phase2（スクリーニング自動採点）の詳細ページを公開しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/recruitment-tool.html" target="_blank" rel="noopener" class="news-card is-hidden">
+        <div class="news-thumb news-thumb--case">
+          <span class="news-thumb-tag">実績公開</span>
+          <span class="news-thumb-text">採用支援AI Phase1<br>求人票・スカウト文生成</span>
+        </div>
+        <span class="news-card-date">2026.4.25</span>
+        <div class="news-card-title">採用支援AI Phase1（求人票・スカウト文自動生成）の詳細ページを公開しました</div>
+      </a>
+
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/" target="_blank" rel="noopener" class="news-card is-hidden">
+        <div class="news-thumb news-thumb--case">
+          <span class="news-thumb-tag">実績公開</span>
+          <span class="news-thumb-text">AI業務自動化アプリ<br>導入実績まとめ</span>
+        </div>
+        <span class="news-card-date">2026.4.25</span>
+        <div class="news-card-title">AI業務自動化アプリ 導入実績まとめページを公開しました</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
 <!-- TRIAL（独立した相談セクション） -->
 <section class="trial" id="trial">
   <div class="wrap">
@@ -460,6 +600,21 @@ footer a{color:#7fb2f0;text-decoration:none}
 <footer>
   福田 和弘 / AI業務自動化支援 © 2026 ｜ <a href="index.html">現行のトップページへ</a>
 </footer>
+
+<script>
+  // 新着情報：「すべて見る」で残りのカードを表示／格納
+  const newsMore = document.getElementById('newsMore');
+  if (newsMore) {
+    newsMore.addEventListener('click', () => {
+      const isOpen = newsMore.classList.toggle('is-open');
+      newsMore.setAttribute('aria-expanded', isOpen);
+      newsMore.querySelector('.news-more-label').textContent = isOpen ? '閉じる' : 'すべて見る';
+      document.querySelectorAll('#newsGrid .news-card').forEach((card, i) => {
+        if (i >= 6) card.classList.toggle('is-hidden', !isOpen);
+      });
+    });
+  }
+</script>
 
 </body>
 </html>
