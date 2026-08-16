@@ -65,7 +65,10 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdro
 .hero .kicker{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.12em;padding:7px 16px;border:1px solid rgba(255,255,255,.34);border-radius:4px;margin-bottom:30px}
 .hero h1{font-size:clamp(30px,5.2vw,54px);font-weight:900;line-height:1.35;letter-spacing:-.02em;margin-bottom:26px}
 .hero h1 .u{border-bottom:4px solid var(--accent);padding-bottom:2px}
-.hero p{font-size:clamp(15px,1.8vw,17.5px);color:rgba(255,255,255,.82);max-width:660px;margin-bottom:38px}
+.hero p{font-size:clamp(15px,1.8vw,17.5px);color:rgba(255,255,255,.82);max-width:680px;margin-bottom:38px}
+/* 強み（既存の trial-item と同じ、左に細い縦線を引くだけの表現） */
+.hero-cred{display:flex;flex-wrap:wrap;gap:12px 26px;margin-bottom:26px}
+.hero-cred span{font-size:15px;font-weight:700;color:#fff;border-left:2px solid var(--accent);padding-left:12px;line-height:1.5}
 .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
 .btn{display:inline-block;font-size:15px;font-weight:700;padding:16px 34px;border-radius:6px;text-decoration:none}
 .btn-main{background:var(--accent);color:#fff}
@@ -203,11 +206,17 @@ footer a{color:#7fb2f0;text-decoration:none}
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="hero-in">
-    <span class="kicker">AI業務自動化支援 / Claude Code・Codex × 業務設計</span>
-    <h1>業務の無駄を削ぎ落とし、<br><span class="u">AIが働く仕組み</span>をつくる。</h1>
+    <span class="kicker">AI × 業務改善 × 開発</span>
+    <h1>AIで業務を変える。<br><span class="u">技術と現場</span>、両方わかるAIコンサル。</h1>
+    <div class="hero-cred">
+      <span>エンジニア経験</span>
+      <span>PM経験</span>
+      <span>AI開発</span>
+      <span>業務自動化</span>
+    </div>
     <p>
-      ITマネジメント20年以上の経験をもとに、貴社の業務課題を整理し、Claude CodeやCodexで自動化ツールを設計・実装。<br>
-      AWSをはじめ、さまざまな環境で使える状態まで、一貫して対応します。
+      業務を理解し、必要な仕組みを設計・開発・実装まで一貫して担当します。<br>
+      ITマネジメント20年以上の経験をもとに課題を整理し、Claude CodeやCodexで実際に動くツールをつくります。
     </p>
     <div class="hero-btns">
       <a href="contact.html" class="btn btn-main">まず相談する（無料）</a>
