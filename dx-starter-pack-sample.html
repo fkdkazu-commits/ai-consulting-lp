@@ -1163,6 +1163,11 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f6f8fb; color: #1a1
 @media (max-width:860px){
   .container{padding:64px 20px}
 }
+
+/* チーム：説明文の行数が違ってもリンクの位置が揃うよう、下端で固定する */
+.team-card{display:flex;flex-direction:column;height:100%}
+.team-desc{flex:1 0 auto;margin-bottom:16px}
+.team-links{justify-content:flex-start;margin-top:auto}
 </style>
 </head>
 <body>
