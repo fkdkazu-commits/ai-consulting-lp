@@ -4,10 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>【変更案】Claude Code・Codex スポット開発支援｜1万円〜の単発AIアプリ開発（福田和弘）</title>
-<meta name="description" content="つくりたいものが1つ決まっているなら、まずそれだけ。環境構築から、ご希望のAIアプリ1本を開発してお渡しするところまで。10,000円（税抜）〜、納期1日〜。">
+<meta name="description" content="Claude Code・Codexを使ったAIアプリ開発を単発でご依頼いただけるサービス。環境構築・初期設定からアプリ構築・操作レクチャー、Cowork／AWSでの本番公開まで一貫対応。ベーシック10,000円（税抜）〜、納期1日〜。">
+<meta property="og:title" content="Claude Code・Codex スポット開発支援｜単発でAIアプリを1本つくる">
+<meta property="og:description" content="環境構築から業務課題の整理、AIアプリの構築・納品まで単発でご依頼いただけます。10,000円（税抜）〜／納期1日〜。">
+<meta property="og:type" content="website">
 <meta name="robots" content="noindex">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
+/* ===== トップページと同じデザイン言語（濃紺＋青の2色／グラデーションなし） ===== */
 :root{
   --ink:#0b2138;
   --ink-2:#102a43;
@@ -18,256 +22,284 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Noto Sans JP',sans-serif;color:var(--ink);background:#fff;line-height:1.9;-webkit-font-smoothing:antialiased}
+body{font-family:'Noto Sans JP',sans-serif;background:#fff;color:var(--ink);line-height:1.9;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 img{max-width:100%;display:block}
 
+/* ── 共通 ── */
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
-.sec{padding:92px 0}
-.sec.tint{background:var(--bg)}
-.sec.dark{background:var(--ink);color:#fff}
-.sec.dark .lead{color:rgba(255,255,255,.72)}
+.section{padding:92px 0}
+.section.alt{background:var(--bg)}
+.sec-tag{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.18em;margin-bottom:14px}
+.sec-title{font-size:clamp(26px,3.6vw,40px);font-weight:900;line-height:1.4;letter-spacing:-.02em;margin-bottom:20px}
+.sec-lead{font-size:16px;color:var(--gray);line-height:1.9;max-width:680px;margin-bottom:48px}
 
-.label{font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--accent);margin-bottom:14px}
-.sec.dark .label{color:#7fb2f0}
-h2{font-size:clamp(26px,3.6vw,40px);font-weight:900;line-height:1.4;letter-spacing:-.02em;margin-bottom:20px}
-h2 .thin{font-weight:700;color:var(--gray)}
-.sec.dark h2 .thin{color:rgba(255,255,255,.6)}
-.lead{font-size:16px;color:var(--gray);max-width:680px;margin-bottom:48px}
+/* ── ヘッダー ── */
+.site-header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.header-inner{max-width:1040px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:15px;font-weight:900;text-decoration:none}
+.logo span{font-size:12px;font-weight:500;color:var(--gray)}
+.header-links{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.header-links a{font-size:13.5px;font-weight:700;color:var(--gray);text-decoration:none}
+.header-links a:hover{color:var(--accent)}
+.header-cta{background:var(--ink);color:#fff !important;padding:9px 20px;border-radius:6px;font-size:13.5px;font-weight:700;text-decoration:none}
 
-/* ヘッダー */
-header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.burger{display:none;width:42px;height:42px;border:0;background:none;cursor:pointer;flex-direction:column;justify-content:center;gap:6px;padding:0}
-.burger span{display:block;width:24px;height:2px;background:var(--ink);margin:0 auto;transition:transform .25s,opacity .2s}
-.burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
-.burger.open span:nth-child(2){opacity:0}
-.burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
-.hd{max-width:1040px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-weight:900;font-size:15px;text-decoration:none}
-.logo em{font-style:normal;font-weight:500;font-size:12px;color:var(--gray);margin-left:8px}
-.nav{display:flex;gap:26px;align-items:center}
-.nav a{font-size:13.5px;font-weight:700;color:var(--gray);text-decoration:none}
-.nav a:hover{color:var(--accent)}
-.nav .btn-hd{background:var(--ink);color:#fff;padding:9px 20px;border-radius:6px}
-@media(max-width:820px){
-  .burger{display:flex}
-  .nav{display:none;position:absolute;top:100%;right:0;left:0;flex-direction:column;align-items:stretch;gap:0;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 10px 24px rgba(11,33,56,.08);padding:6px 0 16px}
-  .nav.open{display:flex}
-  .nav a{padding:14px 24px;font-size:15px;color:var(--ink);border-bottom:1px solid var(--line)}
-  .nav .btn-hd{margin:14px 24px 0;padding:13px 24px;text-align:center;border-bottom:0;color:#fff}
+/* ── ヒーロー：写真＋単色オーバーレイ ── */
+.hero{
+  position:relative;overflow:hidden;color:#fff;
+  background:#0b2138 url('https://images.unsplash.com/photo-1785523609758-98f20c75c6c8?w=1800&q=80') center/cover no-repeat;
+  padding:110px 0 96px;
 }
-
-/* ヒーロー：写真＋単色オーバーレイ */
-.hero{position:relative;background:#0b2138 url('https://images.unsplash.com/photo-1785523609758-98f20c75c6c8?w=1800&q=80') center/cover no-repeat;color:#fff}
 .hero::before{content:'';position:absolute;inset:0;background:rgba(9,26,44,.82)}
-.hero-in{position:relative;max-width:1040px;margin:0 auto;padding:110px 24px 96px}
-.hero .kicker{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.12em;padding:7px 16px;border:1px solid rgba(255,255,255,.34);border-radius:4px;margin-bottom:30px}
+.hero-inner{position:relative;z-index:1}
+.hero-tag{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.12em;color:#fff;background:none;border:1px solid rgba(255,255,255,.34);padding:7px 16px;border-radius:4px;margin-bottom:30px}
 .hero h1{font-size:clamp(28px,4.8vw,50px);font-weight:900;line-height:1.38;letter-spacing:-.02em;margin-bottom:24px}
-.hero h1 .u{border-bottom:4px solid var(--accent);padding-bottom:2px}
-.hero-cred{display:flex;flex-wrap:wrap;gap:12px 26px;margin-bottom:26px}
-.hero-cred span{font-size:15px;font-weight:700;color:#fff;border-left:2px solid var(--accent);padding-left:12px;line-height:1.5}
-.hero p{font-size:clamp(15px,1.8vw,17.5px);color:rgba(255,255,255,.82);max-width:680px;margin-bottom:38px}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
-.btn{display:inline-block;font-size:15px;font-weight:700;padding:16px 34px;border-radius:6px;text-decoration:none}
-.btn-main{background:var(--accent);color:#fff}
-.btn-line{border:1px solid rgba(255,255,255,.45);color:#fff}
-.hero-note{margin-top:34px;font-size:13px;color:rgba(255,255,255,.6)}
+.hero h1 em{font-style:normal;color:#fff;border-bottom:4px solid var(--accent);padding-bottom:2px}
+.hero-sub{font-size:clamp(15px,1.8vw,17.5px);color:rgba(255,255,255,.82);line-height:1.95;max-width:680px;margin-bottom:38px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-size:15px;font-weight:700;padding:16px 34px;border-radius:6px;text-decoration:none;box-shadow:none}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.45);color:#fff;font-size:15px;font-weight:700;padding:16px 30px;border-radius:6px;text-decoration:none}
+/* 数値は左に細い縦線で（トップの trial-item と同じ手法） */
+.hero-nums{display:flex;gap:16px 40px;flex-wrap:wrap}
+.hero-nums > div{border-left:2px solid var(--accent);padding-left:16px}
+.hero-num-val{font-size:30px;font-weight:900;color:#fff;line-height:1.35;margin-bottom:2px}
+.hero-num-val small{font-size:15px}
+.hero-num-label{font-size:12.5px;color:rgba(255,255,255,.65)}
 
-/* 課題（罫線区切りの文章） */
-.stmt-item{padding:34px 0;border-top:1px solid var(--line)}
-.stmt-item:last-child{border-bottom:1px solid var(--line)}
-.stmt-h{font-size:clamp(19px,2.4vw,25px);font-weight:900;line-height:1.55;margin-bottom:12px;letter-spacing:-.01em}
-.stmt-b{font-size:15.5px;color:var(--gray);max-width:760px}
-.stmt-close{margin-top:44px;font-size:clamp(17px,2.2vw,22px);font-weight:700;line-height:1.8}
-.stmt-close b{color:var(--accent);font-weight:900}
+/* ── グリッド ── */
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:44px 40px}
 
-/* 対応範囲（3カラム・濃色） */
-.scope{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:44px 40px}
-.scope-n{font-size:13px;font-weight:900;color:#7fb2f0;letter-spacing:.14em;margin-bottom:14px}
-.scope-t{font-size:20px;font-weight:900;line-height:1.55;margin-bottom:12px}
-.scope-d{font-size:14.5px;color:rgba(255,255,255,.72)}
+/* ── 課題：カードをやめ、上罫線＋テキストに ── */
+.problem-card{background:none;border-radius:0;padding:0;border-top:2px solid var(--line);padding-top:26px}
+.problem-card-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.problem-icon{font-size:20px;line-height:1.5;flex-shrink:0;opacity:.75}
+.problem-title{font-size:19px;font-weight:900;line-height:1.55;letter-spacing:-.01em}
+.problem-desc{font-size:14.5px;color:var(--gray);line-height:1.9}
 
-/* 料金 */
-.price{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;background:var(--line);border:1px solid var(--line)}
-.price-card{background:#fff;padding:34px 28px;display:flex;flex-direction:column;position:relative}
-.price-card.pick{background:#f4f8fd}
-.price-badge{font-size:11.5px;font-weight:900;color:var(--accent);letter-spacing:.1em;margin-bottom:14px}
-.price-name{font-size:19px;font-weight:900;margin-bottom:14px}
+/* ── 対応範囲：同じく罫線＋テキスト ── */
+.scope-card{background:none;border-radius:0;padding:0;border-top:2px solid var(--line);padding-top:26px}
+.scope-icon{font-size:22px;line-height:1;margin-bottom:14px;opacity:.75}
+.scope-title{font-size:19px;font-weight:900;line-height:1.55;margin-bottom:12px;letter-spacing:-.01em}
+.scope-desc{font-size:14.5px;color:var(--gray);line-height:1.9}
+
+/* ── 料金：罫線で仕切る表形式 ── */
+.grid-3:has(.price-card){gap:2px;background:var(--line);border:1px solid var(--line)}
+.price-card{border-radius:0;padding:34px 28px;position:relative;background:#fff;border:0;display:flex;flex-direction:column}
+.price-card.a{background:#fff;border:0}
+.price-card.b{background:#f4f8fd;border:0}
+.price-card.c{background:#fff;border:0}
+.price-card.b::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent)}
+.price-badge{display:inline-block;background:none !important;color:var(--accent);font-size:11.5px;font-weight:900;letter-spacing:.1em;padding:0;border-radius:0;margin-bottom:14px}
+.price-recommend{position:static;display:inline-block;background:none;color:var(--accent);font-size:11.5px;font-weight:900;letter-spacing:.06em;padding:0;border-radius:0;margin-bottom:6px}
+.price-name{font-size:19px;font-weight:900;line-height:1.5;margin-bottom:14px}
 .price-val{font-size:15px;font-weight:700;color:var(--gray);margin-bottom:4px}
 .price-val strong{font-size:34px;font-weight:900;color:var(--ink);letter-spacing:-.01em}
+.price-card.b .price-val strong,.price-card.c .price-val strong{color:var(--ink)}
 .price-cond{font-size:12.5px;color:var(--gray);margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--line)}
-.price-for{font-size:13.5px;color:var(--ink);font-weight:700;margin-bottom:14px;line-height:1.7}
+.price-desc{font-size:13.5px;color:var(--ink);font-weight:700;line-height:1.7;margin-bottom:14px}
 .price-list{list-style:none;flex:1}
 .price-list li{font-size:13.5px;color:var(--gray);line-height:1.9;padding-left:18px;position:relative;margin-bottom:8px}
 .price-list li::before{content:'';position:absolute;left:0;top:12px;width:8px;height:1px;background:var(--accent)}
-.price-pickmark{position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent)}
-.price-note{margin-top:28px;font-size:12.5px;color:var(--gray);line-height:1.95}
+.price-note{font-size:12.5px;color:var(--gray);line-height:1.95;margin-top:28px}
 
-/* 進め方 */
-.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;border-top:1px solid var(--line)}
-.flow-i{padding:30px 26px 30px 0;border-bottom:1px solid var(--line)}
-.flow-n{font-size:12px;font-weight:900;color:var(--accent);letter-spacing:.12em;margin-bottom:10px}
-.flow-t{font-size:17px;font-weight:900;margin-bottom:8px}
-.flow-d{font-size:13.5px;color:var(--gray)}
-.flow-note{margin-top:26px;font-size:14px;color:var(--gray);line-height:1.95}
-.flow-note a{color:var(--accent);font-weight:700}
+/* ── 進め方：罫線で仕切る ── */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;align-items:stretch;border-top:1px solid var(--line)}
+.step-card{flex:none;background:none;border-radius:0;padding:30px 26px 30px 0;text-align:left;border-bottom:1px solid var(--line)}
+.step-no{width:auto;height:auto;border-radius:0;background:none;color:var(--accent);font-size:12px;font-weight:900;letter-spacing:.12em;display:block;margin:0 0 10px}
+.step-title{font-size:17px;font-weight:900;margin-bottom:8px}
+.step-desc{font-size:13.5px;color:var(--gray);line-height:1.85}
+.step-arrow{display:none}
+.step-note{margin-top:26px;background:none;color:var(--gray);border-radius:0;padding:0;font-size:14px;line-height:1.95}
+.step-note a{color:var(--accent) !important}
 
-/* FAQ */
-.q{border-top:1px solid var(--line);padding:26px 0}
-.q:last-child{border-bottom:1px solid var(--line)}
-.q-t{font-size:16.5px;font-weight:900;line-height:1.6;margin-bottom:10px}
-.q-a{font-size:14.5px;color:var(--gray)}
-.q-a a{color:var(--accent);font-weight:700}
+/* ── FAQ：罫線区切り ── */
+.faq-item{background:none;border-radius:0;padding:26px 0;margin-bottom:0;border-top:1px solid var(--line)}
+.faq-item:last-child{border-bottom:1px solid var(--line)}
+.faq-q{font-size:16.5px;font-weight:900;line-height:1.6;margin-bottom:10px;display:flex;gap:10px}
+.faq-q span{color:var(--accent)}
+.faq-a{font-size:14.5px;color:var(--gray);line-height:1.95;padding-left:26px}
+.faq-a a{color:var(--accent) !important}
 
-/* 他のサービス */
-.other{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;background:var(--line);border:1px solid var(--line)}
-.other-card{background:#fff;padding:30px 28px;text-decoration:none;color:inherit;display:block}
-.other-card:hover{background:#fbfcfe}
-.other-label{font-size:11.5px;font-weight:700;color:var(--accent);letter-spacing:.08em;margin-bottom:12px}
-.other-t{font-size:17px;font-weight:900;line-height:1.55;margin-bottom:10px}
-.other-d{font-size:13.5px;color:var(--gray)}
+/* ── 他のご支援サービス ── */
+.grid-3:has(.next-card){gap:2px;background:var(--line);border:1px solid var(--line)}
+.next-card{background:#fff;border-radius:0;padding:30px 28px;text-decoration:none;display:block}
+.next-card:hover{background:#fbfcfe}
+.next-label{font-size:11.5px;font-weight:700;color:var(--accent);letter-spacing:.08em;margin-bottom:12px}
+.next-title{font-size:17px;font-weight:900;line-height:1.55;margin-bottom:10px}
+.next-desc{font-size:13.5px;color:var(--gray);line-height:1.85}
 
-/* プロフィール */
-.pf{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start}
-.pf img{border-radius:4px}
-.pf-n{font-size:26px;font-weight:900;margin-bottom:6px}
-.pf-r{font-size:13.5px;color:var(--accent);font-weight:700;margin-bottom:18px}
-.pf-b{font-size:14.5px;color:var(--gray);margin-bottom:16px}
+/* ── プロフィール：濃色（グラデーションは使わない） ── */
+.profile-section{background:var(--ink);color:#fff;padding:92px 0}
+.profile-section .sec-tag{color:#7fb2f0}
+.profile-layout{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start}
+.profile-photo{width:100%;border-radius:4px;display:block}
+.profile-name{font-size:26px;font-weight:900;margin-bottom:6px}
+.profile-role{font-size:13.5px;font-weight:700;color:#7fb2f0;margin-bottom:18px}
+.profile-bio{font-size:14.5px;color:rgba(255,255,255,.78);line-height:2;margin-bottom:20px}
 .tags{display:flex;flex-wrap:wrap;gap:8px}
-.tag{font-size:12px;border:1px solid var(--line);padding:5px 13px;border-radius:3px;color:var(--gray)}
-@media(max-width:720px){.pf{grid-template-columns:1fr}.pf img{max-width:180px}}
+.tag{border:1px solid rgba(255,255,255,.28);border-radius:3px;padding:5px 13px;font-size:12px;color:rgba(255,255,255,.85)}
 
-/* CTA */
-.cta{background:var(--ink);color:#fff;padding:96px 0;text-align:center}
-.cta h2{margin-bottom:16px}
-.cta p{font-size:16px;color:rgba(255,255,255,.75);margin-bottom:38px}
-.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+/* ── CTA：濃色 ── */
+.cta-section{background:var(--ink-2);color:#fff;padding:96px 0;text-align:center}
+.cta-title{font-size:clamp(26px,3.4vw,38px);font-weight:900;margin-bottom:16px}
+.cta-lead{font-size:16px;color:rgba(255,255,255,.75);margin-bottom:38px}
+.cta-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14);margin-bottom:26px}
+.cta-card{background:var(--ink-2);border-radius:0;padding:24px 26px;display:flex;align-items:center;gap:16px;text-align:left;text-decoration:none}
+.cta-card:hover{background:var(--ink)}
+.cta-card-icon{width:40px;height:40px;border-radius:50%;background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cta-card-label{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:2px}
+.cta-card-val{font-size:15px;font-weight:700;word-break:break-all}
+.cta-note{font-size:13px;color:rgba(255,255,255,.55)}
 
-footer{background:#071827;color:rgba(255,255,255,.55);font-size:13px;padding:28px 0;text-align:center}
-footer a{color:#7fb2f0;text-decoration:none}
+/* ── フッター ── */
+.site-footer{background:#071827;color:rgba(255,255,255,.55);padding:28px 0;font-size:13px;text-align:center}
+.site-footer a{color:#7fb2f0;text-decoration:none}
+
+@media (max-width: 860px){
+  .profile-layout{grid-template-columns:1fr}
+  .profile-photo{max-width:180px}
+  .header-links a:not(.header-cta){display:none}
+}
 </style>
+
 </head>
 <body>
 
-<header>
-  <div class="hd">
-    <a href="index.html" class="logo">福田和弘<em>AI業務自動化</em></a>
-    <nav class="nav" id="nav">
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">福田和弘<span> | AI業務自動化</span></a>
+    <div class="header-links">
       <a href="index.html">トップ</a>
       <a href="#pricing">料金プラン</a>
-      <a href="#flow">進め方</a>
-      <a href="#faq">FAQ</a>
-      <a href="contact.html" class="btn-hd">お問合せ</a>
-    </nav>
-    <button type="button" class="burger" id="burger" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav">
-      <span></span><span></span><span></span>
-    </button>
+      <a href="#steps">進め方</a>
+      <a href="#faq">よくある質問</a>
+      <a href="contact.html" class="header-cta">無料相談</a>
+    </div>
   </div>
 </header>
 
 <!-- HERO -->
-<section class="hero" id="top">
-  <div class="hero-in">
-    <span class="kicker">単発でのご依頼 / Claude Code・Codex</span>
-    <h1>つくりたいものが1つあるなら、<br><span class="u">まずそれだけ</span>、動くところまで。</h1>
-    <div class="hero-cred">
-      <span>環境構築</span>
-      <span>課題整理</span>
-      <span>アプリ開発</span>
-      <span>操作レクチャー</span>
-    </div>
-    <p>
-      Claude Code・Codex を使ったAIアプリ開発を、単発でご依頼いただけます。<br>
-      環境の準備から、ご希望のアプリを1本つくってお渡しするところまで担当します。
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-tag">✦ 単発でのAIアプリ開発 / Claude Code・Codex</div>
+    <h1>Claude Code・Codex <em>スポット開発支援</em></h1>
+    <p class="hero-sub">
+      Claude Code・Codexを使ったAIアプリ開発を、単発でご依頼いただけるサービスです。<br>
+      環境構築・ツール作成・操作レクチャーまで一貫して対応します。
     </p>
     <div class="hero-btns">
-      <a href="contact.html" class="btn btn-main">まず相談する（無料）</a>
-      <a href="#pricing" class="btn btn-line">料金プランを見る</a>
+      <a href="contact.html" class="btn-primary">✉ まずは無料相談</a>
+      <a href="#pricing" class="btn-ghost">料金プランを見る</a>
     </div>
-    <p class="hero-note">環境構築とレクチャーだけでも承ります（10,000円・納期1日）</p>
+    <div class="hero-nums">
+      <div>
+        <div class="hero-num-val">¥10,000<small>〜</small></div>
+        <div class="hero-num-label">税抜／ベーシックプラン</div>
+      </div>
+      <div>
+        <div class="hero-num-val">1<small>日〜</small></div>
+        <div class="hero-num-label">最短の納期</div>
+      </div>
+      <div>
+        <div class="hero-num-val">20<small>本+</small></div>
+        <div class="hero-num-label">自社・支援先への導入実績</div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- PROBLEM -->
-<section class="sec" id="problem">
+<section class="section alt">
   <div class="wrap">
-    <div class="label">WHO IT'S FOR</div>
-    <h2>いきなり全部は、<br><span class="thin">決めなくていい。</span></h2>
-    <p class="lead">継続契約の前に、まず1つだけ試したい。そんなご相談を単発でお引き受けしています。</p>
-
-    <div class="stmt-item">
-      <div class="stmt-h">入れたいのに、環境構築で止まっている</div>
-      <p class="stmt-b">インストール、初期設定、セキュリティの設定。動かす前の段階でつまずいたまま、手が止まっているケースが多くあります。設定の意味もあわせて説明しながら、業務で使える状態にしてお渡しします。</p>
+    <div class="sec-tag">PROBLEM</div>
+    <h2 class="sec-title">こんな段階の方に向いています</h2>
+    <p class="sec-lead">継続契約の前に、まず1つだけ試してみたい——そんなご相談を単発でお引き受けします。</p>
+    <div class="grid-3">
+      <div class="problem-card">
+        <div class="problem-card-head">
+          <span class="problem-icon">🧭</span>
+          <div class="problem-title">Claude Code・Codexを入れたいが、<br>環境構築でつまずいている</div>
+        </div>
+        <p class="problem-desc">インストール・初期設定・セキュリティ設定まで、実際に業務で使える状態にして
+          お渡しします。設定の意味もあわせてご説明します。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-head">
+          <span class="problem-icon">🛠️</span>
+          <div class="problem-title">つくりたいツールが<br>1つだけ決まっている</div>
+        </div>
+        <p class="problem-desc">「この作業を自動化したい」が明確なら、単発の開発が向いています。
+          課題整理から設計・構築まで対応し、1本つくってお渡しします。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-head">
+          <span class="problem-icon">🚀</span>
+          <div class="problem-title">つくったものを<br>他の人にも使わせたい</div>
+        </div>
+        <p class="problem-desc">自分の手元で動くだけでなく、Cowork や AWS 上に構築して、
+          社内メンバーやお客様が使える状態まで仕上げることもできます。</p>
+      </div>
     </div>
-    <div class="stmt-item">
-      <div class="stmt-h">つくりたいものが、1つだけ決まっている</div>
-      <p class="stmt-b">「この作業を自動化したい」がはっきりしているなら、単発が一番早い。課題の整理から設計・構築まで対応し、動くものを1本お渡しします。</p>
-    </div>
-    <div class="stmt-item">
-      <div class="stmt-h">つくったものを、他の人にも使わせたい</div>
-      <p class="stmt-b">自分の手元で動くだけでは、業務は変わりません。Cowork や AWS 上に構築し、社内メンバーやお客様が使える状態まで仕上げることもできます。</p>
-    </div>
-
-    <p class="stmt-close">
-      まず1本つくって、効果を確かめる。<br>
-      続けるかどうかは、<b>それから決めれば十分</b>です。
-    </p>
   </div>
 </section>
 
-<!-- SCOPE（濃色） -->
-<section class="sec dark" id="scope">
+<!-- SCOPE -->
+<section class="section">
   <div class="wrap">
-    <div class="label">SCOPE</div>
-    <h2>どこまでやるかは、<br><span class="thin">プランで変わります。</span></h2>
-    <p class="lead">関わる工程の深さが、そのまま価格の差になっています。</p>
-    <div class="scope">
-      <div>
-        <div class="scope-n">01</div>
-        <div class="scope-t">導入環境の準備</div>
-        <p class="scope-d">貴社PCへのインストール、初期設定、動作確認まで対応します。既存の業務環境にそのまま組み込めるよう、設定の意味を説明しながら進めます。</p>
+    <div class="sec-tag">SCOPE</div>
+    <h2 class="sec-title">対応する範囲</h2>
+    <p class="sec-lead">プランによって、関わる工程の深さが変わります。</p>
+    <div class="grid-3">
+      <div class="scope-card">
+        <div class="scope-icon">🖥️</div>
+        <div class="scope-title">Claude Code・Codex 導入環境について</div>
+        <p class="scope-desc">貴社PCへのClaude Code・Codexインストール・初期設定・動作確認まで対応します。
+          既存の業務環境にそのまま組み込めるよう丁寧にご案内します。</p>
       </div>
-      <div>
-        <div class="scope-n">02</div>
-        <div class="scope-t">アプリの構築</div>
-        <p class="scope-d">ベーシックはつくり方のレクチャー、スタンダードはご希望のアプリを1本構築、プレミアムは Cowork または AWS で本番公開まで。</p>
+      <div class="scope-card">
+        <div class="scope-icon">⚙️</div>
+        <div class="scope-title">アプリ構築について</div>
+        <p class="scope-desc">ベーシックは基本的なAIアプリの作り方をレクチャー、スタンダードはご希望のAIアプリを1本構築、
+          プレミアムはCoworkまたはAWSで本番公開まで対応します。</p>
       </div>
-      <div>
-        <div class="scope-n">03</div>
-        <div class="scope-t">複数メンバーへの展開</div>
-        <p class="scope-d">チーム全体への展開や、複数人でのサポートも別途ご相談いただけます。まずは何人が使う想定かをお聞かせください。</p>
+      <div class="scope-card">
+        <div class="scope-icon">👥</div>
+        <div class="scope-title">複数メンバーへのサポートについて</div>
+        <p class="scope-desc">チーム全体への展開・複数人サポートも別途ご相談いただけます。
+          お気軽にお声がけください。</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
-<section class="sec" id="pricing">
+<section class="section alt" id="pricing">
   <div class="wrap">
-    <div class="label">PRICING</div>
-    <h2>料金プラン</h2>
-    <p class="lead">課題の規模と予算に合わせてお選びください。表示価格はすべて税抜です。</p>
+    <div class="sec-tag">PRICING</div>
+    <h2 class="sec-title">料金プラン</h2>
+    <p class="sec-lead">課題の規模や予算に合わせてお選びください。表示価格はすべて税抜です。</p>
 
-    <div class="price">
-      <div class="price-card">
-        <div class="price-badge">BASIC</div>
+    <div class="grid-3">
+      <div class="price-card a">
+        <span class="price-badge">BASIC</span>
         <div class="price-name">ベーシック</div>
         <div class="price-val">¥<strong>10,000</strong></div>
         <div class="price-cond">税抜 ／ 納期 1日〜</div>
-        <p class="price-for">まず始めたい方へ（レクチャー）</p>
+        <p class="price-desc">AIで業務効率化・自動化を始めたい方に（レクチャー）</p>
         <ul class="price-list">
-          <li>環境構築＋初期設定（セキュリティ設定含む）</li>
-          <li>簡単なAIアプリのつくり方レクチャー</li>
+          <li>Claude Code・Codex環境構築＋初期設定（セキュリティ設定含む）</li>
+          <li>簡単なAIアプリ構築方法レクチャー</li>
         </ul>
       </div>
 
-      <div class="price-card pick">
-        <div class="price-pickmark"></div>
-        <div class="price-badge">STANDARD ／ 人気 No.1</div>
+      <div class="price-card b">
+        <span class="price-recommend">人気 No.1</span>
+        <span class="price-badge">STANDARD</span>
         <div class="price-name">スタンダード</div>
         <div class="price-val">¥<strong>30,000</strong>〜</div>
         <div class="price-cond">税抜 ／ 納期 10日〜</div>
-        <p class="price-for">業務改善を具体的に進めたい方へ（設計＋構築）</p>
+        <p class="price-desc">AIを活用した業務改善を具体的に進めたい方に（設計＋構築）</p>
         <ul class="price-list">
           <li>環境構築</li>
           <li>現状業務の課題整理・設計</li>
@@ -275,139 +307,149 @@ footer a{color:#7fb2f0;text-decoration:none}
         </ul>
       </div>
 
-      <div class="price-card">
-        <div class="price-badge">PREMIUM</div>
+      <div class="price-card c">
+        <span class="price-badge">PREMIUM</span>
         <div class="price-name">プレミアム</div>
         <div class="price-val">¥<strong>50,000</strong>〜</div>
         <div class="price-cond">税抜 ／ 納期 21日〜</div>
-        <p class="price-for">他の人にも使わせたい方へ（実装・納品支援）</p>
+        <p class="price-desc">開発アプリを他者が使える状態にしたい方に（実装・納品支援）</p>
         <ul class="price-list">
           <li>スタンダードの内容</li>
-          <li>納品方法に応じて構築（Cowork または AWS）</li>
+          <li>納品方法に応じて構築（Cowork or AWS）</li>
         </ul>
       </div>
     </div>
 
     <p class="price-note">
-      ※ スタンダード・プレミアムは内容に応じてお見積りします。<br>
-      ※ 外部API利用料（OpenAI・Anthropic等）は別途実費です。<br>
-      ※ Cowork／AWSでの本番公開をご希望の場合は、環境や運用体制に合わせてご提案します。
+      ※ スタンダード・プレミアムは内容に応じてお見積りいたします。<br>
+      ※ 外部API利用料（OpenAI・Anthropic等）は別途実費となります。<br>
+      ※ Cowork／AWSでの本番公開をご希望の場合は、環境や運用体制に合わせてご提案します。まずは無料相談にてご相談ください。
     </p>
   </div>
 </section>
 
-<!-- FLOW -->
-<section class="sec tint" id="flow">
+<!-- STEPS -->
+<section class="section" id="steps">
   <div class="wrap">
-    <div class="label">FLOW</div>
-    <h2>相談から納品まで</h2>
-    <p class="lead">お見積りまでは費用がかかりません。アイデア段階のご相談で構いません。</p>
-    <div class="flow">
-      <div class="flow-i">
-        <div class="flow-n">STEP 01</div>
-        <div class="flow-t">相談</div>
-        <p class="flow-d">やりたいこと、困っていることをお聞かせください。整理されていなくて大丈夫です。</p>
+    <div class="sec-tag">FLOW</div>
+    <h2 class="sec-title">ご依頼の進め方</h2>
+    <p class="sec-lead">お問い合わせから納品まで、次の流れで進めます。</p>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-no">1</div>
+        <div class="step-title">無料相談</div>
+        <p class="step-desc">やりたいこと・お困りごとをお聞かせください。アイデア段階でも構いません。</p>
       </div>
-      <div class="flow-i">
-        <div class="flow-n">STEP 02</div>
-        <div class="flow-t">プランと見積り</div>
-        <p class="flow-d">ご要望に合うプランと、納期・費用をご提示します。ここまで費用はかかりません。</p>
+      <div class="step-arrow">›</div>
+      <div class="step-card">
+        <div class="step-no">2</div>
+        <div class="step-title">プラン・お見積り</div>
+        <p class="step-desc">ご要望に合うプランと、納期・費用をご提示します。ここまで費用はかかりません。</p>
       </div>
-      <div class="flow-i">
-        <div class="flow-n">STEP 03</div>
-        <div class="flow-t">環境構築・開発</div>
-        <p class="flow-d">環境の準備から、業務課題の整理、アプリの構築までを進めます。</p>
+      <div class="step-arrow">›</div>
+      <div class="step-card">
+        <div class="step-no">3</div>
+        <div class="step-title">環境構築・開発</div>
+        <p class="step-desc">環境の準備から、業務課題の整理、アプリの構築までを進めます。</p>
       </div>
-      <div class="flow-i">
-        <div class="flow-n">STEP 04</div>
-        <div class="flow-t">納品とレクチャー</div>
-        <p class="flow-d">実際に動かしながら操作をご説明します。ご希望に応じて本番環境へ公開します。</p>
+      <div class="step-arrow">›</div>
+      <div class="step-card">
+        <div class="step-no">4</div>
+        <div class="step-title">納品・レクチャー</div>
+        <p class="step-desc">実際に動かしながら操作をご説明します。ご希望に応じて本番環境へ公開します。</p>
       </div>
     </div>
-    <p class="flow-note">
-      単発でつくったあと、継続的な開発や改善が必要になった場合は
-      <a href="retainer.html">Claude Code・Codex 業務委託支援（月額）</a>へ移行いただけます。
+    <div class="step-note">
+      単発でのご依頼のあと、継続的な開発・改善が必要になった場合は
+      <a href="retainer.html" style="color:#90cdf4;font-weight:700">Claude Code・Codex 業務委託支援（月額）</a>へ移行いただくこともできます。
       まず1本つくってみて、相性を確かめてからで構いません。
-    </p>
+    </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="sec" id="faq">
+<section class="section alt" id="faq">
   <div class="wrap">
-    <div class="label">FAQ</div>
-    <h2>よくいただく質問</h2>
-    <div class="q">
-      <div class="q-t">プログラミングの知識がなくても依頼できますか。</div>
-      <p class="q-a">問題ありません。環境構築・初期設定はこちらで対応し、操作方法もあわせてご説明します。ベーシックプランは「これから始めたい方」を想定した内容です。</p>
+    <div class="sec-tag">FAQ</div>
+    <h2 class="sec-title">よくあるご質問</h2>
+    <p class="sec-lead"></p>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>プログラミングの知識がなくても依頼できますか？</div>
+      <p class="faq-a">はい。環境構築・初期設定はこちらで対応し、操作方法もあわせてご説明します。
+        ベーシックプランは「これから始めたい方」を想定した内容になっています。</p>
     </div>
-    <div class="q">
-      <div class="q-t">どのプランを選べばよいか分かりません。</div>
-      <p class="q-a">まずは無料相談でやりたいことをお聞かせください。内容をうかがったうえで、適したプランと納期・費用をご提示します。ご相談だけでも構いません。</p>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>どのプランを選べばよいか分かりません。</div>
+      <p class="faq-a">まずは無料相談でやりたいことをお聞かせください。内容をうかがったうえで、
+        適したプランと納期・費用をご提示します。ご相談だけでも構いません。</p>
     </div>
-    <div class="q">
-      <div class="q-t">費用は表示価格だけですか。</div>
-      <p class="q-a">表示価格はすべて税抜です。スタンダード・プレミアムは内容に応じたお見積りとなります。また、OpenAI・Anthropic等の外部API利用料は別途実費です。</p>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>費用は表示価格だけですか？</div>
+      <p class="faq-a">表示価格はすべて税抜です。スタンダード・プレミアムは内容に応じたお見積りとなります。
+        また、OpenAI・Anthropic等の外部API利用料は別途実費となります。</p>
     </div>
-    <div class="q">
-      <div class="q-t">つくったツールを社内の他のメンバーにも使わせたいのですが。</div>
-      <p class="q-a">プレミアムプランで、Cowork または AWS 上に構築して本番公開まで対応できます。チーム全体への展開・複数人サポートも別途ご相談いただけます。</p>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>つくったツールを社内の他のメンバーにも使わせたいのですが。</div>
+      <p class="faq-a">プレミアムプランで、CoworkまたはAWS上に構築して本番公開まで対応できます。
+        チーム全体への展開・複数人サポートも別途ご相談いただけます。</p>
     </div>
-    <div class="q">
-      <div class="q-t">納品後の改善もお願いできますか。</div>
-      <p class="q-a">継続的な開発・改善・技術相談が必要な場合は、月額の<a href="retainer.html">業務委託支援</a>をご用意しています。単発でお試しいただいたあとに移行されるケースもあります。</p>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>納品後の改善もお願いできますか？</div>
+      <p class="faq-a">継続的な開発・改善・技術相談が必要な場合は、月額の
+        <a href="retainer.html" style="color:#2563c9;font-weight:700">業務委託支援</a>をご用意しています。
+        単発でお試しいただいたあとに移行いただくケースもあります。</p>
     </div>
   </div>
 </section>
 
-<!-- OTHER SERVICES -->
-<section class="sec tint">
+<!-- 他のサービス -->
+<section class="section">
   <div class="wrap">
-    <div class="label">OTHER SERVICES</div>
-    <h2>他のご支援サービス</h2>
-    <p class="lead">継続的な支援や、より大きな規模のDXをお考えの場合はこちらをご覧ください。</p>
-    <div class="other">
-      <a href="retainer.html" class="other-card">
-        <div class="other-label">月額・継続契約</div>
-        <div class="other-t">Claude Code・Codex 業務委託支援</div>
-        <p class="other-d">月額5万円〜。開発するエンジニアと、方針を相談できる相手を1人で兼ねます。</p>
+    <div class="sec-tag">OTHER SERVICES</div>
+    <h2 class="sec-title">他のご支援サービス</h2>
+    <p class="sec-lead">単発ではなく継続的な支援や、より大きな規模のDXをお考えの場合はこちらをご覧ください。</p>
+    <div class="grid-3">
+      <a href="retainer.html" class="next-card">
+        <div class="next-label">MONTHLY RETAINER</div>
+        <div class="next-title">Claude Code・Codex 業務委託支援</div>
+        <p class="next-desc">月額5万円〜。AIエンジニアとAI顧問、両方の役割で継続的にご支援します。</p>
       </a>
-      <a href="dx-starter-pack.html" class="other-card">
-        <div class="other-label">パートナー協業</div>
-        <div class="other-t">中小企業向け DXスターターパック</div>
-        <p class="other-d">FAX・紙・Excel業務を1業務だけ小さくシステム化。3名体制で対応します。</p>
+      <a href="dx-starter-pack.html" class="next-card">
+        <div class="next-label">PARTNER SERVICE</div>
+        <div class="next-title">DXスターターパック</div>
+        <p class="next-desc">FAX・紙・Excel業務を「1業務だけ」小さくシステム化。専門家チームで対応します。</p>
       </a>
-      <a href="https://fkdkazu-commits.github.io/mentor-lp/" target="_blank" rel="noopener" class="other-card">
-        <div class="other-label">個別指導</div>
-        <div class="other-t">Claude Code・Codex 個別家庭教師</div>
-        <p class="other-d">月額3,000円。自分で書けるようになりたい方へ、1対1で伴走します。</p>
+      <a href="https://fkdkazu-commits.github.io/mentor-lp/" target="_blank" rel="noopener" class="next-card">
+        <div class="next-label">MENTORING</div>
+        <div class="next-title">Claude Code・Codex 個別家庭教師</div>
+        <p class="next-desc">月額3,000円。環境構築から副業・案件化まで1対1でサポートします。</p>
       </a>
     </div>
   </div>
 </section>
 
 <!-- PROFILE -->
-<section class="sec" id="profile">
+<section class="profile-section" id="profile">
   <div class="wrap">
-    <div class="label">PROFILE</div>
-    <h2>担当するのは、一人です</h2>
-    <div class="pf">
-      <img src="profile.png" alt="福田 和弘">
+    <div class="sec-tag">PROFILE</div>
+    <div class="profile-layout">
+      <img src="profile.png" alt="福田 和弘" class="profile-photo">
       <div>
-        <div class="pf-n">福田 和弘</div>
-        <div class="pf-r">AI/DX推進支援 ・ SEO全般 ・ 法人／個別サポート</div>
-        <p class="pf-b">
-          IT企業にてエンジニアとマネジメント職を20年以上経験し、DX事業の立ち上げを担当。
-          現在はClaude CodeやCodexをはじめとしたAIツールを活用した業務自動化支援を行っています。
-        </p>
-        <p class="pf-b">
-          自社業務で実際に運用している仕組みをベースに、中小企業・個人事業主向けに実装。
-          SEO記事自動化では約80%のコスト削減を実現するなど、現場で動く仕組みづくりを得意としています。
+        <div class="profile-name">福田 和弘</div>
+        <div class="profile-role">AI/DX推進支援 ・ SEO全般 ・ 法人サポート／個別サポート</div>
+        <p class="profile-bio">
+          IT企業にてマネジメント職を20年以上経験し、DX事業の立ち上げを担当。現在はClaude Code・CodexをはじめとしたAIツールを活用した業務自動化支援を行っています。自社業務で実際に運用している仕組みをベースに、中小企業・個人事業主向けに実装。SEO記事自動化では約80%のコスト削減を実現するなど、現場で動く仕組みづくりを得意としています。
         </p>
         <div class="tags">
-          <span class="tag">Claude Code</span><span class="tag">Codex</span><span class="tag">Copilot Studio</span>
-          <span class="tag">AWS</span><span class="tag">Cowork</span><span class="tag">業務自動化</span>
-          <span class="tag">DX推進</span><span class="tag">SEO</span>
+          <span class="tag">Claude Code</span>
+          <span class="tag">Codex</span>
+          <span class="tag">ChatGPT</span>
+          <span class="tag">Cowork</span>
+          <span class="tag">AWS</span>
+          <span class="tag">業務自動化</span>
+          <span class="tag">マーケティング</span>
+          <span class="tag">DX推進</span>
+          <span class="tag">SEO</span>
         </div>
       </div>
     </div>
@@ -415,39 +457,42 @@ footer a{color:#7fb2f0;text-decoration:none}
 </section>
 
 <!-- CTA -->
-<section class="cta" id="contact">
+<section class="cta-section" id="contact">
   <div class="wrap">
-    <h2>自動化したい作業を、1つ挙げてください。</h2>
-    <p>それが1万円でつくれるものかどうか、その場でお答えします。</p>
-    <div class="cta-row">
-      <a href="contact.html" class="btn btn-main">無料で相談する</a>
-      <a href="mailto:fkdkazu@gmail.com" class="btn btn-line">メールで送る</a>
+    <h2 class="cta-title">まずは気軽にご相談ください</h2>
+    <p class="cta-lead">「こんなことを自動化したい」というアイデアだけでも大歓迎です。</p>
+    <div class="cta-cards">
+      <a href="mailto:fkdkazu@gmail.com" class="cta-card">
+        <div class="cta-card-icon">✉</div>
+        <div>
+          <div class="cta-card-label">メール</div>
+          <div class="cta-card-val">fkdkazu@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://x.com/Marketer_kazuf" target="_blank" rel="noopener" class="cta-card">
+        <div class="cta-card-icon">𝕏</div>
+        <div>
+          <div class="cta-card-label">X（DM）</div>
+          <div class="cta-card-val">@Marketer_kazuf</div>
+        </div>
+      </a>
+      <a href="contact.html" class="cta-card">
+        <div class="cta-card-icon">🔗</div>
+        <div>
+          <div class="cta-card-label">お問い合わせフォーム</div>
+          <div class="cta-card-val">無料相談を申し込む</div>
+        </div>
+      </a>
     </div>
+    <p class="cta-note">通常1営業日以内にご返信します</p>
   </div>
 </section>
 
-<footer>
+<footer class="site-footer">
   <div class="wrap">
     福田 和弘 / AI業務自動化支援 © 2026 ｜ <a href="index.html">トップページに戻る</a>
   </div>
 </footer>
-
-<script>
-  const burger = document.getElementById('burger');
-  const nav = document.getElementById('nav');
-  if (burger && nav) {
-    burger.addEventListener('click', () => {
-      const open = burger.classList.toggle('open');
-      nav.classList.toggle('open', open);
-      burger.setAttribute('aria-expanded', open);
-      burger.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
-    });
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      burger.classList.remove('open'); nav.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-    }));
-  }
-</script>
 
 </body>
 </html>
