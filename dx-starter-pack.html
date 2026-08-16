@@ -9,7 +9,7 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1a2e; line-height: 1.8; }
+body { font-family: 'Noto Sans JP', sans-serif; background: #f6f8fb; color: #1a1a2e; line-height: 1.8; }
 
 /* ── Hero ── */
 .hero {
@@ -23,20 +23,14 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    /* スマートファクトリー感を出すグリッド＋青い光 */
-    linear-gradient(rgba(99,179,237,0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(99,179,237,0.09) 1px, transparent 1px),
-    radial-gradient(circle at 78% 26%, rgba(99,179,237,0.28), transparent 42%),
-    linear-gradient(100deg, rgba(10,26,47,0.96) 0%, rgba(10,26,47,0.90) 42%, rgba(10,26,47,0.46) 70%, rgba(10,26,47,0.18) 100%);
-  background-size: 46px 46px, 46px 46px, 100% 100%, 100% 100%;
+  background: rgba(9,26,44,0.82);
 }
 .hero::after {
   content: '';
   position: absolute;
   bottom: -2px; left: 0; right: 0;
   height: 60px;
-  background: #f7fafc;
+  background: #f6f8fb;
   clip-path: ellipse(55% 100% at 50% 100%);
 }
 .hero-inner { position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; }
@@ -49,11 +43,11 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 .hero-tag {
   display: inline-block;
   background: rgba(255,255,255,0.12);
-  color: #90cdf4;
+  color: #7fb2f0;
   font-size: 12px;
   font-weight: 700;
   padding: 5px 18px;
-  border-radius: 20px;
+  border-radius: 6px;
   border: 1px solid rgba(255,255,255,0.2);
   margin-bottom: 24px;
   letter-spacing: 0.06em;
@@ -67,7 +61,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   letter-spacing: -0.02em;
   text-shadow: 0 2px 20px rgba(0,0,0,0.2);
 }
-.hero h1 em { font-style: normal; color: #f6ad55; }
+.hero h1 em { font-style: normal; color: #2f6fd0; }
 .hero-sub {
   font-size: clamp(14px, 1.8vw, 18px);
   color: rgba(255,255,255,0.82);
@@ -85,7 +79,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 .hero-num-item {
   background: rgba(255,255,255,0.1);
   border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 14px;
+  border-radius: 6px;
   padding: 16px 28px;
   text-align: center;
   min-width: 140px;
@@ -104,7 +98,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 .hero-num-val {
   font-size: 30px;
   font-weight: 900;
-  color: #f6ad55;
+  color: #2f6fd0;
   line-height: 1;
   margin-bottom: 4px;
 }
@@ -126,17 +120,17 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #f6ad55;
+  background: #2f6fd0;
   color: #1a202c;
   font-size: 15px;
   font-weight: 900;
   padding: 14px 36px;
-  border-radius: 8px;
+  border-radius: 6px;
   text-decoration: none;
-  box-shadow: 0 4px 16px rgba(246,173,85,0.45);
+  box-shadow: 0 2px 8px rgba(11,33,56,.06);
   transition: background 0.2s, transform 0.1s;
 }
-.btn-primary:hover { background: #ed8936; transform: translateY(-1px); }
+.btn-primary:hover { background: #2f6fd0; transform: translateY(-1px); }
 .btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -146,7 +140,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   font-size: 15px;
   font-weight: 700;
   padding: 14px 32px;
-  border-radius: 8px;
+  border-radius: 6px;
   text-decoration: none;
   border: 1px solid rgba(255,255,255,0.3);
   transition: background 0.2s;
@@ -162,25 +156,25 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.12em;
-  color: #4299e1;
+  color: #2f6fd0;
   background: rgba(66,153,225,0.1);
   border: 1px solid rgba(66,153,225,0.25);
   padding: 4px 14px;
-  border-radius: 20px;
+  border-radius: 6px;
   margin-bottom: 14px;
 }
 .sec-title {
   font-size: clamp(22px, 3.5vw, 34px);
   font-weight: 900;
-  color: #1a365d;
+  color: #0b2138;
   line-height: 1.35;
   margin-bottom: 14px;
   letter-spacing: -0.02em;
 }
-.sec-title em { font-style: normal; color: #2b6cb0; }
+.sec-title em { font-style: normal; color: #2f6fd0; }
 .sec-lead {
   font-size: 15px;
-  color: #4a5568;
+  color: #5a6b7d;
   line-height: 1.9;
   margin-bottom: 48px;
 }
@@ -188,23 +182,23 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 /* ── キャッチ ── */
 .catch-box {
   background: #fff;
-  border: 2px solid #bee3f8;
-  border-radius: 20px;
+  border: 2px solid #dbe7f6;
+  border-radius: 6px;
   padding: 36px 40px;
   margin-bottom: 64px;
   text-align: center;
-  box-shadow: 0 4px 24px rgba(26,54,93,0.07);
+  box-shadow: 0 2px 8px rgba(11,33,56,.06);
 }
 .catch-box p {
   font-size: clamp(17px, 2.2vw, 22px);
   font-weight: 700;
-  color: #1a365d;
+  color: #0b2138;
   line-height: 1.7;
 }
 .catch-box p em {
   font-style: normal;
-  color: #2b6cb0;
-  background: linear-gradient(transparent 60%, rgba(66,153,225,0.18) 60%);
+  color: #2f6fd0;
+  background:rgba(66,153,225,0.18);
 }
 
 /* ── 3者チーム ── */
@@ -216,10 +210,10 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 }
 .team-card {
   background: #fff;
-  border-radius: 18px;
+  border-radius: 6px;
   padding: 28px 24px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 20px rgba(26,54,93,0.06);
+  border: 1px solid #dfe6ee;
+  box-shadow: 0 2px 8px rgba(11,33,56,.06);
   text-align: center;
 }
 .team-icon { font-size: 36px; margin-bottom: 14px; }
@@ -227,20 +221,20 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #4299e1;
+  color: #2f6fd0;
   margin-bottom: 6px;
 }
-.team-title { font-size: 16px; font-weight: 700; color: #1a365d; margin-bottom: 10px; }
-.team-desc { font-size: 13px; color: #718096; line-height: 1.7; }
+.team-title { font-size: 16px; font-weight: 700; color: #0b2138; margin-bottom: 10px; }
+.team-desc { font-size: 13px; color: #5a6b7d; line-height: 1.7; }
 .team-note {
-  background: linear-gradient(135deg, #ebf8ff, #e6fffa);
-  border: 1px solid #bee3f8;
-  border-radius: 14px;
+  background:#eef4fb;
+  border: 1px solid #dbe7f6;
+  border-radius: 6px;
   padding: 18px 24px;
   text-align: center;
   font-size: 14px;
   font-weight: 700;
-  color: #1a365d;
+  color: #0b2138;
   margin-bottom: 64px;
   line-height: 1.8;
 }
@@ -253,14 +247,14 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   margin-bottom: 64px;
 }
 .pain-item {
-  background: linear-gradient(135deg, #fff5f5, #fce7f3);
+  background:#fff5f5;
   border: 1px solid rgba(239,68,68,0.15);
-  border-radius: 16px;
+  border-radius: 6px;
   padding: 22px;
 }
 .pain-icon { font-size: 26px; margin-bottom: 10px; }
 .pain-title { font-size: 14px; font-weight: 700; color: #c53030; margin-bottom: 6px; }
-.pain-desc { font-size: 13px; color: #4a5568; line-height: 1.65; }
+.pain-desc { font-size: 13px; color: #5a6b7d; line-height: 1.65; }
 
 /* ── 2パック ── */
 .pack-grid {
@@ -271,29 +265,29 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 }
 .pack-card {
   background: #fff;
-  border-radius: 20px;
+  border-radius: 6px;
   padding: 32px 28px;
-  border: 1.5px solid #e2e8f0;
-  box-shadow: 0 6px 28px rgba(26,54,93,0.07);
+  border: 1.5px solid #dfe6ee;
+  box-shadow: 0 2px 8px rgba(11,33,56,.06);
   position: relative;
   display: flex;
   flex-direction: column;
 }
 .pack-card.featured {
-  border-color: #4299e1;
-  box-shadow: 0 8px 36px rgba(66,153,225,0.15);
+  border-color: #2f6fd0;
+  box-shadow: 0 2px 8px rgba(11,33,56,.06);
 }
 .pack-badge {
   position: absolute;
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #1a365d, #2b6cb0);
+  background:#0b2138;
   color: #fff;
   font-size: 11px;
   font-weight: 700;
   padding: 4px 16px;
-  border-radius: 20px;
+  border-radius: 6px;
   white-space: nowrap;
   letter-spacing: 0.04em;
 }
@@ -301,22 +295,22 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: #4299e1;
+  color: #2f6fd0;
   margin-bottom: 10px;
 }
 .pack-icon { font-size: 36px; margin-bottom: 12px; }
-.pack-name { font-size: 18px; font-weight: 900; color: #1a365d; margin-bottom: 12px; line-height: 1.4; }
+.pack-name { font-size: 18px; font-weight: 900; color: #0b2138; margin-bottom: 12px; line-height: 1.4; }
 .pack-target {
   font-size: 12px;
   font-weight: 700;
   color: #fff;
-  background: #4299e1;
+  background: #2f6fd0;
   display: inline-block;
   padding: 3px 12px;
-  border-radius: 20px;
+  border-radius: 6px;
   margin-bottom: 14px;
 }
-.pack-desc { font-size: 13px; color: #4a5568; line-height: 1.75; margin-bottom: 18px; }
+.pack-desc { font-size: 13px; color: #5a6b7d; line-height: 1.75; margin-bottom: 18px; }
 .pack-includes {
   list-style: none;
   margin-bottom: 20px;
@@ -326,7 +320,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   font-size: 13px;
   color: #374151;
   padding: 5px 0;
-  border-bottom: 1px solid #f0f4f8;
+  border-bottom: 1px solid #f6f8fb;
   padding-left: 20px;
   position: relative;
 }
@@ -335,16 +329,16 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   content: '✓';
   position: absolute;
   left: 0;
-  color: #4299e1;
+  color: #2f6fd0;
   font-weight: 700;
 }
 .pack-copy {
-  background: #f7fafc;
-  border-left: 3px solid #4299e1;
+  background: #f6f8fb;
+  border-left: 3px solid #2f6fd0;
   border-radius: 0 8px 8px 0;
   padding: 12px 14px;
   font-size: 13px;
-  color: #2b6cb0;
+  color: #2f6fd0;
   font-weight: 600;
   line-height: 1.65;
   font-style: italic;
@@ -352,8 +346,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 
 /* ── 価格 ── */
 .price-box {
-  background: linear-gradient(135deg, #1a365d 0%, #2a4a7f 60%, #2b6cb0 100%);
-  border-radius: 24px;
+  background:#0b2138;
+  border-radius: 6px;
   padding: 48px 40px;
   text-align: center;
   color: #fff;
@@ -366,7 +360,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   position: absolute;
   top: -60px; right: -60px;
   width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+  background:rgba(255,255,255,0.08);
   border-radius: 50%;
 }
 .price-box-inner { position: relative; z-index: 1; }
@@ -374,11 +368,11 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   display: inline-block;
   background: rgba(246,173,85,0.2);
   border: 1px solid rgba(246,173,85,0.5);
-  color: #f6ad55;
+  color: #2f6fd0;
   font-size: 12px;
   font-weight: 700;
   padding: 4px 16px;
-  border-radius: 20px;
+  border-radius: 6px;
   margin-bottom: 16px;
   letter-spacing: 0.06em;
 }
@@ -401,18 +395,18 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   color: rgba(255,255,255,0.4);
   text-decoration: line-through;
 }
-.price-arrow { font-size: 28px; color: #f6ad55; }
+.price-arrow { font-size: 28px; color: #2f6fd0; }
 .price-special { text-align: center; }
 .price-special-label {
   font-size: 12px;
   font-weight: 700;
-  color: #f6ad55;
+  color: #2f6fd0;
   margin-bottom: 4px;
 }
 .price-special-val {
   font-size: 52px;
   font-weight: 900;
-  color: #f6ad55;
+  color: #2f6fd0;
   line-height: 1;
 }
 .price-special-val small { font-size: 24px; }
@@ -426,7 +420,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 .price-item {
   background: rgba(255,255,255,0.1);
   border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 10px 20px;
   font-size: 13px;
   color: rgba(255,255,255,0.85);
@@ -443,15 +437,15 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 }
 .industry-item {
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
+  border: 1px solid #dfe6ee;
+  border-radius: 6px;
   padding: 20px 16px;
   text-align: center;
-  box-shadow: 0 2px 10px rgba(26,54,93,0.04);
+  box-shadow: 0 2px 8px rgba(11,33,56,.06);
 }
 .industry-icon { font-size: 28px; margin-bottom: 8px; }
-.industry-name { font-size: 14px; font-weight: 700; color: #1a365d; margin-bottom: 4px; }
-.industry-ex { font-size: 11px; color: #718096; line-height: 1.5; }
+.industry-name { font-size: 14px; font-weight: 700; color: #0b2138; margin-bottom: 4px; }
+.industry-ex { font-size: 11px; color: #5a6b7d; line-height: 1.5; }
 
 /* ── フロー ── */
 .flow-list {
@@ -468,7 +462,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 .flow-num {
   min-width: 36px;
   height: 36px;
-  background: linear-gradient(135deg, #1a365d, #2b6cb0);
+  background:#0b2138;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -481,20 +475,20 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 .flow-connector {
   width: 2px;
   height: 20px;
-  background: #e2e8f0;
+  background: #dfe6ee;
   margin: 0 17px;
 }
 .flow-body {
   background: #fff;
-  border-radius: 14px;
+  border-radius: 6px;
   padding: 16px 20px;
   flex: 1;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #dfe6ee;
   margin-bottom: 8px;
-  box-shadow: 0 2px 8px rgba(26,54,93,0.04);
+  box-shadow: 0 2px 8px rgba(11,33,56,.06);
 }
-.flow-title { font-size: 14px; font-weight: 700; color: #1a365d; margin-bottom: 4px; }
-.flow-desc { font-size: 13px; color: #718096; line-height: 1.65; }
+.flow-title { font-size: 14px; font-weight: 700; color: #0b2138; margin-bottom: 4px; }
+.flow-desc { font-size: 13px; color: #5a6b7d; line-height: 1.65; }
 
 /* ── 価格設計テーブル ── */
 .pricing-table {
@@ -504,7 +498,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   font-size: 14px;
 }
 .pricing-table th {
-  background: #1a365d;
+  background: #0b2138;
   color: #fff;
   padding: 11px 16px;
   text-align: left;
@@ -515,32 +509,32 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 .pricing-table th:nth-child(2) { text-align: right; }
 .pricing-table td {
   padding: 12px 16px;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #dfe6ee;
   vertical-align: middle;
   line-height: 1.6;
 }
-.pricing-table td:nth-child(2) { text-align: right; font-weight: 900; color: #1a365d; font-size: 15px; white-space: nowrap; }
+.pricing-table td:nth-child(2) { text-align: right; font-weight: 900; color: #0b2138; font-size: 15px; white-space: nowrap; }
 .pricing-table tr:last-child td { border-bottom: none; }
-.pricing-table tr:nth-child(even) td { background: #f7fafc; }
-.pricing-table tr.featured td { background: linear-gradient(135deg, #fffbeb, #fef3c7); }
-.pricing-table tr.featured td:first-child { border-left: 3px solid #f6ad55; }
+.pricing-table tr:nth-child(even) td { background: #f6f8fb; }
+.pricing-table tr.featured td { background:#fffbeb; }
+.pricing-table tr.featured td:first-child { border-left: 3px solid #2f6fd0; }
 .pt-label {
   display: inline-block;
   font-size: 11px; font-weight: 700;
-  padding: 2px 10px; border-radius: 20px;
+  padding: 2px 10px; border-radius: 6px;
   margin-bottom: 3px;
 }
-.pt-label.base { background: #ebf8ff; color: #2b6cb0; border: 1px solid #bee3f8; }
+.pt-label.base { background: #eef4fb; color: #2f6fd0; border: 1px solid #dbe7f6; }
 .pt-label.special { background: #fffbeb; color: #b45309; border: 1px solid #f6e05e; }
 .pt-label.monthly { background: #f0fff4; color: #276749; border: 1px solid #9ae6b4; }
 .pt-label.add { background: #faf5ff; color: #6b46c1; border: 1px solid #d6bcfa; }
-.pt-note { font-size: 13px; color: #718096; line-height: 1.8; margin-bottom: 48px; }
+.pt-note { font-size: 13px; color: #5a6b7d; line-height: 1.8; margin-bottom: 48px; }
 
 /* ── FAQ ── */
 .faq-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 64px; }
 .faq-item {
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border: 1px solid #dfe6ee;
+  border-radius: 6px;
   margin-bottom: 10px;
   overflow: hidden;
   background: #fff;
@@ -553,15 +547,15 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   cursor: pointer;
   font-size: 14px;
   font-weight: 700;
-  color: #1a365d;
+  color: #0b2138;
   line-height: 1.55;
   user-select: none;
 }
-.faq-q:hover { background: #f7fafc; }
+.faq-q:hover { background: #f6f8fb; }
 .faq-q-icon {
   flex-shrink: 0;
   width: 24px; height: 24px;
-  background: linear-gradient(135deg, #1a365d, #2b6cb0);
+  background:#0b2138;
   color: #fff;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -571,8 +565,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 .faq-a-icon {
   flex-shrink: 0;
   width: 24px; height: 24px;
-  background: #ebf8ff;
-  color: #2b6cb0;
+  background: #eef4fb;
+  color: #2f6fd0;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 12px; font-weight: 900; margin-top: 1px;
@@ -587,20 +581,20 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   display: none;
   padding: 0 20px 16px 56px;
   font-size: 13.5px;
-  color: #4a5568;
+  color: #5a6b7d;
   line-height: 1.85;
-  border-top: 1px solid #f0f4f8;
+  border-top: 1px solid #f6f8fb;
 }
 .faq-a-inner {
   display: flex; gap: 12px; padding-top: 14px;
 }
 .faq-item.open .faq-a { display: block; }
-.faq-a strong { color: #1a365d; }
+.faq-a strong { color: #0b2138; }
 
 /* ── CTA ── */
 .cta-box {
-  background: linear-gradient(135deg, #1a365d 0%, #2a4a7f 60%, #2b6cb0 100%);
-  border-radius: 24px;
+  background:#0b2138;
+  border-radius: 6px;
   padding: 52px 40px;
   text-align: center;
   color: #fff;
@@ -612,7 +606,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   position: absolute;
   top: -60px; right: -60px;
   width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+  background:rgba(255,255,255,0.08);
   border-radius: 50%;
 }
 .cta-box-inner { position: relative; z-index: 1; }
@@ -622,7 +616,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 
 /* ── Back ── */
 .back-link { text-align: center; margin-top: 32px; }
-.back-link a { color: #4299e1; font-size: 14px; font-weight: 600; text-decoration: none; }
+.back-link a { color: #2f6fd0; font-size: 14px; font-weight: 600; text-decoration: none; }
 .back-link a:hover { text-decoration: underline; }
 
 /* ── Team avatar & links ── */
@@ -630,25 +624,25 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   width: 88px; height: 88px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #bee3f8;
+  border: 3px solid #dbe7f6;
   margin: 0 auto 14px;
   display: block;
-  background: #e2e8f0;
+  background: #dfe6ee;
 }
 .team-name {
-  font-size: 16px; font-weight: 900; color: #1a365d; margin-bottom: 2px;
+  font-size: 16px; font-weight: 900; color: #0b2138; margin-bottom: 2px;
 }
 .team-links {
   display: flex; justify-content: center; gap: 7px; margin-top: 14px; flex-wrap: wrap;
 }
 .team-link {
-  font-size: 11px; font-weight: 700; padding: 4px 13px; border-radius: 20px;
+  font-size: 11px; font-weight: 700; padding: 4px 13px; border-radius: 6px;
   text-decoration: none; border: 1px solid; transition: all 0.2s; display: inline-flex; align-items: center; gap: 4px;
 }
 .team-link.x-link { background: #0f1419; color: #fff; border-color: #0f1419; }
 .team-link.x-link:hover { background: #1a2533; }
-.team-link.web-link { background: #ebf8ff; color: #2b6cb0; border-color: #bee3f8; }
-.team-link.web-link:hover { background: #bee3f8; }
+.team-link.web-link { background: #eef4fb; color: #2f6fd0; border-color: #dbe7f6; }
+.team-link.web-link:hover { background: #dbe7f6; }
 
 /* ── Tech badge row ── */
 .tech-badges {
@@ -657,26 +651,25 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 .tech-badge {
   background: rgba(66,153,225,0.12);
   border: 1px solid rgba(66,153,225,0.3);
-  color: #90cdf4;
+  color: #7fb2f0;
   font-size: 12px; font-weight: 700;
-  padding: 5px 16px; border-radius: 20px; letter-spacing: 0.04em;
+  padding: 5px 16px; border-radius: 6px; letter-spacing: 0.04em;
 }
 
 /* ── Divider ── */
-.divider { height: 1px; background: #e2e8f0; margin: 0 0 64px; }
+.divider { height: 1px; background: #dfe6ee; margin: 0 0 64px; }
 
 /* ══ CASE STUDY（導入事例） ══ */
 #case-study .cs-summary {
   position: relative; overflow: hidden; margin-bottom: 18px;
-  background:
-    linear-gradient(100deg, rgba(10,26,47,0.95) 0%, rgba(10,26,47,0.86) 45%, rgba(18,41,74,0.55) 100%),
+  background:linear-gradient(rgba(10,26,47,0.95), rgba(10,26,47,0.95)),
     url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80') center/cover no-repeat;
-  padding: 32px 34px; border-radius: 14px;
+  padding: 32px 34px; border-radius: 6px;
 }
 #case-study .cs-summary-title { color: #fff; font-size: 16px; font-weight: 900; margin-bottom: 20px; }
 #case-study .cs-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 24px; }
-#case-study .cs-summary-item { border-left: 3px solid #f6ad55; padding-left: 16px; }
-#case-study .cs-summary-value { font-size: 34px; font-weight: 900; color: #f6ad55; line-height: 1.05; letter-spacing: -0.03em; }
+#case-study .cs-summary-item { border-left: 3px solid #2f6fd0; padding-left: 16px; }
+#case-study .cs-summary-value { font-size: 34px; font-weight: 900; color: #2f6fd0; line-height: 1.05; letter-spacing: -0.03em; }
 #case-study .cs-summary-value small { font-size: 15px; font-weight: 700; }
 #case-study .cs-summary-label { font-size: 12px; color: rgba(255,255,255,0.78); margin-top: 6px; line-height: 1.6; }
 
@@ -685,12 +678,12 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   font-size: 11px; font-weight: 900; padding: 5px 13px;
   letter-spacing: 0.04em; white-space: nowrap; flex-shrink: 0; color: #fff; border-radius: 4px;
 }
-#case-study .cs-badge--measured { background: #2b6cb0; }
+#case-study .cs-badge--measured { background: #2f6fd0; }
 #case-study .cs-badge--model    { background: #b45309; }
 #case-study .cs-legend {
   display: flex; gap: 20px; flex-wrap: wrap; align-items: center;
-  font-size: 12px; color: #5a6b80; background: #fff; padding: 13px 20px;
-  border-radius: 10px; border: 1px solid #e2e8f0; margin-bottom: 40px;
+  font-size: 12px; color: #5a6b7d; background: #fff; padding: 13px 20px;
+  border-radius: 6px; border: 1px solid #dfe6ee; margin-bottom: 40px;
 }
 #case-study .cs-legend-item { display: flex; align-items: center; gap: 9px; }
 
@@ -698,20 +691,20 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 #case-study .cs-alert {
   display: flex; gap: 14px; align-items: flex-start;
   background: #fffbeb; border: 1px solid #fcd34d; border-left: 4px solid #d97706;
-  border-radius: 10px; padding: 17px 22px; margin: 0 0 16px;
+  border-radius: 6px; padding: 17px 22px; margin: 0 0 16px;
 }
 #case-study .cs-alert-icon { flex-shrink: 0; width: 20px; height: 20px; fill: #d97706; margin-top: 2px; }
 #case-study .cs-alert-title { font-size: 13.5px; font-weight: 900; color: #92400e; margin-bottom: 6px; letter-spacing: 0.01em; }
 #case-study .cs-alert-text { font-size: 12.5px; color: #78350f; line-height: 1.9; }
 #case-study .cs-provisional {
   font-size: 12px; color: #92400e; background: #fffbeb;
-  border: 1px solid #fde68a; border-radius: 8px;
+  border: 1px solid #fde68a; border-radius: 6px;
   padding: 11px 15px; margin: 0 0 20px; line-height: 1.8;
 }
 
 #case-study .cs-case {
-  background: #fff; margin-bottom: 30px; border-radius: 14px; overflow: hidden;
-  box-shadow: 0 6px 24px rgba(18,41,74,0.09);
+  background: #fff; margin-bottom: 30px; border-radius: 6px; overflow: hidden;
+  box-shadow: 0 2px 8px rgba(11,33,56,.06);
 }
 #case-study .cs-hero {
   position: relative; min-height: 190px;
@@ -720,12 +713,12 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 }
 #case-study .cs-hero::before {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(10,26,47,0.35) 0%, rgba(10,26,47,0.88) 100%);
+  background:rgba(10,26,47,0.35);
 }
 #case-study .cs-hero > * { position: relative; z-index: 1; }
 #case-study .cs-topline { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
 #case-study .cs-num {
-  font-size: 12px; font-weight: 900; color: #0a1a2f; background: #f6ad55;
+  font-size: 12px; font-weight: 900; color: #0b2138; background: #2f6fd0;
   padding: 4px 11px; letter-spacing: 0.05em; border-radius: 4px;
 }
 #case-study .cs-scope { font-size: 12px; color: rgba(255,255,255,0.82); font-weight: 700; }
@@ -735,8 +728,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 
 #case-study .cs-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2px; margin-bottom: 26px; }
 #case-study .cs-stat { padding: 18px 20px; }
-#case-study .cs-stat--dark  { background: #12294a; }
-#case-study .cs-stat--blue  { background: #2b6cb0; }
+#case-study .cs-stat--dark  { background: #0b2138; }
+#case-study .cs-stat--blue  { background: #2f6fd0; }
 #case-study .cs-stat--amber { background: #b45309; }
 #case-study .cs-stat-label { font-size: 11px; color: rgba(255,255,255,0.72); font-weight: 700; margin-bottom: 6px; }
 #case-study .cs-stat-value { font-size: 26px; font-weight: 900; color: #fff; line-height: 1.1; letter-spacing: -0.02em; }
@@ -744,72 +737,72 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 #case-study .cs-stat-sub { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 5px; }
 
 #case-study .cs-block-title {
-  font-size: 12px; font-weight: 900; color: #12294a; letter-spacing: 0.06em;
-  padding-bottom: 8px; border-bottom: 2px solid #12294a; margin-bottom: 18px; display: inline-block;
+  font-size: 12px; font-weight: 900; color: #0b2138; letter-spacing: 0.06em;
+  padding-bottom: 8px; border-bottom: 2px solid #0b2138; margin-bottom: 18px; display: inline-block;
 }
 #case-study .cs-bars { margin-bottom: 26px; }
 #case-study .cs-bar-row { display: grid; grid-template-columns: 68px 1fr; gap: 14px; align-items: center; }
-#case-study .cs-bar-name { font-size: 11px; font-weight: 900; color: #a0aec0; text-align: right; letter-spacing: 0.08em; }
-#case-study .cs-bar-name.is-after { color: #2b6cb0; }
+#case-study .cs-bar-name { font-size: 11px; font-weight: 900; color: #8b9aac; text-align: right; letter-spacing: 0.08em; }
+#case-study .cs-bar-name.is-after { color: #2f6fd0; }
 #case-study .cs-bar-track { background: #eef2f7; height: 44px; border-radius: 4px; overflow: hidden; }
 #case-study .cs-bar-fill { height: 100%; display: flex; align-items: center; padding: 0 16px; font-size: 18px; font-weight: 900; white-space: nowrap; }
 #case-study .cs-bar-fill--before { background: #c3ccd8; color: #2d3748; }
-#case-study .cs-bar-fill--after  { background: linear-gradient(90deg, #12294a, #2b6cb0); color: #fff; }
+#case-study .cs-bar-fill--after  { background:#0b2138; color: #fff; }
 #case-study .cs-bar-fill small { font-size: 12px; font-weight: 700; margin-left: 3px; }
-#case-study .cs-bar-sub { font-size: 12px; color: #718096; margin: 5px 0 14px 82px; }
+#case-study .cs-bar-sub { font-size: 12px; color: #5a6b7d; margin: 5px 0 14px 82px; }
 #case-study .cs-bar-delta {
-  background: #12294a; color: #f6ad55; font-size: 14px; font-weight: 900;
+  background: #0b2138; color: #2f6fd0; font-size: 14px; font-weight: 900;
   padding: 11px 18px; margin-left: 82px; display: inline-block; border-radius: 6px;
 }
 
-#case-study .cs-gauge-wrap { background: #f4f8fc; padding: 20px 22px; border-radius: 10px; margin-bottom: 26px; }
-#case-study .cs-gauge-title { font-size: 12px; font-weight: 900; color: #12294a; margin-bottom: 14px; }
+#case-study .cs-gauge-wrap { background: #f6f8fb; padding: 20px 22px; border-radius: 6px; margin-bottom: 26px; }
+#case-study .cs-gauge-title { font-size: 12px; font-weight: 900; color: #0b2138; margin-bottom: 14px; }
 #case-study .cs-gauge-row { display: grid; grid-template-columns: 104px 1fr 48px; gap: 12px; align-items: center; margin-bottom: 10px; font-size: 12px; }
 #case-study .cs-gauge-row:last-child { margin-bottom: 0; }
-#case-study .cs-gauge-name { color: #4a5568; font-weight: 700; text-align: right; }
-#case-study .cs-gauge-track { background: #dde5ee; height: 18px; border-radius: 4px; overflow: hidden; }
+#case-study .cs-gauge-name { color: #5a6b7d; font-weight: 700; text-align: right; }
+#case-study .cs-gauge-track { background: #dfe6ee; height: 18px; border-radius: 4px; overflow: hidden; }
 #case-study .cs-gauge-fill { display: block; height: 100%; }
-#case-study .cs-gauge-fill--old { background: #a0aec0; }
-#case-study .cs-gauge-fill--new { background: linear-gradient(90deg, #276749, #38a169); }
-#case-study .cs-gauge-num { font-weight: 900; color: #12294a; text-align: right; }
+#case-study .cs-gauge-fill--old { background: #8b9aac; }
+#case-study .cs-gauge-fill--new { background:#276749; }
+#case-study .cs-gauge-num { font-weight: 900; color: #0b2138; text-align: right; }
 
 #case-study .cs-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px 22px; margin-bottom: 26px; }
 #case-study .cs-action { display: flex; gap: 11px; align-items: flex-start; font-size: 13.5px; color: #2d3748; line-height: 1.7; }
-#case-study .cs-action svg { width: 20px; height: 20px; fill: #2b6cb0; flex-shrink: 0; margin-top: 3px; }
+#case-study .cs-action svg { width: 20px; height: 20px; fill: #2f6fd0; flex-shrink: 0; margin-top: 3px; }
 
 #case-study .cs-shot { margin-bottom: 26px; }
-#case-study .cs-shot img { width: 100%; display: block; border-radius: 8px; box-shadow: 0 4px 18px rgba(18,41,74,0.14); cursor: zoom-in; }
-#case-study .cs-shot-cap { font-size: 11px; color: #90a0b4; text-align: center; margin-top: 8px; }
+#case-study .cs-shot img { width: 100%; display: block; border-radius: 6px; box-shadow: 0 2px 8px rgba(11,33,56,.06); cursor: zoom-in; }
+#case-study .cs-shot-cap { font-size: 11px; color: #8b9aac; text-align: center; margin-top: 8px; }
 
-#case-study .cs-roi { background: #f4f8fc; padding: 20px 24px; border-radius: 10px; margin-bottom: 20px; }
+#case-study .cs-roi { background: #f6f8fb; padding: 20px 24px; border-radius: 6px; margin-bottom: 20px; }
 #case-study .cs-roi-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
-#case-study .cs-roi-label { font-size: 12px; font-weight: 900; color: #12294a; }
+#case-study .cs-roi-label { font-size: 12px; font-weight: 900; color: #0b2138; }
 #case-study .cs-roi-value { font-size: 23px; font-weight: 900; color: #b45309; }
 #case-study .cs-roi-value small { font-size: 14px; }
-#case-study .cs-roi-track { position: relative; height: 12px; background: #dde5ee; border-radius: 6px; overflow: hidden; }
-#case-study .cs-roi-done { position: absolute; left: 0; top: 0; bottom: 0; background: linear-gradient(90deg, #b45309, #f6ad55); }
-#case-study .cs-roi-scale { display: flex; justify-content: space-between; font-size: 10px; color: #90a0b4; margin-top: 6px; }
-#case-study .cs-roi-calc { font-size: 11px; color: #718096; margin-top: 10px; line-height: 1.7; }
+#case-study .cs-roi-track { position: relative; height: 12px; background: #dfe6ee; border-radius: 6px; overflow: hidden; }
+#case-study .cs-roi-done { position: absolute; left: 0; top: 0; bottom: 0; background:#b45309; }
+#case-study .cs-roi-scale { display: flex; justify-content: space-between; font-size: 10px; color: #8b9aac; margin-top: 6px; }
+#case-study .cs-roi-calc { font-size: 11px; color: #5a6b7d; margin-top: 10px; line-height: 1.7; }
 
-#case-study .cs-evidence { background: #f4f8fc; border-radius: 10px; }
+#case-study .cs-evidence { background: #f6f8fb; border-radius: 6px; }
 #case-study .cs-evidence > summary {
   cursor: pointer; list-style: none;
-  font-size: 13px; font-weight: 900; color: #2b6cb0;
+  font-size: 13px; font-weight: 900; color: #2f6fd0;
   padding: 14px 20px; display: flex; align-items: center; gap: 9px;
 }
 #case-study .cs-evidence > summary::-webkit-details-marker { display: none; }
 #case-study .cs-evidence > summary::before { content: '＋'; font-size: 14px; }
 #case-study .cs-evidence[open] > summary::before { content: '−'; }
 #case-study .cs-evidence-body { padding: 0 20px 18px; }
-#case-study .cs-evidence-body dl { display: grid; grid-template-columns: 92px 1fr; gap: 7px 14px; font-size: 12.5px; padding-top: 6px; border-top: 1px solid #dde5ee; }
-#case-study .cs-evidence-body dt { color: #718096; font-weight: 700; }
-#case-study .cs-evidence-body dd { color: #4a5568; line-height: 1.75; }
+#case-study .cs-evidence-body dl { display: grid; grid-template-columns: 92px 1fr; gap: 7px 14px; font-size: 12.5px; padding-top: 6px; border-top: 1px solid #dfe6ee; }
+#case-study .cs-evidence-body dt { color: #5a6b7d; font-weight: 700; }
+#case-study .cs-evidence-body dd { color: #5a6b7d; line-height: 1.75; }
 
 #case-study .cs-note {
-  font-size: 12px; color: #5a6b80; line-height: 1.95;
-  background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 24px;
+  font-size: 12px; color: #5a6b7d; line-height: 1.95;
+  background: #fff; border: 1px solid #dfe6ee; border-radius: 6px; padding: 20px 24px;
 }
-#case-study .cs-credit { font-size: 10px; color: #90a0b4; margin-top: 14px; text-align: right; }
+#case-study .cs-credit { font-size: 10px; color: #8b9aac; margin-top: 14px; text-align: right; }
 
 @media (max-width: 640px) {
   #case-study .cs-hero { padding: 20px; min-height: 160px; }
@@ -830,10 +823,10 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 }
 .expand-item {
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
+  border: 1px solid #dfe6ee;
+  border-radius: 6px;
   padding: 20px 22px;
-  box-shadow: 0 2px 10px rgba(26,54,93,0.05);
+  box-shadow: 0 2px 8px rgba(11,33,56,.06);
   display: flex;
   gap: 14px;
   align-items: flex-start;
@@ -842,16 +835,16 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
   font-size: 26px; flex-shrink: 0; line-height: 1; margin-top: 2px;
 }
 .expand-title {
-  font-size: 14px; font-weight: 700; color: #1a365d; margin-bottom: 5px; line-height: 1.4;
+  font-size: 14px; font-weight: 700; color: #0b2138; margin-bottom: 5px; line-height: 1.4;
 }
 .expand-desc {
-  font-size: 12px; color: #718096; line-height: 1.65;
+  font-size: 12px; color: #5a6b7d; line-height: 1.65;
 }
 .expand-item.featured {
-  border-color: #4299e1;
-  background: linear-gradient(135deg, #f0f9ff, #ebf8ff);
+  border-color: #2f6fd0;
+  background:#f0f9ff;
 }
-.expand-item.featured .expand-title { color: #1a365d; }
+.expand-item.featured .expand-title { color: #0b2138; }
 
 /* ── Sample screens (縦並び常時表示) ── */
 .showcase {
@@ -862,9 +855,9 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 }
 .showcase-item {
   background: #fff;
-  border-radius: 16px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 20px rgba(26,54,93,0.07);
+  border-radius: 6px;
+  border: 1px solid #dfe6ee;
+  box-shadow: 0 2px 8px rgba(11,33,56,.06);
   overflow: hidden;
 }
 .showcase-header {
@@ -875,17 +868,17 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 }
 .showcase-num {
   min-width: 40px; height: 40px;
-  background: linear-gradient(135deg, #1a365d, #2b6cb0);
+  background:#0b2138;
   color: #fff; font-size: 13px; font-weight: 900;
-  border-radius: 10px;
+  border-radius: 6px;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; letter-spacing: 0.04em;
 }
 .showcase-title {
-  font-size: 15px; font-weight: 900; color: #1a365d; margin-bottom: 5px; line-height: 1.45;
+  font-size: 15px; font-weight: 900; color: #0b2138; margin-bottom: 5px; line-height: 1.45;
 }
 .showcase-desc {
-  font-size: 13px; color: #4a5568; line-height: 1.75;
+  font-size: 13px; color: #5a6b7d; line-height: 1.75;
 }
 .showcase-img-wrap {
   padding: 0 20px 20px;
@@ -893,8 +886,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 }
 .showcase-img-wrap img {
   width: 100%; height: auto; display: block;
-  border-radius: 10px; border: 1px solid #e2e8f0;
-  box-shadow: 0 2px 12px rgba(26,54,93,0.08);
+  border-radius: 6px; border: 1px solid #dfe6ee;
+  box-shadow: 0 2px 8px rgba(11,33,56,.06);
   cursor: zoom-in;
   transition: opacity 0.15s;
 }
@@ -913,7 +906,7 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 .lb-overlay.active { display: flex; }
 .lb-overlay img {
   max-width: 94vw; max-height: 90vh;
-  border-radius: 8px; box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+  border-radius: 6px; box-shadow: 0 2px 8px rgba(11,33,56,.06);
   cursor: default;
 }
 .lb-close {
@@ -936,53 +929,53 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 /* ══ パック以外も対応できることの訴求 ══ */
 .anypack {
   position: relative; overflow: hidden;
-  background: linear-gradient(135deg, #12294a 0%, #1e4a80 60%, #2b6cb0 100%);
-  border-radius: 18px; padding: 38px 40px; margin-top: 34px; color: #fff;
-  box-shadow: 0 10px 30px rgba(18,41,74,0.22);
+  background:#0b2138;
+  border-radius: 6px; padding: 38px 40px; margin-top: 34px; color: #fff;
+  box-shadow: 0 2px 8px rgba(11,33,56,.06);
 }
 .anypack::before {
   content: ''; position: absolute; top: -90px; right: -60px;
   width: 320px; height: 320px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(246,173,85,0.22), transparent 65%);
+  background:rgba(246,173,85,0.22);
 }
 .anypack > * { position: relative; z-index: 1; }
 .anypack-badge {
-  display: inline-block; background: #f6ad55; color: #12294a;
+  display: inline-block; background: #2f6fd0; color: #0b2138;
   font-size: 12px; font-weight: 900; letter-spacing: 0.06em;
-  padding: 6px 16px; border-radius: 20px; margin-bottom: 18px;
+  padding: 6px 16px; border-radius: 6px; margin-bottom: 18px;
 }
 .anypack-title {
   font-size: clamp(20px, 3vw, 28px); font-weight: 900; line-height: 1.5;
   letter-spacing: -0.01em; margin-bottom: 16px;
 }
-.anypack-title em { font-style: normal; color: #f6ad55; }
+.anypack-title em { font-style: normal; color: #2f6fd0; }
 .anypack-lead { font-size: 14.5px; line-height: 2; color: rgba(255,255,255,0.88); margin-bottom: 24px; }
 .anypack-lead strong { color: #fff; }
 
 .anypack-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
 .anypack-chips span {
   background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.28);
-  border-radius: 24px; padding: 8px 16px; font-size: 13px; font-weight: 700;
+  border-radius: 6px; padding: 8px 16px; font-size: 13px; font-weight: 700;
 }
 
 .anypack-foot {
   background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 14px; padding: 22px 24px;
+  border-radius: 6px; padding: 22px 24px;
   display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
 }
 .anypack-foot-text { flex: 1; min-width: 260px; font-size: 13.5px; line-height: 1.95; color: rgba(255,255,255,0.86); }
-.anypack-foot-text strong { display: block; color: #f6ad55; font-size: 15px; margin-bottom: 4px; }
+.anypack-foot-text strong { display: block; color: #2f6fd0; font-size: 15px; margin-bottom: 4px; }
 .anypack-foot-text b { color: #fff; }
 .anypack-btns { display: flex; flex-direction: column; align-items: stretch; gap: 10px; }
 .anypack-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  background: #f6ad55; color: #12294a; font-size: 15px; font-weight: 900;
-  padding: 15px 32px; border-radius: 10px; text-decoration: none; white-space: nowrap;
-  box-shadow: 0 6px 16px rgba(246,173,85,0.28); transition: transform 0.2s;
+  background: #2f6fd0; color: #0b2138; font-size: 15px; font-weight: 900;
+  padding: 15px 32px; border-radius: 6px; text-decoration: none; white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(11,33,56,.06); transition: transform 0.2s;
 }
 .anypack-btn:hover { transform: translateY(-2px); }
 .anypack-link { font-size: 12.5px; font-weight: 700; color: rgba(255,255,255,0.82); text-decoration: none; text-align: center; }
-.anypack-link:hover { color: #f6ad55; }
+.anypack-link:hover { color: #2f6fd0; }
 
 @media (max-width: 640px) {
   .anypack { padding: 28px 20px; }
@@ -993,21 +986,21 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 /* ══ 目次ナビ ══ */
 .page-nav {
   display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-  background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+  background: #fff; border: 1px solid #dfe6ee; border-radius: 6px;
   padding: 14px 18px; margin-bottom: 56px;
 }
-.page-nav-label { font-size: 11px; font-weight: 700; color: #a0aec0; letter-spacing: 0.08em; margin-right: 6px; }
+.page-nav-label { font-size: 11px; font-weight: 700; color: #8b9aac; letter-spacing: 0.08em; margin-right: 6px; }
 .page-nav a {
-  font-size: 13px; font-weight: 700; color: #2b6cb0; text-decoration: none;
-  padding: 6px 14px; border-radius: 20px; background: #ebf4ff; transition: background 0.2s, color 0.2s;
+  font-size: 13px; font-weight: 700; color: #2f6fd0; text-decoration: none;
+  padding: 6px 14px; border-radius: 6px; background: #ebf4ff; transition: background 0.2s, color 0.2s;
 }
-.page-nav a:hover { background: #2b6cb0; color: #fff; }
+.page-nav a:hover { background: #2f6fd0; color: #fff; }
 
 /* ══ 追従CTA ══ */
 .sticky-cta {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 80;
   background: rgba(26,54,93,0.97); color: #fff;
-  box-shadow: 0 -4px 16px rgba(0,0,0,0.18);
+  box-shadow: 0 2px 8px rgba(11,33,56,.06);
   transform: translateY(110%); transition: transform 0.3s ease;
 }
 .sticky-cta.is-shown { transform: translateY(0); }
@@ -1019,8 +1012,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 .sticky-cta-text strong { display: block; font-size: 14px; font-weight: 900; }
 .sticky-cta-text span { font-size: 11.5px; color: rgba(255,255,255,0.7); }
 .sticky-cta-btn {
-  background: #f6ad55; color: #1a365d; font-size: 14px; font-weight: 900;
-  padding: 12px 26px; border-radius: 8px; text-decoration: none; white-space: nowrap;
+  background: #2f6fd0; color: #0b2138; font-size: 14px; font-weight: 900;
+  padding: 12px 26px; border-radius: 6px; text-decoration: none; white-space: nowrap;
 }
 @media (max-width: 640px) {
   .sticky-cta-inner { padding: 10px 16px; gap: 10px; }
@@ -1030,28 +1023,28 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 
 /* ══ 事例：全幅の色帯にして区切りを明確にする ══ */
 #case-study {
-  background: #f4f8fc;
+  background: #f6f8fb;
   margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
   padding: 64px calc(50vw - 50% + 24px);
 }
 
 /* ══ 事例：一覧表 ══ */
-#case-study .cs-table-wrap { background: #fff; border-radius: 14px; padding: 22px 24px; margin-bottom: 34px; box-shadow: 0 2px 10px rgba(18,41,74,0.06); }
-#case-study .cs-table-title { font-size: 13px; font-weight: 900; color: #12294a; margin-bottom: 14px; }
+#case-study .cs-table-wrap { background: #fff; border-radius: 6px; padding: 22px 24px; margin-bottom: 34px; box-shadow: 0 2px 8px rgba(11,33,56,.06); }
+#case-study .cs-table-title { font-size: 13px; font-weight: 900; color: #0b2138; margin-bottom: 14px; }
 #case-study .cs-table { width: 100%; border-collapse: collapse; }
 #case-study .cs-table th {
-  font-size: 11px; color: #90a0b4; font-weight: 700; text-align: left;
-  padding: 8px 10px; border-bottom: 2px solid #e2e8f0; white-space: nowrap;
+  font-size: 11px; color: #8b9aac; font-weight: 700; text-align: left;
+  padding: 8px 10px; border-bottom: 2px solid #dfe6ee; white-space: nowrap;
 }
 #case-study .cs-table td { font-size: 13px; padding: 11px 10px; border-bottom: 1px solid #eef2f7; white-space: nowrap; }
 #case-study .cs-table tr:last-child td { border-bottom: 0; }
-#case-study .cs-td-name a { color: #12294a; font-weight: 900; text-decoration: none; border-bottom: 2px solid #cfe0f2; }
-#case-study .cs-td-name a:hover { color: #2b6cb0; border-color: #2b6cb0; }
-#case-study .cs-td-n { text-align: right; font-variant-numeric: tabular-nums; color: #4a5568; }
+#case-study .cs-td-name a { color: #0b2138; font-weight: 900; text-decoration: none; border-bottom: 2px solid #cfe0f2; }
+#case-study .cs-td-name a:hover { color: #2f6fd0; border-color: #2f6fd0; }
+#case-study .cs-td-n { text-align: right; font-variant-numeric: tabular-nums; color: #5a6b7d; }
 #case-study .cs-td-arrow { color: #cbd5e0; text-align: center; padding: 0 2px; }
-#case-study .cs-td-after { color: #2b6cb0; font-weight: 700; }
+#case-study .cs-td-after { color: #2f6fd0; font-weight: 700; }
 #case-study .cs-td-cut { color: #b45309; font-weight: 900; }
-#case-study .cs-table-note { font-size: 11px; color: #90a0b4; margin-top: 12px; }
+#case-study .cs-table-note { font-size: 11px; color: #8b9aac; margin-top: 12px; }
 @media (max-width: 640px) {
   #case-study .cs-table-wrap { overflow-x: auto; }
   #case-study .cs-table { min-width: 560px; }
@@ -1061,8 +1054,8 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 #case-study .cs-more { margin-top: 4px; }
 #case-study .cs-more > summary {
   cursor: pointer; list-style: none; text-align: center;
-  font-size: 13.5px; font-weight: 900; color: #2b6cb0;
-  background: #eef4fb; border-radius: 8px; padding: 13px;
+  font-size: 13.5px; font-weight: 900; color: #2f6fd0;
+  background: #eef4fb; border-radius: 6px; padding: 13px;
 }
 #case-study .cs-more > summary::-webkit-details-marker { display: none; }
 #case-study .cs-more > summary::after { content: ' ▼'; font-size: 10px; }
@@ -1074,18 +1067,106 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f7fafc; color: #1a1
 #case-study .cs-more-body { padding-top: 24px; }
 
 /* ══ 事例：全画面ギャラリー（旧 SYSTEM PREVIEW） ══ */
-#case-study .cs-gallery { margin-bottom: 26px; background: #f4f8fc; border-radius: 10px; }
+#case-study .cs-gallery { margin-bottom: 26px; background: #f6f8fb; border-radius: 6px; }
 #case-study .cs-gallery > summary {
   cursor: pointer; list-style: none;
-  font-size: 13px; font-weight: 900; color: #2b6cb0; padding: 14px 20px;
+  font-size: 13px; font-weight: 900; color: #2f6fd0; padding: 14px 20px;
 }
 #case-study .cs-gallery > summary::-webkit-details-marker { display: none; }
 #case-study .cs-gallery > summary::before { content: '＋ '; }
 #case-study .cs-gallery[open] > summary::before { content: '− '; }
 #case-study .cs-gallery-body { padding: 0 20px 20px; }
-#case-study .cs-gallery-lead { font-size: 12.5px; color: #5a6b80; line-height: 1.9; margin-bottom: 18px; }
+#case-study .cs-gallery-lead { font-size: 12.5px; color: #5a6b7d; line-height: 1.9; margin-bottom: 18px; }
 #case-study .cs-gallery-body .showcase-item { margin-bottom: 24px; }
 #case-study .cs-gallery-body .showcase-item:last-child { margin-bottom: 0; }
+
+/* ============================================================
+   ここから：トップページと同じ「作り」に寄せる上書き
+   カード（枠線＋影＋角丸）をやめ、罫線で区切る構成に統一する
+   ============================================================ */
+
+/* 余白・幅をトップと揃える */
+.container{max-width:1040px;padding:92px 24px}
+.sec-title{font-size:clamp(26px,3.6vw,40px);line-height:1.4;margin-bottom:20px}
+.sec-lead{font-size:16px;color:#5a6b7d;line-height:1.9;max-width:720px;margin-bottom:48px}
+/* セクションラベルは囲みをやめ、文字だけに */
+.sec-tag{background:none !important;border:0 !important;padding:0 !important;border-radius:0 !important;
+  font-size:12px;letter-spacing:.18em;color:#2f6fd0;margin-bottom:14px}
+
+/* 影は全廃 */
+.pack-card,.team-card,.industry-item,.expand-item,.showcase-item,.anypack,.price-box,
+.faq-item,.cs-case,.cs-summary,.cs-table-wrap,.cs-gallery,.catch-box,.cta-box{box-shadow:none !important}
+
+/* サービスパック：枠線カード → 罫線で仕切る2カラム */
+.pack-grid{gap:2px;background:#dfe6ee;border:1px solid #dfe6ee}
+.pack-card{border:0;border-radius:0;background:#fff;padding:34px 30px}
+.pack-card.featured{background:#f4f8fd;border:0}
+.pack-badge{border-radius:3px;font-size:11px;letter-spacing:.06em}
+.pack-label{font-size:11.5px;font-weight:900;letter-spacing:.1em;color:#2f6fd0}
+.pack-icon{font-size:22px;opacity:.75;margin-bottom:12px}
+.pack-name{font-size:20px;line-height:1.5}
+.pack-target{border-radius:3px;font-size:12px}
+.pack-includes li{padding-left:18px}
+
+/* お困りごと：色付きカード → 上罫線＋テキスト */
+.pain-grid{gap:36px 40px}
+.pain-item{background:none !important;border:0 !important;border-top:2px solid #dfe6ee !important;border-radius:0 !important;padding:26px 0 0 !important}
+.pain-icon{opacity:.75}
+.pain-title{font-size:18px;line-height:1.55}
+.pain-desc{font-size:14.5px;color:#5a6b7d;line-height:1.9}
+
+/* 3名チーム：カード → 上罫線 */
+.team-grid{gap:36px 40px}
+.team-card{background:none;border:0;border-top:2px solid #dfe6ee;border-radius:0;padding:26px 0 0;text-align:left}
+.team-avatar{margin:0 0 14px}
+.team-name{font-size:18px}
+.team-role{color:#2f6fd0;font-weight:700}
+
+/* 進め方 */
+.flow-num{border-radius:0;background:none;color:#2f6fd0;font-weight:900;font-size:12px;letter-spacing:.12em;width:auto;height:auto}
+.flow-connector{display:none}
+.flow-item{border-top:1px solid #dfe6ee;padding:26px 0 0;display:block}
+.flow-title{font-size:17px;margin-bottom:8px}
+.flow-desc{font-size:13.5px;color:#5a6b7d}
+
+/* 業種・拡張・実績ギャラリー：カード → 罫線 */
+.industry-grid,.expand-grid{gap:2px;background:#dfe6ee;border:1px solid #dfe6ee}
+.industry-item,.expand-item{border:0;border-radius:0;background:#fff;padding:22px 20px}
+.industry-icon,.expand-icon{opacity:.75}
+.showcase{gap:2px;background:#dfe6ee;border:1px solid #dfe6ee}
+.showcase-item{border:0;border-radius:0}
+
+/* FAQ：枠線 → 罫線区切り */
+.faq-list{border-top:1px solid #dfe6ee}
+.faq-item{border:0;border-bottom:1px solid #dfe6ee;border-radius:0;margin-bottom:0;background:none}
+.faq-q{padding:24px 0}
+.faq-a-inner{padding:0 0 24px}
+.faq-q-icon,.faq-a-icon{color:#2f6fd0;background:none;border:0}
+
+/* 価格・CTA・その他パック：角丸をやめて面で見せる */
+.price-box,.anypack,.cta-box{border-radius:0}
+.catch-box{border-radius:0;box-shadow:none}
+.cta-box-inner{border-radius:0}
+
+/* 導入事例：カード → 罫線区切り */
+.cs-case{border-radius:0;border:1px solid #dfe6ee;margin-bottom:2px}
+.cs-summary,.cs-table-wrap,.cs-gallery,.cs-evidence,.cs-alert,.cs-provisional{border-radius:0}
+.cs-stat{border-radius:0}
+.cs-badge{border-radius:3px}
+.cs-shot{border-radius:0}
+
+/* 固定CTA */
+.sticky-cta{border-radius:0}
+.sticky-cta-btn{border-radius:6px}
+
+@media (max-width:860px){
+  .container{padding:64px 20px}
+}
+
+/* チーム：説明文の行数が違ってもリンクの位置が揃うよう、下端で固定する */
+.team-card{display:flex;flex-direction:column;height:100%}
+.team-desc{flex:1 0 auto;margin-bottom:16px}
+.team-links{justify-content:flex-start;margin-top:auto}
 </style>
 </head>
 <body>
