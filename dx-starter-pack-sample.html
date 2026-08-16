@@ -1080,6 +1080,89 @@ body { font-family: 'Noto Sans JP', sans-serif; background: #f6f8fb; color: #1a1
 #case-study .cs-gallery-lead { font-size: 12.5px; color: #5a6b7d; line-height: 1.9; margin-bottom: 18px; }
 #case-study .cs-gallery-body .showcase-item { margin-bottom: 24px; }
 #case-study .cs-gallery-body .showcase-item:last-child { margin-bottom: 0; }
+
+/* ============================================================
+   ここから：トップページと同じ「作り」に寄せる上書き
+   カード（枠線＋影＋角丸）をやめ、罫線で区切る構成に統一する
+   ============================================================ */
+
+/* 余白・幅をトップと揃える */
+.container{max-width:1040px;padding:92px 24px}
+.sec-title{font-size:clamp(26px,3.6vw,40px);line-height:1.4;margin-bottom:20px}
+.sec-lead{font-size:16px;color:#5a6b7d;line-height:1.9;max-width:720px;margin-bottom:48px}
+/* セクションラベルは囲みをやめ、文字だけに */
+.sec-tag{background:none !important;border:0 !important;padding:0 !important;border-radius:0 !important;
+  font-size:12px;letter-spacing:.18em;color:#2f6fd0;margin-bottom:14px}
+
+/* 影は全廃 */
+.pack-card,.team-card,.industry-item,.expand-item,.showcase-item,.anypack,.price-box,
+.faq-item,.cs-case,.cs-summary,.cs-table-wrap,.cs-gallery,.catch-box,.cta-box{box-shadow:none !important}
+
+/* サービスパック：枠線カード → 罫線で仕切る2カラム */
+.pack-grid{gap:2px;background:#dfe6ee;border:1px solid #dfe6ee}
+.pack-card{border:0;border-radius:0;background:#fff;padding:34px 30px}
+.pack-card.featured{background:#f4f8fd;border:0}
+.pack-badge{border-radius:3px;font-size:11px;letter-spacing:.06em}
+.pack-label{font-size:11.5px;font-weight:900;letter-spacing:.1em;color:#2f6fd0}
+.pack-icon{font-size:22px;opacity:.75;margin-bottom:12px}
+.pack-name{font-size:20px;line-height:1.5}
+.pack-target{border-radius:3px;font-size:12px}
+.pack-includes li{padding-left:18px}
+
+/* お困りごと：色付きカード → 上罫線＋テキスト */
+.pain-grid{gap:36px 40px}
+.pain-item{background:none !important;border:0 !important;border-top:2px solid #dfe6ee !important;border-radius:0 !important;padding:26px 0 0 !important}
+.pain-icon{opacity:.75}
+.pain-title{font-size:18px;line-height:1.55}
+.pain-desc{font-size:14.5px;color:#5a6b7d;line-height:1.9}
+
+/* 3名チーム：カード → 上罫線 */
+.team-grid{gap:36px 40px}
+.team-card{background:none;border:0;border-top:2px solid #dfe6ee;border-radius:0;padding:26px 0 0;text-align:left}
+.team-avatar{margin:0 0 14px}
+.team-name{font-size:18px}
+.team-role{color:#2f6fd0;font-weight:700}
+
+/* 進め方 */
+.flow-num{border-radius:0;background:none;color:#2f6fd0;font-weight:900;font-size:12px;letter-spacing:.12em;width:auto;height:auto}
+.flow-connector{display:none}
+.flow-item{border-top:1px solid #dfe6ee;padding:26px 0 0;display:block}
+.flow-title{font-size:17px;margin-bottom:8px}
+.flow-desc{font-size:13.5px;color:#5a6b7d}
+
+/* 業種・拡張・実績ギャラリー：カード → 罫線 */
+.industry-grid,.expand-grid{gap:2px;background:#dfe6ee;border:1px solid #dfe6ee}
+.industry-item,.expand-item{border:0;border-radius:0;background:#fff;padding:22px 20px}
+.industry-icon,.expand-icon{opacity:.75}
+.showcase{gap:2px;background:#dfe6ee;border:1px solid #dfe6ee}
+.showcase-item{border:0;border-radius:0}
+
+/* FAQ：枠線 → 罫線区切り */
+.faq-list{border-top:1px solid #dfe6ee}
+.faq-item{border:0;border-bottom:1px solid #dfe6ee;border-radius:0;margin-bottom:0;background:none}
+.faq-q{padding:24px 0}
+.faq-a-inner{padding:0 0 24px}
+.faq-q-icon,.faq-a-icon{color:#2f6fd0;background:none;border:0}
+
+/* 価格・CTA・その他パック：角丸をやめて面で見せる */
+.price-box,.anypack,.cta-box{border-radius:0}
+.catch-box{border-radius:0;box-shadow:none}
+.cta-box-inner{border-radius:0}
+
+/* 導入事例：カード → 罫線区切り */
+.cs-case{border-radius:0;border:1px solid #dfe6ee;margin-bottom:2px}
+.cs-summary,.cs-table-wrap,.cs-gallery,.cs-evidence,.cs-alert,.cs-provisional{border-radius:0}
+.cs-stat{border-radius:0}
+.cs-badge{border-radius:3px}
+.cs-shot{border-radius:0}
+
+/* 固定CTA */
+.sticky-cta{border-radius:0}
+.sticky-cta-btn{border-radius:6px}
+
+@media (max-width:860px){
+  .container{padding:64px 20px}
+}
 </style>
 </head>
 <body>
