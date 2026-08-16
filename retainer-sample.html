@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【変更案】Claude Code・Codex 業務委託支援｜月額5万円〜のAIエンジニア＋AI顧問（福田和弘）</title>
+<meta name="description" content="Claude Code・CodexでのAIツール開発・改善を継続的な業務委託契約でご支援。新規開発・保守だけでなく、業務課題の整理や技術選定まで「AIエンジニア」と「AI顧問」の両方の役割を1人が担当。月額50,000円（税抜）〜。">
+<meta property="og:title" content="Claude Code・Codex 業務委託支援｜AIエンジニア＋AI顧問を1人で">
+<meta property="og:description" content="継続的なAI開発・活用支援を、月額50,000円（税抜）〜。中小企業・個人事業主向けにClaude Code・Codexでの開発から社内展開（Cowork / AWS）まで一貫対応します。">
+<meta property="og:type" content="website">
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+/* ===== トップページと同じデザイン言語（濃紺＋青の2色／グラデーションなし） ===== */
+:root{
+  --ink:#0b2138;
+  --ink-2:#102a43;
+  --accent:#2f6fd0;
+  --gray:#5a6b7d;
+  --line:#dfe6ee;
+  --bg:#f6f8fb;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:#fff;color:var(--ink);line-height:1.9;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%;display:block}
+
+/* ── 共通 ── */
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+.section{padding:92px 0}
+.section.alt{background:var(--bg)}
+.sec-tag{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.18em;margin-bottom:14px}
+.sec-title{font-size:clamp(26px,3.6vw,40px);font-weight:900;line-height:1.4;letter-spacing:-.02em;margin-bottom:20px}
+.sec-lead{font-size:16px;color:var(--gray);line-height:1.9;max-width:720px;margin-bottom:48px}
+
+/* ── ヘッダー ── */
+.site-header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.header-inner{max-width:1040px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:15px;font-weight:900;text-decoration:none}
+.logo span{font-size:12px;font-weight:500;color:var(--gray)}
+.header-links{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.header-links a{font-size:13.5px;font-weight:700;color:var(--gray);text-decoration:none}
+.header-links a:hover{color:var(--accent)}
+.header-cta{background:var(--ink);color:#fff !important;padding:9px 20px;border-radius:6px;font-size:13.5px;font-weight:700;text-decoration:none}
+
+/* ── ヒーロー：写真＋単色オーバーレイ ── */
+.hero{
+  position:relative;overflow:hidden;color:#fff;
+  background:#0b2138 url('https://images.unsplash.com/photo-1777264935754-aa53096c2d68?w=1800&q=80') center/cover no-repeat;
+  padding:110px 0 96px;
+}
+.hero::before{content:'';position:absolute;inset:0;background:rgba(9,26,44,.84)}
+.hero-inner{position:relative;z-index:1}
+.hero-tag{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.12em;color:#fff;background:none;border:1px solid rgba(255,255,255,.34);padding:7px 16px;border-radius:4px;margin-bottom:30px}
+.hero h1{font-size:clamp(28px,4.8vw,50px);font-weight:900;line-height:1.38;letter-spacing:-.02em;margin-bottom:24px}
+.hero h1 em{font-style:normal;color:#fff;border-bottom:4px solid var(--accent);padding-bottom:2px}
+.hero-sub{font-size:clamp(15px,1.8vw,17.5px);color:rgba(255,255,255,.82);line-height:1.95;max-width:700px;margin-bottom:38px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-size:15px;font-weight:700;padding:16px 34px;border-radius:6px;text-decoration:none;box-shadow:none}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.45);color:#fff;font-size:15px;font-weight:700;padding:16px 30px;border-radius:6px;text-decoration:none}
+.hero-nums{display:flex;gap:16px 40px;flex-wrap:wrap}
+.hero-nums > div{border-left:2px solid var(--accent);padding-left:16px}
+.hero-num-val{font-size:30px;font-weight:900;color:#fff;line-height:1.35;margin-bottom:2px}
+.hero-num-val small{font-size:15px}
+.hero-num-label{font-size:12.5px;color:rgba(255,255,255,.65)}
+
+/* ── グリッド ── */
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px 40px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:44px 40px}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 30px}
+
+/* ── お悩み：上罫線＋テキスト ── */
+.problem-card{background:none;border-radius:0;padding:26px 0 0;border-top:2px solid var(--line)}
+.problem-card-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.problem-icon{font-size:20px;line-height:1.5;flex-shrink:0;opacity:.75}
+.problem-title{font-size:18px;font-weight:900;line-height:1.55;letter-spacing:-.01em}
+.problem-desc{font-size:14.5px;color:var(--gray);line-height:1.9}
+
+/* ── 2つの役割（AIエンジニア／AI顧問） ── */
+.role-card{border-radius:6px;padding:34px 30px}
+.role-card.dark{background:var(--ink);color:#fff}
+.role-card.light{background:var(--bg);border:1px solid var(--line)}
+.role-head{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.role-icon{font-size:22px;opacity:.85}
+.role-name{font-size:20px;font-weight:900;letter-spacing:-.01em}
+.role-list{list-style:none}
+.role-list li{font-size:14.5px;line-height:2.05;padding-left:20px;position:relative}
+.role-list li::before{content:'';position:absolute;left:0;top:16px;width:8px;height:1px;background:var(--accent)}
+.role-card.light .role-list li{color:var(--gray)}
+.role-card.light .role-list li::before{background:var(--gray)}
+
+/* ── 選ばれる理由 ── */
+.feature-card{background:none;border-radius:0;padding:26px 0 0;border-top:2px solid var(--line)}
+.feature-no{font-size:13px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:14px;letter-spacing:.14em}
+.feature-title{font-size:18px;font-weight:900;line-height:1.55;margin-bottom:12px;letter-spacing:-.01em}
+.feature-desc{font-size:14.5px;color:var(--gray);line-height:1.9}
+
+/* ── 支援の進め方 ── */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;align-items:stretch;border-top:1px solid var(--line)}
+.step-card{flex:none;background:none;border-radius:0;padding:30px 26px 30px 0;text-align:left;border-bottom:1px solid var(--line)}
+.step-no{width:auto;height:auto;border-radius:0;background:none;color:var(--accent);font-size:12px;font-weight:900;letter-spacing:.12em;display:block;margin:0 0 10px}
+.step-title{font-size:17px;font-weight:900;margin-bottom:8px}
+.step-desc{font-size:13.5px;color:var(--gray);line-height:1.85}
+.step-arrow{display:none}
+.step-note{margin-top:26px;background:none;color:var(--gray);border-radius:0;padding:0;font-size:14px;line-height:1.95}
+.step-note a{color:var(--accent) !important}
+
+/* ── マトリクス ── */
+.matrix-layout{display:grid;grid-template-columns:260px 1fr;gap:30px;align-items:stretch}
+.matrix-note{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:26px 24px}
+.matrix-note-title{font-size:16px;font-weight:900;margin-bottom:14px}
+.matrix-note-body{font-size:13.5px;color:var(--gray);line-height:1.9}
+.matrix{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.matrix-cell{padding:34px 22px;text-align:center;background:#fff}
+.matrix-cell h4{font-size:17px;font-weight:900;margin-bottom:8px}
+.matrix-cell p{font-size:13px;color:var(--gray)}
+.matrix-cell.hot{background:var(--ink);color:#fff}
+.matrix-cell.hot p{color:rgba(255,255,255,.72)}
+.matrix-cell.warm{background:#eaf1fa}
+.matrix-axis{font-size:13px;font-weight:700;color:var(--gray);text-align:center;margin-top:12px}
+
+/* ── 料金 ── */
+.plan-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;background:var(--line);border:1px solid var(--line);margin-bottom:36px}
+.plan-summary-item{background:var(--ink);color:#fff;border-radius:0;padding:26px 26px}
+.plan-summary-name{font-size:14px;font-weight:700;color:#7fb2f0;margin-bottom:8px}
+.plan-summary-price{font-size:28px;font-weight:900;color:#fff;line-height:1.3}
+.plan-summary-cond{font-size:12.5px;color:rgba(255,255,255,.6);margin-bottom:14px}
+.plan-summary-ref{display:inline-block;font-size:12px;font-weight:700;background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.9);padding:4px 14px;border-radius:3px}
+.plan-ref-head{font-size:15px;font-weight:900;color:var(--ink);margin-bottom:16px}
+.grid-3:has(.price-card){gap:2px;background:var(--line);border:1px solid var(--line)}
+.price-card{border-radius:0;padding:34px 28px;position:relative;background:#fff;border:0;display:flex;flex-direction:column}
+.price-card.a,.price-card.c{background:#fff;border:0}
+.price-card.b{background:#f4f8fd;border:0}
+.price-card.b::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent)}
+.price-plan{font-size:11.5px;font-weight:700;color:var(--gray);letter-spacing:.08em;margin-bottom:10px}
+.price-badge{display:inline-block;background:none !important;color:var(--accent);font-size:11.5px;font-weight:900;letter-spacing:.1em;padding:0;border-radius:0;margin-bottom:14px}
+.price-recommend{position:static;display:inline-block;background:none;color:var(--accent);font-size:11.5px;font-weight:900;letter-spacing:.06em;padding:0;border-radius:0;margin-bottom:6px}
+.price-name{font-size:19px;font-weight:900;line-height:1.5;margin-bottom:14px}
+.price-val{font-size:15px;font-weight:700;color:var(--gray);margin-bottom:4px}
+.price-val strong{font-size:32px;font-weight:900;color:var(--ink);letter-spacing:-.01em}
+.price-card.b .price-val strong,.price-card.c .price-val strong{color:var(--ink)}
+.price-cond{font-size:12.5px;color:var(--gray);margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.price-desc{font-size:13.5px;color:var(--ink);font-weight:700;line-height:1.7;margin-bottom:14px}
+.price-list{list-style:none;flex:1}
+.price-list li{font-size:13.5px;color:var(--gray);line-height:1.9;padding-left:18px;position:relative;margin-bottom:8px}
+.price-list li::before{content:'';position:absolute;left:0;top:12px;width:8px;height:1px;background:var(--accent)}
+.price-note{font-size:12.5px;color:var(--gray);line-height:1.95;margin-top:24px}
+/* ご紹介キャッシュバック */
+.referral{margin-top:28px;background:var(--bg);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:24px 26px}
+.referral-title{font-size:15px;font-weight:900;color:var(--ink);margin-bottom:8px}
+.referral-body{font-size:13.5px;color:var(--gray);line-height:1.95}
+.referral-body strong{color:var(--accent)}
+
+/* ── 導入実績 ── */
+.result-main{background:#fff;border:1px solid var(--line);border-radius:6px;padding:32px 30px}
+.result-cat{display:inline-block;background:none;border:1px solid var(--line);color:var(--accent);font-size:11.5px;font-weight:700;letter-spacing:.06em;padding:4px 14px;border-radius:3px;margin-bottom:16px}
+.result-title{font-size:20px;font-weight:900;line-height:1.55;margin-bottom:14px;letter-spacing:-.01em}
+.result-desc{font-size:14px;color:var(--gray);line-height:1.9;margin-bottom:20px}
+.result-metric{background:var(--ink);color:#fff;border-radius:4px;padding:16px;text-align:center;font-size:16px;font-weight:900}
+.mini-card{background:#fff;border:1px solid var(--line);border-radius:6px;padding:22px 20px}
+.mini-cat{font-size:11.5px;font-weight:700;color:var(--accent);margin-bottom:8px;letter-spacing:.06em}
+.mini-title{font-size:14.5px;font-weight:900;line-height:1.6;margin-bottom:10px}
+.mini-metric{font-size:12.5px;font-weight:700;color:var(--gray)}
+
+/* ── 対象・強み ── */
+.target-box{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:32px 30px}
+.target-item{display:flex;gap:14px;margin-bottom:22px}
+.target-item:last-child{margin-bottom:0}
+.target-icon{font-size:20px;line-height:1.5;flex-shrink:0;opacity:.75}
+.target-name{font-size:15px;font-weight:900;margin-bottom:4px}
+.target-desc{font-size:13.5px;color:var(--gray);line-height:1.85}
+.strength-box{background:var(--ink);color:#fff;border-radius:6px;padding:32px 30px}
+.strength-item{margin-bottom:24px;border-left:2px solid var(--accent);padding-left:16px}
+.strength-item:last-child{margin-bottom:0}
+.strength-val{font-size:28px;font-weight:900;color:#fff;line-height:1.3}
+.strength-label{font-size:13px;color:rgba(255,255,255,.68);line-height:1.75}
+
+/* ── 経歴 ── */
+.bg-list{list-style:none;position:relative;padding-left:44px}
+.bg-list::before{content:'';position:absolute;left:14px;top:8px;bottom:8px;width:1px;background:var(--line)}
+.bg-item{position:relative;margin-bottom:32px}
+.bg-item:last-child{margin-bottom:0}
+.bg-no{position:absolute;left:-44px;top:2px;width:29px;height:29px;border-radius:50%;background:#fff;border:1px solid var(--accent);color:var(--accent);font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.bg-title{font-size:17px;font-weight:900;margin-bottom:8px}
+.bg-desc{font-size:14px;color:var(--gray);line-height:1.9}
+.bg-quote{margin-top:30px;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:24px 26px;font-size:14px;color:var(--gray);line-height:1.95;font-style:normal}
+
+/* ── プロフィール：濃色 ── */
+.profile-section{background:var(--ink);color:#fff;padding:92px 0}
+.profile-section .sec-tag{color:#7fb2f0}
+.profile-layout{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start}
+.profile-photo{width:100%;border-radius:4px;display:block}
+.profile-name{font-size:26px;font-weight:900;margin-bottom:6px}
+.profile-role{font-size:13.5px;font-weight:700;color:#7fb2f0;margin-bottom:18px}
+.profile-bio{font-size:14.5px;color:rgba(255,255,255,.78);line-height:2;margin-bottom:20px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{border:1px solid rgba(255,255,255,.28);border-radius:3px;padding:5px 13px;font-size:12px;color:rgba(255,255,255,.85)}
+
+/* ── CTA：濃色 ── */
+.cta-section{background:var(--ink-2);color:#fff;padding:96px 0;text-align:center}
+.cta-title{font-size:clamp(26px,3.4vw,38px);font-weight:900;margin-bottom:16px}
+.cta-lead{font-size:16px;color:rgba(255,255,255,.75);margin-bottom:38px}
+.cta-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14);margin-bottom:26px}
+.cta-card{background:var(--ink-2);border-radius:0;padding:24px 26px;display:flex;align-items:center;gap:16px;text-align:left;text-decoration:none}
+.cta-card:hover{background:var(--ink)}
+.cta-card-icon{width:40px;height:40px;border-radius:50%;background:none;border:1px solid rgba(255,255,255,.3);color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cta-card-label{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:2px}
+.cta-card-val{font-size:15px;font-weight:700;word-break:break-all}
+.cta-note{font-size:13px;color:rgba(255,255,255,.55)}
+
+/* ── フッター ── */
+.site-footer{background:#071827;color:rgba(255,255,255,.55);padding:28px 0;font-size:13px;text-align:center}
+.site-footer a{color:#7fb2f0;text-decoration:none}
+
+@media (max-width: 860px){
+  .matrix-layout{grid-template-columns:1fr}
+  .profile-layout{grid-template-columns:1fr}
+  .profile-photo{max-width:180px}
+  .header-links a:not(.header-cta){display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">福田和弘<span> | AI業務自動化</span></a>
+    <div class="header-links">
+      <a href="index.html">トップ</a>
+      <a href="#pricing">料金プラン</a>
+      <a href="#results">導入実績</a>
+      <a href="#profile">プロフィール</a>
+      <a href="contact.html" class="header-cta">無料相談</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-tag">✦ AI業務自動化支援 / Claude Code・Codex × 業務設計</div>
+    <h1>Claude Code・Codex <em>業務委託支援</em></h1>
+    <p class="hero-sub">
+      継続的なAI開発・活用支援を、<br>
+      「AIエンジニア」と「AI顧問」、両方の役割で1人がご支援します。
+    </p>
+    <div class="hero-btns">
+      <a href="contact.html" class="btn-primary">✉ まずは無料相談</a>
+      <a href="#pricing" class="btn-ghost">料金プランを見る</a>
+    </div>
+    <div class="hero-nums">
+      <div>
+        <div class="hero-num-val">80<small>%</small></div>
+        <div class="hero-num-label">SEO記事制作コスト削減実績</div>
+      </div>
+      <div>
+        <div class="hero-num-val">20<small>年+</small></div>
+        <div class="hero-num-label">ITマネジメント経験</div>
+      </div>
+      <div>
+        <div class="hero-num-val">20<small>本+</small></div>
+        <div class="hero-num-label">自社・支援先への導入実績</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-tag">PROBLEM</div>
+    <h2 class="sec-title">こんなお悩みはありませんか？</h2>
+    <p class="sec-lead">AI活用に興味はあるものの、何から手をつければいいかわからない——そんな声を多くいただきます。</p>
+    <div class="grid-3">
+      <div class="problem-card">
+        <div class="problem-card-head">
+          <div class="problem-icon">🤔</div>
+          <div class="problem-title">AIを導入したいが具体的な進め方がわからない</div>
+        </div>
+        <div class="problem-desc">どのツールを使えばいいのか、社内に知見がない</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-head">
+          <div class="problem-icon">⏰</div>
+          <div class="problem-title">繰り返し作業に毎日時間を取られている</div>
+        </div>
+        <div class="problem-desc">報告書作成・問い合わせ対応・データ整理など</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-head">
+          <div class="problem-icon">👤</div>
+          <div class="problem-title">業務が特定の人に依存・属人化している</div>
+        </div>
+        <div class="problem-desc">担当者が休むと業務が止まる、引き継ぎが困難</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-head">
+          <div class="problem-icon">💸</div>
+          <div class="problem-title">外注すると高額になり費用対効果が見えない</div>
+        </div>
+        <div class="problem-desc">大手ベンダーへの依頼は予算・スピード面でハードル高</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-head">
+          <div class="problem-icon">🖥️</div>
+          <div class="problem-title">Claude Code・Codexでツールを作ったが社内展開できない</div>
+        </div>
+        <div class="problem-desc">自分のPCでは動くが、チーム全員が使える環境にできない</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-head">
+          <div class="problem-icon">📉</div>
+          <div class="problem-title">人手不足で対応工数が限界に近づいている</div>
+        </div>
+        <div class="problem-desc">採用も難しく、今いるメンバーの負荷が増す一方</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-tag">SOLUTION</div>
+    <h2 class="sec-title">「AIエンジニア」と「AI顧問」を、1人で。</h2>
+    <p class="sec-lead">
+      Claude Code・CodexでのAIツール開発・改善を、単発ではなく継続的な業務委託契約としてお引き受け。新規ツールの開発だけでなく、既存ツールの改善・保守、技術的な相談相手としての関わり方も可能です。CoworkやAWSなど社内環境も含め、社内メンバーが実際に使える環境としてご提供します。
+    </p>
+    <div class="grid-2">
+      <div class="role-card dark">
+        <div class="role-head">
+          <div class="role-icon">⚙️</div>
+          <div class="role-name">AIエンジニアとして</div>
+        </div>
+        <ul class="role-list">
+          <li>AIツールの新規開発・改善</li>
+          <li>既存ツールの保守・アップデート</li>
+          <li>Cowork / AWSでの社内展開まで対応</li>
+        </ul>
+      </div>
+      <div class="role-card light">
+        <div class="role-head">
+          <div class="role-icon">🤝</div>
+          <div class="role-name">AI顧問として</div>
+        </div>
+        <ul class="role-list">
+          <li>業務課題の整理・自動化方針の相談</li>
+          <li>技術選定・活用方針のアドバイス</li>
+          <li>中長期のAI活用ロードマップ策定</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-tag">FEATURES</div>
+    <h2 class="sec-title">選ばれる3つの理由</h2>
+    <p class="sec-lead">単なるツール制作ではなく、Claude Code・Codexを軸に、AWSをはじめ様々な環境で業務全体が回る仕組みとして設計・実装します。</p>
+    <div class="grid-3">
+      <div class="feature-card">
+        <div class="feature-no">01</div>
+        <div class="feature-title">業務設計から一貫して対応</div>
+        <p class="feature-desc">「何を自動化すべきか」の整理から始め、設計・実装・環境構築（AWSなど）・運用定着まで一人で担当。複数の業者に依頼する手間がありません。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-no">02</div>
+        <div class="feature-title">中小企業・個人事業主に最適化した価格設計</div>
+        <p class="feature-desc">月次契約は5万円〜の明確な料金体系。大手ベンダーより大幅にコストを抑えながら実務レベルの自動化を実現します。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-no">03</div>
+        <div class="feature-title">自社で実運用している仕組みを提供</div>
+        <p class="feature-desc">提案するツールはすべて自社業務で実際に使い続けているものがベース。デモで終わらない、本番稼働する実用的なシステムです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-tag">APPROACH</div>
+    <h2 class="sec-title">支援の進め方（4ステップ）</h2>
+    <p class="sec-lead">「業務棚卸 → 分析 → 優先順位付け → 提案」の体系的なプロセスで、成果につながる自動化を進めます。</p>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-no">1</div>
+        <div class="step-title">業務棚卸</div>
+        <div class="step-desc">ヒアリングで<br>業務を洗い出す</div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-no">2</div>
+        <div class="step-title">分析</div>
+        <div class="step-desc">頻度×効果で<br>可視化・分類する</div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-no">3</div>
+        <div class="step-title">優先順位付け</div>
+        <div class="step-desc">着手すべき施策と<br>ツールを選定する</div>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-no">4</div>
+        <div class="step-title">提案</div>
+        <div class="step-desc">ロードマップで<br>提示・合意する</div>
+      </div>
+    </div>
+    <div class="step-note">各ステップの詳細をふまえ、思い込みではなく事実情報に基づいて自動化の優先順位を可視化します。</div>
+  </div>
+</section>
+
+<!-- MATRIX -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-tag">APPROACH</div>
+    <h2 class="sec-title">分析の視点：頻度 × 効果マトリクス</h2>
+    <p class="sec-lead">業務ごとに「頻度」と「効果・インパクト」を評価し、マトリクス上にプロットして着手順を可視化します。</p>
+    <div class="matrix-layout">
+      <div class="matrix-note">
+        <div class="matrix-note-title">分析の視点</div>
+        <p class="matrix-note-body">右上（高頻度×高インパクト）から着手すると、成果が出やすく信頼構築につながります。感覚だけでなく、ヒアリングで得た所要時間などの数値も判断材料にします。</p>
+      </div>
+      <div>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <h4>個別に自動化検討</h4>
+            <p>低頻度 × 高インパクト</p>
+          </div>
+          <div class="matrix-cell hot">
+            <h4>最優先で自動化</h4>
+            <p>高頻度 × 高インパクト</p>
+          </div>
+          <div class="matrix-cell">
+            <h4>現状維持・様子見</h4>
+            <p>低頻度 × 低インパクト</p>
+          </div>
+          <div class="matrix-cell warm">
+            <h4>簡易ツールで効率化</h4>
+            <p>高頻度 × 低インパクト</p>
+          </div>
+        </div>
+        <div class="matrix-axis">頻度（低 → 高）／ 縦軸：効果・インパクト（高 ↑）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="sec-tag">PRICING</div>
+    <h2 class="sec-title">Claude Code・Codex 業務委託支援 － 料金プラン</h2>
+    <p class="sec-lead">料金プランは「ライトプラン」「スタンダードプラン」の2つです（継続契約前提）。<br>下記のパターンA〜Cは、それぞれのプランで<strong>どのようなご支援ができるかを示した参考例</strong>です。ご支援内容はこの3パターンに限定されるものではなく、お客様の目的やご予算に合わせて組み合わせ・調整いたします。</p>
+
+    <div class="plan-summary">
+      <div class="plan-summary-item">
+        <div class="plan-summary-name">ライトプラン</div>
+        <div class="plan-summary-price">月額 50,000円〜</div>
+        <div class="plan-summary-cond">税抜 ／ 目安 稼働 15h／月</div>
+        <div class="plan-summary-ref">参考例：パターンA</div>
+      </div>
+      <div class="plan-summary-item">
+        <div class="plan-summary-name">スタンダードプラン</div>
+        <div class="plan-summary-price">月額 100,000円〜</div>
+        <div class="plan-summary-cond">税抜 ／ 目安 稼働 30h／月</div>
+        <div class="plan-summary-ref">参考例：パターンB・パターンC</div>
+      </div>
+    </div>
+
+    <div class="plan-ref-head">▼ ご支援内容の参考例（パターンA〜C）</div>
+    <div class="grid-3">
+      <div class="price-card a">
+        <div class="price-badge">参考例｜パターンA</div>
+        <div class="price-plan">ライトプラン の活用例</div>
+        <div class="price-name">AIエンジニア<br>（開発・改善支援）</div>
+        <div class="price-val">月額 <strong>50,000</strong> 円〜</div>
+        <div class="price-cond">税抜 ／ 目安 稼働 15h／月</div>
+        <p class="price-desc">Claude Code・Codexを活用した新規AIツールの開発や既存ツールの改善をサポート</p>
+        <ul class="price-list">
+          <li>✓ 新規ツール開発</li>
+          <li>✓ 改善・保守</li>
+          <li>✓ 技術相談</li>
+        </ul>
+      </div>
+      <div class="price-card b">
+        <div class="price-recommend">おすすめ</div>
+        <div class="price-badge">参考例｜パターンB</div>
+        <div class="price-plan">スタンダードプラン の活用例</div>
+        <div class="price-name">AIエンジニア＋AI顧問<br>（戦略支援）</div>
+        <div class="price-val">月額 <strong>100,000</strong> 円〜</div>
+        <div class="price-cond">税抜 ／ 目安 稼働 30h／月</div>
+        <p class="price-desc">開発・改善の実行支援に加え、AI活用の戦略立案や技術相談まで一貫してサポート</p>
+        <ul class="price-list">
+          <li>✓ 新規ツール開発・改善保守</li>
+          <li>✓ 戦略立案・課題整理</li>
+          <li>✓ AI活用の伴走支援</li>
+        </ul>
+      </div>
+      <div class="price-card c">
+        <div class="price-badge">参考例｜パターンC</div>
+        <div class="price-plan">スタンダードプラン の活用例</div>
+        <div class="price-name">AIエンジニア＋AI人材の<br>育成・サポート（個人）</div>
+        <div class="price-val">月額 <strong>100,000</strong> 円〜</div>
+        <div class="price-cond">税抜 ／ 目安 稼働 30h／月</div>
+        <p class="price-desc">開発・改善支援に加え、担当者のAIスキル向上と実務での活用定着までサポート</p>
+        <ul class="price-list">
+          <li>✓ 新規ツール開発・改善保守</li>
+          <li>✓ AIスキルの個別サポート</li>
+          <li>✓ 実務活用・定着支援</li>
+        </ul>
+      </div>
+    </div>
+    <p class="price-note">※ パターンA〜Cは、ライトプラン／スタンダードプランでご支援できる内容の参考例です。実際のご支援内容はこの3パターンに限定されず、ご要望に応じて組み合わせ・調整いたします。<br>※ 稼働時間・料金は業務内容により変動します。まずは無料相談にてご要望をお伺いします。<br>※ 表示価格はすべて税抜です。外部API利用料（OpenAI・Anthropic等）は別途実費となります。</p>
+
+    <div class="referral">
+      <div class="referral-title">🎁 ご紹介キャッシュバック制度</div>
+      <p class="referral-body">
+        <strong>AI人材を必要とされているお知り合いの方がいらっしゃいましたら、ぜひ私をご紹介ください。</strong><br>
+        ご紹介者様からのご紹介がきっかけで業務委託契約に至った場合、契約が継続している限り、<strong>毎月の契約金額の20%</strong>をご紹介者様に還元します。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="section alt" id="results">
+  <div class="wrap">
+    <div class="sec-tag">RESULTS</div>
+    <h2 class="sec-title">導入実績・事例</h2>
+    <p class="sec-lead">マーケティング・採用・経理・エンタープライズ導入まで、これまでに構築した自動化ツールの一部です。</p>
+    <div class="grid-2" style="margin-bottom:20px">
+      <div class="result-main">
+        <div class="result-cat">マーケティング</div>
+        <div class="result-title">マーケティングAI<br>ダッシュボード</div>
+        <p class="result-desc">GA4・Search Console等のデータ分析に加え、コンサルタントの暗黙知をナレッジとして蓄積・活用。5軸評価で現状と目標のギャップを診断し、事実整理→診断→改善提案までをGoogleスライド形式で自動出力します。</p>
+        <div class="result-metric">ナレッジ活用率を可視化し診断品質が向上</div>
+      </div>
+      <div class="result-main">
+        <div class="result-cat">SEO・コンテンツ</div>
+        <div class="result-title">SEO記事制作の<br>完全自動化パイプライン</div>
+        <p class="result-desc">キーワード選定から記事執筆・入稿・公開後のリライトまでを毎朝自動実行。APIキー不要でClaude Proサブスクのみで運用でき、外注コストと作業時間を大幅に削減します。</p>
+        <div class="result-metric">約80%コスト削減</div>
+      </div>
+    </div>
+    <div class="grid-4">
+      <div class="mini-card">
+        <div class="mini-cat">経理・バックオフィス</div>
+        <div class="mini-title">請求書管理システム<br>（AWS × Claude Vision）</div>
+        <div class="mini-metric">月数十時間を削減</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-cat">エンタープライズ</div>
+        <div class="mini-title">FAQエージェント<br>大手機器メーカー導入</div>
+        <div class="mini-metric">AI一次回答率 約70%</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-cat">SEO対策</div>
+        <div class="mini-title">内部リンク構築<br>AIエージェント</div>
+        <div class="mini-metric">約200記事を約50分</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-cat">SEO対策</div>
+        <div class="mini-title">WordPress内部リンク<br>自動挿入ツール</div>
+        <div class="mini-metric">Gutenberg/Classic自動判定</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-cat">採用・HR</div>
+        <div class="mini-title">採用支援AI Phase2<br>スクリーニング自動採点</div>
+        <div class="mini-metric">約30秒でマッチ度採点</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-cat">採用・HR</div>
+        <div class="mini-title">採用支援AI Phase3<br>面談メモAI構造化</div>
+        <div class="mini-metric">議事録作成の手間ゼロ</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-cat">マーケティング</div>
+        <div class="mini-title">顧客育成ジャーニー<br>設計AI</div>
+        <div class="mini-metric">6フェーズを自動設計</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-cat">採用・HR</div>
+        <div class="mini-title">採用支援AI<br>求人票・スカウト文自動生成</div>
+        <div class="mini-metric">求人票を約1分で生成</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-cat">コンテンツ</div>
+        <div class="mini-title">YouTube→note<br>記事自動生成ツール</div>
+        <div class="mini-metric">字幕から記事を自動生成</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-cat">業務効率化</div>
+        <div class="mini-title">AIヒアリング→<br>モックアップ自動生成</div>
+        <div class="mini-metric">当日中に画面イメージ提示</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-cat">SEO対策</div>
+        <div class="mini-title">GSCカニバリ<br>ゼーション分析</div>
+        <div class="mini-metric">数時間の作業を約3分に</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-cat">経営基盤</div>
+        <div class="mini-title">会社経営<br>AI役員チーム</div>
+        <div class="mini-metric">アウトソース費用を削減</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE HELP -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-tag">WHO WE HELP</div>
+    <h2 class="sec-title">こんな方・こんな企業におすすめです</h2>
+    <p class="sec-lead">対象業種・業務領域と、支援にあたっての強みをまとめました。</p>
+    <div class="grid-2">
+      <div class="target-box">
+        <div class="target-name" style="font-size:18px;margin-bottom:22px">対象業種・業務領域</div>
+        <div class="target-item">
+          <div class="target-icon">👔</div>
+          <div>
+            <div class="target-name">採用・HR</div>
+            <div class="target-desc">求人票・スカウト文・書類選考・面談メモの自動化</div>
+          </div>
+        </div>
+        <div class="target-item">
+          <div class="target-icon">📣</div>
+          <div>
+            <div class="target-name">マーケティング・SEO</div>
+            <div class="target-desc">記事制作、内部リンク、SNS投稿、顧客ジャーニー設計</div>
+          </div>
+        </div>
+        <div class="target-item">
+          <div class="target-icon">🧾</div>
+          <div>
+            <div class="target-name">経理・バックオフィス</div>
+            <div class="target-desc">請求書処理、承認ワークフロー、レポート作成</div>
+          </div>
+        </div>
+        <div class="target-item">
+          <div class="target-icon">🏭</div>
+          <div>
+            <div class="target-name">個人事業主〜中小企業</div>
+            <div class="target-desc">個人事業主から中小企業まで導入実績あり</div>
+          </div>
+        </div>
+      </div>
+      <div class="strength-box">
+        <div style="font-size:18px;font-weight:900;margin-bottom:22px">福田の強み</div>
+        <div class="strength-item">
+          <div class="strength-val">20年+</div>
+          <div class="strength-label">ITマネジメント経験。DX事業立ち上げの実務知見</div>
+        </div>
+        <div class="strength-item">
+          <div class="strength-val">20本+</div>
+          <div class="strength-label">自社・支援先での自動化ツール導入実績</div>
+        </div>
+        <div class="strength-item">
+          <div class="strength-val">月320h</div>
+          <div class="strength-label">自社業務の作業時間を削減してきた実績</div>
+        </div>
+        <div class="strength-item">
+          <div class="strength-val">個人 〜中小企業</div>
+          <div class="strength-label">個人事業主から中小企業まで対応幅の広さ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BACKGROUND -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-tag">BACKGROUND</div>
+    <h2 class="sec-title">製造業プロジェクトマネジメントの経験を、AI活用支援にも</h2>
+    <p class="sec-lead">本業では、20年以上にわたり製造業の大規模プロジェクトを推進してきました。</p>
+    <ul class="bg-list">
+      <li class="bg-item">
+        <div class="bg-no">1</div>
+        <div class="bg-title">半導体製造装置メーカー様（20年以上）</div>
+        <p class="bg-desc">制御開発プロジェクト責任者として熊本・福岡・札幌の3拠点を統括。最大150名規模のプロジェクトマネジメント（品質・進捗・コスト・リスク）を担当。</p>
+      </li>
+      <li class="bg-item">
+        <div class="bg-no">2</div>
+        <div class="bg-title">二輪バイクメーカー様</div>
+        <p class="bg-desc">スマートファクトリー構築プロジェクトPM。工場の見える化システム構築・関係部門との要件整理を推進。</p>
+      </li>
+      <li class="bg-item">
+        <div class="bg-no">3</div>
+        <div class="bg-title">製造業向けPLM（Windchill）導入支援（直近2年）</div>
+        <p class="bg-desc">北九州・九州エリア担当。要件定義〜導入・定着支援まで推進し、業務改革・設計情報管理・品質向上を支援。</p>
+      </li>
+    </ul>
+    <div class="bg-quote">「構想から実装・定着まで一気通貫で伴走します」－ プロジェクトマネジメントで培った推進力を、AIを活用した業務効率化・自動化にも活かしています。</div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section class="profile-section" id="profile">
+  <div class="wrap">
+    <div class="sec-tag">PROFILE</div>
+    <h2 class="sec-title" style="margin-bottom:32px">私のプロフィール</h2>
+    <div class="profile-layout">
+      <img src="profile.png" alt="福田 和弘" class="profile-photo">
+      <div>
+        <div class="profile-name">福田 和弘</div>
+        <div class="profile-role">AI/DX推進支援 ・ SEO全般 ・ 法人サポート／個別サポート</div>
+        <p class="profile-bio">
+          IT企業にてマネジメント職を20年以上経験し、DX事業の立ち上げを担当。現在はClaude Code・CodexをはじめとしたAIツールを活用した業務自動化支援を行っています。自社業務で実際に運用している仕組みをベースに、中小企業・個人事業主向けに実装。SEO記事自動化では約80%のコスト削減を実現するなど、現場で動く仕組みづくりを得意としています。
+        </p>
+        <div class="tags">
+          <span class="tag">Claude Code</span>
+          <span class="tag">Codex</span>
+          <span class="tag">ChatGPT</span>
+          <span class="tag">Cowork</span>
+          <span class="tag">AWS</span>
+          <span class="tag">業務自動化</span>
+          <span class="tag">マーケティング</span>
+          <span class="tag">採用支援</span>
+          <span class="tag">経理自動化</span>
+          <span class="tag">DX推進</span>
+          <span class="tag">AI顧問</span>
+          <span class="tag">SEO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="wrap">
+    <h2 class="cta-title">まずは気軽にご相談ください</h2>
+    <p class="cta-lead">「こんなことを自動化したい」というアイデアだけでも大歓迎です。</p>
+    <div class="cta-cards">
+      <a href="mailto:fkdkazu@gmail.com" class="cta-card">
+        <div class="cta-card-icon">✉</div>
+        <div>
+          <div class="cta-card-label">メール</div>
+          <div class="cta-card-val">fkdkazu@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://x.com/Marketer_kazuf" target="_blank" rel="noopener" class="cta-card">
+        <div class="cta-card-icon">𝕏</div>
+        <div>
+          <div class="cta-card-label">X（DM）</div>
+          <div class="cta-card-val">@Marketer_kazuf</div>
+        </div>
+      </a>
+      <a href="contact.html" class="cta-card">
+        <div class="cta-card-icon">🔗</div>
+        <div>
+          <div class="cta-card-label">お問い合わせフォーム</div>
+          <div class="cta-card-val">無料相談を申し込む</div>
+        </div>
+      </a>
+    </div>
+    <p class="cta-note">通常1営業日以内にご返信します</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    福田 和弘 / AI業務自動化支援 © 2026 ｜ <a href="index.html">トップページに戻る</a>
+  </div>
+</footer>
+
+</body>
+</html>
