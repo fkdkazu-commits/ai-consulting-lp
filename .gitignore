@@ -11,6 +11,9 @@ _recolor/
 # _illust/build.html の書き出し先。中身は本番の news-*.png と同一なので追跡しない
 _illust/out/
 
+# ブランド素材の原本（公開不要。ヘッダー用は logo-mark.png / logo-icon.png に切り出し済み）
+data/
+
 # 依存関係・環境
 node_modules/
 .env

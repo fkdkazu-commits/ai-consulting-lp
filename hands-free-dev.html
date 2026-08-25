@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ハンズフリーAI開発チーム（UNIA）｜会話しながらAIが開発を進める仕組み（福田和弘）</title>
+<title>ハンズフリーAI開発チーム（UNIA）｜会話しながらAIが開発を進める仕組み（SHIKOU × AI）</title>
 <meta name="description" content="iPhoneに相談しながら要件を固め、PC上のClaude Codeが調査・実装・テストまで実行。途中で判断が必要になれば会話で決めながら最後まで進められます。司令塔のAIユナと実行担当のAIレンが複数のAIをひとつのチームとして動かします。">
 <meta property="og:title" content="ハンズフリーAI開発チーム（UNIA）｜話しながら、AI開発チームとつくり上げる">
 <meta property="og:description" content="画面もキーボードも触らず、会話を往復させながらAI開発チームを動かす。相談・確認・方針変更まで音声で完結します。">
 <meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="logo-icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,8 +27,10 @@ a { color: inherit; }
 /* ── ヘッダー ── */
 .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid #e6e6f0; }
 .header-inner { max-width: 1080px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.logo { font-size: 15px; font-weight: 900; text-decoration: none; }
-.logo span { font-size: 12px; font-weight: 600; color: #718096; }
+.logo{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:#0b2138}
+.logo img{height:28px;width:auto;display:block}
+.logo .logo-t{font-size:15px;font-weight:900;letter-spacing:.08em;color:#0b2138}
+.logo .x{color:#2f6fd0;font-weight:700;margin:0 .16em}
 .header-links { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .header-links a { font-size: 13px; font-weight: 700; color: #4a5568; text-decoration: none; }
 .header-links a:hover { color: #6d4fe3; }
@@ -182,7 +185,7 @@ a { color: inherit; }
 <!-- HEADER -->
 <header class="site-header">
   <div class="header-inner">
-    <a href="index.html" class="logo">福田和弘<span> | AI業務自動化</span></a>
+    <a href="index.html" class="logo"><img src="logo-mark.png" alt="SHIKOU × AI"><span class="logo-t">SHIKOU<span class="x">×</span>AI</span></a>
     <div class="header-links">
       <a href="index.html">トップ</a>
       <a href="#how">仕組み</a>
@@ -600,7 +603,7 @@ a { color: inherit; }
 
 <footer class="site-footer">
   <div class="wrap">
-    福田 和弘 / AI業務自動化支援 © 2026 ｜ <a href="index.html">トップページに戻る</a>
+    SHIKOU × AI / AI業務自動化支援 © 2026 ｜ <a href="index.html">トップページに戻る</a>
   </div>
 </footer>
 

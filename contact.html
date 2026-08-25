@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>お問合せ | 福田和弘 AI業務自動化支援</title>
+<title>お問合せ | SHIKOU × AI｜AI業務自動化支援</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="icon" type="image/png" href="logo-icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,13 +33,10 @@
     justify-content: space-between;
     height: 64px;
   }
-  .logo {
-    font-size: 17px;
-    font-weight: 900;
-    color: #1a365d;
-    text-decoration: none;
-  }
-  .logo span { color: #2b6cb0; }
+.logo{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:#0b2138}
+.logo img{height:28px;width:auto;display:block}
+.logo .logo-t{font-size:15px;font-weight:900;letter-spacing:.08em;color:#0b2138}
+.logo .x{color:#2f6fd0;font-weight:700;margin:0 .16em}
   .header-back {
     font-size: 14px;
     font-weight: 600;
@@ -202,7 +200,7 @@
 
 <header class="site-header">
   <div class="header-inner">
-    <a href="index.html" class="logo">福田和弘<span> | AI業務自動化</span></a>
+    <a href="index.html" class="logo"><img src="logo-mark.png" alt="SHIKOU × AI"><span class="logo-t">SHIKOU<span class="x">×</span>AI</span></a>
     <a href="index.html" class="header-back">← トップに戻る</a>
   </div>
 </header>
@@ -223,7 +221,7 @@
       <!-- Web3Forms アクセスキー（要設定） -->
       <input type="hidden" name="access_key" value="f52b6018-916c-40c4-bbbd-79964f0c6609">
       <input type="hidden" name="subject" value="【AI業務自動化支援】お問合せが届きました">
-      <input type="hidden" name="from_name" value="福田和弘 AI業務自動化支援">
+      <input type="hidden" name="from_name" value="SHIKOU × AI｜AI業務自動化支援">
       <input type="checkbox" name="botcheck" style="display:none">
 
       <div class="form-group">
@@ -295,8 +293,8 @@
             ...data,
             replyto: data.email,
             autoresponse: true,
-            autoresponse_subject: '【お問合せ受付完了】福田和弘 AI業務自動化支援',
-            autoresponse_message: `${data.name} 様\n\nお問合せいただきありがとうございます。\n以下の内容でお問合せを受け付けました。\n\n---\n【お名前】${data.name}\n【種別】${data.category}\n【内容】${data.message}\n---\n\n通常2営業日以内にご返信いたします。\n\n福田和弘 | AI業務自動化支援\nhttps://fkdkazu-commits.github.io/ai-consulting-lp/`
+            autoresponse_subject: '【お問合せ受付完了】SHIKOU × AI',
+            autoresponse_message: `${data.name} 様\n\nお問合せいただきありがとうございます。\n以下の内容でお問合せを受け付けました。\n\n---\n【お名前】${data.name}\n【種別】${data.category}\n【内容】${data.message}\n---\n\n通常2営業日以内にご返信いたします。\n\nSHIKOU × AI ／ 福田 和弘\nhttps://fkdkazu-commits.github.io/ai-consulting-lp/`
           })
       });
       const json = await res.json();

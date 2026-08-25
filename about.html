@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHIKOU × AIについて | AIで業務と開発を変える。</title>
+<meta name="description" content="SHIKOU × AI（代表：福田 和弘）の理念と事業概要。「思考」と「試行」を繰り返しながら、AIで業務と開発のあり方を変えていきます。AI業務自動化・AIエージェント開発・DX推進支援を行っています。">
+<link rel="icon" type="image/png" href="logo-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0b2138;
+  --ink-2:#102a43;
+  --accent:#2f6fd0;
+  --gray:#5a6b7d;
+  --line:#dfe6ee;
+  --bg:#f6f8fb;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;color:var(--ink);background:#fff;line-height:1.9;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%;display:block}
+
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+.narrow{max-width:760px}
+.sec{padding:88px 0}
+.sec.tint{background:var(--bg)}
+.sec.dark{background:var(--ink);color:#fff}
+
+.label{font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--accent);margin-bottom:14px}
+.sec.dark .label{color:#7fb2f0}
+h2{font-size:clamp(24px,3.2vw,34px);font-weight:900;line-height:1.5;letter-spacing:-.02em;margin-bottom:28px}
+p{font-size:16px;margin-bottom:22px}
+p:last-child{margin-bottom:0}
+.mute{color:var(--gray)}
+strong{font-weight:900}
+
+/* ヘッダー */
+header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.hd{max-width:1040px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+.logo img{height:30px;width:auto}
+.logo-t{font-weight:900;font-size:16px;letter-spacing:.08em;white-space:nowrap}
+.logo .x{color:var(--accent);font-weight:700;margin:0 .16em}
+.nav{display:flex;gap:22px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.nav a{font-size:13.5px;font-weight:700;color:var(--gray);text-decoration:none;white-space:nowrap}
+.nav a:hover{color:var(--accent)}
+.nav .cur{color:var(--ink)}
+.nav .btn-hd{background:var(--ink);color:#fff;padding:9px 20px;border-radius:6px}
+@media(max-width:640px){.logo-t{font-size:15px}.nav{gap:14px}.nav a{font-size:12.5px}.nav .btn-hd{padding:8px 14px}}
+
+/* ヒーロー */
+.hero{background:linear-gradient(135deg,#0b2138 0%,#102a43 55%,#173a63 100%);color:#fff;padding:80px 0 76px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-140px;top:-120px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(47,111,208,.35) 0%,rgba(47,111,208,0) 68%)}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:34px;flex-wrap:wrap}
+.hero-plate{width:120px;height:120px;flex-shrink:0;background:#fff;border-radius:26px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(0,0,0,.28)}
+.hero-plate img{width:78px}
+@media(max-width:560px){.hero-plate{width:96px;height:96px;border-radius:22px}.hero-plate img{width:62px}}
+.hero h1{font-size:clamp(28px,4.4vw,44px);font-weight:900;letter-spacing:.04em;line-height:1.3;margin-bottom:10px}
+.hero h1 .x{color:#5b9bf5;margin:0 .14em}
+.hero .tag{font-size:clamp(15px,1.9vw,19px);font-weight:500;color:rgba(255,255,255,.82);letter-spacing:.06em}
+.hero .en{margin-top:18px;font-size:11.5px;letter-spacing:.22em;color:rgba(255,255,255,.45)}
+
+/* リード文（大きめの一文） */
+.big{font-size:clamp(19px,2.4vw,26px);font-weight:900;line-height:1.75;letter-spacing:-.01em;margin:34px 0}
+.big .hl{background:linear-gradient(transparent 62%,rgba(47,111,208,.22) 62%)}
+.verse{font-size:16px;line-height:2.1;margin-bottom:22px}
+.verse span{display:block}
+
+/* コンセプト3カード */
+.concept{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:14px;margin-top:56px}
+.cc{background:#fff;border:1px solid var(--line);border-radius:10px;padding:30px 18px;text-align:center}
+.cc-k{font-size:26px;font-weight:900;letter-spacing:.06em;margin-bottom:10px}
+.cc-k .inf{font-size:30px;line-height:1}
+.cc-n{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--accent);margin-bottom:8px}
+.cc-d{font-size:13px;color:var(--gray);line-height:1.8}
+.cx{font-size:20px;font-weight:700;color:var(--accent)}
+@media(max-width:760px){
+  .concept{grid-template-columns:1fr;gap:10px}
+  .cx{display:none}
+}
+
+/* プロセス */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:14px;border:1px solid rgba(255,255,255,.16);border-radius:10px;overflow:hidden}
+.fl{padding:26px 12px;text-align:center;border-right:1px solid rgba(255,255,255,.16)}
+.fl:last-child{border-right:0}
+.fl-n{font-size:11px;letter-spacing:.2em;color:#7fb2f0;margin-bottom:8px}
+.fl-t{font-size:15px;font-weight:900}
+@media(max-width:760px){
+  .flow{grid-template-columns:repeat(2,1fr)}
+  .fl{border-bottom:1px solid rgba(255,255,255,.16)}
+  .fl:nth-child(2n){border-right:0}
+}
+
+/* 概要テーブル */
+.tbl{width:100%;border-collapse:collapse;border-top:1px solid var(--line)}
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:18px 4px;font-size:15px;text-align:left;vertical-align:top}
+.tbl th{width:170px;font-weight:700;color:var(--gray);font-size:14px}
+.tbl td a{color:var(--accent);text-decoration:none}
+.tbl td a:hover{text-decoration:underline}
+.tbl ul{list-style:none;margin:0;padding:0}
+.tbl li{position:relative;padding-left:15px;margin-bottom:4px}
+.tbl li::before{content:"";position:absolute;left:0;top:12px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+@media(max-width:640px){
+  .tbl th,.tbl td{display:block;width:100%;border-bottom:0;padding:14px 4px 0}
+  .tbl td{padding:4px 4px 16px;border-bottom:1px solid var(--line)}
+}
+
+/* CTA・フッター */
+.cta{background:var(--ink);color:#fff;padding:88px 0;text-align:center}
+.cta h2{margin-bottom:16px}
+.cta p{font-size:16px;color:rgba(255,255,255,.75);margin-bottom:36px}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;font-size:15px;font-weight:700;padding:16px 34px;border-radius:6px;text-decoration:none}
+.btn-main{background:var(--accent);color:#fff}
+.btn-line{border:1px solid rgba(255,255,255,.45);color:#fff}
+footer{background:#071827;color:rgba(255,255,255,.55);font-size:13px;padding:28px 0;text-align:center}
+footer a{color:#7fb2f0;text-decoration:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd">
+    <a href="index.html" class="logo"><img src="logo-mark.png" alt="SHIKOU × AI"><span class="logo-t">SHIKOU<span class="x">×</span>AI</span></a>
+    <nav class="nav">
+      <a href="index.html">トップ</a>
+      <a href="index.html#services">サービス</a>
+      <a href="index.html#results">実績</a>
+      <a href="blog/">ブログ</a>
+      <a href="about.html" class="cur">会社概要</a>
+      <a href="index.html#profile">プロフィール</a>
+      <a href="contact.html" class="btn-hd">お問合せ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-in">
+    <div class="hero-plate"><img src="logo-mark.png" alt=""></div>
+    <div>
+      <h1>SHIKOU<span class="x">×</span>AI について</h1>
+      <div class="tag">AIで業務と開発を変える。</div>
+      <div class="en">THINK &nbsp;/&nbsp; TRY &nbsp;/&nbsp; BUILD &nbsp;/&nbsp; OPERATE &nbsp;/&nbsp; IMPROVE</div>
+    </div>
+  </div>
+</section>
+
+<!-- 思考と試行 -->
+<section class="sec">
+  <div class="wrap narrow">
+    <div class="label">CONCEPT</div>
+    <h2>思考と試行を、AIとともに。</h2>
+
+    <p><strong>SHIKOU × AI</strong>には、「思考」と「試行」という2つの意味を込めています。</p>
+
+    <p>AIを導入すること自体が目的ではありません。</p>
+
+    <p class="verse">
+      <span>まず、人が考える。</span>
+      <span>何に困っているのか。</span>
+      <span>何を変えるべきなのか。</span>
+      <span>どこまでAIに任せるべきなのか。</span>
+    </p>
+
+    <p class="verse">
+      <span>そして、実際にAIを使って試してみる。</span>
+      <span>つくる。動かす。改善する。</span>
+    </p>
+
+    <p class="big"><span class="hl">思考と試行を繰り返しながら、業務と開発のあり方を変えていく。</span></p>
+
+    <p>それが、SHIKOU × AIの考えるAI活用です。</p>
+  </div>
+
+  <div class="wrap narrow">
+    <div class="concept">
+      <div class="cc">
+        <div class="cc-k">S</div>
+        <div class="cc-n">SHIKOU</div>
+        <div class="cc-d">思考 / 試行</div>
+      </div>
+      <div class="cx">×</div>
+      <div class="cc">
+        <div class="cc-k">AI</div>
+        <div class="cc-n">AI</div>
+        <div class="cc-d">拡張 / 自動化</div>
+      </div>
+      <div class="cx">×</div>
+      <div class="cc">
+        <div class="cc-k"><span class="inf">∞</span></div>
+        <div class="cc-n">FUTURE</div>
+        <div class="cc-d">仕組み / 成長</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AIで業務と開発を変える -->
+<section class="sec tint">
+  <div class="wrap narrow">
+    <div class="label">MISSION</div>
+    <h2>AIで業務と開発を変える。</h2>
+
+    <p>AIによって、できることは急速に増えています。</p>
+
+    <p>一方で、「AIを導入したけれど、結局使いこなせない」「便利なツールを作ったけれど、業務には定着しない」というケースも少なくありません。</p>
+
+    <p>私たちは、AIそのものを売るのではなく、<strong>AIを使って仕事の仕組みを変えること</strong>を大切にしています。</p>
+
+    <p>業務を整理し、課題を見つけ、最適な方法を考える。</p>
+
+    <p>必要であればAIツールを組み合わせ、アプリやシステムを開発する。</p>
+
+    <p>そして、実際の現場で使いながら改善する。</p>
+
+    <p class="big"><span class="hl">「考えて終わり」でも、「つくって終わり」でもない。</span></p>
+
+    <p>現場で動き続ける仕組みをつくることを目指しています。</p>
+  </div>
+</section>
+
+<!-- 人の思考 × AIの実行力 -->
+<section class="sec">
+  <div class="wrap narrow">
+    <div class="label">APPROACH</div>
+    <h2>人の思考 × AIの実行力</h2>
+
+    <p>AIには、大量の情報を処理し、繰り返し作業を高速に実行する力があります。</p>
+
+    <p>一方で、人には、現場を理解し、目的を決め、状況に応じて判断する力があります。</p>
+
+    <p>SHIKOU × AIは、その両方を組み合わせます。</p>
+
+    <p class="big">
+      <span class="hl">人が考える。</span><br>
+      <span class="hl">AIが動く。</span><br>
+      <span class="hl">人が判断する。</span><br>
+      <span class="hl">AIがつくる。</span><br>
+      <span class="hl">そして、また改善する。</span>
+    </p>
+
+    <p>人とAIがそれぞれの強みを活かすことで、これまで時間や人手が必要だった仕事を、新しい形へ変えていきます。</p>
+  </div>
+</section>
+
+<!-- つくって終わらない -->
+<section class="sec dark">
+  <div class="wrap narrow">
+    <div class="label">PROCESS</div>
+    <h2>つくって終わらない。</h2>
+
+    <p>私たちが目指しているのは、一度だけ動くAIではありません。</p>
+
+    <p>業務を実行し、結果を確認し、改善し、また実行する。</p>
+
+    <p>そんな<strong>「動き続ける仕組み」</strong>を少しずつ増やしていくことです。</p>
+  </div>
+
+  <div class="wrap narrow">
+    <div class="flow">
+      <div class="fl"><div class="fl-n">THINK</div><div class="fl-t">思考する</div></div>
+      <div class="fl"><div class="fl-n">TRY</div><div class="fl-t">試行する</div></div>
+      <div class="fl"><div class="fl-n">BUILD</div><div class="fl-t">つくる</div></div>
+      <div class="fl"><div class="fl-n">OPERATE</div><div class="fl-t">動かす</div></div>
+      <div class="fl"><div class="fl-n">IMPROVE</div><div class="fl-t">改善する</div></div>
+    </div>
+  </div>
+
+  <div class="wrap narrow" style="margin-top:44px">
+    <p>AIによる業務自動化から、AIエージェント、AIアプリケーション、そして将来的には複数のAIが連携して仕事を進める仕組みまで。</p>
+
+    <p>小さな自動化から始めて、企業や個人の仕事そのものが変わっていくところまで支援します。</p>
+  </div>
+</section>
+
+<!-- 目指すもの -->
+<section class="sec">
+  <div class="wrap narrow">
+    <div class="label">VISION</div>
+    <h2>SHIKOU × AIが目指すもの</h2>
+
+    <p>AIを使うことが特別なことではなくなる。</p>
+
+    <p>「この仕事、AIに任せられないかな？」</p>
+
+    <p>そう考えることが当たり前になる。</p>
+
+    <p>そして、AIを単なる便利なツールとして使うのではなく、<strong>人とAIが一緒に仕事を進める新しい働き方</strong>が当たり前になる。</p>
+
+    <p>SHIKOU × AIは、そんな未来を、まずは目の前の一つの業務からつくっていきます。</p>
+
+    <p class="big"><span class="hl">AIで業務と開発を変える。</span></p>
+  </div>
+</section>
+
+<!-- 事業概要 -->
+<section class="sec tint">
+  <div class="wrap narrow">
+    <div class="label">OVERVIEW</div>
+    <h2>事業概要</h2>
+    <table class="tbl">
+      <tr>
+        <th>屋号</th>
+        <td>SHIKOU × AI（シコウ カケル エーアイ）</td>
+      </tr>
+      <tr>
+        <th>代表</th>
+        <td>福田 和弘（Fukuda Kazuhiro）</td>
+      </tr>
+      <tr>
+        <th>事業内容</th>
+        <td>
+          <ul>
+            <li>AI業務自動化の設計・開発（Claude Code / Codex 等）</li>
+            <li>AIエージェント・AIアプリケーションの開発</li>
+            <li>DX推進支援・AI顧問（業務委託／月額支援）</li>
+            <li>AI開発環境の構築支援・個別レクチャー</li>
+            <li>SEO記事制作・コンテンツ運用の自動化支援</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>お問い合わせ</th>
+        <td>
+          <a href="contact.html">お問合せフォーム</a><br>
+          <a href="mailto:fkdkazu@gmail.com">fkdkazu@gmail.com</a>
+        </td>
+      </tr>
+      <tr>
+        <th>ウェブサイト</th>
+        <td><a href="index.html">https://fkdkazu-commits.github.io/ai-consulting-lp/</a></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap">
+    <h2>面倒な作業を、1つ挙げてください。</h2>
+    <p>それが自動化できるかどうか、その場でお答えします。</p>
+    <div class="cta-row">
+      <a href="contact.html" class="btn btn-main">無料で相談する</a>
+      <a href="mailto:fkdkazu@gmail.com" class="btn btn-line">メールで送る</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  SHIKOU × AI / AI業務自動化支援 © 2026 ｜ <a href="index.html">トップページに戻る</a>
+</footer>
+
+</body>
+</html>
