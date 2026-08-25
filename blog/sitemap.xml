@@ -6,6 +6,12 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://fkdkazu-commits.github.io/ai-seo-blog/blog/internal-link-automation/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://fkdkazu-commits.github.io/ai-seo-blog/blog/seo-article-automation/</loc>
     <lastmod>2026-08-22</lastmod>
     <changefreq>monthly</changefreq>
