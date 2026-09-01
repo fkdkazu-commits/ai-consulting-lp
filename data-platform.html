@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>データ活用基盤の構築｜Azure Databricks で可視化のその先まで設計する（SHIKOU × AI）</title>
+<meta name="description" content="散在したデータを1か所へ集約し、可視化から予測・生成AIまでを Azure Databricks の単一ワークスペースで扱えるようにするデータ基盤の構成。Lakeflow Connect・Delta Lake・Databricks SQL・Power BI・MLflow・Genie を使った構成と、AIを使った開発の進め方を紹介します。">
+<meta property="og:title" content="データ活用基盤の構築｜可視化のその先まで設計する">
+<meta property="og:description" content="「可視化したい」というご要望の一歩先。予測と生成AIまで見据えた基盤設計と、AIを使った開発の進め方。">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="logo-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Noto Sans JP', sans-serif; background: #f6faf8; color: #1a1a2e; line-height: 1.8; }
+a { color: inherit; }
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 72px 0; }
+.section.alt { background: #fff; }
+.sec-tag { font-size: 12px; font-weight: 700; color: #047857; letter-spacing: 0.14em; margin-bottom: 10px; }
+.sec-title { font-size: clamp(22px, 3.2vw, 34px); font-weight: 900; line-height: 1.35; margin-bottom: 14px; letter-spacing: -0.01em; }
+.sec-lead { font-size: 15px; color: #4a5568; line-height: 1.9; margin-bottom: 36px; }
+
+/* ── ヘッダー ── */
+.site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid #e2ece8; }
+.header-inner { max-width: 1080px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:#0b2138}
+.logo img{height:28px;width:auto;display:block}
+.logo .logo-t{font-size:15px;font-weight:900;letter-spacing:.08em;color:#0b2138}
+.logo .x{color:#2f6fd0;font-weight:700;margin:0 .16em}
+.header-links { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.header-links a { font-size: 13px; font-weight: 700; color: #4a5568; text-decoration: none; }
+.header-links a:hover { color: #047857; }
+.header-cta { background: #047857; color: #fff !important; padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none; }
+
+/* ── ヒーロー ── */
+/* 写真：分析画面。左からの濃緑グラデーションで文字の可読性を確保しつつ、右側に写真を見せる */
+.hero {
+  position: relative; overflow: hidden;
+  background: url('https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=1800&q=80') center/cover no-repeat;
+  padding: 84px 0 96px; color: #fff;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(100deg, rgba(5,50,40,0.97) 0%, rgba(8,84,66,0.92) 44%, rgba(6,58,46,0.62) 100%);
+}
+/* 本文中のスクリーンショット */
+.shot { margin: 0; }
+.shot img { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid #dcebe5; box-shadow: 0 10px 40px rgba(6,55,44,0.16); background: #fff; }
+.shot figcaption { font-size: 12.5px; color: #94a3b8; margin-top: 14px; text-align: center; line-height: 1.85; }
+.hero-inner { position: relative; z-index: 1; }
+.hero-tag { display: inline-block; font-size: 12px; font-weight: 700; color: #99f6e4; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.22); padding: 6px 20px; border-radius: 24px; margin-bottom: 26px; letter-spacing: 0.05em; }
+.hero h1 { font-size: clamp(28px, 5vw, 52px); font-weight: 900; line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 20px; }
+.hero h1 em { font-style: normal; color: #5eead4; }
+.hero-sub { font-size: clamp(14px, 1.9vw, 18px); color: rgba(255,255,255,0.86); line-height: 1.95; margin-bottom: 34px; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 56px; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #f0a54a; color: #1a1a2e; font-size: 15px; font-weight: 700; padding: 15px 34px; border-radius: 999px; text-decoration: none; box-shadow: 0 8px 22px rgba(240,165,74,0.25); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.4); color: #fff; font-size: 15px; font-weight: 700; padding: 15px 30px; border-radius: 999px; text-decoration: none; }
+.hero-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; }
+.hero-num-val { font-size: 42px; font-weight: 900; color: #f0a54a; line-height: 1; margin-bottom: 8px; }
+.hero-num-val small { font-size: 18px; }
+.hero-num-label { font-size: 13px; color: rgba(255,255,255,0.72); }
+
+/* ── グリッド ── */
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+
+.problem-card { background: #eef3f1; border-radius: 14px; padding: 24px 22px; }
+.problem-head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.problem-icon { font-size: 24px; line-height: 1; flex-shrink: 0; }
+.problem-title { font-size: 15px; font-weight: 700; line-height: 1.6; }
+.problem-desc { font-size: 13px; color: #64748b; line-height: 1.85; }
+
+/* ── ナレッジ3階層 ── */
+.layer { display: flex; align-items: center; gap: 18px; background: #fff; border: 1px solid #dcebe5; border-radius: 14px; padding: 22px 24px; margin-bottom: 14px; }
+.layer-no { width: 46px; height: 46px; border-radius: 12px; background: #047857; color: #fff; font-size: 18px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.layer-title { font-size: 16px; font-weight: 900; margin-bottom: 4px; }
+.layer-desc { font-size: 13px; color: #64748b; line-height: 1.85; }
+
+/* ── 機能 ── */
+.feat-item { display: flex; gap: 14px; background: #fff; border: 1px solid #dcebe5; border-radius: 14px; padding: 20px 22px; }
+.feat-icon { font-size: 22px; line-height: 1.3; flex-shrink: 0; }
+.feat-title { font-size: 15px; font-weight: 900; margin-bottom: 4px; }
+.feat-desc { font-size: 12.5px; color: #64748b; line-height: 1.8; }
+
+/* ── フロー ── */
+.steps { display: flex; align-items: stretch; gap: 10px; flex-wrap: wrap; }
+.step-card { flex: 1 1 175px; background: #fff; border: 1px solid #dcebe5; border-radius: 14px; padding: 24px 16px; text-align: center; }
+.step-no { width: 44px; height: 44px; border-radius: 50%; background: #047857; color: #fff; font-size: 19px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+.step-title { font-size: 15px; font-weight: 900; margin-bottom: 8px; }
+.step-desc { font-size: 12.5px; color: #64748b; line-height: 1.8; }
+.step-arrow { display: flex; align-items: center; color: #10b981; font-size: 22px; font-weight: 900; }
+
+/* ── 料金 ── */
+.price-card { border-radius: 16px; padding: 28px 24px; position: relative; }
+.price-card.a { background: #eef3f1; border: 1px solid #d5e5df; }
+.price-card.b { background: #e7f6f0; border: 2px solid #047857; }
+.price-card.c { background: #fdf1e0; border: 1px solid #f0c99a; }
+.price-badge { display: inline-block; color: #fff; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: 8px; margin-bottom: 16px; }
+.price-card.a .price-badge { background: #1f4d40; }
+.price-card.b .price-badge { background: #047857; }
+.price-card.c .price-badge { background: #c05621; }
+.price-recommend { position: absolute; top: -14px; right: 20px; background: #047857; color: #fff; font-size: 12px; font-weight: 700; padding: 5px 16px; border-radius: 8px; }
+.price-name { font-size: 18px; font-weight: 900; line-height: 1.5; margin-bottom: 16px; }
+.price-val { font-size: 15px; font-weight: 700; color: #4a5568; margin-bottom: 4px; }
+.price-val strong { font-size: 32px; font-weight: 900; color: #1a1a2e; letter-spacing: -0.01em; }
+.price-card.b .price-val strong { color: #047857; }
+.price-card.c .price-val strong { color: #c05621; }
+.price-cond { font-size: 12px; color: #718096; margin-bottom: 18px; }
+.price-desc { font-size: 13px; color: #4a5568; line-height: 1.85; margin-bottom: 16px; }
+.price-list { list-style: none; }
+.price-list li { font-size: 13.5px; color: #374151; line-height: 2.1; padding-left: 20px; position: relative; }
+.price-list li::before { content: '✓'; position: absolute; left: 0; color: #047857; font-weight: 900; }
+.price-note { font-size: 12px; color: #94a3b8; margin-top: 22px; line-height: 1.9; }
+
+/* ── FAQ ── */
+.faq-item { background: #eef3f1; border-radius: 12px; padding: 22px 24px; margin-bottom: 14px; }
+.faq-q { font-size: 15px; font-weight: 900; margin-bottom: 10px; display: flex; gap: 10px; }
+.faq-q span { color: #047857; }
+.faq-a { font-size: 13.5px; color: #64748b; line-height: 1.95; padding-left: 26px; }
+
+/* ── 次のアクション ── */
+.next-card { background: #fff; border: 1px solid #dcebe5; border-radius: 14px; padding: 24px 26px; text-decoration: none; display: block; }
+.next-label { font-size: 11px; font-weight: 700; color: #718096; letter-spacing: 0.1em; margin-bottom: 8px; }
+.next-title { font-size: 17px; font-weight: 900; margin-bottom: 8px; }
+.next-desc { font-size: 13px; color: #64748b; line-height: 1.85; }
+
+/* ── CTA ── */
+.cta-section { background: #fff; padding: 72px 0; text-align: center; }
+.cta-title { font-size: clamp(22px, 3.4vw, 34px); font-weight: 900; margin-bottom: 12px; }
+.cta-lead { font-size: 15px; color: #4a5568; margin-bottom: 34px; }
+.cta-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 30px; }
+.cta-card { background: #eef3f1; border-radius: 14px; padding: 22px; display: flex; align-items: center; gap: 16px; text-align: left; text-decoration: none; }
+.cta-card-icon { width: 48px; height: 48px; border-radius: 50%; background: #047857; color: #fff; font-size: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.cta-card-label { font-size: 12px; color: #718096; margin-bottom: 2px; }
+.cta-card-val { font-size: 15px; font-weight: 700; word-break: break-all; }
+.cta-note { font-size: 13px; color: #94a3b8; }
+
+.site-footer { background: #06372c; color: rgba(255,255,255,0.6); padding: 30px 0; font-size: 13px; text-align: center; }
+.site-footer a { color: #5eead4; text-decoration: none; }
+
+@media (max-width: 860px) {
+  .step-arrow { display: none; }
+  .header-links a:not(.header-cta) { display: none; }
+}
+
+/* このページ固有 */
+.fig { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; margin: 8px 0 10px; display: block; }
+.fig-cap { font-size: 12.5px; color: var(--gray); text-align: center; margin-bottom: 28px; }
+.phase { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px,100%),1fr)); gap: 2px; background: var(--line); border: 1px solid var(--line); margin-top: 8px; }
+.phase-item { background: #fff; padding: 22px 20px; }
+.phase.five { grid-template-columns: repeat(auto-fit, minmax(min(185px,100%),1fr)); }
+.phase.five .phase-d { font-size: 12.5px; }
+.phase-n { font-size: 11.5px; font-weight: 900; color: var(--accent); letter-spacing: .1em; margin-bottom: 10px; }
+.phase-t { font-size: 16px; font-weight: 900; line-height: 1.5; margin-bottom: 9px; }
+.phase-d { font-size: 13.5px; color: var(--gray); line-height: 1.8; }
+.svc-list { display: flex; flex-wrap: wrap; gap: 2px; background: var(--line); border: 1px solid var(--line); margin: 26px 0 6px; }
+.svc-row { background: #fff; padding: 16px 18px; flex: 1 1 200px; }
+.svc-layer { font-size: 11px; font-weight: 900; color: var(--accent); letter-spacing: .08em; margin-bottom: 7px; }
+.svc-name { font-size: 14px; font-weight: 900; line-height: 1.5; }
+.svc-role { font-size: 12.5px; color: var(--gray); line-height: 1.7; margin-top: 5px; }
+</style>
+</head><body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo"><img src="logo-mark.png" alt="SHIKOU × AI"><span class="logo-t">SHIKOU<span class="x">×</span>AI</span></a>
+    <div class="header-links">
+      <a href="index.html">トップ</a>
+      <a href="#design">設計の考え方</a>
+      <a href="#phase">進め方</a>
+      <a href="#ai-dev">AIを使った開発</a>
+      <a href="contact.html" class="header-cta">無料相談</a>
+    </div>
+  </div>
+</header>
+
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-tag">✦ 事業会社向け / Azure Databricks によるデータ基盤</div>
+    <h1>「可視化したい」の、<br>その先まで設計する</h1>
+    <p class="hero-sub">
+      自社サービスのデータが複数の場所に散らばっていて、見たい数字がすぐ出てこない。
+      ダッシュボードは作ったが、そこから何をすべきかが分からない。<br>
+      収集から可視化・予測・生成AIまでを、ひとつの基盤で扱える形に設計します。
+    </p>
+    <div class="hero-btns">
+      <a href="contact.html" class="btn btn-primary">無料で相談する</a>
+      <a href="index.html#results" class="btn btn-ghost">他の実績を見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- 課題 -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-tag">BACKGROUND</div>
+    <h2 class="sec-title">こんな状態になっていませんか</h2>
+    <p class="sec-lead">データ活用の相談は「可視化したい」から始まることが多いのですが、実際に困っているのはその手前と、その先にあります。</p>
+    <div class="phase">
+      <div class="phase-item">
+        <div class="phase-n">01</div>
+        <div class="phase-t">データが散らばっている</div>
+        <div class="phase-d">サービスの利用ログ、問い合わせ履歴、顧客マスタが別々の場所にある。突き合わせるたびに手作業で書き出している。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">02</div>
+        <div class="phase-t">数字の定義が揃っていない</div>
+        <div class="phase-d">同じ指標のはずが、部署によって数字が違う。どれが正しいのかを毎回確認している。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">03</div>
+        <div class="phase-t">見えたあとが決まっていない</div>
+        <div class="phase-d">ダッシュボードはできたが、そこから何を判断するかが決まっていない。結局、見る人が限られる。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">04</div>
+        <div class="phase-t">分析にSQLが要る</div>
+        <div class="phase-d">現場が知りたいことを聞くたびに、分かる人へ依頼が集まる。待ち時間が発生する。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 設計の考え方 -->
+<section class="section" id="design">
+  <div class="wrap">
+    <div class="sec-tag">ARCHITECTURE</div>
+    <h2 class="sec-title">収集から活用までを、ひとつの基盤で</h2>
+    <p class="sec-lead">可視化だけを目的にすると、あとから予測や生成AIを足すときに基盤をまたぐことになります。最初から後段を見据えて設計します。</p>
+
+    <img src="data-platform-arch.png" alt="データ基盤の全体構成。複数のデータソースから収集・蓄積・整形を経て、可視化・予測・生成AIまでを単一の基盤で扱う" class="fig" width="1200" height="633" loading="lazy">
+    <p class="fig-cap">データ基盤の全体構成</p>
+
+    <h3 style="font-size:19px;font-weight:900;margin:34px 0 12px">採用したサービス</h3>
+    <div class="svc-list">
+      <div class="svc-row">
+        <div class="svc-layer">COLLECT</div>
+        <div class="svc-name">Lakeflow Connect</div>
+        <div class="svc-role">各データソースへ接続し、決まった間隔で取り込む</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">STORE</div>
+        <div class="svc-name">Delta Lake<br>（ADLS Gen2）</div>
+        <div class="svc-role">生データをそのまま残し、あとから遡って作り直せる状態を保つ</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">MODEL / DWH</div>
+        <div class="svc-name">Databricks SQL</div>
+        <div class="svc-role">分析しやすい形へ変換し、指標の定義をここへ集約する</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">USE</div>
+        <div class="svc-name">Power BI<br>MLflow / Genie</div>
+        <div class="svc-role">可視化、予測モデルの運用、自然言語での問い合わせ</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">GOVERNANCE</div>
+        <div class="svc-name">Unity Catalog<br>Microsoft Entra ID</div>
+        <div class="svc-role">アクセス制御と監査ログを全レイヤに適用する</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--gray);line-height:1.8;margin-top:10px">
+      Power BI 以外は同一の Azure Databricks ワークスペース内で完結し、Power BI だけを外部から接続します。
+    </p>
+
+    <h3 style="font-size:19px;font-weight:900;margin:34px 0 12px">なぜ Databricks 単体にしたのか</h3>
+    <p style="font-size:15px;color:var(--gray);line-height:1.95">
+      比較したのは「Microsoft Fabric 併用案」と「Azure Databricks 単体案」の2つです。
+      Fabric 併用案にも利点はあります。Power BI との Direct Lake 連携が滑らかで、容量ベース（F SKU）の課金は費用が読みやすく、既存の Power BI Premium 資産があればそのまま活かせます。
+    </p>
+    <p style="font-size:15px;color:var(--gray);line-height:1.95;margin-top:14px">
+      ただしこの案では、<strong style="color:var(--ink)">機械学習と生成AIを別途 Databricks と連携させる必要があります。</strong>
+      Phase3・Phase4を見据えると、そこで基盤をまたぐことになります。
+    </p>
+    <p style="font-size:15px;color:var(--gray);line-height:1.95;margin-top:14px">
+      そのため単体案を採りました。収集から生成AIまでを Unity Catalog で一元管理でき、MLflow で予測モデルの運用に乗せられ、Phase4の自然言語チャットは Genie でそのまま実装できます。
+      Power BI は接続先を変えるだけで、資産として継続利用できます。
+    </p>
+    <p style="font-size:15px;color:var(--gray);line-height:1.95;margin-top:14px">
+      基盤をまたぐと、権限管理とデータの受け渡しが二重になります。作るときは大差なくても、運用が始まってから効いてきます。
+    </p>
+  </div>
+</section>
+
+<!-- 進め方 -->
+<section class="section alt" id="phase">
+  <div class="wrap">
+    <div class="sec-tag">ROADMAP</div>
+    <h2 class="sec-title">5段階で、少しずつ広げる</h2>
+    <p class="sec-lead">最初から全部を作りません。まず可視化までを動かし、そこで得たものを見ながら次へ進みます。段階ごとに投資判断ができる形にしています。</p>
+    <div class="phase five">
+      <div class="phase-item">
+        <div class="phase-n">PHASE 1</div>
+        <div class="phase-t">可視化</div>
+        <div class="phase-d">データを集約し、ダッシュボードで見える状態にする。ここが最初のゴール。<br><span style="color:var(--accent);font-weight:700">Databricks SQL + Power BI</span></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">PHASE 2</div>
+        <div class="phase-t">分析</div>
+        <div class="phase-d">見えた数字の「なぜ」を掘る。分類とクラスタリングで傾向を出す。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">PHASE 3</div>
+        <div class="phase-t">予測</div>
+        <div class="phase-d">離脱の兆候や需要の変動を予測し、動く前に手を打てるようにする。<br><span style="color:var(--accent);font-weight:700">MLflow</span></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">PHASE 4</div>
+        <div class="phase-t">生成AIの活用</div>
+        <div class="phase-d">自然言語で問い合わせられるようにする。SQLが書けなくてもデータに向き合える。<br><span style="color:var(--accent);font-weight:700">Genie</span></div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">PHASE 5</div>
+        <div class="phase-t">経営での利用</div>
+        <div class="phase-d">経営会議でそのまま使える形にまとめる。全社への展開を見据える。</div>
+      </div>
+    </div>
+    <p style="font-size:14px;color:var(--gray);line-height:1.9;margin-top:24px">
+      Phase1を動かしてから次を決めます。<strong style="color:var(--ink)">先に全体像を示しつつ、投資は段階的に</strong>という進め方です。
+    </p>
+  </div>
+</section>
+
+<!-- AIを使った開発 -->
+<section class="section" id="ai-dev">
+  <div class="wrap">
+    <div class="sec-tag">HOW WE BUILD</div>
+    <h2 class="sec-title">AIを使った開発の進め方</h2>
+    <p class="sec-lead">「AIで開発を速くします」とだけ言っても、何がどう変わるかは伝わりません。見積もりの段階で工程を分解し、どこをAIに任せるかを決めてから着手します。</p>
+
+    <img src="ai-wbs-split.png" alt="タスクごとに人がやることとAIに任せることを分けた表。要件定義から変換ロジック実装まで、工程ごとにAI適用度を三段階で示している" class="fig" width="1200" height="656" loading="lazy">
+    <p class="fig-cap">工程ごとの役割分担（実際の見積もりから抜粋・工数は非掲載）</p>
+
+    <h3 style="font-size:19px;font-weight:900;margin:34px 0 12px">任せない工程を決めておく</h3>
+    <p style="font-size:15px;color:var(--gray);line-height:1.95">
+      コードとドキュメントの初稿はAIが作れます。一方で、<strong style="color:var(--ink)">権限の方針、設計の方針、要件の確定は人が持ちます。</strong>
+      ここを曖昧にしたまま進めると、あとから戻る作業のほうが大きくなります。
+    </p>
+    <p style="font-size:15px;color:var(--gray);line-height:1.95;margin-top:14px">
+      見積もりの時点でこの線を引いておくと、着手後に「これはAIに任せていいのか」で迷いません。
+    </p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-sec">
+  <div class="wrap">
+    <div class="sec-tag">CONTACT</div>
+    <h2 class="sec-title">データの使い道から、一緒に決めます</h2>
+    <p class="sec-lead">
+      「何から手を付ければいいか分からない」という段階でも構いません。
+      いま持っているデータと、見たい数字を伺うところから始めます。
+    </p>
+    <div class="cta-cards">
+      <a href="mailto:fkdkazu@gmail.com" class="cta-card">
+        <div class="cta-card-icon">✉</div>
+        <div><div class="cta-card-label">メール</div><div class="cta-card-val">fkdkazu@gmail.com</div></div>
+      </a>
+      <a href="https://x.com/Marketer_kazuf" target="_blank" rel="noopener" class="cta-card">
+        <div class="cta-card-icon">𝕏</div>
+        <div><div class="cta-card-label">X（DM）</div><div class="cta-card-val">@Marketer_kazuf</div></div>
+      </a>
+      <a href="contact.html" class="cta-card">
+        <div class="cta-card-icon">🔗</div>
+        <div><div class="cta-card-label">お問い合わせフォーム</div><div class="cta-card-val">無料相談を申し込む</div></div>
+      </a>
+    </div>
+    <p class="cta-note">通常1営業日以内にご返信します</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    SHIKOU × AI / AI業務自動化支援 © 2026 ｜ <a href="index.html">トップページに戻る</a>
+  </div>
+</footer>
+
+</body>
+</html>

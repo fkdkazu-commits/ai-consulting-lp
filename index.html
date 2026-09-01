@@ -108,6 +108,8 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdro
 /* 実績 */
 .res{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px;background:var(--line);border:1px solid var(--line)}
 .res-card{background:#fff;padding:30px 28px;text-decoration:none;color:inherit;display:flex;flex-direction:column}
+.res-card:last-child:nth-child(3n+1){grid-column:1/-1}
+.res-card:last-child:nth-child(3n+1) .res-d{max-width:62ch}
 .res-card:hover{background:#fbfcfe}
 .res-cat{font-size:11.5px;font-weight:700;color:var(--accent);letter-spacing:.08em;margin-bottom:12px}
 .res-t{font-size:17px;font-weight:900;line-height:1.55;margin-bottom:12px}
@@ -351,17 +353,17 @@ footer a{color:#7fb2f0;text-decoration:none}
         <p class="res-d">キーワード選定から執筆・入稿まで一気通貫。外注コストと作業時間を大きく削りました。</p>
         <div class="res-n">約80%<small>コスト削減</small></div>
       </a>
-      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/internal-link-agent.html" target="_blank" rel="noopener" class="res-card">
-        <div class="res-cat">SEO対策</div>
-        <div class="res-t">内部リンク構築 AIエージェント</div>
-        <p class="res-d">スプレッドシートを渡すだけで、被リンク不足の記事へ内部リンク候補を自動提案します。</p>
-        <div class="res-n">約200記事<small>を約50分で処理</small></div>
+      <a href="data-platform.html" class="res-card">
+        <div class="res-cat">データ基盤・AI活用</div>
+        <div class="res-t">データ活用基盤の構築</div>
+        <p class="res-d">散在したデータをAzure Databricksへ集約し、可視化から予測・生成AIまでを単一基盤で扱える形に設計します。</p>
+        <div class="res-n">溜まったデータ<small>をAI分析・利活用</small></div>
       </a>
-      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/hearing-mock.html" target="_blank" rel="noopener" class="res-card">
-        <div class="res-cat">営業・提案</div>
-        <div class="res-t">AIヒアリング〜モックアップ自動生成</div>
-        <p class="res-d">商談中の音声をその場で文字にし、要件を分析。画面モックまで自動で出します。</p>
-        <div class="res-n">最短30分<small>でモック完成</small></div>
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/invoice.html" target="_blank" rel="noopener" class="res-card">
+        <div class="res-cat">経理・バックオフィス</div>
+        <div class="res-t">請求書 AI-OCR 管理システム</div>
+        <p class="res-d">請求書の受領からOCR抽出・承認・支払管理までを自動化。freee会計への自動連携で、仕訳の手入力もなくせます。</p>
+        <div class="res-n">月数十時間<small>の手入力が数時間に</small></div>
       </a>
       <a href="hands-free-dev.html" class="res-card">
         <div class="res-cat">開発環境</div>
@@ -374,7 +376,7 @@ footer a{color:#7fb2f0;text-decoration:none}
         <div class="res-cat">CRM・営業管理</div>
         <div class="res-t">クラウドCRM 初期構築（BtoB商社）</div>
         <p class="res-d">手帳とExcelに散っていた営業情報を、標準機能で一元管理。基幹・EC・名刺管理とつなぎます。</p>
-        <div class="res-n">8画面<small>のモックと設計を先行（進行中）</small></div>
+        <div class="res-n">属人化を解消<small>し、案件を可視化</small></div>
       </a>
     </div>
 
