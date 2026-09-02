@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="ja"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>請求書OCRを2つのAIエンジンで自動化した実装記｜Textract・Claude Vision使い分けの理由</title><meta name="description" content="請求書OCRをAmazon TextractとClaude Visionの2エンジン選択式で自動化した実装記。処理速度の実測値、精度検証の失敗談、100%を保証しない品質担保の考え方を紹介します。"><link rel="canonical" href="https://shikou-ai.com/blog/invoice-ocr-automation/"><link rel="icon" type="image/png" href="/logo-icon.png"><!-- OGP --><meta property="og:type" content="website"><meta property="og:title" content="請求書OCRを2つのAIエンジンで自動化した実装記｜Textract・Claude Vision使い分けの理由"><meta property="og:description" content="請求書OCRをAmazon TextractとClaude Visionの2エンジン選択式で自動化した実装記。処理速度の実測値、精度検証の失敗談、100%を保証しない品質担保の考え方を紹介します。"><meta property="og:image" content="https://shikou-ai.com/blog/og/invoice-ocr-automation.png"><meta property="og:url" content="https://shikou-ai.com/blog/invoice-ocr-automation/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="請求書OCRを2つのAIエンジンで自動化した実装記｜Textract・Claude Vision使い分けの理由"><meta name="twitter:description" content="請求書OCRをAmazon TextractとClaude Visionの2エンジン選択式で自動化した実装記。処理速度の実測値、精度検証の失敗談、100%を保証しない品質担保の考え方を紹介します。"><meta name="twitter:image" content="https://shikou-ai.com/blog/og/invoice-ocr-automation.png"><!-- Google Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/blog/_astro/_slug_.CkmGLpor.css">
+<link rel="stylesheet" href="/blog/_astro/_slug_.9WCtaYt9.css"><script type="module">const i=document.getElementById("article-body");if(i){const e=i.innerText.replace(/\s+/g,"").length,o=Math.max(1,Math.ceil(e/600)),n=document.getElementById("reading-time");n&&(n.textContent=`約${o}分で読めます`)}const u=Array.from(document.querySelectorAll("#article-body h2, #article-body h3")),d=document.getElementById("toc-inline");if(d&&u.length>0){let e=null,o=null;u.forEach((n,a)=>{if(n.id||(n.id=`h-${a}`),n.tagName==="H2"){e=document.createElement("div"),e.className="toc-group";const l=document.createElement("a");l.href=`#${n.id}`,l.className="toc-h2-label",l.textContent=n.textContent??"",e.appendChild(l),d.appendChild(e),o=null}else{o||(o=document.createElement("ul"),o.className="toc-h3-list",e?e.appendChild(o):d.appendChild(o));const l=document.createElement("li"),c=document.createElement("a");c.href=`#${n.id}`,c.textContent=n.textContent??"",l.appendChild(c),o.appendChild(l)}})}else if(d){const e=d.closest(".toc-box");e&&(e.style.display="none")}const p=encodeURIComponent(location.href),f=encodeURIComponent(document.title),m=document.getElementById("share-x");m&&(m.href=`https://twitter.com/intent/tweet?url=${p}&text=${f}`);const h=Array.from(document.querySelectorAll("#article-body img"));if(h.length>0){const e=document.createElement("div");e.className="lightbox",e.setAttribute("role","dialog"),e.setAttribute("aria-modal","true"),e.hidden=!0;const o=document.createElement("img");o.className="lightbox-img",o.alt="";const n=document.createElement("button");n.className="lightbox-close",n.type="button",n.setAttribute("aria-label","閉じる"),n.textContent="×";const a=document.createElement("p");a.className="lightbox-caption",e.appendChild(n),e.appendChild(o),e.appendChild(a),document.body.appendChild(e);let l=null;const c=t=>{l=t,o.src=t.currentSrc||t.src,o.alt=t.alt,a.textContent=t.alt,e.hidden=!1,document.body.style.overflow="hidden",n.focus()},s=()=>{e.hidden=!0,o.src="",document.body.style.overflow="",l&&l.focus()};h.forEach(t=>{t.closest("a")||(t.classList.add("zoomable"),t.tabIndex=0,t.setAttribute("role","button"),t.setAttribute("aria-label",`${t.alt} を拡大表示`),t.addEventListener("click",()=>c(t)),t.addEventListener("keydown",r=>{(r.key==="Enter"||r.key===" ")&&(r.preventDefault(),c(t))}))}),n.addEventListener("click",s),e.addEventListener("click",t=>{t.target===e&&s()}),document.addEventListener("keydown",t=>{t.key==="Escape"&&!e.hidden&&s()})}
+</script></head> <body class="bg-white text-gray-900"> <!-- Header：ai-consulting-lp のヘッダーに合わせる --> <header class="border-b border-[#dfe6ee] bg-white/95 backdrop-blur sticky top-0 z-50"> <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between"> <a href="/" class="flex items-center gap-2.5 group"> <img src="/logo-mark.png" alt="SHIKOU × AI" class="h-7 w-auto"> <span class="text-[15px] font-black tracking-[0.08em] text-[#0b2138] group-hover:text-[#2f6fd0] transition-colors">SHIKOU<span class="text-[#2f6fd0] mx-[0.16em]">×</span>AI</span> </a> <nav class="flex items-center gap-1 text-sm"> <a href="/blog/" class="px-3 py-1.5 text-[#5a6b7d] hover:text-[#2f6fd0] transition-colors font-bold text-[13.5px]">
+ブログ
+</a> <a href="/about.html" class="px-3 py-1.5 text-[#5a6b7d] hover:text-[#2f6fd0] transition-colors font-bold text-[13.5px] hidden sm:inline">
+会社概要
+</a> <a href="/#services" class="px-3 py-1.5 text-[#5a6b7d] hover:text-[#2f6fd0] transition-colors font-bold text-[13.5px] hidden sm:inline">
+サービス
+</a> <a href="/contact.html" class="ml-2 px-5 py-2 bg-[#0b2138] text-white rounded-md font-bold text-[13.5px] hover:bg-[#102a43] transition-colors">
+お問合せ
+</a> </nav> </div> </header> <main class="max-w-3xl mx-auto px-6 py-8 bg-white">  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"請求書OCRを2つのAIエンジンで自動化した実装記｜Textract・Claude Vision使い分けの理由","description":"請求書OCRをAmazon TextractとClaude Visionの2エンジン選択式で自動化した実装記。処理速度の実測値、精度検証の失敗談、100%を保証しない品質担保の考え方を紹介します。","datePublished":"2026-09-01T00:00:00.000Z","author":{"@type":"Person","name":"福田 和弘"},"publisher":{"@type":"Organization","name":"SHIKOU × AI"},"articleSection":"AI業務効率化"}</script>  <nav class="text-xs text-gray-400 mb-5 flex gap-1.5 items-center flex-wrap" aria-label="breadcrumb" data-astro-cid-bvzihdzo> <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-gray-300" fill="currentColor" viewBox="0 0 20 20" data-astro-cid-bvzihdzo><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 1.5a6.5 6.5 0 110 13 6.5 6.5 0 010-13z" data-astro-cid-bvzihdzo></path></svg> <a href="/" class="hover:text-gray-600 transition-colors" data-astro-cid-bvzihdzo>ホーム</a> <span class="text-gray-300" data-astro-cid-bvzihdzo>›</span> <a href="/blog/" class="hover:text-gray-600 transition-colors" data-astro-cid-bvzihdzo>ブログ</a>  <span class="text-gray-300" data-astro-cid-bvzihdzo>›</span> <a href="/blog/category/ai-efficiency/" class="hover:text-gray-600 transition-colors" data-astro-cid-bvzihdzo>AI業務効率化</a>  <span class="text-gray-300" data-astro-cid-bvzihdzo>›</span> <span class="text-gray-500 truncate max-w-[200px]" data-astro-cid-bvzihdzo>請求書OCRを2つのAIエンジンで自動化した実装記｜Textract・Claude Vision使い分けの理由</span> </nav> <article data-astro-cid-bvzihdzo> <!-- Title --> <h1 class="text-2xl md:text-[1.75rem] font-black leading-snug mb-5 text-[#0b2138] tracking-tight" data-astro-cid-bvzihdzo>請求書OCRを2つのAIエンジンで自動化した実装記｜Textract・Claude Vision使い分けの理由</h1> <!-- アイキャッチ（OG画像はSNSシェア用。記事内では heroImage を使う） --> <div class="mb-6" data-astro-cid-bvzihdzo> <img src="/blog/img/eyecatch-invoice-ocr-automation.jpg" alt="" width="1200" height="670" class="w-full h-auto rounded-md border border-[#dfe6ee]" loading="eager" fetchpriority="high" decoding="async" data-astro-cid-bvzihdzo> </div> <!-- Tags + Meta --> <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mb-6" data-astro-cid-bvzihdzo> <div class="flex gap-2 flex-wrap" data-astro-cid-bvzihdzo> <span class="text-xs bg-[#102a43] text-white px-3 py-1 rounded-full font-medium" data-astro-cid-bvzihdzo>請求書</span><span class="text-xs bg-[#102a43] text-white px-3 py-1 rounded-full font-medium" data-astro-cid-bvzihdzo>AI-OCR</span><span class="text-xs bg-[#102a43] text-white px-3 py-1 rounded-full font-medium" data-astro-cid-bvzihdzo>経理</span><span class="text-xs bg-[#102a43] text-white px-3 py-1 rounded-full font-medium" data-astro-cid-bvzihdzo>業務自動化</span><span class="text-xs bg-[#102a43] text-white px-3 py-1 rounded-full font-medium" data-astro-cid-bvzihdzo>精度</span> </div> <div class="text-xs text-gray-400 ml-auto flex gap-3" data-astro-cid-bvzihdzo>  <time datetime="2026-09-01T00:00:00.000Z" data-astro-cid-bvzihdzo>2026/9/1 公開</time> </div> </div> <!-- CTA Banner --> <a href="/contact.html" class="mb-8 bg-[#0b2138] rounded-md px-6 py-4 flex items-center justify-between text-white no-underline hover:bg-[#102a43] transition-colors" data-astro-cid-bvzihdzo> <div class="flex items-center gap-4" data-astro-cid-bvzihdzo> <div class="text-xs bg-white/15 rounded-full px-3 py-1 text-center leading-tight whitespace-nowrap" data-astro-cid-bvzihdzo> <div class="text-[0.6rem] opacity-80" data-astro-cid-bvzihdzo>AI業務改善</div> <div data-astro-cid-bvzihdzo>ご相談</div> </div> <div data-astro-cid-bvzihdzo> <p class="text-[0.7rem] opacity-75" data-astro-cid-bvzihdzo>技術と現場、両方わかるAIコンサル</p> <p class="font-bold text-base leading-snug" data-astro-cid-bvzihdzo>面倒な作業を、1つ挙げてください。</p> </div> </div> <div class="w-8 h-8 rounded-full border-2 border-white/50 flex items-center justify-center flex-shrink-0" data-astro-cid-bvzihdzo> <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-bvzihdzo><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" data-astro-cid-bvzihdzo></path></svg> </div> </a> <!-- 目次 --> <div class="toc-box border border-gray-200 mb-10" data-astro-cid-bvzihdzo> <div class="px-4 py-2 border-b border-gray-200" data-astro-cid-bvzihdzo> <span class="font-bold text-gray-600 text-xs tracking-wide" data-astro-cid-bvzihdzo>目次</span> </div> <nav id="toc-inline" class="px-4 py-3" data-astro-cid-bvzihdzo></nav> </div> <!-- Article Content --> <div id="article-body" class="prose prose-gray max-w-none bg-white
+      prose-p:leading-[1.9] prose-p:text-gray-700 prose-p:text-[1rem]
+      prose-a:text-[#2f6fd0] prose-a:underline
+      prose-strong:text-gray-900 prose-strong:font-bold
+      prose-li:text-gray-700 prose-li:text-[1rem]
+      prose-img:rounded-sm
+    " data-astro-cid-bvzihdzo>  <p>紙やPDFで届く請求書を、Excelに手で打ち直す。この作業をなくしたい、というのが出発点でした。</p>
+<p>そこで、AIによるOCR（光学文字認識。画像内の文字を機械が読み取る技術）で読み取り、確認・修正・承認・ステータス管理までをクラウド上で完結できるアプリを作りました。</p>
+<p>ただ、作りながら分かったのは<mark class="warn">「読み取れれば終わり」ではない</mark>ということです。OCRエンジンにはAmazon TextractとClaude Vision（Anthropicの画像認識AI）の2つを用意し、案件ごとに選べる形にしました。</p>
+<p>なぜ1つに絞らなかったのか。そこに至るまでに何でつまずいたのか。AI-OCRの導入を考えている方が、精度や運用の線引きをどこに置けばよいかを判断する材料になればと思います。</p>
+<h2 id="何ができるものか">何ができるものか</h2>
+<p>このシステムは、経理担当者が請求書のPDFや画像をアップロードすると、AIが金額・日付・取引先などの項目を読み取り、確認画面に自動で反映するところまでを行います。読み取り結果は人が確認・修正したうえで承認担当者に回り、承認されるとステータスが更新される流れです。</p>
+<img src="/blog/img/screen-invoice-ocr.png" alt="OCR結果の確認画面。左に請求書のPDFを表示し、右側に取引先名・請求書番号・発行日・支払期限・請求金額・適格請求書番号をAIが抽出した結果が並ぶ。各項目は編集でき、下部に「確認完了・承認へ進む」ボタンがある" width="1899" height="863" loading="lazy" decoding="async" style="width:100%;max-width:100%;height:auto;margin:1.5rem auto 0.6rem;display:block;border:1px solid #dfe6ee;border-radius:6px;"/>
+<span style="display:block;font-size:0.8rem;color:#5a6b7d;text-align:center;margin-bottom:1.75rem;">読み取り結果の確認画面。左に原本、右にAIの抽出結果を並べ、人が見比べて直せるようにしている（社名・氏名・連絡先はダミーに置き換えています）</span>
+<p>利用者は経理担当者（アップロード）・承認担当者（承認・差し戻し）・管理者の3つの役割に分かれており、同時利用人数は10人以下を想定した設計にしています。会計ソフトのfreeeとの連携機能もあわせて実装しました。</p>
+<img src="/blog/img/screen-invoice-approval.png" alt="承認フロー画面。承認待ち・承認済み・差し戻し・全ての4つのタブがあり、請求書の一覧から1件を選ぶと右側に承認アクションと請求書詳細が表示される" width="1879" height="893" loading="lazy" decoding="async" style="width:100%;max-width:100%;height:auto;margin:1.5rem auto 0.6rem;display:block;border:1px solid #dfe6ee;border-radius:6px;"/>
+<span style="display:block;font-size:0.8rem;color:#5a6b7d;text-align:center;margin-bottom:1.75rem;">承認フロー。確認を終えた請求書がここに回り、承認と差し戻しを選べる（社名・連絡先はダミーに置き換えています）</span>
+<h2 id="なぜ作ったか">なぜ作ったか</h2>
+<p>請求書をExcelに手で転記していると、入力ミスが起きますし、件数が増えるほど時間もかかります。担当者しか手順を把握していない、更新が漏れる、確認のたびに人を捕まえる。中小企業のExcel業務では、このあたりがまとめて問題になりがちです。</p>
+<p>そこで、読み取りから承認までを1つのアプリで完結させ、<mark>転記という作業そのものをなくす</mark>方向で設計しました。</p>
+<h2 id="導入すると何が変わるか">導入すると何が変わるか</h2>
+<p>読み取りが速くなったこと以上に効いたのは、エンジンを1つに絞らなかったことでした。</p>
+<h3 id="処理時間はエンジンによって違う">処理時間はエンジンによって違う</h3>
+<p>OCRの処理時間は、Textractが5〜15秒、Claude Visionが15〜30秒でした。いずれもPDFの枚数に応じて変動する条件下での値です。</p>
+<p>またAPIレスポンスは通常500ミリ秒以内で返ります（Lambdaのコールドスタートを除く条件です）。処理全体のうち、待ち時間の大部分はOCR自体の読み取りにかかる時間が占めています。</p>
+<h3 id="なぜ2つのエンジンを選択式にしたか">なぜ2つのエンジンを選択式にしたか</h3>
+<p>2つのエンジンは、得意な場面が違います。Textractは日本語の印刷文字と処理速度に強く、Claude Visionは手書きや複雑なレイアウトに強い。</p>
+<p>精度だけを見ればClaude Visionに寄せたくなりますが、<mark>こちらはAPIの利用にコストがかかります</mark>。印刷された請求書ばかりならTextractで足りるので、案件ごとに選べるようにしました。</p>
+<p>実装としては、OCRを担うLambda関数（サーバーを用意せずコードを実行できるAWSのサービス）の中で、どちらを使うかを示すフィールドを見て分岐させているだけです。フロントエンドやAPI側には手を入れずに済みます。</p>
+<img src="/blog/img/screen-invoice-upload.png" alt="請求書アップロード画面。ファイルのドラッグ＆ドロップ領域の下に、OCRエンジンとしてTextract（標準）とClaude Vision（高精度）を選ぶラジオボタンが並んでいる" width="1026" height="668" loading="lazy" decoding="async" style="width:100%;max-width:100%;height:auto;margin:1.5rem auto 0.6rem;display:block;border:1px solid #dfe6ee;border-radius:6px;"/>
+<span style="display:block;font-size:0.8rem;color:#5a6b7d;text-align:center;margin-bottom:1.75rem;">アップロード時にエンジンを選ぶ。書類の性質に応じて使い分けられるようにした（ファイル名はダミーに置き換えています）</span>
+<h2 id="品質をどう担保しているか">品質をどう担保しているか</h2>
+<p>AI-OCRを入れれば全部が自動になる、とは言えません。実際に2つのエンジンを動かしてみて分かったことと、それを踏まえてどう設計したかを書きます。</p>
+<h3 id="textractで困った場面">Textractで困った場面</h3>
+<p>Textractを動かしてみると、<mark class="warn">同じ書類の中に読み取れる文字と読み取れない文字が混ざりました</mark>。全部だめなら諦めもつきますが、部分的に抜けるので、結局どこが正しいのか人が全部見ることになります。</p>
+<p>これでは日本語の請求書にTextract単体では厳しい、と判断しました。</p>
+<h3 id="claude-visionに切り替えた決め手">Claude Visionに切り替えた決め手</h3>
+<p>そこでClaude Visionを追加で実装しました。決め手になったのは、自分で試した1つの検証です。</p>
+<p>白い紙に項目名とデータを箇条書きで手書きして、字は汚いまま、それを写真に撮って取り込みました。<mark>すべて読み取れました。</mark></p>
+<p>活字ならTextract、手書きや崩れたレイアウトならClaude Vision。この差を、頭ではなく実際の出力で確かめられたのが大きかったです。</p>
+<h3 id="それでも100にはならないという前提">それでも100%にはならないという前提</h3>
+<p>とはいえ、<mark class="warn">どちらを使っても100%にはなりません。</mark>Claude Visionは変則的なフォームに強い反面、ハルシネーション（AIが実際にはない値を作り出してしまう誤り）が起きることもあります。</p>
+<p>ここを曖昧にしたまま「AI-OCRで全自動化できます」と売ると、あとで必ずもめます。ですのでご説明は<mark>「手入力をAIが下書きするので、確認と修正だけで済むようになります」</mark>で統一しています。</p>
+<p>検収の基準も<mark class="warn">読み取り精度ではなく「承認まで通ること」</mark>に置きました。精度を数値で保証することはしていません。</p>
+<p>こうした「精度を保証せず、承認を基準にする」考え方は、<a href="/blog/seo-article-automation/">SEO記事制作を自動化した事例</a>でも同様に採用しています。</p>
+<p>参考までに、日本語の請求書を実際に通したときの体感を並べておきます。公式なベンチマークではなく、あくまで自分の手元で試した範囲の感触です。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>OCRエンジン</th><th>体感精度</th><th>実装・動作確認の有無</th></tr></thead><tbody><tr><td>Amazon Textract</td><td>65〜75%</td><td>実装・確認済み</td></tr><tr><td>Google Document AI</td><td>75〜85%</td><td>未実装（参考情報）</td></tr><tr><td>Azure Document Intelligence</td><td>80〜90%</td><td>未実装（参考情報）</td></tr><tr><td>Claude Vision</td><td>85〜93%</td><td>実装・確認済み</td></tr></tbody></table>
+<p>自分で実装して動かしたのはTextractとClaude Visionの2つだけです。Google Document AIとAzure Document Intelligenceは触っていないので、比較の参考として並べているだけとお考えください。</p>
+<h2 id="クライアント様が運用できる形にするまでにやったこと">クライアント様が運用できる形にするまでにやったこと</h2>
+<p>動くものができてから、実際に使っていただけるようになるまでには、いくつか詰まったところがあります。</p>
+<h3 id="サーバーレス構成でのつまずき">サーバーレス構成でのつまずき</h3>
+<p>OCRを担うLambda関数が、既定の128MBのままだと処理の途中でメモリ不足（OutOfMemory）で落ちました。<mark class="num">512MBまで上げて</mark>解決しています。</p>
+<p>OCRの完了検知でも手こずりました。最初は一定間隔で状態を見に行くだけ（ポーリング）にしていたのですが、終わったかどうかの判定が安定しません。</p>
+<p>そこで完了時刻を記録するフィールドを足したうえで、初回1秒・以降2秒間隔・90秒でタイムアウト、という形に変えています。それまでは5秒間隔でした。</p>
+<p>こうした細かい調整を積んで、ようやく人に渡せる状態になります。同じようなLambdaまわりの詰まりは、<a href="/blog/internal-link-automation/">内部リンク自動化の実装記</a>でも書いています。</p>
+<h3 id="コストと精度のバランスをとったモデル選定">コストと精度のバランスをとったモデル選定</h3>
+<p>Claude Visionで使うモデルも、最初はopusでしたが途中でsonnetに変えました。請求書の読み取りであればsonnetで精度は落ちず、そのぶんコストを抑えられると判断したためです。</p>
+<h2 id="どんな場合に向いているか">どんな場合に向いているか</h2>
+<p>扱っている書類や体制によって、組み方は変わります。目安として整理しておきます。</p>
+<ul>
+<li>印刷された日本語の請求書が中心で、費用を抑えたいなら、Textractだけで足ります</li>
+<li>手書きやレイアウトが崩れた書類が混じるなら、Claude Visionを併用する形がおすすめです</li>
+<li>経理担当・承認担当・管理者と役割を分けたいなら、権限の設計を先に決めておく必要があります</li>
+<li>使う方が少人数（今回は10人以下を想定しています）なら、今回と近い規模で考えていただけます</li>
+</ul>
+<p>どの組み方であっても、<mark>読み取り精度を100%と見込まず、人が確認する工程を残しておく</mark>ことをおすすめします。ここを飛ばすと、あとで必ず戻ってきます。</p>
+<h2 id="よくある質問">よくある質問</h2>
+<h3 id="既存の会計システムと連携できますか">既存の会計システムと連携できますか</h3>
+<p>freeeとの連携を実装しています。承認が下りた請求書を、そのまま取引としてfreeeへ登録できるので、仕訳の手入力もなくせます。</p>
+<h3 id="手書きの請求書にも対応できますか">手書きの請求書にも対応できますか</h3>
+<p>対応できます。項目名とデータを手書きした紙を撮影して取り込んだところ、すべて読み取れました。</p>
+<p>ただしこれは1件試した結果です。書き方や紙の状態によって変わりますので、実際の書類で一度お試しいただくのが確実です。</p>
+<h3 id="読み取り精度は何と保証されますか">読み取り精度は何%と保証されますか</h3>
+<p>保証はしていません。どちらのエンジンでも100%にはならないためです。そのかわり、検収の基準は「読み取り精度」ではなく「承認まで通ること」に置いてご説明しています。</p>
+<h3 id="導入すればすべて自動で処理されますか">導入すればすべて自動で処理されますか</h3>
+<p>読み取りは自動ですが、<mark class="warn">確認と修正は人が行う設計</mark>です。AIが下書きを作り、人が目を通して直す。この位置づけで運用しています。</p>
+<h2 id="まとめ">まとめ</h2>
+<p>請求書OCRを検討するとき、どのエンジンが優秀かを比べる前に、自社に届く請求書が印刷中心なのか手書きが混じるのかを見ておくと、話が早く進みます。今回はそこが読み切れなかったので、TextractとClaude Visionを選べる形にしました。</p>
+<p><mark>精度は、どこまで上げても100%にはなりません。</mark>ですから「AIにどこまで任せ、どこから人が見るか」を先に決めておくほうが、実際の運用では効いてきます。</p>
+<p>手元の請求書を何枚か眺めてみるところから始めていただければ、どちらの構成で考えればよいかが見えてくるはずです。</p>
+<h2 id="この仕組みを自社でも動かしたい方へ">この仕組みを自社でも動かしたい方へ</h2>
+<p>FAX・紙・Excelでの請求書処理に手間を感じている、中小企業の経理・業務改善のご担当者様向けの内容になっています。</p>
+<p>**まずは対象の業務を1つ挙げていただくところから始まります。**そこからヒアリングして要件を整理し、開発・運用までを対応させていただきます。</p>
+<p>紙やExcel中心の業務を1つシステム化したい、ということでしたら<a href="/dx-starter-pack.html">中小企業向けDXスターターパック</a>がおすすめです。作ったあとも継続的に手を入れながら、適宜ご相談に乗りながら進める方がやりやすい、という場合は<a href="/retainer.html">Claude Code・Codex業務委託支援</a>もご用意しています。</p>
+<p>「うちの請求書でも読めるのか」というところが気になると思いますので、実際の書類を何枚か拝見するところからでも構いません。お気軽にご相談ください。</p>  </div> <!-- Share Buttons --> <div class="mt-12 pt-6 border-t border-gray-200" data-astro-cid-bvzihdzo> <p class="text-xs text-gray-400 mb-4" data-astro-cid-bvzihdzo>この記事をシェアする</p> <div class="flex gap-3 flex-wrap" data-astro-cid-bvzihdzo> <a id="share-x" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 border border-gray-300 text-gray-600 text-sm px-5 py-2 rounded hover:bg-gray-50 transition-all" data-astro-cid-bvzihdzo>
+𝕏 でシェア
+</a> </div> </div> </article>  </main> <footer class="border-t border-[#dfe6ee] bg-white py-10 mt-16"> <div class="max-w-5xl mx-auto px-6 text-center"> <div class="text-sm font-black tracking-wider text-[#0b2138] mb-2">SHIKOU × AI / AI業務自動化支援</div> <p class="text-xs text-[#5a6b7d] mb-3">AI業務改善・AI開発の実績とノウハウを公開しています</p> <p class="text-xs text-[#5a6b7d] mb-1"> <a href="/" class="hover:text-[#2f6fd0] transition-colors">トップ</a> <span class="text-[#dfe6ee] mx-2">/</span> <a href="/about.html" class="hover:text-[#2f6fd0] transition-colors">会社概要</a> <span class="text-[#dfe6ee] mx-2">/</span> <a href="/#services" class="hover:text-[#2f6fd0] transition-colors">サービス</a> <span class="text-[#dfe6ee] mx-2">/</span> <a href="/contact.html" class="hover:text-[#2f6fd0] transition-colors">お問い合わせ</a> </p> <p class="text-xs text-gray-300">&copy; 2026 SHIKOU × AI. All rights reserved.</p> </div> </footer> </body></html>   
