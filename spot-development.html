@@ -78,6 +78,20 @@ img{max-width:100%;display:block}
 .problem-title{font-size:19px;font-weight:900;line-height:1.55;letter-spacing:-.01em}
 .problem-desc{font-size:14.5px;color:var(--gray);line-height:1.9}
 
+/* ── アイデア：SaaS代替の訴求 ── */
+.idea-layout{display:grid;grid-template-columns:1fr 240px;gap:48px;align-items:start;margin-bottom:40px}
+.idea-list{list-style:none}
+.idea-list li{font-size:15px;color:var(--ink);font-weight:700;line-height:1.9;padding-left:20px;position:relative;margin-bottom:12px}
+.idea-list li::before{content:'';position:absolute;left:0;top:12px;width:10px;height:1px;background:var(--accent)}
+.idea-stat{border-left:2px solid var(--accent);padding-left:20px}
+.idea-stat-val{font-size:40px;font-weight:900;color:var(--ink);line-height:1.1;margin-bottom:8px}
+.idea-stat-val small{font-size:19px}
+.idea-stat-label{font-size:13px;color:var(--gray);line-height:1.7}
+.idea-text{font-size:15.5px;color:var(--gray);line-height:1.95;max-width:720px;margin-bottom:40px}
+.idea-highlight{background:#fff;border:1px solid var(--line);padding:30px 32px;margin-bottom:40px}
+.idea-highlight-q{font-size:17px;font-weight:900;color:var(--ink);margin-bottom:12px}
+.idea-highlight p{font-size:14.5px;color:var(--gray);line-height:1.9}
+
 /* ── 対応範囲：同じく罫線＋テキスト ── */
 .scope-card{background:none;border-radius:0;padding:0;border-top:2px solid var(--line);padding-top:26px}
 .scope-icon{font-size:22px;line-height:1;margin-bottom:14px;opacity:.75}
@@ -161,6 +175,8 @@ img{max-width:100%;display:block}
   .profile-layout{grid-template-columns:1fr}
   .profile-photo{max-width:180px}
   .header-links a:not(.header-cta){display:none}
+  .idea-layout{grid-template-columns:1fr}
+  .idea-stat{border-left:0;border-top:2px solid var(--accent);padding-left:0;padding-top:16px}
 }
 </style>
 
@@ -242,6 +258,49 @@ img{max-width:100%;display:block}
         <p class="problem-desc">自分の手元で動くだけでなく、Cowork や AWS 上に構築して、
           社内メンバーやお客様が使える状態まで仕上げることもできます。</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDEA -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-tag">IDEA</div>
+    <h2 class="sec-title">「毎月、このソフトに<br>こんなにお金を払い続ける必要、ある？」</h2>
+    <p class="sec-lead">
+      企業では、業務管理・申請・集計・顧客管理など、さまざまなパッケージ製品を導入しています。
+      でも実際には、こんなケースも少なくありません。
+    </p>
+
+    <div class="idea-layout">
+      <ul class="idea-list">
+        <li>使っていない機能がたくさんある</li>
+        <li>ユーザー数が増えるとライセンス費も増える</li>
+        <li>自社独自の機能が欲しい</li>
+        <li>毎月のランニングコストが高い</li>
+      </ul>
+      <div class="idea-stat">
+        <div class="idea-stat-val">50<small>〜</small>80<small>%</small></div>
+        <div class="idea-stat-label">ケースによっては、ランニングコストを削減できる可能性があります</div>
+      </div>
+    </div>
+
+    <p class="idea-text">
+      そこで最近は、「買い続ける」のではなく、Claude Codeで必要な機能だけ作る、という選択肢もあります。<br>
+      もちろん、すべてのパッケージを置き換えられるわけではありません。ただ、業務に合わせて必要な機能だけを作れば、ケースによってはランニングコストを大きく抑えられる可能性があります。
+    </p>
+
+    <div class="idea-highlight">
+      <p class="idea-highlight-q">「今使っている○○って、自社開発に置き換えられる？」</p>
+      <p>
+        そんな相談でも大丈夫です。現在使っているソフトと、毎月どのくらい費用がかかっているかを教えてください。
+        Claude Codeで代替できそうか、無料で一緒に検討します。
+      </p>
+    </div>
+
+    <p class="idea-text" style="margin-bottom:28px">まずは「これ、作れる？」くらいの相談からどうぞ。</p>
+    <div class="hero-btns">
+      <a href="contact.html" class="btn-primary" style="background:var(--accent);color:#fff">無料で相談する</a>
     </div>
   </div>
 </section>
