@@ -16,7 +16,7 @@
       prose-li:text-gray-700 prose-li:text-[1rem]
       prose-img:rounded-sm
     " data-astro-cid-bvzihdzo>  <p>地域企業向けの脱炭素データ活用AIプラットフォームを提案する場面を想定し、その技術構成を検証するPoC環境を構築しました。PoCとは概念実証(Proof of Concept)のことで、実際に手を動かして構成が成立するか確かめる作業です。PostgreSQLの業務データをAzure Data FactoryでADLS Gen2に取り込み、Azure DatabricksのDelta Lakeで加工し、ダッシュボードとAIチャットとして出力する構成です。</p>
-<p>検証は、あらかじめ定めた完了条件25項目のうち25項目(100%)を満たした時点で、ひとまず区切りとしました。週1回・1時間程度という限られた稼働を前提に、複数のAzureサービスをどう選び、どこで詰まったかを記録しています。</p>
+<p>検証は、あらかじめ定めた<strong>完了条件25項目のうち25項目(100%)を満たした</strong>時点で、ひとまず区切りとしました。週1回・1時間程度という限られた稼働を前提に、複数のAzureサービスをどう選び、どこで詰まったかを記録しています。</p>
 <p>この記事は、Azure Data Factory・ADLS Gen2・Azure Databricksを組み合わせたデータプラットフォームのPoCを検討している方に向けて書いています。読者としては、エンジニアやDX担当者を想定しています。</p>
 <h2 id="何を作ったか">何を作ったか</h2>
 <p>このセクションでは、PoC環境が何を入力し、何を出力するかを説明します。</p>
@@ -31,10 +31,10 @@
 <p>ここでは、採用した技術構成を大きく2つに分けて説明します。</p>
 <h3 id="データ連携とデータ基盤">データ連携とデータ基盤</h3>
 <p>PostgreSQLとADLS Gen2の間は、Azure Data Factory(以下ADF)がつなぎます。ADFは、初期ロードと継続的な差分同期の両方を担当します。ローカルPCには、Self-hosted Integration Runtime(以下SHIR)を常駐させています。SHIRは、オンプレミス環境とクラウドを橋渡しする実行エージェントです。Docker上のPostgreSQLには、このSHIRを経由して接続しています。</p>
-<p>取り込んだデータは、ADLS Gen2上のDelta LakeにBronze・Silver・Goldの3層で保持します。Azure Databricks(Unity Catalogによるアクセス管理付き)がこの3層の変換を担当します。集計クエリはDatabricks SQL Warehouse(Serverless)が処理します。使わない時間は自動的に停止する仕組みです。<a href="https://learn.microsoft.com/ja-jp/azure/databricks/sql/admin/sql-endpoints" rel="noopener noreferrer" target="_blank">Microsoft Learn</a></p>
+<p>取り込んだデータは、ADLS Gen2上のDelta LakeにBronze・Silver・Goldの3層で保持します。Azure Databricks(Unity Catalogによるアクセス管理付き)がこの3層の変換を担当します。集計クエリはDatabricks SQL Warehouse(Serverless)が処理します。<strong>使わない時間は自動的に停止する仕組み</strong>です。<a href="https://learn.microsoft.com/ja-jp/azure/databricks/sql/admin/sql-endpoints" rel="noopener noreferrer" target="_blank">Microsoft Learn</a></p>
 <h3 id="ai基盤とbi可視化">AI基盤とBI可視化</h3>
 <p>専門知識チャットは、Databricks AI Search(旧Vector Search)と、Databricks Model Servingを組み合わせています。AI Searchは文章の意味の近さで検索する仕組みで、Model ServingはAIモデルをAPIとして呼び出す仕組みです。埋め込み(文章を検索用の数値に変換する処理)には<code>databricks-qwen3-embedding-0-6b</code>を使いました。</p>
-<p>回答生成には<code>databricks-meta-llama-3-3-70b-instruct</code>を使っています。SQLからAIモデルを呼び出す<code>ai_query()</code>という関数があります。この関数は、Databricksがホストするオープンソース系のモデルのみに対応しており、外部プロバイダー系のモデルは使えない仕様でした。<a href="https://docs.databricks.com/aws/en/large-language-models/ai-query" rel="noopener noreferrer" target="_blank">Databricks公式ドキュメント</a>この仕様に合わせて、モデルの選定を変更しています。</p>
+<p>回答生成には<code>databricks-meta-llama-3-3-70b-instruct</code>を使っています。SQLからAIモデルを呼び出す<code>ai_query()</code>という関数があります。この関数は、Databricksがホストするオープンソース系のモデルのみに対応しており、<strong>外部プロバイダー系のモデルは使えない仕様</strong>でした。<a href="https://docs.databricks.com/aws/en/large-language-models/ai-query" rel="noopener noreferrer" target="_blank">Databricks公式ドキュメント</a>この仕様に合わせて、モデルの選定を変更しています。</p>
 <p>ダッシュボードとチャットのUIは、Databricks Apps上に構築したStreamlit(Pythonで画面を作れるフレームワーク)アプリです。データ取得は、Databricks SQL Warehouse経由でGold層のビューを参照する経路に統一しています。</p>
 <h2 id="構成をどう選んだか見送った案とあわせて">構成をどう選んだか(見送った案とあわせて)</h2>
 <p>ここからは、複数の候補から今の構成を選んだ理由を、見送った案とあわせて説明します。週1回・短時間という限られた稼働を前提に、常時稼働のコストを避けるという1つの基準で選んでいます。</p>
@@ -86,11 +86,11 @@
 <p>週1回・1時間程度という運用に対して、常時稼働のコンポーネントを持つと稼働時間を絞れません。スケジュール実行が可能なADFに切り替えた理由はここにあります。</p>
 <h3 id="bi可視化はpower-biから自作ダッシュボードへ変更した">BI可視化はPower BIから自作ダッシュボードへ変更した</h3>
 <p>提案書の構成に合わせ、当初はPower BIでダッシュボードを作る計画でした。レポートのビジュアル配置をコードから自動生成できれば、画面づくりを効率化できると考えたためです。</p>
-<p>しかし、Power BIのレポートファイルは、改ざん防止のための整合性情報を内部に持っています。外部からJSONを書き換えると無効になる仕様であることが、6段階の切り分けテストで確認できました。</p>
+<p>しかし、Power BIのレポートファイルは、改ざん防止のための整合性情報を内部に持っています。<strong>外部からJSONを書き換えると無効になる仕様</strong>であることが、6段階の切り分けテストで確認できました。</p>
 <p>そこで、BI可視化はDatabricks Apps上の自作ダッシュボード(Streamlit)に変更しました。データの取得経路は変えていません。具体的には、Databricks SQL Warehouse経由でGoldビューを参照する部分です。</p>
 <h3 id="ai-searchはtriggered同期にした">AI SearchはTriggered同期にした</h3>
 <p>AI Search(旧Vector Search)には、2つの同期モードがあります。決まったタイミングで同期するTriggeredと、常に同期し続けるContinuousです。Continuous同期は常時稼働のコンピュートを必要とする仕様です。<a href="https://docs.databricks.com/aws/en/generative-ai/agent-framework/create-vector-search-index" rel="noopener noreferrer" target="_blank">Databricks公式ドキュメント</a></p>
-<p>このPoCでは、動作確認を終えたAI Search Endpointをそのまま稼働させてしまいました。その結果、想定より高額な課金が発生した経験があります。エンドポイントには一時停止の機能がなく、削除するまで課金が続く仕様でした。この経験から、Triggered同期を選びました。起動・停止・状態確認のスクリプトも用意し、確認後はすぐ削除する運用にしています。</p>
+<p>このPoCでは、動作確認を終えたAI Search Endpointをそのまま稼働させてしまいました。その結果、想定より高額な課金が発生した経験があります。<strong>エンドポイントには一時停止の機能がなく、削除するまで課金が続く仕様</strong>でした。この経験から、Triggered同期を選びました。起動・停止・状態確認のスクリプトも用意し、確認後はすぐ削除する運用にしています。</p>
 <h3 id="model-servingはpay-per-tokenにした">Model ServingはPay-per-tokenにした</h3>
 <p>Databricks Model Servingには、2つの課金モードがあります。使った分だけ課金されるPay-per-tokenと、あらかじめ処理量を確保するProvisioned Throughputです。公式ドキュメントでは、Pay-per-tokenはプロトタイピングや利用量が変動する用途向けと位置づけられています。<a href="https://docs.databricks.com/aws/en/machine-learning/model-serving/" rel="noopener noreferrer" target="_blank">Databricks公式ドキュメント</a></p>
 <p>週1回のデモという利用パターンに、常時起動のコストを持たせる理由はありませんでした。この判断からPay-per-tokenを選んでいます。</p>
@@ -137,13 +137,13 @@
 
 
 <table><thead><tr><th>項目</th><th>結果</th><th>測定条件</th></tr></thead><tbody><tr><td>PoC完了条件の達成率</td><td>25項目中25項目(100%)</td><td>データ連携・BI・専門RAGチャット・デモ運用の4分野の内訳を事前に設定</td></tr><tr><td>PostgreSQL→Bronze層の件数一致</td><td>companies約400件、users約1,054件、usage_logs約199,496件など</td><td>初期ロード実行後に双方の件数を比較した、ある1回の結果</td></tr><tr><td>業種別CO2排出量の傾向(平均)</td><td>製造業約285t、運輸物流約129t、建設業約79tなど</td><td>生成した架空データに対するSQL集計</td></tr><tr><td>AI Search Indexの構築時間</td><td>約15分</td><td>エンドポイント作成から初回embedding計算までを含む、ある1回の実行</td></tr><tr><td>ベクトル検索スコア(正常系)</td><td>1位0.752、2位0.614、3位0.606</td><td>「Scope3の算定にはどのデータが必要ですか」というクエリでの1回の実行</td></tr><tr><td>ベクトル検索スコア(範囲外の質問)</td><td>約0.42</td><td>「御社の資本金はいくらですか」という関連性のない質問での1回の実行</td></tr></tbody></table>
-<p>品質は、事前に定めた完了条件を満たしているかで確認しました。加えて、専門知識チャットについては、業務に関連する質問と関連しない質問の両方をベクトル検索にかけ、スコアの違いを確認しています。関連する質問では上位のスコアが0.6を超えたのに対し、関連しない質問では約0.42にとどまりました。この差から、検索が想定どおりに機能していることを確認しました。</p>
+<p>品質は、事前に定めた完了条件を満たしているかで確認しました。加えて、専門知識チャットについては、業務に関連する質問と関連しない質問の両方をベクトル検索にかけ、スコアの違いを確認しています。**関連する質問では上位のスコアが0.6を超えたのに対し、関連しない質問では約0.42にとどまりました。**この差から、検索が想定どおりに機能していることを確認しました。</p>
 <h2 id="運用できる形にするまでに詰まった点">運用できる形にするまでに詰まった点</h2>
 <p>ここでは、構築の過程で実際に起きた不具合と対処を、簡潔にまとめます。</p>
-<p>ADFの標準機能である<code>writeBehavior: upsert</code>と<code>preCopyScript</code>によるUPSERT処理は、既存行がある場合に主キー重複エラーで失敗しました。そのため、Lookup Activityで<code>INSERT ... ON CONFLICT DO UPDATE</code>文を直接実行する方式に変更しています。</p>
+<p>ADFの標準機能である<code>writeBehavior: upsert</code>と<code>preCopyScript</code>によるUPSERT処理は、<strong>既存行がある場合に主キー重複エラーで失敗しました</strong>。そのため、Lookup Activityで<code>INSERT ... ON CONFLICT DO UPDATE</code>文を直接実行する方式に変更しています。</p>
 <p>ADFが出力する生ファイルと、Databricks側のDelta Bronzeテーブルを同じ場所に置いたところ、形式エラーが発生しました。今は、ADFの出力先を専用のランディングゾーンに分離し、<code>COPY INTO</code>でDelta本体に取り込む2段構成にしています。</p>
-<p>Databricks Apps上でSQL接続処理がハングし、応答が数分間返らない不具合もありました。原因は、アプリが固定トークンを参照する実装になっており、Databricks Appsが自動で渡すサービスプリンシパルの認証情報と合っていなかったことです。公式が推奨する<code>credentials_provider</code>方式に書き直して解消しています。</p>
-<p>これらはいずれも、複数のAzureサービスを実際につないだときにだけ表面化した不具合です。構成図の上では正しく見えても、実装して初めて分かる制約があることを踏まえておくと、見積もりの精度が上がります。</p>
+<p>Databricks Apps上でSQL接続処理がハングし、応答が数分間返らない不具合もありました。原因は、<strong>アプリが固定トークンを参照する実装になっており、Databricks Appsが自動で渡すサービスプリンシパルの認証情報と合っていなかった</strong>ことです。公式が推奨する<code>credentials_provider</code>方式に書き直して解消しています。</p>
+<p>これらはいずれも、複数のAzureサービスを実際につないだときにだけ表面化した不具合です。構成図の上では正しく見えても、<strong>実装して初めて分かる制約がある</strong>ことを踏まえておくと、見積もりの精度が上がります。</p>
 <h2 id="どんな場合に向いているか">どんな場合に向いているか</h2>
 <p>ここでは、この構成が向いている状況を、読者が自社に当てはめられる形で整理します。</p>
 <ul>
@@ -166,7 +166,7 @@
 <p>動作確認後にAI Search Endpointを稼働させたまま放置したためです。エンドポイントには一時停止の機能がなく、削除するまで課金が続く仕様でした。現在は起動・停止・状態確認のスクリプトを使い、確認後すぐ削除する運用にしています。</p>
 <h2 id="まとめ">まとめ</h2>
 <p>地域企業向けの脱炭素データ活用AIプラットフォームの技術構成を、Azure Data Factory・ADLS Gen2・Azure Databricksを組み合わせたPoC環境として実装しました。完了条件25項目をすべて満たし、複数のサービスをつないだときに起きる不具合と、その対処を記録として残しています。</p>
-<p>Lakeflow ConnectからADFへ、Power BIから自作ダッシュボードへという2つの転換は、書類上の構成だけでは見えなかった制約に、実装して初めて気づいたものです。同じような複数サービス連携を検討している場合、稼働頻度と課金の仕組みを先に確認しておくと、手戻りを減らせます。</p>
+<p>Lakeflow ConnectからADFへ、Power BIから自作ダッシュボードへという2つの転換は、<strong>書類上の構成だけでは見えなかった制約に、実装して初めて気づいた</strong>ものです。同じような複数サービス連携を検討している場合、稼働頻度と課金の仕組みを先に確認しておくと、手戻りを減らせます。</p>
 <p>同じようにAzure Databricksを中心にした構成でPoCを検討している場合は、対象データと利用頻度を整理するところから始めると、必要なサービスの絞り込みが早くなります。</p>
 <h2 id="この仕組みを自社でも動かしたい方へ">この仕組みを自社でも動かしたい方へ</h2>
 <p>Azure Data Factory・ADLS Gen2・Azure Databricksを組み合わせたデータプラットフォームについて、PoCとして技術構成を検証したい方はもちろん、実際の構築まで見据えている方にも向けた内容です。コストを抑えて検証したい場合や、コストを抑えて開発を進めたい場合にも、この記事で紹介した構成の考え方を参考にしていただけます。</p>
