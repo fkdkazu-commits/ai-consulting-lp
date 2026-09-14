@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shikou-ai.com/blog/sitemap.xml
+Sitemap: https://fkdkazu-commits.github.io/ai-seo-blog/sitemap.xml
