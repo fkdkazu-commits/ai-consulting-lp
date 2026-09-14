@@ -8,6 +8,9 @@ _ref_*.html
 # 不採用となった色相回転版サムネイル（アイソメトリック版に差し替え済み）
 _recolor/
 
+# 未使用のLPモック（公開対象外）
+ai-pdca-dashboard-mock.html
+
 # _illust/build.html の書き出し先。中身は本番の news-*.png と同一なので追跡しない
 _illust/out/
 
