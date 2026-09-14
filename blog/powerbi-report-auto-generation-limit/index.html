@@ -23,6 +23,9 @@
 <p>このセクションでは、PoC環境が何を入力し、何を出力するかを説明します。</p>
 <p>入力は、PostgreSQLに保持した架空の企業データです。企業情報・利用ログ・CO2排出量・問い合わせ履歴など、地域企業向けサービスを想定した架空データを使っています。</p>
 <p>出力は2つです。1つは、業種別のCO2排出傾向や契約状況別の利用状況を確認できるダッシュボードです。もう1つは、脱炭素関連の専門知識に答えるRAGチャットです。RAGとは、検索結果をもとにAIが回答を作る仕組み(Retrieval Augmented Generation)のことです。</p>
+<p>実際のダッシュボード画面がこちらです。左側に専門知識チャット、右側に問い合わせ件数・解決率などの指標とカテゴリ別の内訳を表示しています。</p>
+<img src="/blog/img/screen-databricks-carbon-demo-dashboard.png" alt="CarbonLucidダッシュボードの画面。左側に専門RAGチャット、右側に総問い合わせ件数・解決率・平均解決時間・FAQ候補件数の指標カードと、月別問い合わせ件数の推移、カテゴリ別問い合わせ件数のグラフが表示されている" width="1904" height="890" loading="lazy" decoding="async" style="width:100%;max-width:100%;height:auto;margin:1.5rem auto 0.6rem;display:block;border:1px solid #dfe6ee;border-radius:6px;"/>
+<span style="display:block;font-size:0.8rem;color:#5a6b7d;text-align:center;margin-bottom:1.75rem;">CarbonLucidダッシュボードの画面（架空データによるPoC環境です）</span>
 <p>データの流れは一本です。PostgreSQLのデータは、Azure Data Factoryを経てADLS Gen2のDelta Lakeに入ります。Delta Lakeは、更新・削除に対応したデータレイク形式です。そこからDatabricks SQLで集計し、ダッシュボードとチャットUIに出力します。取り込みから集計までは自動処理で、人が手を動かすのは起動・停止の操作と検証作業だけです。</p>
 <h2 id="なぜこの構成を検証する必要があったか">なぜこの構成を検証する必要があったか</h2>
 <p>このセクションでは、PoCを作った理由を説明します。</p>
