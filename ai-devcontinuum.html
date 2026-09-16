@@ -167,6 +167,9 @@ img{max-width:100%}
 .feat-tag{font-size:10.5px;font-weight:900;color:#fff;background:var(--accent);padding:4px 11px;border-radius:5px;letter-spacing:.06em;flex-shrink:0}
 .feat-title{font-size:18px;font-weight:900;line-height:1.5}
 .feat-d{font-size:14px;color:var(--gray-dark);line-height:1.9;margin-bottom:16px;max-width:760px}
+.feat-future{display:flex;align-items:flex-start;gap:12px;margin:6px 0 16px;padding-top:14px;border-top:1px dashed var(--line);max-width:760px}
+.feat-future-badge{flex-shrink:0;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:var(--orange-dark);background:#fdf1e2;padding:5px 12px;border-radius:999px;letter-spacing:.02em;white-space:nowrap;margin-top:1px}
+.feat-future-text{font-size:13px;color:var(--gray-dark);line-height:1.8}
 .feat-nofig{padding:18px 22px;background:var(--card);border-radius:10px}
 
 .mini-steps{list-style:none;counter-reset:step;margin:0 0 16px;max-width:760px}
@@ -511,6 +514,10 @@ img{max-width:100%}
         <li><strong>検証して承認</strong> — サンドボックスでテストを自動実行し、合格を確認したうえで人が承認したものだけがリポジトリに反映されます（却下も可能）</li>
       </ol>
       <p class="feat-d">どちらの起点でも、検証・承認のステップは共通です。対応言語はPython・Node.js・Go・Java・C#（.NET）・C/C++の6言語に標準対応しています。</p>
+      <div class="feat-future">
+        <span class="feat-future-badge">✦ 今後拡張予定</span>
+        <span class="feat-future-text">既存コードを解析し、新規作成／既存改修／既存流用・拡張／リファクタリングのいずれで実装すべきかをAIが判定する「実装方式判定」、対応プログラミング言語のさらなる拡充</span>
+      </div>
       <img src="fig_codegen.png" alt="AIコード生成画面。「緊急のSLA期限を2時間から1時間に短縮してください」という依頼に対し、AIがsla_deadline_hours内のurgentキーの値のみを変更した根拠を説明し、Claude/Codexのエンジン選択欄と承認・却下ボタンが表示されている" class="fig" loading="lazy">
       <p class="fig-cap">AIコード生成の提案画面。変更範囲を絞り込んだ根拠をAI自身が説明する（実際の生成結果）</p>
     </div>
@@ -701,6 +708,10 @@ img{max-width:100%}
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">トレーサビリティ</span><span class="feat-title">トレーサビリティ・ナレッジ管理</span></div>
       <p class="feat-d">要求⇔設計⇔テストの対応関係をREQ-IDで追跡できます。改善提案はレビュー観点として昇格させ、以降のAIレビューへ自動で反映する組織学習の仕組みも備えています。</p>
+      <div class="feat-future">
+        <span class="feat-future-badge">✦ 今後拡張予定</span>
+        <span class="feat-future-text">過去の全成果物・レビュー履歴をRAGで検索・参照できるようにし、組織固有の「暗黙のルール」を踏まえたレビューへ発展させる「企業専用AIレビュアー」</span>
+      </div>
       <div class="figs-2">
         <figure>
           <img src="fig_traceability.png" alt="トレーサビリティ画面。要求と成果物・テストケースの紐付け状況が一覧表示されている" class="fig" loading="lazy">
@@ -783,9 +794,9 @@ img{max-width:100%}
           <tr><td class="c-task">品質分析</td><td>テスト十分性評価・テストマトリクス</td><td>要求×テストケースでAI起案</td></tr>
           <tr><td class="c-task">品質分析</td><td>品質スコア・品質ゲート</td><td>決定論的算出、人間による上書き通過</td></tr>
           <tr><td class="c-task">品質分析</td><td>トレーサビリティ・ナレッジ管理</td><td>REQ-ID追跡、組織学習ループ</td></tr>
-          <tr><td class="c-task">品質分析</td><td>AI変更管理（影響分析）</td><td>要求変更の影響範囲分析</td></tr>
-          <tr><td class="c-task">PM</td><td>AI PM（WBS・工数・進捗）</td><td>WBS自動生成・見積/実績工数・進捗率算出</td></tr>
-          <tr><td class="c-task">標準化</td><td>開発標準エンジン（規約取り込み）</td><td>生成・レビューの判断材料に反映</td></tr>
+          <tr><td class="c-task">品質分析</td><td>AI変更管理（影響分析）</td><td>要求変更の影響範囲分析 ※修正案の自動生成は今後拡張予定</td></tr>
+          <tr><td class="c-task">PM</td><td>AI PM（WBS・工数・進捗）</td><td>WBS自動生成・見積/実績工数・進捗率算出 ※遅延予測・ダッシュボード統合は今後拡張予定</td></tr>
+          <tr><td class="c-task">標準化</td><td>開発標準エンジン（規約取り込み）</td><td>生成・レビューの判断材料に反映 ※準拠率の数値化は今後拡張予定</td></tr>
           <tr><td class="c-task">セキュリティ</td><td>送信前マスキング・送信前プレビュー</td><td>fail closed、氏名は登録辞書との照合方式</td></tr>
           <tr><td class="c-task">セキュリティ</td><td>監査ログ</td><td>ハッシュのみ保存、改ざん・削除不可</td></tr>
           <tr><td class="c-task">セキュリティ</td><td>サンドボックス検証・権限管理</td><td>隔離実行→人間承認、4ロールで権限分離</td></tr>
