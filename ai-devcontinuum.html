@@ -89,6 +89,9 @@ img{max-width:100%}
 .hero-point{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;color:var(--ink);line-height:1.5}
 .hero-point-icon{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:#2f6fd0;color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center}
 .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+@media (min-width:861px){
+  .hero-btns{grid-column:2;margin-top:24px}
+}
 .btn{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:700;padding:15px 34px;border-radius:999px;text-decoration:none}
 .btn-primary{background:var(--orange);color:var(--ink);box-shadow:0 8px 22px rgba(240,165,74,.3)}
 .btn-ghost{border:1px solid var(--line);color:var(--ink);padding:15px 30px;background:#fff}
@@ -308,13 +311,13 @@ img{max-width:100%}
         <div class="hero-point"><span class="hero-point-icon">✓</span>ユーザー数無制限</div>
         <div class="hero-point"><span class="hero-point-icon">✓</span>使うほど品質が上がる仕組み</div>
       </div>
-      <div class="hero-btns">
-        <a href="https://shikou-ai.com/contact.html" class="btn btn-primary">無料で相談する</a>
-        <a href="#architecture" class="btn btn-ghost">仕組みを見る</a>
-      </div>
     </div>
     <div class="hero-visual">
       <img class="hero-shot" src="fig_hero_mockup.png" alt="AI-DevContinuumのイメージ画面。ダッシュボードでプロジェクト一覧・品質指標・AIアシスタントを一体的に確認できるコンセプトイメージ" loading="lazy">
+    </div>
+    <div class="hero-btns">
+      <a href="https://shikou-ai.com/contact.html" class="btn btn-primary">無料で相談する</a>
+      <a href="#architecture" class="btn btn-ghost">仕組みを見る</a>
     </div>
   </div>
 </section>
