@@ -197,6 +197,30 @@ img{max-width:100%}
 .svc-name{font-size:14px;font-weight:900;line-height:1.5}
 .svc-role{font-size:12.5px;color:var(--gray);line-height:1.7;margin-top:5px}
 
+.gw-panel{background:#0b2138;border-radius:16px;padding:32px 28px;margin:28px 0}
+.gw-panel-title{color:#fff;font-size:20px;font-weight:900;margin-bottom:4px}
+.gw-panel-sub{color:rgba(255,255,255,.65);font-size:13px;margin-bottom:26px}
+.gw-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.gw-step{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12.5px;font-weight:700;padding:11px 14px;border-radius:8px;text-align:center;white-space:nowrap}
+.gw-step.gw-external{background:var(--accent);border-color:var(--accent)}
+.gw-step.gw-critical{background:var(--orange-dark);border-color:var(--orange-dark)}
+.gw-arrow{color:rgba(255,255,255,.35);font-size:14px;flex-shrink:0}
+.data-class-mini{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+.data-class-chip{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--gray-dark)}
+.data-class-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.data-class-dot.green{background:var(--accent)}
+.data-class-dot.yellow{background:var(--orange)}
+.data-class-dot.red{background:#c0392b}
+.gw-layers{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:2px;background:var(--line);border:1px solid var(--line);margin-top:8px}
+.gw-layer-card{background:#fff;padding:22px 20px}
+.gw-layer-name{font-size:15px;font-weight:900;margin-bottom:12px;color:var(--ink)}
+.gw-layer-card ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.gw-layer-card li{font-size:13px;color:var(--gray-dark);line-height:1.6;padding-left:15px;position:relative}
+.gw-layer-card li::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+@media (max-width:640px){
+  .gw-panel{padding:24px 18px}
+}
+
 .figs-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-top:8px}
 
 /* ── 控えめなセクション内CTA（大きなボタンを多用しない） ── */
@@ -724,6 +748,140 @@ img{max-width:100%}
       </div>
     </div>
 
+  </div>
+</section>
+
+<section class="section" id="security-gateway">
+  <div class="wrap">
+    <div class="sec-tag">セキュリティへの取り組み</div>
+    <h2 class="sec-title">AIへ送信する情報を、送信前に制御する</h2>
+    <p class="sec-lead">
+      AIを活用した開発では、「社内情報をAIへ送信すること」自体が企業にとって重要なセキュリティ課題になります。
+      AI-DevContinuumでは、AIに情報を渡さないことを目的とするのではなく、
+      <strong style="color:var(--ink)">「AIに渡してよい情報だけを制御して渡す」</strong>という考え方でAI活用を設計しています。
+      ユーザー権限やデータの内容を確認し、必要に応じて機密情報をマスキングしたうえで、AIへの送信を制御します。
+    </p>
+
+    <div class="gw-panel">
+      <div class="gw-panel-title">AI Security Gateway</div>
+      <div class="gw-panel-sub">AIへ送信する情報を、送信前に制御する。</div>
+      <div class="gw-flow">
+        <div class="gw-step">社内データ</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step">認証・権限確認</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step">データ分類</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step">機密情報チェック</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step">マスキング</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step">送信前プレビュー</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step gw-critical">Fail Closed</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step gw-external">Enterprise AI</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step">Human Review</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step">監査ログ</div>
+      </div>
+    </div>
+
+    <div class="svc-list">
+      <div class="svc-row">
+        <div class="svc-layer">認証・権限確認</div>
+        <div class="svc-name">ユーザー・ロールに応じたアクセス制御</div>
+        <div class="svc-role">ユーザーやロールに応じて、AI機能・プロジェクト・データへのアクセスを制御します。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">データ分類</div>
+        <div class="svc-name">情報の機密度を分類してから扱う</div>
+        <div class="svc-role">
+          AIへ送信する情報を、公開情報・社内情報・機密情報などの観点から分類します。
+          <div class="data-class-mini">
+            <span class="data-class-chip"><span class="data-class-dot green"></span>Green：公開・一般情報</span>
+            <span class="data-class-chip"><span class="data-class-dot yellow"></span>Yellow：社内情報・機密情報</span>
+            <span class="data-class-chip"><span class="data-class-dot red"></span>Red：パスワード・APIキー・秘密鍵等</span>
+          </div>
+        </div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">機密情報チェック</div>
+        <div class="svc-name">送信前の検査</div>
+        <div class="svc-role">AIへ送信する前に、機密情報や送信すべきではない情報をチェックします。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">マスキング</div>
+        <div class="svc-name">機密情報を置き換えてから送信</div>
+        <div class="svc-role">必要に応じて、機密情報をマスキングしてからAIへ送信します。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">送信前プレビュー</div>
+        <div class="svc-name">実際に送信される内容を確認できる</div>
+        <div class="svc-role">AIへ実際に送信される内容を、送信前に確認できる仕組みです。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">Fail Closed</div>
+        <div class="svc-name">判断できない場合は止める</div>
+        <div class="svc-role">安全性を判断できない場合は、「とりあえず送信する」のではなく、処理を停止する考え方です。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">Enterprise AI</div>
+        <div class="svc-name">企業向けAIサービスの利用</div>
+        <div class="svc-role">企業向けのAIサービスを利用し、AIサービス側の契約・データ利用ポリシー・保持期間なども含めて管理します。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">Human Review</div>
+        <div class="svc-name">最終判断は人が行う</div>
+        <div class="svc-role">AIが生成・分析した結果を、人が確認・承認するHuman in the Loopを基本とします。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">監査ログ</div>
+        <div class="svc-name">利用状況を記録</div>
+        <div class="svc-role">AIの利用状況や処理履歴を、監査可能な形で記録します。現在の設計では、監査ログに機密情報そのものを保存するのではなく、ハッシュなどを利用した記録方式を採用しています。</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:19px;font-weight:900;margin:34px 0 12px">3つのレイヤーでAI活用を守る</h3>
+    <div class="gw-layers">
+      <div class="gw-layer-card">
+        <div class="gw-layer-name">AI-DevContinuum</div>
+        <ul>
+          <li>アクセス制御</li>
+          <li>データ分類</li>
+          <li>機密情報チェック</li>
+          <li>マスキング</li>
+          <li>送信前プレビュー</li>
+          <li>Fail Closed</li>
+          <li>Human Review</li>
+          <li>監査ログ</li>
+        </ul>
+      </div>
+      <div class="gw-layer-card">
+        <div class="gw-layer-name">Enterprise AI</div>
+        <ul>
+          <li>企業向け契約</li>
+          <li>データ利用ポリシー</li>
+          <li>データ保持設定</li>
+          <li>管理機能</li>
+        </ul>
+      </div>
+      <div class="gw-layer-card">
+        <div class="gw-layer-name">Infrastructure</div>
+        <ul>
+          <li>AWS</li>
+          <li>IAM</li>
+          <li>暗号化</li>
+          <li>ネットワーク制御</li>
+          <li>監査ログ</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="prose" style="font-size:13px;color:var(--gray);line-height:1.9;margin-top:24px">
+      AIサービス側のデータ利用・保持条件は、契約プラン、モデル、設定などによって異なります。AI-DevContinuum側の制御に加えて、利用するAIサービスの企業向け契約・設定を確認し、企業のセキュリティポリシーに合わせて利用することが重要です。詳細は<a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener" style="color:var(--accent-dark);font-weight:700">Anthropic公式のプライバシー・データ利用に関する情報</a>をご確認ください。
+    </p>
   </div>
 </section>
 
