@@ -143,6 +143,12 @@ img{max-width:100%}
 .price-label{font-size:12.5px;font-weight:700;color:var(--gray);margin-bottom:12px;letter-spacing:.03em}
 .price-val{font-size:26px;font-weight:900;color:var(--accent-dark);line-height:1.3}
 .price-note{font-size:12px;color:var(--gray-light);margin-top:9px;line-height:1.7}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:16px;margin-top:8px}
+.kpi-card{background:#0b2138;border-radius:14px;padding:26px 22px;text-align:center;box-shadow:0 10px 24px rgba(6,55,44,.16)}
+.kpi-label{font-size:12.5px;font-weight:700;color:rgba(255,255,255,.55);margin-bottom:10px;letter-spacing:.03em}
+.kpi-val{font-size:27px;font-weight:900;color:var(--teal2);line-height:1.2}
+.kpi-card--orange .kpi-val{color:var(--orange)}
+.kpi-card--white .kpi-val{color:#fff}
 
 .price-tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:20px;margin-top:8px}
 .price-tier-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 26px}
@@ -387,22 +393,22 @@ img{max-width:100%}
 
 <section class="section alt" style="padding:44px 0">
   <div class="wrap">
-    <div class="price-grid">
-      <div class="price-item">
-        <div class="price-label">開発効率</div>
-        <div class="price-val">+40%</div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">開発効率</div>
+        <div class="kpi-val">+40%</div>
       </div>
-      <div class="price-item">
-        <div class="price-label">品質向上</div>
-        <div class="price-val">+60%</div>
+      <div class="kpi-card">
+        <div class="kpi-label">品質向上</div>
+        <div class="kpi-val">+60%</div>
       </div>
-      <div class="price-item">
-        <div class="price-label">リードタイム短縮</div>
-        <div class="price-val">−50%</div>
+      <div class="kpi-card kpi-card--orange">
+        <div class="kpi-label">リードタイム短縮</div>
+        <div class="kpi-val">−50%</div>
       </div>
-      <div class="price-item">
-        <div class="price-label">企業内ユーザー数</div>
-        <div class="price-val">無制限</div>
+      <div class="kpi-card kpi-card--white">
+        <div class="kpi-label">企業内ユーザー数</div>
+        <div class="kpi-val">無制限</div>
       </div>
     </div>
     <p class="price-note">開発効率・品質向上・リードタイム短縮は、導入時に目安としている想定値です（実測値ではありません）。実際の効果は貴社の開発体制・案件内容により異なります。ユーザー数無制限は料金プランの内容です。</p>
