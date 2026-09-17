@@ -162,6 +162,13 @@ img{max-width:100%}
 .price-tier-list strong{font-size:20px;font-weight:900;color:var(--accent-dark);white-space:nowrap}
 .price-tier-total{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--gray-dark);line-height:1.9}
 .price-tier-total strong{color:var(--ink);font-weight:700}
+.price-tier-badge.poc-badge{background:var(--orange-dark)}
+.price-tier-poc-price{font-size:28px;font-weight:900;color:var(--ink);margin-bottom:16px}
+.price-tier-poc-list{list-style:none;display:flex;flex-direction:column;gap:9px}
+.price-tier-poc-list li{font-size:13px;color:var(--gray-dark);line-height:1.6;padding-left:18px;position:relative}
+.price-tier-poc-list li::before{content:'✓';position:absolute;left:0;top:0;color:var(--accent);font-weight:900;font-size:12px}
+.price-tier-poc-note{font-size:11.5px;color:var(--orange-dark);font-weight:700;margin-top:14px;line-height:1.6}
+.price-tier-credit{color:var(--orange-dark);font-weight:700}
 
 .price-detail{margin-top:28px}
 .price-detail-title{font-size:15px;font-weight:900;margin-bottom:16px}
@@ -371,9 +378,9 @@ img{max-width:100%}
         決まった仕様に合わせていただくのではなく、貴社の開発フロー・体制に合わせてカスタマイズし、パッケージ製品では実現できない価格体系でご提供させていただきます。
       </div>
       <div class="hero-points">
+        <div class="hero-point"><span class="hero-point-icon">✓</span>POCでのお試し導入</div>
         <div class="hero-point"><span class="hero-point-icon">✓</span>AI下書きでドキュメント作成の負担を軽減</div>
         <div class="hero-point"><span class="hero-point-icon">✓</span>追加コストなしの柔軟なカスタマイズ実現</div>
-        <div class="hero-point"><span class="hero-point-icon">✓</span>ユーザー数無制限</div>
         <div class="hero-point"><span class="hero-point-icon">✓</span>使うほどナレッジが溜まり品質が上がる仕組み</div>
       </div>
       <div class="hero-btns hero-btns--in-copy">
@@ -1086,6 +1093,20 @@ img{max-width:100%}
     <h2 class="sec-title">料金の目安</h2>
     <p class="sec-lead">貴社の開発フロー・体制に合わせてカスタマイズさせていただきますが、下記記載の【導入・環境構築（標準）】の範囲内であれば、基本追加費用は発生いたしません。また、本稼働後におきましても、ライセンス費の範囲内でカスタマイズ対応させていただきます。<br>なお、Claude等AIの利用料金・AWS等クラウドのランニングコストは含まれておらず、別途必要です。以下は目安としてご参照ください。</p>
     <div class="price-tiers">
+      <div class="price-tier-card">
+        <div class="price-tier-badge poc-badge">お試し導入</div>
+        <div class="price-tier-name">POC</div>
+        <div class="price-tier-poc-price">50万円</div>
+        <ul class="price-tier-poc-list">
+          <li>1プロジェクト</li>
+          <li>要件整理〜結合テスト仕様書</li>
+          <li>各工程のAIチューニング</li>
+          <li>企業固有の開発ルールへの適応</li>
+          <li>POC結果の整理</li>
+          <li>本番導入に向けた課題整理</li>
+        </ul>
+        <p class="price-tier-poc-note">※本導入に進んだ場合、POC費用を初期導入費用から差し引きます</p>
+      </div>
       <div class="price-tier-card featured">
         <div class="price-tier-badge">先行導入価格</div>
         <div class="price-tier-name">Early Adopter</div>
@@ -1094,7 +1115,7 @@ img{max-width:100%}
           <li><span>本稼働後ライセンス費</span><strong>15万円/月</strong></li>
           <li><span>ユーザー数</span><strong>無制限</strong></li>
         </ul>
-        <div class="price-tier-total">初年度費用：<strong>258万円</strong><br>2年目以降：<strong>180万円</strong>/年</div>
+        <div class="price-tier-total">初年度費用：<strong>258万円</strong><br>2年目以降：<strong>180万円</strong>/年<br><span class="price-tier-credit">POC実施済みの場合：初期導入118万円〜</span></div>
       </div>
       <div class="price-tier-card">
         <div class="price-tier-badge" style="visibility:hidden">先行導入価格</div>
@@ -1104,7 +1125,7 @@ img{max-width:100%}
           <li><span>本稼働後ライセンス費</span><strong>25万円/月</strong></li>
           <li><span>ユーザー数</span><strong>無制限</strong></li>
         </ul>
-        <div class="price-tier-total">初年度費用：<strong>400万円</strong><br>2年目以降：<strong>300万円</strong>/年</div>
+        <div class="price-tier-total">初年度費用：<strong>400万円</strong><br>2年目以降：<strong>300万円</strong>/年<br><span class="price-tier-credit">POC実施済みの場合：初期導入200万円〜</span></div>
       </div>
     </div>
     <p style="font-size:12px;color:var(--gray-light);margin-top:10px">金額はいずれも税抜・標準導入期間6カ月を前提とした目安です。ライセンス費は導入期間終了後から発生します。</p>
