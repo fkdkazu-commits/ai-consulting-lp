@@ -56,7 +56,16 @@ img{max-width:100%}
 
 /* header */
 .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line2)}
-.header-inner{max-width:1080px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.header-inner{position:relative;max-width:1080px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;border:0;background:none;cursor:pointer;padding:0;flex-shrink:0}
+.nav-toggle-bar{display:block;width:100%;height:2px;background:var(--ink);border-radius:2px;transition:transform .2s,opacity .2s}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.back-to-top{position:fixed;right:24px;bottom:24px;z-index:60;width:46px;height:46px;border-radius:50%;background:var(--ink);color:#fff;border:0;font-size:19px;line-height:1;cursor:pointer;box-shadow:0 10px 22px rgba(6,55,44,.24);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .2s,transform .2s}
+.back-to-top.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
+.back-to-top:hover{background:var(--accent)}
+@media (max-width:640px){.back-to-top{right:16px;bottom:16px;width:42px;height:42px;font-size:17px}}
 .logo{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:#0b2138}
 .logo img{height:28px;width:auto;display:block}
 .logo .logo-t{font-size:15px;font-weight:900;letter-spacing:.08em;color:#0b2138}
@@ -277,7 +286,16 @@ img{max-width:100%}
 .site-footer a{color:var(--teal);text-decoration:none}
 
 @media (max-width:860px){
-  .header-links a:not(.header-cta){display:none}
+  .nav-toggle{display:flex}
+  .header-links{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;align-items:stretch;gap:0;
+    background:#fff;border-bottom:1px solid var(--line2);
+    padding:4px 24px 18px;box-shadow:0 16px 28px rgba(6,55,44,.1);
+  }
+  .header-links.is-open{display:flex}
+  .header-links a:not(.header-cta){padding:13px 0;border-top:1px solid var(--line2)}
+  .header-links a.header-cta{margin-top:14px;text-align:center}
   .hero-grid{grid-template-columns:1fr}
   .hero-visual{order:-1;max-width:420px;margin:0 auto}
 }
@@ -294,12 +312,18 @@ img{max-width:100%}
 <header class="site-header">
   <div class="header-inner">
     <a href="https://shikou-ai.com/index.html" class="logo"><img src="logo-mark.png" alt="SHIKOU × AI"><span class="logo-t">SHIKOU<span class="x">×</span>AI</span></a>
-    <div class="header-links">
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="headerLinks">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <div class="header-links" id="headerLinks">
       <a href="https://shikou-ai.com/index.html">トップ</a>
       <a href="#background">課題</a>
       <a href="#architecture">仕組み</a>
       <a href="#development">開発プロセス</a>
       <a href="#quality">品質分析・管理</a>
+      <a href="#security-gateway">セキュリティ</a>
       <a href="#future">今後の拡張</a>
       <a href="#pricing">料金</a>
       <a href="#faq">FAQ</a>
@@ -1227,6 +1251,7 @@ img{max-width:100%}
   <img id="lightbox-img" src="" alt="">
   <p class="lightbox-cap" id="lightbox-cap"></p>
 </div>
+<button type="button" class="back-to-top" id="backToTop" aria-label="ページの先頭に戻る">↑</button>
 <script>
 (function(){
   var lightbox = document.getElementById('lightbox');
@@ -1267,6 +1292,30 @@ img{max-width:100%}
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
   });
+  var navToggle = document.getElementById('navToggle');
+  var headerLinks = document.getElementById('headerLinks');
+  if (navToggle && headerLinks) {
+    navToggle.addEventListener('click', function(){
+      var isOpen = headerLinks.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    headerLinks.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        headerLinks.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  var backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    window.addEventListener('scroll', function(){
+      backToTop.classList.toggle('is-visible', window.scrollY > 500);
+    });
+    backToTop.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 })();
 </script>
 
