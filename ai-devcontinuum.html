@@ -352,7 +352,7 @@ img{max-width:100%}
       </div>
     </div>
     <div class="hero-visual">
-      <img class="hero-shot" src="fig_hero_mockup.png" alt="AI-DevContinuumのイメージ画面。ダッシュボードでプロジェクト一覧・品質指標・AIアシスタントを一体的に確認できるコンセプトイメージ" loading="lazy">
+      <img class="hero-shot" src="fig_hero_mockup.png" width="1536" height="1024" alt="AI-DevContinuumのイメージ画面。ダッシュボードでプロジェクト一覧・品質指標・AIアシスタントを一体的に確認できるコンセプトイメージ" loading="lazy">
       <div class="hero-btns hero-btns--in-visual">
         <a href="https://shikou-ai.com/contact.html" class="btn btn-primary">無料で相談する</a>
         <a href="#architecture" class="btn btn-ghost">仕組みを見る</a>
@@ -446,10 +446,10 @@ img{max-width:100%}
 
     <p class="prose" style="margin-bottom:18px">全案件を横断して状況をつかむダッシュボードと、1案件を10工程で追うパイプライン画面。視点は違っても、同じ基盤・同じデータの上で動いています。</p>
 
-    <img src="fig_dashboard.png" alt="AI-DevContinuumのダッシュボード画面。全案件のライフサイクル進捗・開発フェーズ分布・AI品質インサイト・AIレビュー状況・品質フィードバックループを1画面で横断把握できる" class="fig" loading="lazy">
+    <img src="fig_dashboard.png" alt="AI-DevContinuumのダッシュボード画面。全案件のライフサイクル進捗・開発フェーズ分布・AI品質インサイト・AIレビュー状況・品質フィードバックループを1画面で横断把握できる" class="fig" loading="lazy" width="1600" height="1936">
     <p class="fig-cap">ダッシュボード（実際の案件データ）。全案件の進捗・品質・AIレビュー状況を1画面で横断把握する</p>
 
-    <img src="fig_pipeline.png" alt="AI-DevContinuumの開発パイプライン画面。ヒアリングから要件定義書・基本設計書・詳細設計書・結合テスト仕様書の生成、実装・単体テスト自動生成、結合テスト実行・システムテスト実行の実績反映までを1つの画面で追跡する" class="fig" loading="lazy">
+    <img src="fig_pipeline.png" alt="AI-DevContinuumの開発パイプライン画面。ヒアリングから要件定義書・基本設計書・詳細設計書・結合テスト仕様書の生成、実装・単体テスト自動生成、結合テスト実行・システムテスト実行の実績反映までを1つの画面で追跡する" class="fig" loading="lazy" width="1220" height="1180">
     <p class="fig-cap">実際の案件管理画面。全10工程の状態を1画面で追跡する（画面はデモ案件）</p>
 
     <h3 style="font-size:19px;font-weight:900;margin:34px 0 12px">扱っている範囲</h3>
@@ -486,7 +486,7 @@ img{max-width:100%}
       開発モデルにはV字モデルを採用し、要件定義⇔システムテスト・基本設計⇔結合テスト・詳細設計⇔単体テストが対応関係（トレーサビリティ）を保ちます。
       実装・テストで得られた不具合・レビュー・実行結果はAI品質分析にフィードバックされ、そこで生まれたレビュー観点は次のプロジェクトのAIレビュー精度向上として還元されます。
     </p>
-    <img src="fig_vmodel.png" alt="AI支援レイヤー（AI要件生成・AIレビュー・AI設計支援・AIテスト・AI品質分析）とV字モデル（要件定義⇔システムテスト・基本設計⇔結合テスト・詳細設計⇔単体テスト）、品質フィードバックループの関係図。不具合・レビュー・テスト結果・Git変更履歴からAI品質分析を経て、改善ポイントとナレッジが生成され、レビュー観点として次のプロジェクトのV字モデル各検証工程へ反映される" class="fig" loading="lazy" style="max-width:720px;margin-left:auto;margin-right:auto">
+    <img src="fig_vmodel.png" alt="AI支援レイヤー（AI要件生成・AIレビュー・AI設計支援・AIテスト・AI品質分析）とV字モデル（要件定義⇔システムテスト・基本設計⇔結合テスト・詳細設計⇔単体テスト）、品質フィードバックループの関係図。不具合・レビュー・テスト結果・Git変更履歴からAI品質分析を経て、改善ポイントとナレッジが生成され、レビュー観点として次のプロジェクトのV字モデル各検証工程へ反映される" class="fig" loading="lazy" style="max-width:720px;margin-left:auto;margin-right:auto" width="1222" height="1287">
     <p class="fig-cap">機能マップ。AI支援・V字モデル・品質フィードバックループが1つの構造でつながっている</p>
 
     <h3 style="font-size:19px;font-weight:900;margin:34px 0 12px">なぜ全部を1つの基盤にしたのか</h3>
@@ -524,7 +524,7 @@ img{max-width:100%}
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">設計・仕様</span><span class="feat-title">要件定義書〜結合テスト仕様書のAIレビュー</span></div>
       <p class="feat-d">要件定義書はヒアリング内容、基本設計書は承認済みの要件定義書、詳細設計書は承認済みの基本設計書というように、各成果物は直前に承認された成果物の内容を踏まえてAIが生成します。生成後は、成果物の種類ごとに定めた5つの観点（例:要件定義書なら完全性・一貫性・明確性・実現可能性・トレーサビリティ）でAIがレビューし、スコアと具体的な指摘を返します。承認するかどうかは人間が決めます。章立てや必須項目は企業独自のテンプレートとして登録でき、承認済みの成果物はMarkdown・Word・Excelの3形式で出力できます。</p>
-      <img src="fig_artifact_review.png" alt="要件定義書のAIレビュー結果画面。完全性・一貫性・明確性・実現可能性・トレーサビリティの観点ごとにスコアと指摘コメントが表示され、承認記録とMD/Word/Excelへのエクスポートボタンがある" class="fig" loading="lazy">
+      <img src="fig_artifact_review.png" alt="要件定義書のAIレビュー結果画面。完全性・一貫性・明確性・実現可能性・トレーサビリティの観点ごとにスコアと指摘コメントが表示され、承認記録とMD/Word/Excelへのエクスポートボタンがある" class="fig" loading="lazy" width="1220" height="1450">
       <p class="fig-cap">要件定義書のAIレビュー結果（実際の案件データ）。観点別スコアと具体的な指摘、承認履歴を1画面で確認できる</p>
     </div>
 
@@ -542,21 +542,21 @@ img{max-width:100%}
         <span class="feat-future-badge">✦ 今後拡張予定</span>
         <span class="feat-future-text">既存コードを解析し、新規作成／既存改修／既存流用・拡張／リファクタリングのいずれで実装すべきかをAIが判定する「実装方式判定」、対応プログラミング言語のさらなる拡充</span>
       </div>
-      <img src="fig_codegen.png" alt="AIコード生成画面。「緊急のSLA期限を2時間から1時間に短縮してください」という依頼に対し、AIがsla_deadline_hours内のurgentキーの値のみを変更した根拠を説明し、Claude/Codexのエンジン選択欄と承認・却下ボタンが表示されている" class="fig" loading="lazy">
+      <img src="fig_codegen.png" alt="AIコード生成画面。「緊急のSLA期限を2時間から1時間に短縮してください」という依頼に対し、AIがsla_deadline_hours内のurgentキーの値のみを変更した根拠を説明し、Claude/Codexのエンジン選択欄と承認・却下ボタンが表示されている" class="fig" loading="lazy" width="1220" height="650">
       <p class="fig-cap">AIコード生成の提案画面。変更範囲を絞り込んだ根拠をAI自身が説明する（実際の生成結果）</p>
     </div>
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">実装</span><span class="feat-title">単体テスト自動生成 / 詳細設計書からのテストケース抽出</span></div>
       <p class="feat-d">コードから単体テストをAIに書かせるだけでなく、詳細設計書の最新版からテストケースを抽出することもできます（承認前のドラフト段階でも抽出可能です）。前提条件・手順・期待結果がケースごとに整理され、そのままテストコード生成に進めます。</p>
-      <img src="fig_unittest.png" alt="詳細設計書からのテストケース抽出画面。AuthService.loginやTicketService.createなど23件の実テストケースが前提条件・手順・期待結果つきで一覧表示され、各行にテストコード生成ボタンがある" class="fig" loading="lazy">
+      <img src="fig_unittest.png" alt="詳細設計書からのテストケース抽出画面。AuthService.loginやTicketService.createなど23件の実テストケースが前提条件・手順・期待結果つきで一覧表示され、各行にテストコード生成ボタンがある" class="fig" loading="lazy" width="1220" height="1350">
       <p class="fig-cap">詳細設計書から抽出したテストケース（実際の案件、23件）。ケースごとにテストコード生成へ進める</p>
     </div>
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">コードレビュー</span><span class="feat-title">レビューエンジンの選択（Claude CLI / Codex CLI）</span></div>
       <p class="feat-d">自己参照のコードレビューだけでなく、クライアント案件のコード生成・単体テスト生成でも、Claude CLIに加えてOpenAI Codex CLIを選べます。1つのコードを2つのAIの目でダブルチェックできます。</p>
-      <img src="fig_admin_review.png" alt="コードレビュー画面。レビューエンジンとしてClaude CLIとCodex CLIを選択できるドロップダウンがあり、過去のレビュー履歴が実行日時・使用エンジン・検出件数つきで一覧表示されている" class="fig" loading="lazy">
+      <img src="fig_admin_review.png" alt="コードレビュー画面。レビューエンジンとしてClaude CLIとCodex CLIを選択できるドロップダウンがあり、過去のレビュー履歴が実行日時・使用エンジン・検出件数つきで一覧表示されている" class="fig" loading="lazy" width="1220" height="1195">
       <p class="fig-cap">コードレビューのエンジン選択画面。Claude CLI / Codex CLIを切り替えて実行できる</p>
     </div>
   </div>
@@ -666,14 +666,14 @@ img{max-width:100%}
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">ガバナンス</span><span class="feat-title">データ取り込み・機能マスタ</span></div>
       <p class="feat-d">CSV・JUnit形式のテスト結果やGit連携から実績データを取り込み、機能マスタを整備します。ここで取り込んだ実績が、この先の不具合分析・リスク予測の元データになります。</p>
-      <img src="fig_ingest.png" alt="データ取り込み画面。CSV・JUnitのテスト結果取り込みとGit連携のUI、機能マスタの一覧表が表示されている" class="fig" loading="lazy">
+      <img src="fig_ingest.png" alt="データ取り込み画面。CSV・JUnitのテスト結果取り込みとGit連携のUI、機能マスタの一覧表が表示されている" class="fig" loading="lazy" width="1220" height="1870">
       <p class="fig-cap">データ取り込み画面。外部の実績データを機能マスタに紐付けて取り込む</p>
     </div>
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">見える化</span><span class="feat-title">品質ダッシュボード</span></div>
       <p class="feat-d">不具合件数・原因内訳・カバレッジなど、案件の品質状態をKPIカードとグラフで一望できます。集計はすべて実データからの機械的な計算です。</p>
-      <img src="fig_qa_dashboard.png" alt="品質ダッシュボード画面。不具合件数・重大度別内訳・原因カテゴリ・機能別クロス集計などのKPIカードとグラフが並んでいる" class="fig" loading="lazy">
+      <img src="fig_qa_dashboard.png" alt="品質ダッシュボード画面。不具合件数・重大度別内訳・原因カテゴリ・機能別クロス集計などのKPIカードとグラフが並んでいる" class="fig" loading="lazy" width="1220" height="1470">
       <p class="fig-cap">品質ダッシュボード（実際の案件データ）</p>
     </div>
 
@@ -682,11 +682,11 @@ img{max-width:100%}
       <p class="feat-d">登録された不具合をAIが根本原因・混入工程ごとに分類し、原因カテゴリの構成比や機能とのクロス集計まで自動で作ります（検出工程は取り込んだ実績データの値をそのまま使用）。分類結果の確定は人間が行います。</p>
       <div class="figs-2">
         <figure>
-          <img src="fig_defects.png" alt="不具合一覧画面。16件の不具合それぞれについてAIが根本原因・混入工程を分類して表示している" class="fig" loading="lazy">
+          <img src="fig_defects.png" alt="不具合一覧画面。16件の不具合それぞれについてAIが根本原因・混入工程を分類して表示している" class="fig" loading="lazy" width="1220" height="1080">
           <p class="fig-cap">不具合一覧。AIが根本原因・混入工程を分類する</p>
         </figure>
         <figure>
-          <img src="fig_root_cause.png" alt="根本原因分析画面。原因カテゴリ構成比のドーナツグラフと、原因×機能のクロス集計表が表示されている" class="fig" loading="lazy">
+          <img src="fig_root_cause.png" alt="根本原因分析画面。原因カテゴリ構成比のドーナツグラフと、原因×機能のクロス集計表が表示されている" class="fig" loading="lazy" width="1220" height="1050">
           <p class="fig-cap">根本原因分析。原因カテゴリの構成比と機能別のクロス集計</p>
         </figure>
       </div>
@@ -695,7 +695,7 @@ img{max-width:100%}
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">AI予測</span><span class="feat-title">再発リスクマップ（7要素）</span></div>
       <p class="feat-d">不具合密度だけでなく、直近の変更量・カバレッジ不足・変更頻度・類似案件・レビュー指摘の集中度・要求変更の多さまで加味してリスクを算出します。重みは画面から調整でき、内訳（生値と相対値）を必ず併記します。</p>
-      <img src="fig_risk.png" alt="再発リスクマップ画面。不具合密度・直近変更量・カバレッジ不足・変更頻度・類似案件・レビュー指摘・要求変更の7要素から機能ごとの総合リスクスコアを算出し、レポート機能が総合リスク37.5で最上位に表示されている" class="fig" loading="lazy">
+      <img src="fig_risk.png" alt="再発リスクマップ画面。不具合密度・直近変更量・カバレッジ不足・変更頻度・類似案件・レビュー指摘・要求変更の7要素から機能ごとの総合リスクスコアを算出し、レポート機能が総合リスク37.5で最上位に表示されている" class="fig" loading="lazy" width="1220" height="1000">
       <p class="fig-cap">再発リスクマップ（実際の案件データ）。7要素の内訳から総合リスクスコアを算出する</p>
     </div>
 
@@ -704,11 +704,11 @@ img{max-width:100%}
       <p class="feat-d">要求とテストケースの紐付け状況から、未検証の要求や不足しているテスト種別（異常系・境界値など）を検出します。要求×テストケースの対応表では、空白セルからそのままAIにテストケース起案を依頼できます（機能×テストケースの対応表は件数確認用です）。</p>
       <div class="figs-2">
         <figure>
-          <img src="fig_coverage.png" alt="テスト十分性評価画面。要求カバレッジ率と、テストケースが紐付いていない要求の一覧が表示されている" class="fig" loading="lazy">
+          <img src="fig_coverage.png" alt="テスト十分性評価画面。要求カバレッジ率と、テストケースが紐付いていない要求の一覧が表示されている" class="fig" loading="lazy" width="1220" height="1250">
           <p class="fig-cap">テスト十分性評価。未検証の要求を一覧化する</p>
         </figure>
         <figure>
-          <img src="fig_test_matrix.png" alt="テストマトリクス画面。要求×テストケースの対応表で、テストケースが無い箇所に「AIに起案させる」ボタンが並んでいる" class="fig" loading="lazy">
+          <img src="fig_test_matrix.png" alt="テストマトリクス画面。要求×テストケースの対応表で、テストケースが無い箇所に「AIに起案させる」ボタンが並んでいる" class="fig" loading="lazy" width="1220" height="750">
           <p class="fig-cap">テストマトリクス。空白セルからそのままAI起案に進める</p>
         </figure>
       </div>
@@ -719,11 +719,11 @@ img{max-width:100%}
       <p class="feat-d">要求カバレッジ・異常系比率・出荷前検出率・手戻り率・品質ゲート通過率を重み付け合算して品質スコアを算出します。品質ゲートは結合テストへ進む条件などを判定し、未達でも理由を記録すれば人間が上書き通過できます。数値そのものはAIに作らせません。</p>
       <div class="figs-2">
         <figure>
-          <img src="fig_score.png" alt="品質スコア画面。要求カバレッジ・異常系比率・出荷前検出率・手戻り率・品質ゲート通過率を重み付け合算し57.2点と表示している" class="fig" loading="lazy">
+          <img src="fig_score.png" alt="品質スコア画面。要求カバレッジ・異常系比率・出荷前検出率・手戻り率・品質ゲート通過率を重み付け合算し57.2点と表示している" class="fig" loading="lazy" width="1220" height="980">
           <p class="fig-cap">品質スコア。数値は決められた計算式のみで算出し、AIは所見文だけを書く</p>
         </figure>
         <figure>
-          <img src="fig_gates.png" alt="品質ゲート画面。結合テストへ進む条件のうち要求カバレッジと高リスク要求のカバレッジが未達で不合格と判定され、理由を記入して上書き通過できる欄がある" class="fig" loading="lazy">
+          <img src="fig_gates.png" alt="品質ゲート画面。結合テストへ進む条件のうち要求カバレッジと高リスク要求のカバレッジが未達で不合格と判定され、理由を記入して上書き通過できる欄がある" class="fig" loading="lazy" width="1220" height="750">
           <p class="fig-cap">品質ゲート。条件未達でも、理由を記録すれば人間が上書き通過できる</p>
         </figure>
       </div>
@@ -738,11 +738,11 @@ img{max-width:100%}
       </div>
       <div class="figs-2">
         <figure>
-          <img src="fig_traceability.png" alt="トレーサビリティ画面。要求と成果物・テストケースの紐付け状況が一覧表示されている" class="fig" loading="lazy">
+          <img src="fig_traceability.png" alt="トレーサビリティ画面。要求と成果物・テストケースの紐付け状況が一覧表示されている" class="fig" loading="lazy" width="1220" height="1000">
           <p class="fig-cap">トレーサビリティ。要求⇔設計⇔テストの対応関係を追跡する</p>
         </figure>
         <figure>
-          <img src="fig_knowledge.png" alt="ナレッジ管理画面。改善提案がレビュー観点として登録され、以降のAIレビューに反映される仕組みが表示されている" class="fig" loading="lazy">
+          <img src="fig_knowledge.png" alt="ナレッジ管理画面。改善提案がレビュー観点として登録され、以降のAIレビューに反映される仕組みが表示されている" class="fig" loading="lazy" width="1220" height="430">
           <p class="fig-cap">ナレッジ管理。指摘を観点として蓄積し、次のAIレビューに反映する</p>
         </figure>
       </div>
@@ -1173,6 +1173,10 @@ img{max-width:100%}
       <details class="faq-item">
         <summary>機密情報・個人情報の扱いは大丈夫ですか？</summary>
         <p class="faq-a">AIへ送信する前に、氏名・メールアドレス・電話番号・APIキー等を自動マスキングします。マスキング規則に不備を検知した場合は送信自体を中止します。詳しくは上記「セキュリティ・ガバナンス」をご覧ください。</p>
+      </details>
+      <details class="faq-item">
+        <summary>AIに社内の機密情報を送信しても大丈夫ですか？</summary>
+        <p class="faq-a">AI-DevContinuumでは、AIへ送信する前に認証・権限確認、データ分類、機密情報チェック、マスキング、送信前プレビューといった複数の制御を行い、判断できない場合は送信自体を停止します（Fail Closed）。仕組みの詳細は<a href="#security-gateway" style="color:var(--accent-dark);font-weight:700">「セキュリティへの取り組み」</a>をご覧ください。</p>
       </details>
       <details class="faq-item">
         <summary>導入までどれくらいかかりますか？</summary>
