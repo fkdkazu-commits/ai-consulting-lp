@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code・Codex 個別家庭教師 | 初心者からAIを仕事にする</title>
+<meta name="description" content="Claude Code・Codexを触ったことがない方向け。何から始めればいいかわからない状態から、実務活用・副業・案件化まで1対1でサポート。月額5,000円〜。">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #f6f8fb;
+  color: #102a43;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ── 共通 ── */
+.container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 96px 0; background: #fff; }
+.section-alt { background: #f6f8fb; }
+
+.sec-tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #2f6fd0;
+  background: rgba(37,99,235,0.08);
+  border: 1px solid rgba(37,99,235,0.2);
+  padding: 4px 14px; border-radius: 6px;
+  margin-bottom: 16px;
+}
+.sec-title {
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 900;
+  color: #0b2138;
+  line-height: 1.3;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+.sec-title em { font-style: normal; color: #2f6fd0; }
+.sec-lead {
+  font-size: 15px;
+  color: #5a6b7d;
+  line-height: 1.9;
+  margin-bottom: 56px;
+}
+.divider { height: 1px; background:#cbd5e1; margin: 0; }
+
+/* ── Nav ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #dfe6ee;
+  box-shadow: none;
+  padding: 14px 0;
+}
+.nav-inner {
+  max-width: 900px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-size: 14px; font-weight: 700; color: #0b2138;
+  display: flex; align-items: center; gap: 8px;
+}
+.nav-logo span {
+  width: 8px; height: 8px; background: #2f6fd0;
+  border-radius: 50%; display: inline-block;
+  box-shadow: none;
+}
+.nav-cta {
+  font-size: 13px; font-weight: 700;
+  background: #2f6fd0; color: #fff;
+  padding: 8px 20px; border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: #1f5bb0; }
+
+/* ── サービスプルダウン ── */
+.nav-links { display: flex; align-items: center; gap: 24px; }
+.nav-link {
+  font-size: 13px; font-weight: 700; color: #5a6b7d;
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-link:hover { color: #2f6fd0; }
+/* ── Hamburger ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 36px; height: 36px;
+  background: #fff;
+  border: 2px solid #2f6fd0;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 7px 6px;
+  z-index: 200;
+  flex-shrink: 0;
+}
+.hamburger span {
+  display: block; width: 100%; height: 2px;
+  background: #2f6fd0; border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+.nav-dropdown { position: relative; }
+.nav-dropdown-trigger {
+  font-size: 13px; font-weight: 700; color: #5a6b7d;
+  cursor: pointer; user-select: none;
+  display: flex; align-items: center; gap: 4px;
+  transition: color 0.2s;
+}
+.nav-dropdown-trigger:hover { color: #2f6fd0; }
+.nav-dropdown-trigger::after {
+  content: '';
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  margin-top: -3px;
+  transition: transform 0.2s;
+}
+.nav-dropdown:hover .nav-dropdown-trigger::after { transform: rotate(-135deg); margin-top: 3px; }
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  padding-top: 12px;
+  min-width: 230px;
+  z-index: 200;
+  white-space: nowrap;
+}
+.nav-dropdown-menu-inner {
+  background: #fff;
+  border: 1px solid #dfe6ee;
+  border-radius: 6px;
+  box-shadow: none;
+  padding: 6px 0;
+  overflow: hidden;
+}
+.nav-dropdown:hover .nav-dropdown-menu { display: block; }
+.nav-dropdown-menu a {
+  display: block;
+  padding: 10px 20px;
+  font-size: 13px; font-weight: 600;
+  color: #102a43;
+  text-decoration: none;
+  border-bottom: 1px solid #f6f8fb;
+  transition: background 0.15s;
+}
+.nav-dropdown-menu a:last-child { border-bottom: none; }
+.nav-dropdown-menu a:hover { background: #eef4fb; color: #2f6fd0; }
+.nav-menu-badge {
+  display: inline-block;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 6px;
+  margin-left: 8px; vertical-align: middle;
+}
+.badge-orange { background: rgba(217,119,6,0.1); color: #92400e; border: 1px solid rgba(217,119,6,0.25); }
+.badge-blue   { background: rgba(37,99,235,0.08); color: #1f5bb0; border: 1px solid rgba(37,99,235,0.2); }
+
+/* ── Hero ── */
+.hero {
+  padding: 120px 24px 80px;
+  position: relative;
+  overflow: hidden;
+  background:#eef4fb;
+}
+.hero-inner {
+  max-width: 680px; margin: 0 auto;
+}
+.hero-text { text-align: left; }
+.hero-illust { display: flex; justify-content: center; align-items: center; }
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:rgba(37,99,235,0.1),
+    rgba(99,102,241,0.06);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 700;
+  color: #2f6fd0; letter-spacing: 0.1em;
+  margin-bottom: 28px;
+  background: rgba(37,99,235,0.07);
+  border: 1px solid rgba(37,99,235,0.18);
+  padding: 6px 18px; border-radius: 6px;
+}
+.hero-eyebrow::before { content: ''; width: 6px; height: 6px; background: #2f6fd0; border-radius: 50%; box-shadow: none; }
+.hero h1 {
+  font-size: clamp(32px, 6vw, 62px);
+  font-weight: 900;
+  color: #0b2138;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin-bottom: 28px;
+}
+.hero h1 .from {
+  color: #8b9aac;
+  font-size: 0.62em;
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.hero h1 em {
+  font-style: normal;
+  word-break: keep-all;
+  white-space: nowrap;
+  background:#2f6fd0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: clamp(14px, 1.8vw, 17px);
+  color: #5a6b7d;
+  line-height: 1.9;
+  margin-bottom: 40px;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.hero-badges {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 44px;
+}
+.hero-badge {
+  font-size: 13px; font-weight: 700;
+  background: #fff;
+  border: 1px solid #dfe6ee;
+  color: #1e3450;
+  padding: 8px 18px; border-radius: 6px;
+  box-shadow: none;
+}
+.hero-cta {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 14px;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background:#1f5bb0;
+  color: #fff; font-size: 15px; font-weight: 700;
+  padding: 15px 36px; border-radius: 6px;
+  text-decoration: none;
+  box-shadow: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: none; }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #fff;
+  color: #1e3450; font-size: 15px; font-weight: 700;
+  padding: 15px 32px; border-radius: 6px;
+  text-decoration: none;
+  border: 1px solid #dfe6ee;
+  box-shadow: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.btn-secondary:hover { border-color: #7fb2f0; box-shadow: none; }
+.hero-note { margin-top: 20px; font-size: 12px; color: #8b9aac; }
+
+/* ── Pain（本家 #stmt と同じ型：罫線区切り＋見出し＋本文、締めの一文） ── */
+.stmt-item { padding: 34px 0; border-top: 1px solid #dfe6ee; }
+.stmt-item:last-child { border-bottom: 1px solid #dfe6ee; }
+.stmt-h { font-size: clamp(19px,2.4vw,25px); font-weight: 900; line-height: 1.55; margin-bottom: 12px; letter-spacing: -.01em; color:#0b2138; }
+.stmt-b { font-size: 15.5px; color: #5a6b7d; max-width: 760px; line-height: 1.85; }
+.stmt-close { margin-top: 44px; font-size: clamp(17px,2.2vw,22px); font-weight: 700; line-height: 1.8; color:#0b2138; }
+.stmt-close b { color: #2f6fd0; font-weight: 900; }
+
+/* ── Solution ── */
+.sol-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.sol-card {
+  background: #fff;
+  border: 1px solid #dbe7f6;
+  border-radius: 6px;
+  padding: 28px 24px;
+  box-shadow: none;
+}
+.sol-num {
+  font-size: 11px; font-weight: 700; color: #2f6fd0;
+  letter-spacing: 0.1em; margin-bottom: 10px;
+}
+.sol-title { font-size: 16px; font-weight: 700; color: #0b2138; margin-bottom: 10px; }
+.sol-desc { font-size: 13px; color: #5a6b7d; line-height: 1.75; }
+.sol-tags {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px;
+}
+.sol-tag {
+  font-size: 11px; font-weight: 600;
+  background: rgba(37,99,235,0.08);
+  color: #1f5bb0;
+  padding: 3px 10px; border-radius: 6px;
+}
+
+/* ── Curriculum ── */
+.curriculum-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+.cur-card {
+  background: #fff;
+  border: 1px solid #dfe6ee;
+  border-radius: 6px;
+  padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: none;
+}
+.cur-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background:#1f5bb0;
+}
+.cur-month {
+  font-size: 11px; font-weight: 700; color: #2f6fd0;
+  letter-spacing: 0.1em; margin-bottom: 8px;
+}
+.cur-title { font-size: 18px; font-weight: 900; color: #0b2138; margin-bottom: 16px; }
+.cur-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.cur-list li {
+  display: flex; gap: 8px; align-items: flex-start;
+  font-size: 13px; color: #5a6b7d;
+}
+.cur-list li::before {
+  content: '';
+  width: 6px; height: 6px;
+  margin-top: 6px;
+  background: #2f6fd0; border-radius: 50%;
+  flex-shrink: 0;
+}
+.cur-note { font-size: 11.5px; color: #8b9aac; line-height: 1.6; margin-top: 3px; }
+
+/* ── Pricing ── */
+.price-card {
+  background:#1e3a5f;
+  border-radius: 6px;
+  padding: 52px 48px;
+  text-align: center;
+  max-width: 520px;
+  margin: 0 auto 48px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: none;
+}
+.price-card::before {
+  content: '';
+  position: absolute; top: -80px; right: -80px;
+  width: 300px; height: 300px;
+  background:rgba(255,255,255,0.08);
+  border-radius: 50%;
+}
+.price-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  font-size: 12px; font-weight: 700;
+  padding: 4px 16px; border-radius: 6px;
+  margin-bottom: 20px;
+  letter-spacing: 0.06em;
+}
+.price-val {
+  font-size: 64px; font-weight: 900; color: #fff;
+  line-height: 1; margin-bottom: 6px;
+  letter-spacing: -0.04em;
+}
+.price-val small { font-size: 24px; font-weight: 700; color: rgba(255,255,255,0.75); }
+.price-unit { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 28px; }
+.price-features {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 12px;
+  text-align: left;
+  margin-bottom: 32px;
+}
+.price-features li {
+  display: flex; gap: 10px; align-items: center;
+  font-size: 14px; color: rgba(255,255,255,0.9);
+}
+.price-features li::before {
+  content: '✓';
+  color: #7fb2f0; font-weight: 700; flex-shrink: 0;
+}
+.price-note { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.8; }
+.price-plan-name {
+  font-size: 18px; font-weight: 900; color: #fff;
+  margin-bottom: 16px; letter-spacing: 0.02em;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+.price-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* ── FAQ ── */
+.faq-list { display: flex; flex-direction: column; gap: 0; }
+.faq-item {
+  border-bottom: 1px solid #dfe6ee;
+}
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 20px 4px;
+  cursor: pointer;
+  font-size: 15px; font-weight: 700; color: #102a43;
+  user-select: none;
+}
+.faq-q:hover { color: #2f6fd0; }
+.faq-chevron { color: #2f6fd0; font-size: 20px; flex-shrink: 0; transition: transform 0.2s; }
+.faq-item.open .faq-chevron { transform: rotate(180deg); }
+.faq-a {
+  display: none;
+  padding: 0 4px 20px;
+  font-size: 14px; color: #5a6b7d; line-height: 1.85;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* ── CTA ── */
+.cta-section {
+  background:#0f1e3a;
+  padding: 96px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:rgba(96,165,250,0.15);
+  pointer-events: none;
+}
+.cta-section h2 {
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 900; color: #fff;
+  line-height: 1.3; margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+.cta-section h2 em { font-style: normal; color: #7fb2f0; }
+.cta-section p { font-size: 15px; color: rgba(255,255,255,0.7); margin-bottom: 40px; line-height: 1.85; }
+.cta-btns {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 14px;
+  margin-bottom: 32px;
+}
+.cta-channels {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;
+}
+.cta-channel {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.cta-channel:hover { color: rgba(255,255,255,0.8); }
+
+/* ── Form ── */
+.form-wrap {
+  background: #fff;
+  border: 1px solid #dfe6ee;
+  border-radius: 6px;
+  padding: 40px;
+  max-width: 560px; margin: 0 auto;
+  box-shadow: none;
+}
+.form-title {
+  font-size: 18px; font-weight: 700; color: #0b2138;
+  margin-bottom: 8px;
+}
+.form-sub { font-size: 13px; color: #8b9aac; margin-bottom: 24px; }
+.form-row { margin-bottom: 16px; }
+.form-label { display: block; font-size: 12px; font-weight: 700; color: #5a6b7d; margin-bottom: 6px; letter-spacing: 0.04em; }
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: #f6f8fb;
+  border: 1px solid #dfe6ee;
+  border-radius: 6px;
+  color: #102a43;
+  font-size: 14px;
+  font-family: inherit;
+  padding: 12px 14px;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: #2f6fd0;
+  background: #fff;
+  box-shadow: none;
+}
+.form-select option { background: #fff; color: #102a43; }
+.form-textarea { resize: vertical; min-height: 100px; }
+.form-btn {
+  width: 100%;
+  background:#1f5bb0;
+  color: #fff; font-size: 15px; font-weight: 700;
+  padding: 14px; border-radius: 6px;
+  border: none; cursor: pointer;
+  box-shadow: none;
+  transition: opacity 0.2s;
+  margin-top: 8px;
+  font-family: inherit;
+}
+.form-btn:hover { opacity: 0.9; }
+.form-privacy { font-size: 11px; color: #8b9aac; text-align: center; margin-top: 12px; line-height: 1.6; }
+
+/* ── Footer ── */
+footer {
+  background: #102a43;
+  border-top: 1px solid #1e3450;
+  padding: 32px 24px;
+  text-align: center;
+  font-size: 12px; color: #5a6b7d;
+}
+footer a { color: #7fb2f0; text-decoration: none; }
+
+@media (max-width: 860px) {
+  .hamburger { display: flex; }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%; right: 0;
+    width: 240px;
+    max-width: calc(100vw - 16px);
+    overflow: hidden;
+    background: #fff;
+    padding: 8px 0 16px;
+    box-shadow: none;
+    border-radius: 0 0 0 10px;
+    border-top: 2px solid #2f6fd0;
+    z-index: 150;
+  }
+  .nav-links.open { display: flex; }
+  .nav-link {
+    display: block;
+    padding: 12px 20px;
+    font-size: 15px;
+    border-bottom: 1px solid #f0f4f8;
+    color: #0b2138 !important;
+    white-space: normal;
+    word-break: break-all;
+  }
+  .nav-dropdown { display: block; width: 100%; }
+  .nav-dropdown-trigger { display: flex; padding: 12px 20px; font-size: 15px; color: #0b2138; border-bottom: 1px solid #f0f4f8; width: 100%; box-sizing: border-box; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: none; }
+  .nav-dropdown-menu {
+    display: none;
+    position: static !important;
+    transform: none !important;
+    padding-top: 0 !important;
+    min-width: 0 !important;
+    white-space: normal !important;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    background: #eef4fb;
+    width: 100%;
+    overflow: hidden;
+  }
+  .nav-dropdown-menu-inner { border-radius: 0; box-shadow: none; border: none; width: 100%; overflow: hidden; }
+  .nav-dropdown.open .nav-dropdown-menu { display: block; }
+  .nav-dropdown-menu a { padding: 10px 20px 10px 28px; font-size: 13px; border-bottom: 1px solid #f0f4f8; white-space: normal; word-break: break-all; display: block; }
+  .nav-cta { display: block; margin: 8px 16px 0; text-align: center; font-size: 15px; border-radius: 6px; }
+}
+@media (max-width: 640px) {
+  .hero { padding: 100px 20px 60px; }
+  .hero h1 { font-size: clamp(24px, 7.5vw, 32px); overflow-wrap: break-word; word-break: break-word; }
+  .hero-badges { grid-template-columns: 1fr; }
+  .section { padding: 64px 0; }
+  .price-card { padding: 36px 24px; }
+  .price-grid { grid-template-columns: 1fr; }
+  .form-wrap { padding: 28px 20px; }
+  .container { padding: 0 16px; }
+}
+
+/* ============================================================
+   トップページと同じ「作り」に寄せる上書き
+   カード（枠線＋影＋角丸）をやめ、罫線で区切る構成へ
+   ============================================================ */
+.container{max-width:1040px}
+.hero-eyebrow{background:none !important;border:1px solid rgba(255,255,255,.34) !important;border-radius:4px}
+/* 影は全廃 */
+.cur-card,.faq-item,.step-card,.price-card,.voice-card,
+.form-wrap,.reason-card,.target-card{box-shadow:none !important}
+/* カード → 罫線区切り */
+.curriculum-grid{gap:2px;background:#dfe6ee;border:1px solid #dfe6ee}
+.cur-card{border:0;border-radius:0;background:#fff;padding:28px 26px}
+.cur-month{border-radius:3px;font-size:11.5px;letter-spacing:.08em}
+/* FAQ */
+.faq-list{border-top:1px solid #dfe6ee}
+.faq-item{border:0;border-bottom:1px solid #dfe6ee;border-radius:0;margin-bottom:0;background:none}
+/* フォーム */
+.form-wrap{border-radius:0;border:1px solid #dfe6ee}
+.form-input,.form-select,.form-textarea{border-radius:4px}
+.form-btn{border-radius:6px}
+/* ナビ・ボタン */
+.nav-cta,.btn-primary,.hero-cta{border-radius:6px}
+.hero-badge{border-radius:4px}
+
+/* ヒーローを他ページと同じ濃紺に統一する */
+.hero{background:#0b2138 !important;color:#fff}
+.hero h1{color:#fff}
+.hero h1 em{background:none !important;-webkit-text-fill-color:#7fb2f0 !important;color:#7fb2f0}
+.from{color:rgba(255,255,255,.55) !important}
+.hero-sub{color:rgba(255,255,255,.82) !important}
+.hero-note{color:rgba(255,255,255,.55) !important}
+.hero-eyebrow{background:rgba(255,255,255,.08) !important;color:#7fb2f0 !important;border:1px solid rgba(255,255,255,.28) !important}
+.hero-badge{background:rgba(255,255,255,.06) !important;border:1px solid rgba(255,255,255,.22) !important;color:rgba(255,255,255,.9) !important;border-radius:4px}
+.hero .btn-primary{background:#2f6fd0 !important;color:#fff !important}
+
+/* ============================================================
+   ai-consulting-lp トップページの寸法・字送りに合わせる
+   ============================================================ */
+.container{max-width:1040px;padding:0 24px}
+.section{padding:92px 0}
+.section-alt{background:#f6f8fb}
+
+/* セクションラベル：囲みをやめて文字だけに */
+.sec-tag{display:block !important;background:none !important;border:0 !important;
+  padding:0 !important;border-radius:0 !important;
+  font-size:12px;font-weight:700;letter-spacing:.18em;color:#2f6fd0;margin-bottom:14px}
+.sec-title{font-size:clamp(26px,3.6vw,40px);line-height:1.4;letter-spacing:-.02em;margin-bottom:20px;color:#0b2138}
+.sec-title em{font-style:normal;color:#2f6fd0}
+.sec-lead{font-size:16px;color:#5a6b7d;line-height:1.9;max-width:680px;margin-bottom:48px}
+
+/* 料金：紺のグラデーション角丸 → 単色の面で見せる */
+.price-card{background:#0b2138 !important;border-radius:0;padding:48px 44px;max-width:none}
+.price-badge{border-radius:3px}
+
+/* 最終CTA：グラデーション → 単色 */
+.cta-section{background:#102a43 !important;padding:96px 24px}
+
+/* カリキュラム・FAQ・フォームの角丸をさらに抑える */
+.cur-card,.faq-item,.form-wrap{border-radius:0}
+.form-input,.form-select,.form-textarea{border-radius:4px}
+
+/* ナビゲーション：トップと同じ細い罫線と字送り */
+.nav{border-bottom:1px solid #dfe6ee}
+.nav-link{font-size:13.5px;font-weight:700;color:#5a6b7d}
+.nav-cta{background:#0b2138;border-radius:6px}
+
+/* ── サービス／カリキュラム：カードをやめ、罫線で仕切る面に ── */
+.sol-grid,.curriculum-grid{gap:2px;background:#dfe6ee;border:1px solid #dfe6ee}
+.sol-card,.cur-card{background:#fff;border:0 !important;border-radius:0 !important;
+  box-shadow:none !important;padding:34px 30px;height:auto}
+.sol-card::before,.cur-card::before{display:none !important}
+.sol-num{color:#2f6fd0;font-weight:900;letter-spacing:.12em;font-size:12px;margin-bottom:12px}
+.sol-title{font-size:19px;font-weight:900;line-height:1.55;letter-spacing:-.01em;margin-bottom:12px}
+.sol-desc{font-size:14.5px;color:#5a6b7d;line-height:1.9}
+.sol-tag{background:none;border:1px solid #dfe6ee;border-radius:3px;color:#5a6b7d;font-size:12px;padding:4px 11px}
+.cur-month{color:#2f6fd0;font-weight:900;letter-spacing:.12em;font-size:12px;margin-bottom:10px}
+.cur-title{font-size:19px;font-weight:900;line-height:1.55;margin-bottom:14px}
+.cur-list li{font-size:14px;color:#5a6b7d;line-height:1.95}
+
+/* ── 料金：面で見せる（角丸・影なし） ── */
+.price-grid{gap:2px;background:#dfe6ee;border:1px solid #dfe6ee}
+.price-card{border-radius:0 !important;box-shadow:none !important;border:0 !important}
+.price-features li{font-size:14px;line-height:1.95}
+
+/* ── FAQ：罫線区切りに ── */
+.faq-list{border-top:1px solid #dfe6ee}
+.faq-item{background:none !important;border:0 !important;border-bottom:1px solid #dfe6ee !important;
+  border-radius:0 !important;box-shadow:none !important;margin-bottom:0;padding:6px 0}
+.faq-q{font-size:16.5px;font-weight:900;line-height:1.6}
+.faq-a{font-size:14.5px;color:#5a6b7d;line-height:1.95}
+
+/* ── フォーム：白い面に ── */
+.form-wrap{background:#fff;border:1px solid #dfe6ee;border-radius:0 !important;box-shadow:none !important;padding:44px 40px}
+.form-btn{border-radius:6px;box-shadow:none;background:#2f6fd0}
+
+/* ── ヒーロー：ai-consulting-lp トップと同じ「写真＋単色オーバーレイ・左寄せ」 ── */
+.hero{
+  position:relative;overflow:hidden;text-align:left !important;
+  background:#0b2138 url('https://images.unsplash.com/photo-1781246435700-afec19012b45?w=1800&q=80') center/cover no-repeat !important;
+  padding:112px 0 100px;
+}
+.hero::before{content:'';position:absolute;inset:0;background:rgba(9,26,44,.84);z-index:0}
+.hero::after{display:none !important}
+.hero-inner{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:0 24px;text-align:left}
+.hero-text{text-align:left;margin:0}
+.hero-eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.12em;
+  background:none !important;border:1px solid rgba(255,255,255,.34);color:#fff;
+  padding:7px 16px;border-radius:4px;margin-bottom:30px;box-shadow:none}
+.hero h1{font-size:clamp(28px,4.6vw,50px);line-height:1.38;letter-spacing:-.02em;margin-bottom:24px;color:#fff}
+.hero h1 em{font-style:normal;color:#fff !important;-webkit-text-fill-color:#fff !important;
+  background:none !important;border-bottom:4px solid #2f6fd0;padding-bottom:2px}
+.hero-sub{font-size:clamp(15px,1.8vw,17.5px);color:rgba(255,255,255,.82);line-height:1.95;
+  max-width:680px;margin:0 0 38px}
+
+/* 特徴：箱をやめ、左の細い縦線で並べる（トップの hero-cred と同じ手法） */
+.hero-badges{display:flex !important;flex-wrap:wrap;gap:14px 34px;justify-content:flex-start !important;
+  max-width:none;margin:0 0 40px}
+.hero-badge{background:none !important;border:0 !important;border-left:2px solid #2f6fd0 !important;
+  border-radius:0 !important;box-shadow:none !important;padding:2px 0 2px 14px !important;
+  font-size:13.5px;font-weight:700;color:rgba(255,255,255,.92);justify-content:flex-start}
+
+.hero-cta{display:flex;justify-content:flex-start;margin:0 0 18px}
+.hero .btn-primary{background:#2f6fd0 !important;color:#fff !important;border-radius:6px;
+  box-shadow:none !important;padding:16px 34px;font-size:15px;font-weight:700}
+.hero-note{text-align:left;font-size:13px;color:rgba(255,255,255,.6)}
+
+.hero h1 .from{display:block;font-size:clamp(17px,2.1vw,23px);font-weight:700;
+  color:rgba(255,255,255,.78) !important;-webkit-text-fill-color:rgba(255,255,255,.78) !important;
+  background:none !important;margin-bottom:10px;letter-spacing:0}
+.divider{height:0;background:none;margin:0}
+
+/* ── 料金：抽象的な円の装飾をやめ、左寄せの面に ── */
+.price-card{position:relative;overflow:hidden;text-align:left;padding:44px 40px}
+.price-card::before,.price-card::after{display:none !important;content:none !important}
+.price-badge{background:none !important;border:1px solid rgba(255,255,255,.34) !important;
+  border-radius:3px !important;color:#fff;font-size:11.5px;font-weight:900;letter-spacing:.1em;
+  padding:5px 12px;margin-bottom:18px;box-shadow:none}
+.price-plan-name{font-size:19px;font-weight:900;color:#fff;margin-bottom:18px;
+  padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.18)}
+.price-val{color:#fff;letter-spacing:-.02em}
+.price-unit{color:rgba(255,255,255,.6)}
+.price-features li{color:rgba(255,255,255,.8)}
+.price-note{color:rgba(255,255,255,.62);font-size:13px;line-height:1.9}
+
+.price-grid{align-items:stretch}
+.price-card{height:100%}
+.price-features{flex:1}
+.price-card .btn-primary,.form-btn,.cta-section .btn-primary{border-radius:6px !important;box-shadow:none !important}
+
+/* ── スクール紹介：インラインstyleの紫グラデ・角丸カードを上書き ── */
+#school > .container > div[style]{
+  background:#fff !important;border:1px solid #dfe6ee !important;border-radius:0 !important;
+  box-shadow:none !important;max-width:none !important;margin:0 !important;padding:44px 40px !important}
+#school div[style*="linear-gradient"]{
+  background:#0b2138 !important;border-radius:4px !important;box-shadow:none !important}
+#school div[style*="#f0f5fb"]{
+  background:none !important;border-radius:0 !important;border-top:1px solid #dfe6ee !important;
+  padding:20px 0 0 !important;margin-bottom:0 !important}
+#school div[style*="#f0f5fb"] + div[style*="#f0f5fb"]{margin-top:0}
+#school [style*="#7c3aed"]{color:#0b2138 !important}
+#school a[style*="linear-gradient"]{
+  background:#2f6fd0 !important;border-radius:6px !important;box-shadow:none !important;
+  padding:15px 32px !important;font-size:15px !important}
+
+.form-privacy{font-size:12px;color:#5a6b7d}
+
+/* 下線付きの行が次行と接近しないよう行間を確保 */
+.hero h1{line-height:1.52}
+
+@media (max-width:600px){
+  .hero{padding:80px 0 72px}
+  .hero-badges{flex-direction:column;gap:12px}
+  .hero .btn-primary{width:100%;justify-content:center}
+  .sol-card,.cur-card,.price-card{padding:30px 22px}
+  #school > .container > div[style]{padding:30px 22px !important}
+}
+</style>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yk0mhqg55j");
+</script>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span></span>
+      Claude Code・Codex 個別家庭教師
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="../" class="nav-link">トップ</a>
+      <div class="nav-dropdown">
+        <span class="nav-dropdown-trigger">サービス</span>
+        <div class="nav-dropdown-menu">
+          <div class="nav-dropdown-menu-inner">
+            <a href="../#plans" target="_blank" rel="noopener">Claude Code・Codex スポット開発支援</a>
+            <a href="../dx-starter-pack.html" target="_blank" rel="noopener">DXスターターパック<span class="nav-menu-badge badge-orange">NEW</span></a>
+            <a href="#">Claude Code・Codex 個別家庭教師<span class="nav-menu-badge badge-blue">このページ</span></a>
+          </div>
+        </div>
+      </div>
+      <a href="../#aws-delivery" class="nav-link">環境・費用</a>
+      <a href="../#results" class="nav-link">実績</a>
+      <a href="../#profile" class="nav-link">プロフィール</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#contact" class="nav-cta">お問合せ</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <!-- テキスト -->
+    <div class="hero-text">
+      <div class="hero-eyebrow">プログラミング不要・完全初心者歓迎</div>
+      <h1>
+        <span class="from">Claude Code・Codex、まだ触ったことがない方へ。</span>
+        <em>「何から始めればいいか」</em><br>一緒に解決します。
+      </h1>
+      <p class="hero-sub">
+        AIに興味はあるのに、何をすればいいかわからない——そんな方を、Claude Code・Codex の実務活用・副業・案件化まで 1対1でサポートします。
+      </p>
+      <div class="hero-badges">
+        <div class="hero-badge">💰 月額 5,000円〜</div>
+        <div class="hero-badge">🎥 月2回〜4回 オンラインサポート</div>
+        <div class="hero-badge">💬 チャット相談自由</div>
+        <div class="hero-badge">👤 1対1 個別サポート</div>
+        <div class="hero-badge">👨‍💻 現役エンジニアが直接伴走</div>
+      </div>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">✉ 無料相談を申し込む</a>
+      </div>
+      <p class="hero-note">少人数制 ／ いつでも解約可能</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Pain -->
+<section class="section" id="pain">
+  <div class="container">
+    <div class="sec-tag">PROBLEM</div>
+    <h2 class="sec-title">こんなお悩み、<em>ありませんか？</em></h2>
+    <p class="sec-lead">ご相談をいただく前は、たいてい同じところで止まっています。</p>
+
+    <div class="stmt-item">
+      <div class="stmt-h">情報が多すぎて、決められない</div>
+      <p class="stmt-b">ChatGPTやYouTube、Xの発信……AIの情報はいくらでも出てきます。けれど自分に必要なのがどれかは誰も教えてくれません。気づけば「学んだ気になっただけ」で止まっています。</p>
+    </div>
+    <div class="stmt-item">
+      <div class="stmt-h">会社でAIを活用するように言われたけど、何をすればいいかわからない</div>
+      <p class="stmt-b">上司から「AIをうまく活用するように」言われたものの、AIをどう使って効率化したらよいのかわかりません。</p>
+    </div>
+    <div class="stmt-item">
+      <div class="stmt-h">AIは「稼げる」と聞くけれど、道筋が見えない</div>
+      <p class="stmt-b">SNSでは副業の成功例が溢れています。けれど自分のスキルでどう案件を取ればいいのか、何から始めれば収益につながるのかが見えないまま止まっています。</p>
+    </div>
+    <div class="stmt-item">
+      <div class="stmt-h">インストールしたところで、止まっている</div>
+      <p class="stmt-b">Claude CodeやCodexを入れてはみたものの、何を作ればいいか、どう使えば業務に活かせるのかがわからず、開いたままになっています。</p>
+    </div>
+
+    <p class="stmt-close">
+      前に進めない理由は、やる気や才能がないわけではありません。<br>
+      <b>AIを使った成功体験</b>がないからです。
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Service -->
+<section class="section section-alt" id="service">
+  <div class="container">
+    <div class="sec-tag">SOLUTION</div>
+    <h2 class="sec-title"><em>実践型</em>で、3本柱の支援</h2>
+    <p class="sec-lead">「勉強して終わり」にしない。触ったことがない状態から、作る・公開する・仕事にするまで、成功体験を積み重ねながら一貫して伴走します。</p>
+    <div class="sol-grid">
+      <div class="sol-card">
+        <div class="sol-num">01 — 学習支援</div>
+        <div class="sol-title">Claude Code・Codex を<br>確実に使いこなす</div>
+        <div class="sol-desc">環境構築・インストールから丁寧にサポート。GitHub 連携・AIアプリ開発まで、プログラミング未経験でも段階的に身につくカリキュラムで進めます。</div>
+        <div class="sol-tags">
+          <span class="sol-tag">環境構築から</span>
+          <span class="sol-tag">GitHub</span>
+          <span class="sol-tag">アプリ開発</span>
+        </div>
+      </div>
+      <div class="sol-card">
+        <div class="sol-num">02 — 実務支援</div>
+        <div class="sol-title">要件定義から<br>本番運用まで</div>
+        <div class="sol-desc">クライアントへの提案方法・要件定義・業務自動化設計まで対応。作ったシステムをクライアントが実際に使えるようにするには、AWSなどのクラウド環境への本番展開が必要になるケースもあります。要件定義から構築・運用まで一緒にサポートします。</div>
+        <div class="sol-tags">
+          <span class="sol-tag">要件定義</span>
+          <span class="sol-tag">提案方法</span>
+          <span class="sol-tag">本番運用</span>
+          <span class="sol-tag">自動化設計</span>
+        </div>
+      </div>
+      <div class="sol-card">
+        <div class="sol-num">03 — マネタイズ支援</div>
+        <div class="sol-title">副業・案件化まで<br>伴走する</div>
+        <div class="sol-desc">私自身が実際に案件を獲得できた方法——ポートフォリオの作り方・X（Twitter）での発信戦略・実績の見せ方——をそのままお伝えします。再現性のある方法で、スキルを"収益"に変えるまで伴走します。</div>
+        <div class="sol-tags">
+          <span class="sol-tag">ポートフォリオ</span>
+          <span class="sol-tag">X発信</span>
+          <span class="sol-tag">案件相談</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Curriculum -->
+<section class="section" id="curriculum">
+  <div class="container">
+    <div class="sec-tag">CURRICULUM</div>
+    <h2 class="sec-title">あなたのペースで<em>0→1</em>を実現する</h2>
+    <p class="sec-lead">下記はあくまで一例です。現在地・目標・ペースに合わせて内容は柔軟に組み替えます。「触ったことがない」状態からでも、「もう少し先に進みたい」状態からでも、どこからでもスタートできます。</p>
+    <div class="curriculum-grid">
+      <div class="cur-card">
+        <div class="cur-month">PHASE 1 — 学習支援</div>
+        <div class="cur-title">導入 & 基盤</div>
+        <ul class="cur-list">
+          <li>Claude Code・Codex 環境構築・インストール</li>
+          <li>基本操作マスター</li>
+          <li>GitHub 連携・公開</li>
+          <li>
+            <div>
+              AIアプリ作成
+              <div class="cur-note">※業務ですぐに使いたいご希望のAIアプリを一緒に作っていきます。</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="cur-card">
+        <div class="cur-month">PHASE 2 — 実務支援</div>
+        <div class="cur-title">実務 & 提案力</div>
+        <ul class="cur-list">
+          <li>API 連携・外部サービス活用</li>
+          <li>AWS 構築・運用（EC2・S3・Lambda）</li>
+          <li>要件定義の方法</li>
+          <li>クライアント提案練習</li>
+        </ul>
+      </div>
+      <div class="cur-card">
+        <div class="cur-month">PHASE 3 — マネタイズ支援</div>
+        <div class="cur-title">案件化 & 収益</div>
+        <ul class="cur-list">
+          <li>ポートフォリオ完成</li>
+          <li>X 発信・実績化</li>
+          <li>案件相談・見積り</li>
+          <li>副業スタート準備</li>
+          <li>継続的な収益設計</li>
+        </ul>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:#94a3b8;margin-top:24px;">※ フェーズの期間・順序・内容はご状況に合わせて個別に設計します</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Pricing -->
+<section class="section section-alt" id="pricing">
+  <div class="container">
+    <div class="sec-tag">PRICING</div>
+    <h2 class="sec-title">シンプルな<em>料金設計</em></h2>
+    <p class="sec-lead">継続的なサポートを、負担の少ない価格で。少人数制だから、1人ひとりに集中できます。</p>
+
+    <div class="price-grid">
+      <!-- ライトプラン -->
+      <div class="price-card">
+        <div class="price-plan-name">ライトプラン</div>
+        <div class="price-val">5,000<small>円</small></div>
+        <div class="price-unit">税込 ／ 月</div>
+        <ul class="price-features">
+          <li>月2回 1対1 オンラインサポート（各60分）</li>
+          <li>チャット相談 自由（平日対応）</li>
+          <li>個別カリキュラム設計</li>
+          <li>成果物レビュー・フィードバック</li>
+          <li>案件・副業相談</li>
+          <li>いつでも解約可能</li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="width:100%;justify-content:center;margin-bottom:16px;">✉ 無料相談を申し込む</a>
+        <p class="price-note">
+          まずは無料相談にてご状況をお聞きします。<br>
+          無理な勧誘は一切ありません。
+        </p>
+      </div>
+
+      <!-- スタンダードプラン -->
+      <div class="price-card">
+        <div class="price-plan-name">スタンダードプラン</div>
+        <div class="price-val">8,000<small>円</small></div>
+        <div class="price-unit">税込 ／ 月</div>
+        <ul class="price-features">
+          <li>月4回 1対1 オンラインサポート（各60分）</li>
+          <li>チャット相談 自由（平日対応）</li>
+          <li>個別カリキュラム設計</li>
+          <li>成果物レビュー・フィードバック</li>
+          <li>案件・副業相談</li>
+          <li>いつでも解約可能</li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="width:100%;justify-content:center;margin-bottom:16px;">✉ 無料相談を申し込む</a>
+        <p class="price-note">
+          まずは無料相談にてご状況をお聞きします。<br>
+          無理な勧誘は一切ありません。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="sec-tag">FAQ</div>
+    <h2 class="sec-title">よくある<em>ご質問</em></h2>
+    <p class="sec-lead" style="margin-bottom:36px;">気になることはお気軽にご相談ください。</p>
+
+    <div class="faq-list">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          Claude Code・Codex を一度も触ったことがないのですが大丈夫ですか？
+          <span class="faq-chevron">⌄</span>
+        </div>
+        <div class="faq-a">
+          まったく問題ありません。このサービスは「Claude Code・Codex を触ったことがない方」を主な対象としています。環境構築・インストールから一緒に進めますので、「名前だけ聞いたことある」という状態からでも安心してスタートできます。
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          プログラミング未経験でも参加できますか？
+          <span class="faq-chevron">⌄</span>
+        </div>
+        <div class="faq-a">
+          もちろんです。むしろ非エンジニアの方（Web制作者・SEO担当・事務職・営業・DX推進担当など）を積極的に歓迎しています。Claude Code・Codex は「コードを書けない人がAIで開発できる」ツールです。あなたの職種・目標に合わせたカリキュラムを個別に設計します。
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          途中で解約できますか？
+          <span class="faq-chevron">⌄</span>
+        </div>
+        <div class="faq-a">
+          はい、いつでも解約できます。月単位のプランのため、翌月分の更新前にお知らせいただければ、違約金なしで退会できます。長期縛りは一切ありません。
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          月の途中で申し込んだ場合、日割りとかになりますか？
+          <span class="faq-chevron">⌄</span>
+        </div>
+        <div class="faq-a">
+          日割りではなく、初回の受講日を1日目として、そこから1ヶ月間となります。
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          オンラインサポートはどのツールで行いますか？
+          <span class="faq-chevron">⌄</span>
+        </div>
+        <div class="faq-a">
+          Google Meet を使用します。日程は毎月柔軟に調整します。チャット相談は Discord・ChatWork・Slack・LINE など、使いやすいツールで構いません。
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          Macでもよいですか？
+          <span class="faq-chevron">⌄</span>
+        </div>
+        <div class="faq-a">
+          はい、問題ありません。Claude Code・Codex は Mac・Windows・Linux いずれでも利用できます。むしろ Mac で学習される方も多く、OSに合わせて環境構築からサポートします。
+        </div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          ツール開発を依頼することも出来ますか？
+          <span class="faq-chevron">⌄</span>
+        </div>
+        <div class="faq-a">
+          はい、可能です。どうしても難易度の高いツール開発など、別途ご依頼いただければ、お見積もりいたします。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Recommended School -->
+<section class="section section-alt" id="school">
+  <div class="container">
+    <div class="sec-tag">RECOMMENDED</div>
+    <h2 class="sec-title">AIをもっと広く・深く学びたい方へ</h2>
+    <p class="sec-lead">私自身も入会して学び続けているAIスクールをご紹介します。</p>
+
+    <div style="background:#fff;border:1px solid #dbeafe;border-radius:20px;padding:36px 40px;max-width:680px;margin:0 auto;box-shadow:0 4px 20px rgba(37,99,235,0.08);">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+        <div style="background:linear-gradient(135deg,#1d4ed8,#7c3aed);border-radius:12px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">🎓</div>
+        <div>
+          <div style="font-size:11px;font-weight:700;color:#2563eb;letter-spacing:0.1em;margin-bottom:4px;">DIGIRISE AI SCHOOL</div>
+          <div style="font-size:20px;font-weight:900;color:#0f172a;line-height:1.2;">デジライズAIスクール</div>
+        </div>
+      </div>
+
+      <p style="font-size:14px;color:#475569;line-height:1.85;margin-bottom:8px;">
+        チャエンさんが運営している、ChatGPT・画像生成・動画AI・音声AIなど、AIツール全般を幅広く・体系的に学べるオンラインスクールです。私自身も現役受講生として、常に最新のAI活用を学び続けています。
+      </p>
+      <p style="margin-bottom:20px;">
+        <a href="https://x.com/masahirochaen?s=20" target="_blank" rel="noopener" style="font-size:13px;color:#2563eb;font-weight:700;text-decoration:none;">𝕏 @masahirochaen</a>
+      </p>
+
+      <!-- 特徴リスト -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:24px;">
+        <div style="background:#f0f5fb;border-radius:10px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start;">
+          <span style="font-size:18px;flex-shrink:0;">🎬</span>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:3px;">充実した動画コンテンツ</div>
+            <div style="font-size:12px;color:#64748b;line-height:1.6;">最新AIツールを体系的に解説する動画が豊富。自分のペースで繰り返し学べます。</div>
+          </div>
+        </div>
+        <div style="background:#f0f5fb;border-radius:10px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start;">
+          <span style="font-size:18px;flex-shrink:0;">🤝</span>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:3px;">仲間と刺激し合えるコミュニティ</div>
+            <div style="font-size:12px;color:#64748b;line-height:1.6;">同じ目標を持つ仲間と切磋琢磨しながら学べる環境。一人で続けるより圧倒的に加速します。</div>
+          </div>
+        </div>
+        <div style="background:#f0f5fb;border-radius:10px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start;">
+          <span style="font-size:18px;flex-shrink:0;">💬</span>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:3px;">実務の壁打ち相談ができる</div>
+            <div style="font-size:12px;color:#64748b;line-height:1.6;">「実際の業務でどう使うか」を相談できる場があり、学びを現場に直結させやすい。</div>
+          </div>
+        </div>
+        <div style="background:#f0f5fb;border-radius:10px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start;">
+          <span style="font-size:18px;flex-shrink:0;">💼</span>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:3px;">案件紹介の機会もある</div>
+            <div style="font-size:12px;color:#64748b;line-height:1.6;">スキルが身についてきたら、案件紹介の機会も。学びが直接収益につながるルートがあります。</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#f0f5fb;border-radius:12px;padding:20px 24px;margin-bottom:24px;">
+        <div style="font-size:12px;font-weight:700;color:#1d4ed8;margin-bottom:12px;">🔗 私の伴走メンタリングとの補完関係</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <div style="font-size:11px;font-weight:700;color:#2563eb;margin-bottom:6px;">デジライズAIスクール</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:5px;">
+              <li style="font-size:13px;color:#475569;display:flex;gap:6px;"><span style="color:#2563eb;">✓</span>AIツール全般を広く学ぶ</li>
+              <li style="font-size:13px;color:#475569;display:flex;gap:6px;"><span style="color:#2563eb;">✓</span>コミュニティで仲間と学ぶ</li>
+              <li style="font-size:13px;color:#475569;display:flex;gap:6px;"><span style="color:#2563eb;">✓</span>案件紹介・実務壁打ちあり</li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;color:#7c3aed;margin-bottom:6px;">私の伴走メンタリング</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:5px;">
+              <li style="font-size:13px;color:#475569;display:flex;gap:6px;"><span style="color:#7c3aed;">✓</span>Claude Code・Codex を深く使いこなす</li>
+              <li style="font-size:13px;color:#475569;display:flex;gap:6px;"><span style="color:#7c3aed;">✓</span>実務・案件化まで1対1サポート</li>
+              <li style="font-size:13px;color:#475569;display:flex;gap:6px;"><span style="color:#7c3aed;">✓</span>副業・収益化まで伴走</li>
+            </ul>
+          </div>
+        </div>
+        <p style="font-size:12px;color:#64748b;margin-top:14px;line-height:1.7;">
+          「デジライズで広く学び、私のメンタリングでClaude Code・Codex の実務活用を深める」——両方を組み合わせることで、AIを仕事にするまでの道筋が最短になります。
+        </p>
+      </div>
+
+      <a href="https://digirise.school/" target="_blank" rel="noopener"
+        style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#1d4ed8,#7c3aed);color:#fff;font-size:14px;font-weight:700;padding:12px 28px;border-radius:8px;text-decoration:none;box-shadow:0 4px 16px rgba(37,99,235,0.25);">
+        🎓 デジライズAIスクールを見る →
+      </a>
+      <p style="font-size:11px;color:#94a3b8;margin-top:10px;">※ 私自身が受講・継続しているスクールです</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA / Contact -->
+<section class="cta-section" id="contact">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="sec-tag" style="color:#93c5fd;background:rgba(147,197,253,0.12);border-color:rgba(147,197,253,0.25);">CONTACT</div>
+    <h2>まずは、<em>無料相談</em>から。</h2>
+    <p>
+      現状・目標・疑問点をお聞きした上で、<br>
+      あなたに合った進め方をご提案します。<br>
+      無理な勧誘は一切ありません。
+    </p>
+
+    <div class="form-wrap">
+      <div id="mentorSuccessMsg" style="display:none;text-align:center;padding:24px 0;">
+        <div style="font-size:52px;margin-bottom:14px;">✅</div>
+        <h3 style="font-size:20px;font-weight:900;color:#0f172a;margin-bottom:10px;">送信完了しました</h3>
+        <p style="font-size:14px;color:#64748b;line-height:1.8;">
+          無料相談のお申し込みありがとうございます。<br>
+          通常1営業日以内にご連絡いたします。
+        </p>
+      </div>
+      <div id="mentorFormInner">
+        <div class="form-title">無料相談フォーム</div>
+        <div class="form-sub">通常1営業日以内にご返信します</div>
+        <div id="mentorErrorMsg" style="display:none;color:#ef4444;font-size:13px;margin-bottom:12px;">送信に失敗しました。時間をおいて再度お試しください。</div>
+        <form id="mentorForm">
+          <div class="form-row">
+            <label class="form-label">お名前 <span style="color:#ef4444;">*</span></label>
+            <input class="form-input" type="text" name="name" placeholder="山田 太郎" required>
+          </div>
+          <div class="form-row">
+            <label class="form-label">メールアドレス <span style="color:#ef4444;">*</span></label>
+            <input class="form-input" type="email" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="form-row">
+            <label class="form-label">現在のご職業</label>
+            <select class="form-select" name="job">
+              <option value="">選択してください</option>
+              <option>IT職・エンジニア</option>
+              <option>Web制作者・デザイナー</option>
+              <option>SEO担当・マーケター</option>
+              <option>フリーランス</option>
+              <option>事務職</option>
+              <option>営業</option>
+              <option>DX推進担当</option>
+              <option>その他</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label class="form-label">Claude Code・Codex の経験</label>
+            <select class="form-select" name="experience">
+              <option value="">選択してください</option>
+              <option>触ったことがない（これから）</option>
+              <option>少し触ったことがある</option>
+              <option>ある程度使っているが仕事にならない</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label class="form-label">相談内容・ご質問</label>
+            <textarea class="form-textarea" name="message" placeholder="現状やご質問などをご自由にお書きください（任意）"></textarea>
+          </div>
+          <button type="submit" class="form-btn" id="mentorSubmitBtn">無料相談を申し込む →</button>
+          <p class="form-privacy">送信いただいた情報は、サービスご案内の目的以外に使用しません。</p>
+        </form>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;">
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p style="margin-bottom:8px;">Claude Code・Codex 個別家庭教師</p>
+  <p><a href="https://x.com/Marketer_kazuf" target="_blank">𝕏 @Marketer_kazuf</a> ／ <a href="../" target="_blank">AI業務自動化支援 LP</a></p>
+  <p style="margin-top:12px;">© 2026 fukuda kazuhiro. All rights reserved.</p>
+</footer>
+
+<script>
+function toggleFaq(el) { el.classList.toggle('open'); }
+
+// ハンバーガーメニュー
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+function closeNav() {
+  navLinks.classList.remove('open');
+  hamburger.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+}
+hamburger.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const isOpen = navLinks.classList.toggle('open');
+  hamburger.classList.toggle('open', isOpen);
+  hamburger.setAttribute('aria-expanded', isOpen);
+});
+document.addEventListener('click', (e) => {
+  if (!navLinks.contains(e.target)) closeNav();
+});
+document.querySelector('.nav-dropdown-trigger').addEventListener('click', (e) => {
+  e.stopPropagation();
+  e.currentTarget.closest('.nav-dropdown').classList.toggle('open');
+});
+
+document.getElementById('mentorForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('mentorSubmitBtn');
+  const errMsg = document.getElementById('mentorErrorMsg');
+  errMsg.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = '送信中…';
+
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData);
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: 'f52b6018-916c-40c4-bbbd-79964f0c6609',
+        subject: '【Claude Code メンター】無料相談申込',
+        replyto: data.email,
+        ...data
+      })
+    });
+    const json = await res.json();
+    if (json.success) {
+      document.getElementById('mentorFormInner').style.display = 'none';
+      document.getElementById('mentorSuccessMsg').style.display = 'block';
+    } else {
+      throw new Error('送信失敗');
+    }
+  } catch {
+    errMsg.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = '無料相談を申し込む →';
+  }
+});
+</script>
+</body>
+</html>
