@@ -169,11 +169,14 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdro
 
 /* プロフィール */
 .pf{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start}
-.pf img{border-radius:4px}
+.pf img{width:100%;border-radius:6px}
 .pf-n{font-size:26px;font-weight:900;margin-bottom:6px}
-.pf-r{font-size:13.5px;color:var(--accent);font-weight:700;margin-bottom:18px}
-.pf-b{font-size:14.5px;color:var(--gray);margin-bottom:20px}
-.tags{display:flex;flex-wrap:wrap;gap:8px}
+.pf-r{font-size:13.5px;color:var(--accent);font-weight:700;margin-bottom:22px}
+.pf-item{border-top:1px solid var(--line);padding:16px 0}
+.pf-item:last-of-type{border-bottom:1px solid var(--line)}
+.pf-k{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.12em;margin-bottom:6px}
+.pf-v{font-size:14px;color:var(--gray);line-height:1.85}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .tag{font-size:12px;border:1px solid var(--line);padding:5px 13px;border-radius:3px;color:var(--gray)}
 @media(max-width:720px){.pf{grid-template-columns:1fr}.pf img{max-width:180px}}
 
@@ -609,18 +612,22 @@ footer a{color:#7fb2f0;text-decoration:none}
       <div>
         <div class="pf-n">福田 和弘</div>
         <div class="pf-r">AI/DX推進支援 ・ SEO全般 ・ 法人／個別サポート</div>
-        <p class="pf-b">
-          IT企業でエンジニア・PMとして20年以上、システム開発やプロジェクトマネジメント、DX事業の立ち上げに携わってきました。
-        </p>
-        <p class="pf-b">
-          現在は、Claude CodeやCodexなどのAIツールを活用し、企業や個人事業主のさまざまな業務をAIで進化させる支援を行っています。
-        </p>
-        <p class="pf-b">
-          代表プロダクトとして、システム開発のライフサイクル全体をAIでつなぐ企業専用AI開発OS「AI-DevContinuum」を開発・提供。
-        </p>
-        <p class="pf-b">
-          業務自動化、AI活用、システム開発、SEOなど、領域を限定せず、課題に合わせてAIを活用した仕組みを企画・設計・実装まで一貫して支援しています。
-        </p>
+        <div class="pf-item">
+          <div class="pf-k">経歴</div>
+          <div class="pf-v">IT企業でエンジニア・PMとして20年以上、システム開発やプロジェクトマネジメント、DX事業の立ち上げに携わってきました。</div>
+        </div>
+        <div class="pf-item">
+          <div class="pf-k">現在</div>
+          <div class="pf-v">Claude CodeやCodexなどのAIツールを活用し、企業や個人事業主のさまざまな業務をAIで進化させる支援を行っています。</div>
+        </div>
+        <div class="pf-item">
+          <div class="pf-k">代表プロダクト</div>
+          <div class="pf-v">システム開発のライフサイクル全体をAIでつなぐ企業専用AI開発OS「AI-DevContinuum」を開発・提供。</div>
+        </div>
+        <div class="pf-item">
+          <div class="pf-k">強み</div>
+          <div class="pf-v">業務自動化、AI活用、システム開発、SEOなど、領域を限定せず、課題に合わせてAIを活用した仕組みを企画・設計・実装まで一貫して支援しています。</div>
+        </div>
         <div class="tags">
           <span class="tag">Claude Code</span><span class="tag">Codex</span><span class="tag">Copilot Studio</span>
           <span class="tag">AWS</span><span class="tag">業務自動化</span><span class="tag">DX推進</span>
