@@ -168,17 +168,17 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdro
 .flow-d{font-size:13.5px;color:var(--gray)}
 
 /* プロフィール */
-.pf{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start}
-.pf img{width:100%;border-radius:6px}
-.pf-n{font-size:26px;font-weight:900;margin-bottom:6px}
-.pf-r{font-size:13.5px;color:var(--accent);font-weight:700;margin-bottom:22px}
+.pf{display:grid;grid-template-columns:240px 1fr;gap:40px;align-items:start}
+.pf-card img{width:100%;border-radius:6px;margin-bottom:18px}
+.pf-n{font-size:22px;font-weight:900;margin-bottom:6px}
+.pf-r{font-size:13px;color:var(--accent);font-weight:700;line-height:1.6}
 .pf-item{border-top:1px solid var(--line);padding:16px 0}
 .pf-item:last-of-type{border-bottom:1px solid var(--line)}
 .pf-k{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.12em;margin-bottom:6px}
 .pf-v{font-size:14px;color:var(--gray);line-height:1.85}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .tag{font-size:12px;border:1px solid var(--line);padding:5px 13px;border-radius:3px;color:var(--gray)}
-@media(max-width:720px){.pf{grid-template-columns:1fr}.pf img{max-width:180px}}
+@media(max-width:720px){.pf{grid-template-columns:1fr}.pf-card img{max-width:180px}}
 
 /* FAQ */
 .q{border-top:1px solid var(--line);padding:26px 0}
@@ -608,10 +608,12 @@ footer a{color:#7fb2f0;text-decoration:none}
     <div class="label">PROFILE</div>
     <h2>担当するのは、一人です</h2>
     <div class="pf">
-      <img src="profile.png" alt="福田 和弘">
-      <div>
+      <div class="pf-card">
+        <img src="profile.png" alt="福田 和弘">
         <div class="pf-n">福田 和弘</div>
         <div class="pf-r">AI/DX推進支援 ・ SEO全般 ・ 法人／個別サポート</div>
+      </div>
+      <div>
         <div class="pf-item">
           <div class="pf-k">経歴</div>
           <div class="pf-v">IT企業でエンジニア・PMとして20年以上、システム開発やプロジェクトマネジメント、DX事業の立ち上げに携わってきました。</div>
