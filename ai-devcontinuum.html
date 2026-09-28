@@ -401,6 +401,7 @@ img{max-width:100%}
         <div class="hero-point"><span class="hero-point-icon">✓</span>AI下書きでドキュメント作成の負担を軽減</div>
         <div class="hero-point"><span class="hero-point-icon">✓</span>追加コストなしの柔軟なカスタマイズ実現</div>
         <div class="hero-point"><span class="hero-point-icon">✓</span>使うほどナレッジが溜まり品質が上がる仕組み</div>
+        <div class="hero-point"><span class="hero-point-icon">✓</span>高速コーディング・テストを実現するClaude Codeモード選択可能</div>
       </div>
       <div class="hero-btns hero-btns--in-copy">
         <a href="https://shikou-ai.com/contact.html" class="btn btn-primary">無料で相談する</a>
@@ -616,6 +617,7 @@ img{max-width:100%}
       <p class="feat-d">要件定義書はヒアリング内容、基本設計書は承認済みの要件定義書、詳細設計書は承認済みの基本設計書というように、各成果物は直前に承認された成果物の内容を踏まえてAIが生成します。生成後は、成果物の種類ごとに定めた5つの観点（例:要件定義書なら完全性・一貫性・明確性・実現可能性・トレーサビリティ）でAIがレビューし、スコアと具体的な指摘を返します。承認するかどうかは人間が決めます。章立てや必須項目は企業独自のテンプレートとして登録でき、承認済みの成果物はMarkdown・Word・Excelの3形式で出力できます。</p>
       <img src="fig_artifact_review.png" alt="要件定義書のAIレビュー結果画面。完全性・一貫性・明確性・実現可能性・トレーサビリティの観点ごとにスコアと指摘コメントが表示され、承認記録とMD/Word/Excelへのエクスポートボタンがある" class="fig" loading="lazy" width="1220" height="1450">
       <p class="fig-cap">要件定義書のAIレビュー結果（実際の案件データ）。観点別スコアと具体的な指摘、承認履歴を1画面で確認できる</p>
+      <p class="feat-d">成果物がどこまで書き込まれるかのイメージとして、<a href="https://shikou-ai.com/sample-detail-design.html" target="_blank" rel="noopener" style="color:var(--accent-dark);font-weight:700">詳細設計書のサンプル（架空案件）</a>をご覧いただけます。</p>
     </div>
 
     <div class="feat">
@@ -634,6 +636,20 @@ img{max-width:100%}
       </div>
       <img src="fig_codegen.png" alt="AIコード生成画面。「緊急のSLA期限を2時間から1時間に短縮してください」という依頼に対し、AIがsla_deadline_hours内のurgentキーの値のみを変更した根拠を説明し、Claude/Codexのエンジン選択欄と承認・却下ボタンが表示されている" class="fig" loading="lazy" width="1220" height="650">
       <p class="fig-cap">AIコード生成の提案画面。変更範囲を絞り込んだ根拠をAI自身が説明する（実際の生成結果）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">実装</span><span class="feat-title">Claude Codeモード（IDE型のAIコーディング）</span></div>
+      <p class="feat-d">1ファイル単位の提案方式とは別に、開発者自身のVS Code上でClaude Codeを直接動かして実装する方式も選べます。複数ファイルにまたがる大きめの実装や、対話しながら進めたい実装に向いています。AI-DevContinuumの役目は、入力（承認済みの詳細設計書を渡す）と出力（できたブランチを検査・承認・PR化する）を受け持つことです。</p>
+      <ol class="mini-steps">
+        <li><strong>設計書を渡して開始</strong> — 画面のボタン1つで、対象リポジトリに作業用ブランチを作成し、詳細設計書を渡した状態でVS CodeとClaude Codeを起動します</li>
+        <li><strong>Claude Codeで実装</strong> — 開発者がVS Code上で対話しながら実装・テスト追加・コミットを進めます（実際の案件で66ファイルにまたがる実装を1セッションで完了した実績があります）</li>
+        <li><strong>ブランチを登録</strong> — 実装済みのブランチをAI-DevContinuumに登録すると、機密ファイル・CI設定の変更を拒否する検査と、AIの自己申告に頼らない独立したテスト再実行が走ります</li>
+        <li><strong>差分を確認して承認・PR作成</strong> — 変更内容とテスト結果を人が確認して承認し、GitHub/GitLabへのPR作成まで進みます（push・PR作成は人の操作です）</li>
+      </ol>
+      <p class="feat-d">日々の細かい修正はこの画面を経由せず開発者の手元で直接進め、mainへのマージ前などの節目でAI-DevContinuumの検査を通す、という使い分けもできます。エージェント型のAIコーディングの速さと、独立検証・承認記録というガバナンスを両立させています。</p>
+      <img src="fig_claude_code_mode.png" alt="Claude Codeモードの登録画面。提案方式とブランチ登録方式の選択、日々の運用に関する案内、新しい作業用ブランチの作成とVS Code起動、実装済みブランチの選択欄が表示されている" class="fig" loading="lazy" width="1898" height="902">
+      <p class="fig-cap">Claude Codeモードの画面（実際の案件。登録済みリポジトリのパスは伏せています）</p>
     </div>
 
     <div class="feat">
@@ -1031,6 +1047,7 @@ img{max-width:100%}
           <tr><td class="c-task">要求管理</td><td>ヒアリング・要求抽出</td><td>会話ログ・議事録からAIが抽出。機能要求はREQ-ID管理</td></tr>
           <tr><td class="c-task">設計・仕様</td><td>要件定義書〜結合テスト仕様書の生成・AIレビュー・承認</td><td>版管理、成果物ごとに異なる5観点、企業別テンプレート、MD/Word/Excel出力</td></tr>
           <tr><td class="c-task">実装</td><td>AIコード生成</td><td>詳細設計書から自動起案／人が変更依頼、サンドボックス検証→人間承認</td></tr>
+          <tr><td class="c-task">実装</td><td>Claude Codeモード（IDE型のAIコーディング）</td><td>VS Code + Claude Codeで実装、ブランチ登録→独立検証→人間承認</td></tr>
           <tr><td class="c-task">実装</td><td>単体テスト自動生成・テストケース抽出</td><td>詳細設計書の最新版から抽出可能</td></tr>
           <tr><td class="c-task">実装</td><td>レビューエンジン選択</td><td>Claude CLI / Codex CLI</td></tr>
           <tr><td class="c-task">実装</td><td>対応言語</td><td>Python・Node.js・Go・Java・C#（.NET）・C/C++</td></tr>
