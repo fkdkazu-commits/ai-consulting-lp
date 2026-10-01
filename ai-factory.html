@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0E5BXJ21KH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-0E5BXJ21KH");
+</script>
+<title>AI工場OS｜7つの業務をAIが下書きし人が承認する運用基盤（SHIKOU × AI）</title>
+<meta name="description" content="SEO記事制作からiOSアプリ開発まで、自社の7つの業務ラインを横断管理する運用基盤「AI工場OS」の紹介ページ。AIが下書きし人が承認する仕組みと、実際に稼働している実績を紹介します。">
+<meta property="og:title" content="AI工場OS｜自社の7業務をAIで動かす運用基盤">
+<meta property="og:description" content="AIが下書きし、人が承認する。全AI実行を記録する。私たち自身が日々の業務を回すために内製した、7つの業務ラインを横断する運用基盤です。">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#047857; --accent-dark:#03633f;
+  --ink:#1a1a2e; --gray:#64748b; --gray-dark:#4a5568; --gray-light:#94a3b8;
+  --line:#dcebe5; --line2:#e2ece8;
+  --bg:#f6faf8; --card:#eef3f1; --white:#fff;
+  --orange:#f0a54a; --orange-dark:#c05621;
+  --teal:#5eead4; --teal2:#99f6e4;
+  --footer:#06372c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--ink);line-height:1.8;font-variant-numeric:tabular-nums}
+a{color:inherit}
+img{max-width:100%}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.section{padding:72px 0}
+.section.alt{background:var(--white)}
+.sec-tag{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.14em;margin-bottom:10px}
+.sec-title{font-size:clamp(22px,3.2vw,34px);font-weight:900;line-height:1.35;margin-bottom:14px;letter-spacing:-.01em;text-wrap:balance}
+.sec-lead{font-size:15px;color:var(--gray-dark);line-height:1.9;margin-bottom:36px;max-width:700px}
+
+/* header */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line2)}
+.header-inner{position:relative;max-width:1080px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;border:0;background:none;cursor:pointer;padding:0;flex-shrink:0}
+.nav-toggle-bar{display:block;width:100%;height:2px;background:var(--ink);border-radius:2px;transition:transform .2s,opacity .2s}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.back-to-top{position:fixed;right:24px;bottom:24px;z-index:60;width:46px;height:46px;border-radius:50%;background:var(--ink);color:#fff;border:0;font-size:19px;line-height:1;cursor:pointer;box-shadow:0 10px 22px rgba(6,55,44,.24);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .2s,transform .2s}
+.back-to-top.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
+.back-to-top:hover{background:var(--accent)}
+@media (max-width:640px){.back-to-top{right:16px;bottom:16px;width:42px;height:42px;font-size:17px}}
+.logo{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:#0b2138}
+.logo img{height:28px;width:auto;display:block}
+.logo .logo-t{font-size:15px;font-weight:900;letter-spacing:.08em;color:#0b2138}
+.logo .x{color:#2f6fd0;font-weight:700;margin:0 .16em}
+.header-links{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.header-links a{font-size:13px;font-weight:700;color:var(--gray-dark);text-decoration:none}
+.header-links a:hover{color:var(--accent)}
+.header-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#f3f7fb 0%,var(--bg) 68%);padding:60px 0 56px}
+.hero::before{content:'';position:absolute;top:-160px;right:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(4,120,87,.11) 0%,rgba(4,120,87,0) 70%);pointer-events:none;z-index:0}
+.hero-dotgrid{position:absolute;top:0;left:0;width:240px;height:240px;background-image:radial-gradient(rgba(47,111,208,.4) 1.6px,transparent 1.6px);background-size:16px 16px;-webkit-mask-image:radial-gradient(circle at top left,#000 35%,transparent 78%);mask-image:radial-gradient(circle at top left,#000 35%,transparent 78%);pointer-events:none;z-index:0}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center}
+.hero-copy{min-width:0}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--accent-dark);background:#fff;border:1px solid var(--line);padding:7px 18px;border-radius:24px;margin-bottom:24px;letter-spacing:.04em;box-shadow:0 2px 10px rgba(6,55,44,.06)}
+.hero-wordmark{font-size:clamp(28px,4vw,52px);font-weight:900;letter-spacing:-.01em;line-height:1.05;margin-bottom:16px}
+.hero-wordmark .tone-a{color:var(--orange-dark)}
+.hero-wordmark .tone-b{color:var(--ink)}
+.hero-tagline{font-size:clamp(18px,2.2vw,22px);font-weight:800;color:var(--ink);letter-spacing:.01em;margin-bottom:12px}
+.hero-category{font-size:13px;font-weight:800;color:var(--accent-dark);letter-spacing:.06em;margin-bottom:20px}
+.hero-copy h1.hero-h1-sub{font-size:clamp(17px,2vw,21px);font-weight:700;line-height:1.6;letter-spacing:0;margin-bottom:18px;color:var(--gray-dark);text-wrap:balance}
+.hero-sub{font-size:15px;color:var(--gray-dark);line-height:2;margin-bottom:20px;max-width:520px}
+.hero-highlight{background:#0b2138;color:#fff;border-radius:12px;padding:16px 20px;font-size:14px;line-height:1.85;margin-bottom:24px;max-width:560px}
+.hero-highlight strong{color:var(--orange);font-weight:900}
+.hero-points{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.hero-point{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;color:var(--ink);line-height:1.5}
+.hero-point-icon{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:#2f6fd0;color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.hero-btns--in-visual{margin-top:28px;justify-content:center}
+@media (max-width:860px){.hero-btns--in-visual{display:none}}
+@media (min-width:861px){.hero-btns--in-copy{display:none}}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:700;padding:15px 34px;border-radius:999px;text-decoration:none}
+.btn-primary{background:var(--orange);color:var(--ink);box-shadow:0 8px 22px rgba(240,165,74,.3)}
+.btn-ghost{border:1px solid var(--line);color:var(--ink);padding:15px 30px;background:#fff}
+
+/* hero visual（実際のAI工場モニタ画面をモニタ風フレームに収める） */
+.hero-visual{position:relative;min-width:0}
+.device-mockup{background:linear-gradient(160deg,#1c2b3a 0%,#0b1622 100%);border-radius:22px;padding:16px 16px 20px;box-shadow:0 40px 70px rgba(11,33,56,.35)}
+.device-mockup-bar{display:flex;align-items:center;gap:6px;padding:2px 4px 14px}
+.device-mockup-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18)}
+.hero-shot{display:block;width:100%;height:auto;border-radius:8px;cursor:zoom-in}
+.device-stand{width:150px;height:26px;margin:0 auto;background:linear-gradient(160deg,#1c2b3a 0%,#0b1622 100%);clip-path:polygon(40% 0,60% 0,78% 100%,22% 100%)}
+.device-base{width:280px;height:12px;margin:6px auto 0;background:#0b1622;border-radius:8px;opacity:.9}
+.mock-visual-note{margin-top:18px;font-size:11.5px;color:var(--gray-light);text-align:center}
+
+/* 画面キャプチャ（実際の画面。デモデータ使用。黒背景フレームに統一） */
+.fig-frame{background:linear-gradient(160deg,#1c2b3a 0%,#0b1622 100%);border-radius:14px;padding:10px;margin:8px 0 10px;box-shadow:0 14px 32px rgba(6,55,44,.14);transition:box-shadow .2s,transform .2s}
+.fig-frame:hover{box-shadow:0 18px 40px rgba(6,55,44,.22);transform:translateY(-2px)}
+.fig{width:100%;height:auto;border-radius:7px;display:block;cursor:zoom-in}
+.fig-cap{font-size:12.5px;color:var(--gray-light);text-align:center;margin-bottom:8px;line-height:1.85}
+.lightbox{position:fixed;inset:0;z-index:200;background:rgba(11,33,56,.86);display:flex;align-items:center;justify-content:center;padding:32px;opacity:0;pointer-events:none;transition:opacity .2s}
+.lightbox.is-open{opacity:1;pointer-events:auto}
+.lightbox img{max-width:min(1100px,92vw);max-height:88vh;width:auto;border-radius:8px;box-shadow:0 30px 80px rgba(0,0,0,.5);cursor:zoom-out}
+.lightbox-close{position:absolute;top:20px;right:24px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lightbox-close:hover{background:rgba(255,255,255,.18)}
+.lightbox-cap{position:absolute;left:0;right:0;bottom:20px;text-align:center;color:rgba(255,255,255,.78);font-size:13px;padding:0 24px}
+@media (prefers-reduced-motion:reduce){.lightbox,.fig{transition:none}}
+
+/* KPI band */
+.kpi-chip-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px}
+.kpi-chip{font-size:12.5px;font-weight:700;color:var(--accent-dark);background:var(--card);padding:6px 14px;border-radius:999px}
+
+.control-tower{display:flex;align-items:center;justify-content:center;gap:16px;max-width:520px;margin:32px auto 0;background:#0b2138;border-radius:16px;padding:22px 28px;box-shadow:0 14px 32px rgba(6,55,44,.18)}
+.control-tower-icon{width:48px;height:48px;border-radius:50%;background:rgba(91,155,255,.18);color:#7fb0ff;font-size:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.control-tower-title{font-size:17px;font-weight:900;color:#fff}
+.control-tower-sub{font-size:12.5px;color:rgba(255,255,255,.65);margin-top:2px}
+@media (max-width:480px){.control-tower{flex-direction:column;text-align:center;gap:10px}}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:16px;margin-top:8px}
+.kpi-card{background:#0b2138;border-radius:14px;padding:26px 22px;text-align:center;box-shadow:0 10px 24px rgba(6,55,44,.16)}
+.kpi-label{font-size:12.5px;font-weight:700;color:rgba(255,255,255,.55);margin-bottom:10px;letter-spacing:.03em}
+.kpi-val{font-size:27px;font-weight:900;color:var(--teal2);line-height:1.2}
+.kpi-card--orange .kpi-val{color:var(--orange)}
+.kpi-card--white .kpi-val{color:#fff}
+.price-note{font-size:12px;color:var(--gray-light);margin-top:9px;line-height:1.7}
+
+/* prose */
+.prose{font-size:15px;color:var(--gray-dark);line-height:1.95;max-width:700px}
+.prose+.prose{margin-top:14px}
+.prose strong{color:var(--ink)}
+.prose-highlight{margin:28px 0 8px}
+.prose-highlight mark{background:linear-gradient(180deg,transparent 60%,rgba(4,120,87,.22) 60%);color:var(--ink);font-size:19px;font-weight:900;line-height:1.9;padding:0 2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+.name-breakdown{display:flex;align-items:flex-start;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:52px;padding-top:44px;border-top:1px solid var(--line2)}
+.name-breakdown-item{display:flex;flex-direction:column;align-items:center;gap:14px;width:150px;text-align:center}
+.name-icon{width:52px;height:52px;color:var(--ink)}
+.name-word{font-size:18px;font-weight:900;letter-spacing:.01em;color:var(--ink)}
+.name-label{font-size:12.5px;color:var(--gray);line-height:1.6}
+.name-breakdown-x{font-size:20px;font-weight:700;color:var(--gray-light);align-self:center;margin-top:26px}
+@media (max-width:640px){.name-breakdown{gap:16px 10px}.name-breakdown-x{display:none}.name-breakdown-item{width:calc(50% - 5px)}}
+
+/* 7工場グリッド */
+.phase{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:2px;background:var(--line);border:1px solid var(--line);margin-top:8px}
+.phase-item{background:#fff;padding:24px 22px}
+.phase-item.span-full{grid-column:1/-1}
+.phase-n{font-size:11.5px;font-weight:900;color:var(--accent);letter-spacing:.1em;margin-bottom:10px}
+.phase-t{font-size:16px;font-weight:900;line-height:1.5;margin-bottom:9px}
+.phase-d{font-size:13.5px;color:var(--gray);line-height:1.85}
+.phase-tag{display:inline-block;margin-top:10px;font-size:11.5px;font-weight:700;color:var(--accent-dark);background:var(--card);padding:3px 10px;border-radius:6px}
+.phase-tag.pending{color:var(--orange-dark);background:#fdf1e2}
+
+.examples-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:14px;margin-top:20px}
+.examples-card{background:#0b2138;border-radius:14px;padding:18px 18px 20px;box-shadow:0 10px 24px rgba(6,55,44,.14)}
+.examples-card-head{display:flex;align-items:center;gap:9px;margin-bottom:13px}
+.examples-card-no{width:22px;height:22px;border-radius:50%;color:#0b2138;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.examples-card-title{font-size:14.5px;font-weight:900;color:#fff}
+.examples-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;margin:0}
+.examples-card li{font-size:12.5px;color:rgba(255,255,255,.86);background:rgba(255,255,255,.07);border-radius:6px;padding:6px 10px;line-height:1.4}
+.examples-note{font-size:12px;color:var(--gray-light);margin-top:14px}
+
+.feat{margin-bottom:46px}
+.feat:last-child{margin-bottom:0}
+.feat-h{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.feat-tag{font-size:10.5px;font-weight:900;color:#fff;background:var(--accent);padding:4px 11px;border-radius:5px;letter-spacing:.06em;flex-shrink:0}
+.feat-title{font-size:18px;font-weight:900;line-height:1.5}
+.feat-d{font-size:14px;color:var(--gray-dark);line-height:1.9;margin-bottom:16px;max-width:760px}
+
+.mini-steps{list-style:none;counter-reset:step;margin:0 0 16px;max-width:760px}
+.mini-steps li{position:relative;padding-left:34px;margin-bottom:12px;font-size:14px;color:var(--gray-dark);line-height:1.8}
+.mini-steps li:last-child{margin-bottom:0}
+.mini-steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.mini-steps strong{color:var(--ink)}
+
+.svc-list{display:flex;flex-wrap:wrap;gap:2px;background:var(--line);border:1px solid var(--line);margin:26px 0 6px}
+.svc-row{background:#fff;padding:18px 20px;flex:1 1 190px}
+.svc-layer{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.08em;margin-bottom:7px}
+.svc-name{font-size:14px;font-weight:900;line-height:1.5}
+.svc-role{font-size:12.5px;color:var(--gray);line-height:1.7;margin-top:5px}
+
+.gw-panel{background:#0b2138;border-radius:16px;padding:32px 28px;margin:28px 0}
+.gw-panel-title{color:#fff;font-size:20px;font-weight:900;margin-bottom:4px}
+.gw-panel-sub{color:rgba(255,255,255,.65);font-size:13px;margin-bottom:26px}
+.gw-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.gw-step{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12.5px;font-weight:700;padding:11px 14px;border-radius:8px;text-align:center;white-space:nowrap}
+.gw-step.gw-external{background:var(--accent);border-color:var(--accent)}
+.gw-step.gw-critical{background:var(--orange-dark);border-color:var(--orange-dark)}
+.gw-arrow{color:rgba(255,255,255,.35);font-size:14px;flex-shrink:0}
+@media (max-width:640px){.gw-panel{padding:24px 18px}}
+
+/* ── 控えめなセクション内CTA ── */
+.section-cta{margin-top:26px;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;color:var(--accent-dark);text-decoration:none}
+.section-cta:hover{text-decoration:underline}
+.section-cta-arrow{font-size:16px;transition:transform .15s}
+.section-cta:hover .section-cta-arrow{transform:translateX(3px)}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:2px;background:var(--line);border:1px solid var(--line);margin-top:8px}
+.faq-item{background:#fff}
+.faq-item summary{list-style:none;cursor:pointer;padding:20px 24px;font-size:15px;font-weight:700;color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'+';font-size:22px;font-weight:400;color:var(--accent);flex-shrink:0;transition:transform .15s}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-a{padding:0 24px 20px;font-size:14px;color:var(--gray-dark);line-height:1.9;max-width:760px}
+
+/* cta */
+.cta-section{background:#fff;padding:72px 0;text-align:center}
+.cta-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:30px;text-align:left}
+.cta-card{background:var(--card);border-radius:14px;padding:22px;display:flex;align-items:center;gap:16px;text-decoration:none}
+.cta-card-icon{width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cta-card-label{font-size:12px;color:#718096;margin-bottom:2px}
+.cta-card-val{font-size:15px;font-weight:700;word-break:break-all}
+.cta-note{font-size:13px;color:var(--gray-light)}
+
+.site-footer{background:var(--footer);color:rgba(255,255,255,.6);padding:30px 0;font-size:13px;text-align:center}
+.site-footer a{color:var(--teal);text-decoration:none}
+
+@media (max-width:860px){
+  .nav-toggle{display:flex}
+  .header-links{position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid var(--line2);flex-direction:column;align-items:stretch;padding:0 24px;display:none;gap:0}
+  .header-links.is-open{display:flex}
+  .header-links a:not(.header-cta){padding:13px 0;border-top:1px solid var(--line2)}
+  .header-links a.header-cta{margin-top:14px;text-align:center}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-visual{order:-1;max-width:420px;margin:0 auto 8px}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="https://shikou-ai.com/index.html" class="logo"><img src="logo-mark.png" alt="SHIKOU × AI"><span class="logo-t">SHIKOU<span class="x">×</span>AI</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="headerLinks">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <div class="header-links" id="headerLinks">
+      <a href="https://shikou-ai.com/index.html">トップ</a>
+      <a href="#about-name">AI工場OSとは</a>
+      <a href="#dashboard">管制塔</a>
+      <a href="#architecture">7つの工場</a>
+      <a href="#workflow">下書きと承認</a>
+      <a href="#security">ガバナンス</a>
+      <a href="#achievements">実績</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://shikou-ai.com/contact.html" class="header-cta">無料相談</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-dotgrid" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="hero-tag">✦ 自社実践・稼働中の運用基盤</div>
+      <div class="hero-wordmark"><span class="tone-a">AI</span><span class="tone-b">工場OS</span></div>
+      <div class="hero-tagline">全業務を、AIとオートメーションで動かす。</div>
+      <div class="hero-category">AIが下書きし、人が承認する。</div>
+      <h1 class="hero-h1-sub">7つの業務ラインを、1つの管制塔から動かす。</h1>
+      <p class="hero-sub">
+        コンテンツ制作・SEO・マーケティング・自社開発・iOSアプリ開発・PMO・分析・収益化。<br>
+        私たち自身の業務をAIで動かすために内製した、AI業務オペレーション基盤「AI工場OS」です。AIの実行・承認・成果物・コストを記録しながら、日々の業務を「工場」として自動で流します。AI工場モニタから、7つの工場の稼働状況を横断して確認できます。
+      </p>
+      <div class="hero-highlight">
+        <strong>「こういうものを作れます」ではなく、私たち自身が実際にこれで仕事を回しています。</strong><br>
+        外部提供を想定したパッケージ製品ではなく、稼働中の内製システムです。同じ考え方（AI下書き×人間承認×監査ログ）で、貴社専用の仕組みを構築するご相談も承っています。
+      </div>
+      <div class="hero-points">
+        <div class="hero-point"><span class="hero-point-icon">1</span>7つの業務をAI工場として動かす</div>
+        <div class="hero-point"><span class="hero-point-icon">2</span>AIが下書き → 人が承認 → 実行</div>
+        <div class="hero-point"><span class="hero-point-icon">3</span>すべてを1つの管制塔で見る</div>
+      </div>
+      <div class="hero-btns hero-btns--in-copy">
+        <a href="https://shikou-ai.com/contact.html" class="btn btn-primary">無料で相談する</a>
+        <a href="#architecture" class="btn btn-ghost">仕組みを見る</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="device-mockup">
+        <div class="device-mockup-bar">
+          <span class="device-mockup-dot"></span><span class="device-mockup-dot"></span><span class="device-mockup-dot"></span>
+        </div>
+        <img class="hero-shot" src="fig_ai_factory_dashboard.png" width="1536" height="722" alt="AI工場モニタのダッシュボード画面（実際の画面）。7つの工場を1枚のイラストマップで俯瞰し、右側に全体KPI・収益内訳・AIからの提案・アラートが表示されている。金額は「金額を隠す」機能でマスクしている" loading="lazy">
+      </div>
+      <div class="device-stand" aria-hidden="true"></div>
+      <div class="device-base" aria-hidden="true"></div>
+      <p class="mock-visual-note">実際のAI工場モニタの画面です（金額は非表示にしています）</p>
+      <div class="hero-btns hero-btns--in-visual">
+        <a href="https://shikou-ai.com/contact.html" class="btn btn-primary">無料で相談する</a>
+        <a href="#architecture" class="btn btn-ghost">仕組みを見る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" style="padding:56px 0 44px">
+  <div class="wrap">
+    <div class="sec-tag" style="text-align:center">7工場 × 1管制塔</div>
+    <h2 class="sec-title" style="text-align:center">7つの業務ラインと、それぞれの流れ</h2>
+    <div class="svc-list" style="margin-top:24px">
+      <div class="svc-row"><div class="svc-layer">01</div><div class="svc-name">コンテンツ・SEO</div><div class="svc-role">調査 → 執筆 → 公開 → 改善</div></div>
+      <div class="svc-row"><div class="svc-layer">02</div><div class="svc-name">マーケティング・集客</div><div class="svc-role">問い合わせ → 提案 → 発信</div></div>
+      <div class="svc-row"><div class="svc-layer">03</div><div class="svc-name">自社AI開発</div><div class="svc-role">アイデア → 評価 → 開発</div></div>
+      <div class="svc-row"><div class="svc-layer">04</div><div class="svc-name">iOSアプリ開発</div><div class="svc-role">市場調査 → 企画 → 仕様設計</div></div>
+      <div class="svc-row"><div class="svc-layer">05</div><div class="svc-name">PMO・案件管理</div><div class="svc-role">進捗 → 課題 → レポート</div></div>
+      <div class="svc-row"><div class="svc-layer">06</div><div class="svc-name">分析・改善</div><div class="svc-role">データ → 分析 → 改善提案</div></div>
+      <div class="svc-row"><div class="svc-layer">07</div><div class="svc-name">収益化</div><div class="svc-role">売上 → 集計 → KPI</div></div>
+    </div>
+    <div class="control-tower">
+      <div class="control-tower-icon">⛭</div>
+      <div>
+        <div class="control-tower-title">AI工場モニタ</div>
+        <div class="control-tower-sub">7つの工場を横断して見る、1つの管制塔</div>
+      </div>
+    </div>
+    <div class="kpi-grid" style="margin-top:36px">
+      <div class="kpi-card">
+        <div class="kpi-label">横断管理する業務ライン</div>
+        <div class="kpi-val">7工場</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">AI実行の記録</div>
+        <div class="kpi-val">100%</div>
+      </div>
+      <div class="kpi-card kpi-card--orange">
+        <div class="kpi-label">重要操作の前に必ず通過</div>
+        <div class="kpi-val">承認ゲート</div>
+      </div>
+      <div class="kpi-card kpi-card--white">
+        <div class="kpi-label">実行タイミング</div>
+        <div class="kpi-val">夜間無人対応</div>
+      </div>
+    </div>
+    <p class="price-note">「AI実行の記録100%」は、すべてのAgent実行を監査ログ（ExecutionLog）へ記録する設計を指します。効果を示す実測の改善率ではなく、システムの仕様です。</p>
+  </div>
+</section>
+
+<section class="section" id="about-name">
+  <div class="wrap">
+    <div class="sec-tag">基本思想</div>
+    <h2 class="sec-title">AIが作る。人が判断する。システムが記録する。</h2>
+    <p class="sec-lead prose-highlight" style="margin:0 0 28px"><mark>AI → 下書き → 承認 → 実行 → 監査ログ。これを全業務で繰り返します。</mark></p>
+
+    <p class="prose">だから、単なる「AI自動化ツール」ではありません。<strong>AIを組み込んだ業務オペレーション基盤</strong>——それがAI工場OSです。</p>
+    <p class="prose">記事を書く、SEOを改善する、自社製品を開発する、iOSアプリを作る、案件を管理する、収益を分析する——業務の中身は違っても、進み方は同じです。<strong>AIが下書きをつくり、人が確認し、承認されたものだけが実行される。</strong></p>
+    <p class="prose">この共通の形を1つの基盤にまとめ、業務ごとに「工場」として並べたものがAI工場OSです。各工場の進行状況・収益・承認待ちは、AI工場モニタという1つの管制塔ダッシュボードから横断的に確認できます。</p>
+
+    <p class="prose-highlight"><mark>業務を「担当者ごとの属人的な作業」ではなく「AIと人が交互に手を入れる1本のライン」として捉える。</mark></p>
+    <p class="prose" style="margin-top:8px">それが、AI工場OSという名前に込めた考え方です。</p>
+  </div>
+</section>
+
+<section class="section" id="dashboard">
+  <div class="wrap">
+    <div class="sec-tag">DASHBOARD</div>
+    <h2 class="sec-title">7つの業務を、1つの画面で見る。</h2>
+    <div class="fig-frame"><img src="fig_ai_factory_dashboard.png" alt="AI工場モニタのダッシュボード画面（実際の画面）。中央に管制塔、周囲に7つの工場が並ぶイラストマップと、右側に全体KPI・収益のミエルカ・AIからの提案・アラートが表示されている。金額は「金額を隠す」機能でマスクしている" class="fig" loading="lazy" width="1907" height="897"></div>
+    <div class="kpi-chip-row">
+      <span class="kpi-chip">今月売上</span>
+      <span class="kpi-chip">粗利益</span>
+      <span class="kpi-chip">AIコスト</span>
+      <span class="kpi-chip">実行中Task</span>
+      <span class="kpi-chip">承認待ち</span>
+      <span class="kpi-chip">エラー</span>
+      <span class="kpi-chip">本日完了</span>
+    </div>
+    <p class="fig-cap" style="margin-top:14px">AI工場モニタの管制塔画面（実際の画面。金額は非表示にしています）</p>
+  </div>
+</section>
+
+<section class="section alt" id="architecture">
+  <div class="wrap">
+    <div class="sec-tag">ARCHITECTURE</div>
+    <h2 class="sec-title">7つの工場と、1つの管制塔</h2>
+    <p class="sec-lead">業務領域ごとに独立した7つの「工場」が並び、それぞれがAgent（AIの担当者）・Task（実行単位）・Artifact（成果物）・Workflow（工程の連なり）という共通の部品で動きます。工場同士は直接依存せず、成果物を介してゆるやかに連携します。</p>
+
+    <div class="phase">
+      <div class="phase-item">
+        <div class="phase-n">01 · CONTENT_SEO</div>
+        <div class="phase-t">コンテンツ・SEO工場</div>
+        <div class="phase-d">構成案→承認→本文執筆→承認→自社ブログへの公開まで。実際に本番ブログへ記事を公開しています。</div>
+        <span class="phase-tag">稼働中</span>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">02 · MARKETING_ACQUISITION</div>
+        <div class="phase-t">マーケティング・集客工場</div>
+        <div class="phase-d">営業・案件獲得の動きも含め、集客につながる施策の実行を担当します。</div>
+        <span class="phase-tag">稼働中</span>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">03 · AI_DEVELOPMENT</div>
+        <div class="phase-t">自社AI開発工場</div>
+        <div class="phase-d">自社プロダクトのアイデア評価から開発案件の推進までを担当する工場です。</div>
+        <span class="phase-tag">稼働中</span>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">04 · IOS_DEVELOPMENT</div>
+        <div class="phase-t">iOSアプリ開発工場</div>
+        <div class="phase-d">市場調査→企画評価→仕様設計までをAIが担当。実際にiOSアプリを開発し、実機での動作確認まで完了しています。</div>
+        <span class="phase-tag">稼働中</span>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">05 · PMO_PROJECT</div>
+        <div class="phase-t">PMO・案件管理工場</div>
+        <div class="phase-d">案件やプロジェクトの進行管理・課題管理を横断的に担当します。</div>
+        <span class="phase-tag">稼働中</span>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">06 · ANALYTICS_IMPROVEMENT</div>
+        <div class="phase-t">分析・改善工場</div>
+        <div class="phase-d">公開済みコンテンツのアクセス状況などを分析し、改善提案を作成します。</div>
+        <span class="phase-tag">稼働中</span>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">07 · MONETIZATION</div>
+        <div class="phase-t">収益化工場</div>
+        <div class="phase-d">収益データを一元管理し、KPIとして各工場・管制塔に反映します。</div>
+        <span class="phase-tag">稼働中</span>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">CONTROL TOWER</div>
+        <div class="phase-t">AI工場モニタ</div>
+        <div class="phase-d">総売上・粗利・稼働工場数・実行中Task・承認待ち・エラー件数・AI利用コストなどを1画面に集約する管制塔です。工場ではなく、7工場を横断して見るための共通ダッシュボードという位置づけです。</div>
+        <span class="phase-tag">管制塔</span>
+      </div>
+    </div>
+
+    <p class="sec-lead" style="margin-top:36px;margin-bottom:20px">工場ごとに、実際にどんなことをしているかを、画面とあわせてご紹介します。</p>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">01</span><span class="feat-title">コンテンツ・SEO工場</span></div>
+      <p class="feat-d">素材収集から執筆、事実確認、公開まで、ブログ記事の制作を自動で進めています。クライアント向け記事は構成案の承認から本文の仕上げまで自動で進み、修正も対話形式で、どこがどう変わったかを確認しながら行えます。公開後もアクセスデータを取得し、リライト提案・動画化まで一気通貫でつながります。</p>
+      <ol class="mini-steps">
+        <li><strong>素材収集・事実抽出</strong> — 記事の元になる情報を集め、事実関係を整理します</li>
+        <li><strong>検索意図・競合調査 → 本文執筆</strong> — Web検索を伴う調査をもとに、AIが本文を執筆します</li>
+        <li><strong>事実確認・品質チェック</strong> — 集めた事実との整合性、品質基準をAIがチェックします</li>
+        <li><strong>内部リンク設計 → 承認 → 公開</strong> — 承認後、自社ブログ・クライアント先へ公開します</li>
+        <li><strong>公開後もデータを取得</strong> — アクセス状況を取得し、リライト提案・動画化連携まで継続します</li>
+      </ol>
+      <div class="fig-frame"><img src="fig_ai_factory_detail.png" alt="コンテンツ・SEO工場の詳細画面。Agent数・Workflow数・実行中Task・承認待ちTask・完了Task・失敗Task・成果物・AIコストのカードと、主要KPI（平均掲載順位・オーガニック流入・公開記事数）の一覧が表示されている" class="fig" loading="lazy" width="1536" height="1024"></div>
+      <p class="fig-cap">コンテンツ・SEO工場の詳細画面（実際の画面。数値はデモデータです）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">02</span><span class="feat-title">マーケティング・集客工場</span></div>
+      <p class="feat-d">「連絡への対応」と「発信・告知」の2種類を担当する工場です。Gmailを定期的に監視し、LPの問い合わせ・紹介・ランサーズ／クラウドワークス／Wantedly／LinkedInなどから届くメールを自動で検知。内容に応じて返信文・提案の骨子・料金の目安、または応募文の下書きをAIが作成します。あわせて、公開したブログ記事・Note・YouTube動画について、X・Threads・LinkedIn・Facebook・Instagramそれぞれの文体に合わせた告知文の下書きも作成します。実際の送信・投稿は人が行います。</p>
+      <ol class="mini-steps">
+        <li><strong>Gmailを定期的に監視</strong> — 対象の送信元からの新着メールを検知します（読み取り専用）</li>
+        <li><strong>内容に応じてAgentを振り分け</strong> — 問い合わせ・紹介は「提案・見積Agent」、クラウドソーシングの案件通知は「案件探し・応募Agent」が担当します</li>
+        <li><strong>返信・提案・応募文の下書きを作成</strong> — 料金の目安は、公開中のLPに書かれている範囲だけを使います（無い金額は作りません）</li>
+        <li><strong>公開コンテンツの告知文も作成</strong> — 「発信・告知Agent」が、記事・Note・動画をX・Threads・LinkedIn・Facebook・Instagram向けに書き分けます</li>
+        <li><strong>送信・投稿は人が行う</strong> — 下書きを確認し、実際の送信・応募・投稿は人が判断して行います</li>
+      </ol>
+      <div class="fig-frame"><img src="fig_ai_factory_marketing-acquisition.png" alt="マーケティング・集客工場の詳細画面。見込み客を集め案件につなげる工場として、Agent・Task・KPI（今月の取り込みメール件数）が表示されている" class="fig" loading="lazy" width="1536" height="900"></div>
+      <p class="fig-cap">マーケティング・集客工場の詳細画面（実際の画面。数値はデモデータです）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">03</span><span class="feat-title">自社AI開発工場</span></div>
+      <p class="feat-d">自社プロダクトのアイデアを整理し、検討状況を管理する工場です。思いついたアイデアはナレッジとして登録され、一覧で確認できます。AI工場OS自体の機能追加は、私たち（人）がClaude Codeで直接実装しています。</p>
+      <ol class="mini-steps">
+        <li><strong>アイデアを登録</strong> — 思いついたプロダクトアイデア・改善案を起票します</li>
+        <li><strong>ナレッジとして一覧管理</strong> — 登録されたアイデアを一覧で確認できます</li>
+        <li><strong>検討・実装</strong> — 有望なアイデアから、人がClaude Codeを使って実装を進めます</li>
+      </ol>
+      <div class="fig-frame"><img src="fig_ai_factory_ai-development.png" alt="自社AI開発工場の詳細画面。自社プロダクトのアイデア評価から開発案件の推進までを担当するAgent・Task・KPIが表示されている" class="fig" loading="lazy" width="1536" height="900"></div>
+      <p class="fig-cap">自社AI開発工場の詳細画面（実際の画面。数値はデモデータです）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">04</span><span class="feat-title">iOSアプリ開発工場</span></div>
+      <p class="feat-d">iOSアプリの企画をAIが担当する工場です。この工場の企画をもとに実際に作ったのが、管制塔のiPhoneアプリ（ホーム・工場・アラート・提案の4画面）。外出先からでもスマホで工場の稼働状況を確認でき、ログインして安全に利用できます。</p>
+      <ol class="mini-steps">
+        <li><strong>市場調査</strong> — Web検索で競合アプリ・ニーズをAIが調べます</li>
+        <li><strong>MVPスコープの評価</strong> — 最初に作るべき機能範囲をAIが整理します</li>
+        <li><strong>仕様設計</strong> — 画面構成や仕様をAIが下書きします（ここまでがAIによる自動化工程です）</li>
+        <li><strong>実装・実機確認</strong> — 上記の設計をもとに、人がClaude Codeで実装し、実際のiPhoneでの動作まで確認しました</li>
+      </ol>
+      <div class="fig-frame"><img src="fig_ai_factory_ios-development.png" alt="iOSアプリ開発工場の詳細画面。市場調査から仕様設計、実機動作確認までを担当するAgent・Task・KPIが表示されている" class="fig" loading="lazy" width="1536" height="900"></div>
+      <p class="fig-cap">iOSアプリ開発工場の詳細画面（実際の画面。数値はデモデータです）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">05</span><span class="feat-title">PMO・プロジェクト管理工場</span></div>
+      <p class="feat-d">案件やプロジェクトの進捗をコードで正確に集計し、レポートを作成する工場です。あわせて、思いついたことを自由入力するだけで、AIが「ナレッジ」「予定」「アプリの企画」のいずれかに振り分けて提案する『クイック入力』機能も、この工場が担当しています。</p>
+      <ol class="mini-steps">
+        <li><strong>各工場の進捗・課題を横断集計</strong> — Task・Workflowの状況をコードで正確に集計します（AIに数字を作らせません）</li>
+        <li><strong>レポートを作成</strong> — 遅延・リスクをまとめた報告を作成します</li>
+        <li><strong>クイック入力を受付</strong> — 「思いついたこと」を自由入力すると、AIが内容を読み取ります</li>
+        <li><strong>内容に応じて提案</strong> — ナレッジ登録・予定・アプリ企画のいずれかを提案し、人が確認して登録します</li>
+      </ol>
+      <div class="fig-frame"><img src="fig_ai_factory_pmo-project.png" alt="PMO・プロジェクト管理工場の詳細画面。案件・プロジェクトの進行管理を担当するAgent・Task・KPIが表示されている" class="fig" loading="lazy" width="1536" height="900"></div>
+      <p class="fig-cap">PMO・プロジェクト管理工場の詳細画面（実際の画面。数値はデモデータです）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">06</span><span class="feat-title">分析・改善工場</span></div>
+      <p class="feat-d">運転データ（実行状況・アラート・KPI・収益など）をコードで正確に集計し、そこから改善提案だけをAIが作成する工場です。集計自体はAIに任せず、コードで行います。</p>
+      <ol class="mini-steps">
+        <li><strong>運転データをコードで集計</strong> — 実行状況・エラー・KPI・収益などを正確に集めます</li>
+        <li><strong>集計結果をAIが分析</strong> — 傾向や変化をAIが読み取ります</li>
+        <li><strong>改善提案を作成</strong> — 具体的な改善アクションをAIが下書きします</li>
+        <li><strong>各工場にフィードバック</strong> — 「AIからの提案」として管制塔に表示されます</li>
+      </ol>
+      <div class="fig-frame"><img src="fig_ai_factory_analytics-improvement.png" alt="分析・改善工場の詳細画面。公開済みコンテンツのアクセス状況などを分析し改善提案を作成するAgent・Task・KPIが表示されている" class="fig" loading="lazy" width="1536" height="900"></div>
+      <p class="fig-cap">分析・改善工場の詳細画面（実際の画面。数値はデモデータです）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">07</span><span class="feat-title">収益化工場</span></div>
+      <p class="feat-d">実際の売上データをコードで正確に集計し、収益化の状況を見える化する工場です。案件・業務委託、コンサル・顧問、Note販売、SaaS・ツールなど、収益源ごとの内訳をAI工場モニタに反映します。</p>
+      <ol class="mini-steps">
+        <li><strong>取引実績を取り込む</strong> — 案件・業務委託などの実売上データを取り込みます</li>
+        <li><strong>収益源ごとにコードで集計</strong> — 案件・コンサル・Note販売・SaaS等の内訳を正確に整理します</li>
+        <li><strong>KPIとして管制塔に反映</strong> — 総売上・粗利などをAI工場モニタに表示します</li>
+        <li><strong>コスト超過はアラートで通知</strong> — AI利用コストが上限に近づくと警告を出します</li>
+      </ol>
+      <div class="fig-frame"><img src="fig_ai_factory_monetization.png" alt="収益化工場の詳細画面。収益データを一元管理しKPIとして各工場・管制塔に反映するAgent・Task・KPIが表示されている" class="fig" loading="lazy" width="1536" height="900"></div>
+      <p class="fig-cap">収益化工場の詳細画面（実際の画面。数値はデモデータです）</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="workflow">
+  <div class="wrap">
+    <div class="sec-tag">WORKFLOW</div>
+    <h2 class="sec-title">AIが下書きし、人が承認する</h2>
+    <p class="sec-lead">どの工場も、進み方は同じです。AIに任せきりにせず、かといって人がゼロから作るのでもない、下書きと承認の往復で進みます。</p>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">実行単位</span><span class="feat-title">Agent・Task・Artifact・Workflow</span></div>
+      <p class="feat-d">各工場には、業務ごとの役割を持ったAgent（例：構成作成、本文執筆、市場調査）が登録されています。AgentはTaskを実行してArtifact（成果物）を生成し、複数のTaskをつないだものがWorkflowです。外部公開・外部送信・本番反映・重要データ変更を伴うステップには承認フラグが立ち、これを通らない限り完了扱いにはなりません。</p>
+      <ol class="mini-steps">
+        <li><strong>Taskを実行</strong> — 手動実行、または夜間の無人実行（後述）でAgentがTaskを開始します</li>
+        <li><strong>AIが下書きを作成</strong> — Agentが成果物（Artifact）を生成します。すべての実行はExecutionLogに記録されます</li>
+        <li><strong>承認が必要なら止まる</strong> — 外部公開など重要な操作の手前でWorkflowはWAITING_APPROVAL状態になり、次には進みません</li>
+        <li><strong>人が承認・却下</strong> — 内容を確認し、承認すれば実行が再開、却下すれば差し戻されます</li>
+        <li><strong>監査ログに記録</strong> — 誰が・何を・いつ承認したかが記録され、あとから追跡できます</li>
+      </ol>
+      <div class="fig-frame"><img src="fig_ai_factory_approvals.png" alt="承認待ち画面。「AI工場モニタ・iOS版v1.1のリリース判定」「ブログ記事「生成AIと業務自動化」の公開」の2件が、種別（PUBLISH・外部公開）・理由・申請日時とともに一覧表示され、各行に内容を確認・承認・却下ボタンがある" class="fig" loading="lazy" width="1536" height="1024"></div>
+      <p class="fig-cap">承認待ち画面（実際の画面。デモデータです）。「外部公開・外部送信・本番Deploy・決済・契約・重要データ変更は人間の承認なしに実行されません」という方針をそのまま画面にしています</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">無人実行</span><span class="feat-title">コスト上限つきの夜間実行</span></div>
+      <p class="feat-d">承認不要な工程（市場調査や構成案づくりなど）は、夜間に無人で実行するワーカーに任せています。1回の起動で実行するTask数・Workflow数の上限、1日あたりのAI利用コスト上限、古くなった実行ロックの自動解放、二重起動の防止を設けたうえで、Windowsのタスクスケジューラから定期実行しています。暴走を防ぎながら、人の手が空いていない時間帯も業務を進められる仕組みです。</p>
+      <p class="feat-d">毎日02:00の定期実行では、収益化工場が売上の点検と報告を、分析・改善工場が運転データの分析を、PMO・プロジェクト管理工場が案件の進行確認と朝の報告を、それぞれ無人で進めます。夜の間に整理された内容を、朝にまとめて確認できます。</p>
+      <div class="fig-frame"><img src="fig_ai_factory_alerts.png" alt="アラート画面。「月次のAI利用コストが上限の80%に到達」（警告）「夜間無人実行が正常に完了しました」（情報）の2件が未対応として表示され、それぞれに解決ボタンがある" class="fig" loading="lazy" width="1536" height="1024"></div>
+      <p class="fig-cap">アラート画面（実際の画面。デモデータです）。コスト超過や実行完了のお知らせもここに集約されます</p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="security">
+  <div class="wrap">
+    <div class="sec-tag">SECURITY &amp; GOVERNANCE</div>
+    <h2 class="sec-title">何を承認したか、誰がアクセスできるかを、常に管理下に置く</h2>
+    <p class="sec-lead">AIに実行を任せる以上、「何をしているか分からない」状態は避けなければなりません。権限管理・承認記録・監査ログをセットで設計しています。</p>
+
+    <div class="gw-panel">
+      <div class="gw-panel-title">承認ゲート</div>
+      <div class="gw-panel-sub">重要な操作は、1つの判定関数を必ず経由する。</div>
+      <div class="gw-flow">
+        <div class="gw-step">Taskを実行</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step">AIが下書き作成</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step gw-critical">承認要否を判定</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step">承認待ち</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step">人が確認</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step gw-external">承認 / 却下</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step">監査ログ</div>
+      </div>
+    </div>
+
+    <div class="svc-list">
+      <div class="svc-row">
+        <div class="svc-layer">権限管理</div>
+        <div class="svc-name">3段階のロール（ADMIN / OPERATOR / VIEWER）</div>
+        <div class="svc-role">閲覧のみ・実行と承認・全操作、の3段階で権限を分けます。判定ロジックは1箇所に集約し、UIでボタンを隠すだけの制御にはしていません。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">認証</div>
+        <div class="svc-name">セッション管理・パスワードハッシュ</div>
+        <div class="svc-role">パスワードはNode標準のscryptでハッシュ化して保存します（平文は保持しません）。Webはセッションクッキー、iOSアプリはBearer Tokenで認証し、いずれも同じユーザー・権限モデルを共有します。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">承認ゲート</div>
+        <div class="svc-name">重要操作は1つの判定関数を必ず経由</div>
+        <div class="svc-role">外部公開・外部送信・本番反映・重要データ変更は、承認ポリシーを判定する1つの関数を経由しない限り完了扱いにできない構造にしています。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">監査ログ</div>
+        <div class="svc-name">全AI実行を記録</div>
+        <div class="svc-role">Agentの実行はすべてExecutionLogに記録されます。ログを伴わないAI実行の経路は作らない設計です。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">コスト管理</div>
+        <div class="svc-name">利用状況の可視化と上限</div>
+        <div class="svc-role">AI利用コストをAI工場モニタで可視化し、1日あたりの上限を超えそうな場合はアラートを出し新規実行を止めます。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">秘密情報の扱い</div>
+        <div class="svc-name">ソースコード・DB・ログに書かない</div>
+        <div class="svc-role">APIキー等の秘密情報は専用のシークレット管理から読み込み、コード・データベース・ログには一切記録しません。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="achievements">
+  <div class="wrap">
+    <div class="sec-tag">実際に稼働している実績</div>
+    <h2 class="sec-title">仕組みだけでなく、実際に動いています</h2>
+    <p class="sec-lead">コンセプトの説明だけでなく、実際にAI工場OSが動かして生まれた成果物をご紹介します。</p>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">コンテンツ・SEO工場</span><span class="feat-title">ブログ記事の自動生成・公開</span></div>
+      <p class="feat-d">Web検索を伴う構成案の作成から、承認、本文執筆、承認、自社ブログへの公開まで、実際に稼働させて複数記事を公開しています。クライアント向け記事制作にも同じラインを応用し、構成→承認→本文執筆の並行実行に対応しています。</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">連携先：動画制作</span><span class="feat-title">記事→YouTube動画→ショート動画への自動展開</span></div>
+      <p class="feat-d">公開した記事の内容をもとに、姉妹プロジェクトの動画生成基盤と連携してYouTube動画を自動生成し、実際にチャンネルへ投稿しています。ナレーション・字幕・シーン構成までを一気通貫で作成し、さらにInstagramリールやTikTok向けのショート動画まで自動で作成しています。</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">マーケティング・集客工場</span><span class="feat-title">問い合わせ・スカウトメールの自動検知</span></div>
+      <p class="feat-d">ランサーズ・クラウドワークス・Wantedly・LinkedIn・LPの問い合わせフォームなどから届くメールをGmail経由で自動検知し、AIが内容を要約して返信・応募の下書きを提案します。見逃しを防ぎ、対応の初動を早くします。</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">自社AI開発工場</span><span class="feat-title">自社プロダクトのアイデア管理</span></div>
+      <p class="feat-d">自社プロダクトのアイデアをナレッジとして登録・一覧管理しています。AI工場OS自体の機能追加は、私たちがClaude Codeを使って直接実装しており、自分たちが使うツールを自分たちで作り、使いながら直していくサイクルを実践しています。</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">iOSアプリ開発工場</span><span class="feat-title">iOSアプリの企画から実機動作確認まで</span></div>
+      <p class="feat-d">Web検索による競合調査、MVPスコープの評価、UI設計までをAIが担当し、SwiftUIで実装したアプリを開発者本人の物理iPhoneに実際にインストールして動作を確認しています。サーバー側の認証をBearer Token方式に対応させ、実データでの接続まで実装しました。</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">運用基盤</span><span class="feat-title">Windowsタスクスケジューラによる夜間無人実行</span></div>
+      <p class="feat-d">承認不要な工程を対象に、1日あたりのコスト・実行数の上限を設けたうえで夜間に自動実行しています。実行が失敗して残ったロックは一定時間で自動解放し、翌朝には結果をサマリーとして確認できます。</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">応用範囲</span><span class="feat-title">「工場」という考え方は、どんな業務にも当てはめられる</span></div>
+      <p class="feat-d">AI工場OSで実践しているのは、コンテンツ制作や開発に限った話ではありません。業務を「工場」に分けて、AIが下書きし人が承認するラインを1つずつ作っていく、という考え方そのものです。8つの領域に当てはめると、たとえば次のような工場の分け方が考えられます。</p>
+      <div class="examples-grid">
+        <div class="examples-card">
+          <div class="examples-card-head"><span class="examples-card-no" style="background:#5b9bff">1</span><span class="examples-card-title">組織・経営</span></div>
+          <ul><li>経営企画工場</li><li>人事・労務工場</li><li>総務工場</li><li>経理・財務工場</li><li>法務工場</li><li>情報システム工場</li><li>広報・IR工場</li></ul>
+        </div>
+        <div class="examples-card">
+          <div class="examples-card-head"><span class="examples-card-no" style="background:#4ecb84">2</span><span class="examples-card-title">Webマーケティング</span></div>
+          <ul><li>リサーチ工場</li><li>コンテンツ・SEO工場</li><li>SNS工場</li><li>広告工場</li><li>分析・改善工場</li><li>収益化工場</li></ul>
+        </div>
+        <div class="examples-card">
+          <div class="examples-card-head"><span class="examples-card-no" style="background:#e8b45f">3</span><span class="examples-card-title">営業</span></div>
+          <ul><li>リード獲得工場</li><li>顧客分析工場</li><li>アプローチ工場</li><li>商談工場</li><li>フォロー工場</li><li>受注管理工場</li></ul>
+        </div>
+        <div class="examples-card">
+          <div class="examples-card-head"><span class="examples-card-no" style="background:#b18cff">4</span><span class="examples-card-title">システム開発</span></div>
+          <ul><li>要件定義工場</li><li>設計工場</li><li>AI開発工場</li><li>テスト工場</li><li>品質管理工場</li><li>リリース・運用工場</li></ul>
+        </div>
+        <div class="examples-card">
+          <div class="examples-card-head"><span class="examples-card-no" style="background:#f0736a">5</span><span class="examples-card-title">EC</span></div>
+          <ul><li>商品登録工場</li><li>商品企画工場</li><li>集客工場</li><li>接客・問い合わせ工場</li><li>受注・出荷工場</li><li>CRM・分析工場</li></ul>
+        </div>
+        <div class="examples-card">
+          <div class="examples-card-head"><span class="examples-card-no" style="background:#5eead4">6</span><span class="examples-card-title">バックオフィス</span></div>
+          <ul><li>問い合わせ工場</li><li>書類作成工場</li><li>経理工場</li><li>人事・労務工場</li><li>承認工場</li><li>データ集計工場</li></ul>
+        </div>
+        <div class="examples-card">
+          <div class="examples-card-head"><span class="examples-card-no" style="background:#f0a54a">7</span><span class="examples-card-title">採用</span></div>
+          <ul><li>求人企画工場</li><li>求人掲載工場</li><li>候補者管理工場</li><li>スカウト工場</li><li>選考工場</li><li>採用・入社工場</li></ul>
+        </div>
+        <div class="examples-card">
+          <div class="examples-card-head"><span class="examples-card-no" style="background:#e879c8">8</span><span class="examples-card-title">コンサルティング</span></div>
+          <ul><li>リサーチ工場</li><li>データ分析工場</li><li>課題発見工場</li><li>戦略立案工場</li><li>資料作成工場</li><li>成果分析工場</li></ul>
+        </div>
+      </div>
+      <p class="examples-note">※ 実際の導入事例ではなく、業務の分け方の一例です。貴社の業務に合わせた分け方をご相談いただけます。</p>
+    </div>
+
+    <p class="prose" style="font-size:13px;color:var(--gray);margin-top:8px">AI工場OSはClaude Code（Anthropic社のAIコーディングツール）を用いて内製しています。技術スタックはNext.js・Prisma・SQLiteです。</p>
+  </div>
+</section>
+
+<section class="section alt" id="faq">
+  <div class="wrap">
+    <div class="sec-tag">FAQ</div>
+    <h2 class="sec-title">よくあるご質問</h2>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>AI工場OSは外部の会社にも提供してもらえますか？</summary>
+        <div class="faq-a">現時点ではパッケージ製品としての外部提供は行っていません。ただし、同じ考え方（AIが下書きし人が承認する、全実行をログに残す）で貴社専用の仕組みを構築するご相談は承っています。まずは無料相談からお気軽にお問い合わせください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>AIにどこまで任せているのですか？</summary>
+        <div class="faq-a">AIが担当するのは「下書きを作る」工程までです。外部への公開・送信、本番環境への反映、重要データの変更を伴う操作は、必ず人間の承認を経てから実行されます。承認を経ずに完了扱いにできない構造にしているため、AI任せで気づかないうちに何かが公開される、という状態は起きません。</div>
+      </details>
+      <details class="faq-item">
+        <summary>実行内容はあとから確認できますか？</summary>
+        <div class="faq-a">はい。すべてのAI実行を監査ログ（ExecutionLog）に記録しており、いつ・どのAgentが・何を実行し・誰が承認したかを、あとから追跡できます。</div>
+      </details>
+      <details class="faq-item">
+        <summary>どのAIを使っていますか？費用はどれくらいですか？</summary>
+        <div class="faq-a">既定ではAnthropic社のClaude CLI（サブスクリプション契約）を使っており、従量課金のAPIキーを必要としません。AI工場モニタに表示されるコストは、同じ処理をAPI課金で行った場合の参考値であり、実際の請求額そのものではありません。</div>
+      </details>
+      <details class="faq-item">
+        <summary>iOSアプリはどのように使えますか？</summary>
+        <div class="faq-a">AI工場モニタと同じ情報（総売上・稼働工場数・承認待ち・アラートなど）を、外出先からiOSアプリで確認できます。Bearer Token方式で認証したうえで既存のAPIに接続する仕組みです。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="wrap">
+    <div class="sec-tag" style="text-align:center">CONTACT</div>
+    <h2 class="sec-title">同じような仕組みを、貴社専用に。</h2>
+    <p class="sec-lead" style="margin-left:auto;margin-right:auto;text-align:center">AI工場OSはパッケージ製品ではありませんが、「AIが下書きし人が承認する」「全実行を記録する」という設計思想は、業種を問わず応用できます。自社の業務自動化にご興味があれば、お気軽にご相談ください。</p>
+    <div class="cta-cards">
+      <a href="https://shikou-ai.com/contact.html" class="cta-card">
+        <div class="cta-card-icon">🔗</div>
+        <div><div class="cta-card-label">お問い合わせフォーム</div><div class="cta-card-val">無料相談を申し込む</div></div>
+      </a>
+    </div>
+    <p class="cta-note">通常1営業日以内にご返信させていただきます</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    SHIKOU × AI / AI工場OS — 自社の7業務をAIとオートメーションで動かす運用基盤 © 2026 ｜ <a href="https://shikou-ai.com/index.html">トップページに戻る</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="画像の拡大表示">
+  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="閉じる">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <p class="lightbox-cap" id="lightbox-cap"></p>
+</div>
+<button type="button" class="back-to-top" id="backToTop" aria-label="ページの先頭に戻る">↑</button>
+<script>
+(function(){
+  var lightbox = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightbox-img');
+  var lbCap = document.getElementById('lightbox-cap');
+  var lastFocused = null;
+
+  function openLightbox(img){
+    lastFocused = document.activeElement;
+    lbImg.src = img.currentSrc || img.src;
+    lbImg.alt = img.alt || '';
+    lbCap.textContent = img.alt || '';
+    lightbox.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lightbox-close').focus();
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('is-open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+    if (lastFocused) lastFocused.focus();
+  }
+
+  document.querySelectorAll('img.fig, img.hero-shot').forEach(function(img){
+    img.setAttribute('tabindex', '0');
+    img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', '画像を拡大表示: ' + (img.alt || ''));
+    img.addEventListener('click', function(){ openLightbox(img); });
+    img.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openLightbox(img); }
+    });
+  });
+
+  lightbox.addEventListener('click', function(e){
+    if (e.target === lightbox || e.target === lbImg) closeLightbox();
+  });
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+  });
+
+  var navToggle = document.getElementById('navToggle');
+  var headerLinks = document.getElementById('headerLinks');
+  if (navToggle && headerLinks) {
+    navToggle.addEventListener('click', function(){
+      var isOpen = headerLinks.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    headerLinks.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        headerLinks.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  var backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    window.addEventListener('scroll', function(){
+      backToTop.classList.toggle('is-visible', window.scrollY > 500);
+    });
+    backToTop.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
