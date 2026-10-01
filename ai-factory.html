@@ -11,10 +11,10 @@
   gtag("js", new Date());
   gtag("config", "G-0E5BXJ21KH");
 </script>
-<title>AI工場OS｜7つの業務をAIが下書きし人が承認する運用基盤（SHIKOU × AI）</title>
-<meta name="description" content="SEO記事制作からiOSアプリ開発まで、自社の7つの業務ラインを横断管理する運用基盤「AI工場OS」の紹介ページ。AIが下書きし人が承認する仕組みと、実際に稼働している実績を紹介します。">
-<meta property="og:title" content="AI工場OS｜自社の7業務をAIで動かす運用基盤">
-<meta property="og:description" content="AIが下書きし、人が承認する。全AI実行を記録する。私たち自身が日々の業務を回すために内製した、7つの業務ラインを横断する運用基盤です。">
+<title>AI工場OS｜一人で回し切れない業務を、AIが9割・人が1割で回す（SHIKOU × AI）</title>
+<meta name="description" content="作る→発信する→分析→改善を、AIが9割・人が最後の確認の1割で回す運用基盤「AI工場OS」。プロジェクト管理・改善管理・収益管理まで一人で回すために内製した仕組みと、実際に稼働している実績を紹介します。">
+<meta property="og:title" content="AI工場OS｜一人で回し切れない業務を、AI 9割・人 1割で回す">
+<meta property="og:description" content="クリエイティブも含めてAIが下書きまで進め、人は最後の確認だけ。作る→発信→分析→改善の循環と、プロジェクト・改善・収益の管理を1つの基盤で。私たち自身が一人で回すために内製しました。">
 <meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
@@ -198,6 +198,62 @@ img{max-width:100%}
 .section-cta-arrow{font-size:16px;transition:transform .15s}
 .section-cta:hover .section-cta-arrow{transform:translateX(3px)}
 
+/* 悩み → 解決（AI Work Observerページと同じ型） */
+.pain-list{display:flex;flex-direction:column;gap:14px;margin-top:28px}
+.pain-pair{display:grid;grid-template-columns:1fr 40px 1fr;align-items:stretch;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.pain-pair.is-main{border:2px solid var(--orange);box-shadow:0 14px 32px rgba(240,165,74,.18)}
+.pain-before,.pain-after{padding:20px 22px;display:flex;flex-direction:column;justify-content:center}
+.pain-pair.is-main .pain-before,.pain-pair.is-main .pain-after{padding:28px 26px}
+.pain-before{background:#fff}
+.pain-after{background:#0b2138}
+.pain-label{display:block;font-size:10.5px;font-weight:900;letter-spacing:.08em;margin-bottom:8px}
+.pain-before .pain-label{color:var(--gray)}
+.pain-after .pain-label{color:var(--orange)}
+.pain-before p,.pain-after p{font-size:14px;line-height:1.75;margin:0}
+.pain-pair.is-main .pain-before p{font-size:18px;font-weight:900;color:var(--ink);line-height:1.6}
+.pain-pair.is-main .pain-after p{font-size:15px}
+.pain-before p{color:var(--gray-dark)}
+.pain-after p{color:#fff}
+.pain-after strong{color:var(--teal2)}
+.pain-arrow{display:flex;align-items:center;justify-content:center;background:#fff;color:var(--accent);font-size:17px;font-weight:900}
+.pain-sub{font-size:13px;font-weight:700;color:var(--gray);margin:30px 0 -6px;letter-spacing:.04em}
+.pain-closing{margin-top:30px;font-size:15px;line-height:1.9;color:var(--gray-dark);max-width:760px}
+.pain-closing strong{color:var(--ink)}
+@media (max-width:700px){.pain-pair{grid-template-columns:1fr}.pain-arrow{padding:6px 0;background:var(--card)}}
+
+/* AI 9割・人 1割 */
+.split-bar{display:flex;height:64px;border-radius:14px;overflow:hidden;margin:8px 0 22px;box-shadow:0 10px 24px rgba(6,55,44,.16);font-weight:900}
+.split-ai{flex:9;background:#0b2138;color:var(--teal2);display:flex;align-items:center;justify-content:center;font-size:17px;gap:10px}
+.split-human{flex:1;min-width:84px;background:var(--orange);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:14px;text-align:center;line-height:1.3}
+.split-note{font-size:12px;color:var(--gray-light);margin-top:12px;line-height:1.7}
+.role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:16px;margin-top:6px}
+.role-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+.role-card.is-ai{background:#0b2138;border-color:#0b2138}
+.role-card.is-ai .role-h{color:var(--teal2)}
+.role-card.is-ai li{color:rgba(255,255,255,.88)}
+.role-card.is-ai li::before{background:var(--teal2)}
+.role-h{font-size:15px;font-weight:900;margin-bottom:12px;color:var(--orange-dark)}
+.role-card ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin:0}
+.role-card li{position:relative;padding-left:16px;font-size:13.5px;color:var(--gray-dark);line-height:1.7}
+.role-card li::before{content:'';position:absolute;left:0;top:.7em;width:6px;height:6px;border-radius:50%;background:var(--orange)}
+@media (max-width:640px){.split-ai{font-size:14px}.split-human{min-width:64px;font-size:12px}}
+
+/* 循環（作る→発信→分析→改善） */
+.loop-flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:28px 0 8px}
+.loop-step{flex:1 1 200px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px}
+.loop-step-n{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.1em;margin-bottom:6px}
+.loop-step-t{font-size:17px;font-weight:900;margin-bottom:8px}
+.loop-step-d{font-size:12.5px;color:var(--gray);line-height:1.75}
+.loop-step-f{display:inline-block;margin-top:9px;font-size:11.5px;font-weight:700;color:var(--accent-dark);background:var(--card);padding:3px 10px;border-radius:6px}
+.loop-arrow{align-self:center;color:var(--gray-light);font-size:18px;flex-shrink:0}
+.loop-back{text-align:center;font-size:13px;font-weight:700;color:var(--accent-dark);margin:10px 0 0}
+@media (max-width:860px){.loop-arrow{display:none}}
+.mgmt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:14px;margin-top:22px}
+.mgmt-card{background:#0b2138;border-radius:14px;padding:22px 22px 24px;box-shadow:0 10px 24px rgba(6,55,44,.14)}
+.mgmt-t{font-size:17px;font-weight:900;color:#fff;margin-bottom:4px}
+.mgmt-f{font-size:11.5px;font-weight:700;color:var(--orange);margin-bottom:12px;letter-spacing:.04em}
+.mgmt-d{font-size:13px;color:rgba(255,255,255,.82);line-height:1.85}
+
 /* FAQ */
 .faq-list{display:flex;flex-direction:column;gap:2px;background:var(--line);border:1px solid var(--line);margin-top:8px}
 .faq-item{background:#fff}
@@ -242,12 +298,12 @@ img{max-width:100%}
     </button>
     <div class="header-links" id="headerLinks">
       <a href="https://shikou-ai.com/index.html">トップ</a>
-      <a href="#about-name">AI工場OSとは</a>
-      <a href="#dashboard">管制塔</a>
+      <a href="#pain">お悩み</a>
+      <a href="#split">AI 9割・人 1割</a>
+      <a href="#about-name">循環と管理</a>
       <a href="#architecture">7つの工場</a>
-      <a href="#workflow">下書きと承認</a>
-      <a href="#security">ガバナンス</a>
       <a href="#achievements">実績</a>
+      <a href="#security">安全性</a>
       <a href="#faq">FAQ</a>
       <a href="https://shikou-ai.com/contact.html" class="header-cta">無料相談</a>
     </div>
@@ -258,23 +314,20 @@ img{max-width:100%}
   <div class="hero-dotgrid" aria-hidden="true"></div>
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <div class="hero-tag">✦ 自社実践・稼働中の運用基盤</div>
+      <div class="hero-tag">✦ 自社で実際に回している運用基盤</div>
       <div class="hero-wordmark"><span class="tone-a">AI</span><span class="tone-b">工場OS</span></div>
-      <div class="hero-tagline">全業務を、AIとオートメーションで動かす。</div>
-      <div class="hero-category">AIが下書きし、人が承認する。</div>
-      <h1 class="hero-h1-sub">7つの業務ラインを、1つの管制塔から動かす。</h1>
+      <h1 class="hero-tagline">一人で回しているのに、<br>チームのように動く。</h1>
       <p class="hero-sub">
-        コンテンツ制作・SEO・マーケティング・自社開発・iOSアプリ開発・PMO・分析・収益化。<br>
-        私たち自身の業務をAIで動かすために内製した、AI業務オペレーション基盤「AI工場OS」です。AIの実行・承認・成果物・コストを記録しながら、日々の業務を「工場」として自動で流します。AI工場モニタから、7つの工場の稼働状況を横断して確認できます。
+        クリエイティブな作業も含めて、AIが下書きまで進めます。人は最後の確認だけ。<strong>AIが9割、人が1割</strong>を目指して、作る・発信する・分析する・改善するを1つの基盤で回しています。
       </p>
       <div class="hero-highlight">
-        <strong>「こういうものを作れます」ではなく、私たち自身が実際にこれで仕事を回しています。</strong><br>
-        外部提供を想定したパッケージ製品ではなく、稼働中の内製システムです。同じ考え方（AI下書き×人間承認×監査ログ）で、貴社専用の仕組みを構築するご相談も承っています。
+        <strong>「こういうものを作れます」ではなく、私たち自身が一人でこれを使って仕事を回しています。</strong><br>
+        パッケージ製品ではなく、稼働中の内製システムです。同じ考え方で、貴社専用の仕組みを構築するご相談も承っています。
       </div>
       <div class="hero-points">
-        <div class="hero-point"><span class="hero-point-icon">1</span>7つの業務をAI工場として動かす</div>
-        <div class="hero-point"><span class="hero-point-icon">2</span>AIが下書き → 人が承認 → 実行</div>
-        <div class="hero-point"><span class="hero-point-icon">3</span>すべてを1つの管制塔で見る</div>
+        <div class="hero-point"><span class="hero-point-icon">1</span>作る → 発信する → 分析 → 改善を1つの循環に</div>
+        <div class="hero-point"><span class="hero-point-icon">2</span>プロジェクト・改善・収益を1つの管制塔で管理</div>
+        <div class="hero-point"><span class="hero-point-icon">3</span>人は承認するだけ。任せきりにならない</div>
       </div>
       <div class="hero-btns hero-btns--in-copy">
         <a href="https://shikou-ai.com/contact.html" class="btn btn-primary">無料で相談する</a>
@@ -299,67 +352,147 @@ img{max-width:100%}
   </div>
 </section>
 
-<section class="section alt" style="padding:56px 0 44px">
+<section class="section alt" id="pain" style="padding:64px 0 56px">
   <div class="wrap">
-    <div class="sec-tag" style="text-align:center">7工場 × 1管制塔</div>
-    <h2 class="sec-title" style="text-align:center">7つの業務ラインと、それぞれの流れ</h2>
-    <div class="svc-list" style="margin-top:24px">
-      <div class="svc-row"><div class="svc-layer">01</div><div class="svc-name">コンテンツ・SEO</div><div class="svc-role">調査 → 執筆 → 公開 → 改善</div></div>
-      <div class="svc-row"><div class="svc-layer">02</div><div class="svc-name">マーケティング・集客</div><div class="svc-role">問い合わせ → 提案 → 発信</div></div>
-      <div class="svc-row"><div class="svc-layer">03</div><div class="svc-name">自社AI開発</div><div class="svc-role">アイデア → 評価 → 開発</div></div>
-      <div class="svc-row"><div class="svc-layer">04</div><div class="svc-name">iOSアプリ開発</div><div class="svc-role">市場調査 → 企画 → 仕様設計</div></div>
-      <div class="svc-row"><div class="svc-layer">05</div><div class="svc-name">PMO・案件管理</div><div class="svc-role">進捗 → 課題 → レポート</div></div>
-      <div class="svc-row"><div class="svc-layer">06</div><div class="svc-name">分析・改善</div><div class="svc-role">データ → 分析 → 改善提案</div></div>
-      <div class="svc-row"><div class="svc-layer">07</div><div class="svc-name">収益化</div><div class="svc-role">売上 → 集計 → KPI</div></div>
-    </div>
-    <div class="control-tower">
-      <div class="control-tower-icon">⛭</div>
-      <div>
-        <div class="control-tower-title">AI工場モニタ</div>
-        <div class="control-tower-sub">7つの工場を横断して見る、1つの管制塔</div>
+    <div class="sec-tag">お悩み</div>
+    <h2 class="sec-title">一人で、全部は回し切れない。</h2>
+    <p class="sec-lead">AI工場OSは、私たち自身が抱えていた悩みを解くために作りました。同じ悩みをお持ちの方に、まず読んでいただきたい内容です。</p>
+
+    <div class="pain-list">
+      <div class="pain-pair is-main">
+        <div class="pain-before"><span class="pain-label">いちばんのお悩み</span><p>制作も、発信も、営業も、開発も、管理も。一人（少人数）では、とても回し切れない。AIに任せたいが、任せきりは不安。</p></div>
+        <div class="pain-arrow">→</div>
+        <div class="pain-after"><span class="pain-label">AI工場OSなら</span><p>記事や動画といった<strong>クリエイティブな作業も含めて、AIが下書きまで進めます</strong>。人は最後の確認だけ。<strong>AIが9割、人が1割</strong>を目指した分担で、任せきりにならずに回せます。</p></div>
       </div>
     </div>
-    <div class="kpi-grid" style="margin-top:36px">
-      <div class="kpi-card">
-        <div class="kpi-label">横断管理する業務ライン</div>
-        <div class="kpi-val">7工場</div>
+
+    <p class="pain-sub">こんなお悩みも、同じ仕組みで解決しています</p>
+    <div class="pain-list">
+      <div class="pain-pair">
+        <div class="pain-before"><span class="pain-label">よくあるお悩み</span><p>作りっぱなしで、結果を見て次に活かすところまで手が回らない</p></div>
+        <div class="pain-arrow">→</div>
+        <div class="pain-after"><span class="pain-label">AI工場OSなら</span><p>公開後のアクセスデータを自動で取得し、<strong>AIが改善提案まで作成</strong>。提案は「検討開始／見送り」で管理できます</p></div>
       </div>
-      <div class="kpi-card">
-        <div class="kpi-label">AI実行の記録</div>
-        <div class="kpi-val">100%</div>
+      <div class="pain-pair">
+        <div class="pain-before"><span class="pain-label">よくあるお悩み</span><p>案件・発信・収益・改善があちこちに散らばり、全体の状況が見えない</p></div>
+        <div class="pain-arrow">→</div>
+        <div class="pain-after"><span class="pain-label">AI工場OSなら</span><p><strong>1つの管制塔</strong>で、プロジェクト・改善・収益をまとめて確認できます</p></div>
       </div>
-      <div class="kpi-card kpi-card--orange">
-        <div class="kpi-label">重要操作の前に必ず通過</div>
-        <div class="kpi-val">承認ゲート</div>
-      </div>
-      <div class="kpi-card kpi-card--white">
-        <div class="kpi-label">実行タイミング</div>
-        <div class="kpi-val">夜間無人対応</div>
+      <div class="pain-pair">
+        <div class="pain-before"><span class="pain-label">よくあるお悩み</span><p>AIを使っても、その場の指示と個人の腕前に頼りきりで、仕組みとして残らない</p></div>
+        <div class="pain-arrow">→</div>
+        <div class="pain-after"><span class="pain-label">AI工場OSなら</span><p>役割・工程・成果物・実行ログが<strong>仕組みとして残る</strong>ので、同じ流れを何度でも再現できます</p></div>
       </div>
     </div>
-    <p class="price-note">「AI実行の記録100%」は、すべてのAgent実行を監査ログ（ExecutionLog）へ記録する設計を指します。効果を示す実測の改善率ではなく、システムの仕様です。</p>
+
+    <p class="pain-closing"><strong>これらはすべて、私たち自身の悩みでした。</strong>だから、自分たちで作り、自分たちで毎日使っています。</p>
   </div>
 </section>
 
-<section class="section" id="about-name">
+<section class="section" id="split">
   <div class="wrap">
-    <div class="sec-tag">基本思想</div>
-    <h2 class="sec-title">AIが作る。人が判断する。システムが記録する。</h2>
-    <p class="sec-lead prose-highlight" style="margin:0 0 28px"><mark>AI → 下書き → 承認 → 実行 → 監査ログ。これを全業務で繰り返します。</mark></p>
+    <div class="sec-tag">AI 9割・人 1割</div>
+    <h2 class="sec-title">9割はAI。人は、最後の1割だけ。</h2>
+    <p class="sec-lead">自動化できるところは、クリエイティブな部分も含めてAIに任せます。人が担うのは、内容を確かめ、公開や送信を決めるところです。</p>
 
-    <p class="prose">だから、単なる「AI自動化ツール」ではありません。<strong>AIを組み込んだ業務オペレーション基盤</strong>——それがAI工場OSです。</p>
-    <p class="prose">記事を書く、SEOを改善する、自社製品を開発する、iOSアプリを作る、案件を管理する、収益を分析する——業務の中身は違っても、進み方は同じです。<strong>AIが下書きをつくり、人が確認し、承認されたものだけが実行される。</strong></p>
-    <p class="prose">この共通の形を1つの基盤にまとめ、業務ごとに「工場」として並べたものがAI工場OSです。各工場の進行状況・収益・承認待ちは、AI工場モニタという1つの管制塔ダッシュボードから横断的に確認できます。</p>
+    <div class="split-bar" role="img" aria-label="AIが9割、人が1割を目指す分担">
+      <div class="split-ai"><span>AI 9割</span><span style="font-size:12.5px;font-weight:700;opacity:.8">下書きまで</span></div>
+      <div class="split-human">人 1割<br><span style="font-size:11px;font-weight:700">確認</span></div>
+    </div>
+
+    <div class="role-grid">
+      <div class="role-card is-ai">
+        <div class="role-h">AIが担うこと</div>
+        <ul>
+          <li>素材収集・調査・構成案・記事本文の執筆（自社ブログ・クライアント向け記事）</li>
+          <li>記事をもとにしたYouTube動画・ショート動画の制作</li>
+          <li>届いたメールへの返信・提案・応募文の下書き</li>
+          <li>公開した記事・動画の告知文（X・Threads・LinkedIn・Facebook・Instagram）</li>
+          <li>アクセスデータの集計と、リライトなどの改善提案</li>
+          <li>案件・収益の集計とレポート作成</li>
+          <li>アプリや機能の企画・要件定義・設計・実装仕様書づくりと、Claude Codeによる実装</li>
+        </ul>
+      </div>
+      <div class="role-card">
+        <div class="role-h">人が担うこと</div>
+        <ul>
+          <li>構成案・本文・動画・告知文を確認し、承認・却下・修正を指示する</li>
+          <li>外部への公開・送信・投稿を最終判断する</li>
+          <li>改善提案を「検討開始」にするか「見送る」かを選ぶ</li>
+          <li>開発の実装仕様書（指示書）を確認し、承認する</li>
+          <li>重要データの変更を承認する</li>
+        </ul>
+      </div>
+    </div>
+    <p class="split-note">「9割・1割」は実測した割合ではなく、役割分担の設計上の目標です。開発系の工程は、AIが実装仕様書を作り、人が承認すると、実装はClaude Code（これもAI）が進めます。承認した仕様書は自動でClaude Codeに渡されて実行され、完了するとAI工場へ戻ります。</p>
+  </div>
+</section>
+
+<section class="section alt" id="about-name">
+  <div class="wrap">
+    <div class="sec-tag">基本の考え方</div>
+    <h2 class="sec-title">作る → 発信する → 分析 → 改善。一周まとめて回す。</h2>
+    <p class="sec-lead">作って終わり、にしないのがAI工場OSです。公開した結果を取得して分析し、改善を次の制作へ戻す。この循環を1つの基盤で回します。</p>
+
+    <div class="loop-flow">
+      <div class="loop-step">
+        <div class="loop-step-n">STEP 1</div>
+        <div class="loop-step-t">作る</div>
+        <div class="loop-step-d">記事・動画・アプリの企画や実装指示書を、AIが下書きします。</div>
+        <span class="loop-step-f">コンテンツ・SEO／AI開発／iOS開発</span>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="loop-step-n">STEP 2</div>
+        <div class="loop-step-t">発信する</div>
+        <div class="loop-step-d">承認した記事の公開、SNS向けの告知文、届いたメールへの返信下書きを作ります。送信・投稿は人が行います。</div>
+        <span class="loop-step-f">マーケティング・集客</span>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="loop-step-n">STEP 3</div>
+        <div class="loop-step-t">結果を分析</div>
+        <div class="loop-step-d">検索流入やGoogleへの登録状況を毎晩取得し、動画の視聴状況とあわせて集計します。集計はAIに任せず、正確な数え上げで行います。</div>
+        <span class="loop-step-f">分析・改善</span>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="loop-step-n">STEP 4</div>
+        <div class="loop-step-t">改善する</div>
+        <div class="loop-step-d">直す価値のある記事をAIが見つけ、リライト案を提案します。実行する仕組みも実装済みで、本番への反映は承認を経て行います。</div>
+        <span class="loop-step-f">分析・改善</span>
+      </div>
+    </div>
+    <p class="loop-back">↺ 改善した結果は、次の「作る」へ戻ります</p>
+
+    <h3 class="feat-title" style="margin-top:48px">その上で、3つを管理します</h3>
+    <div class="mgmt-grid">
+      <div class="mgmt-card">
+        <div class="mgmt-t">プロジェクト管理</div>
+        <div class="mgmt-f">PMO・プロジェクト管理工場</div>
+        <div class="mgmt-d">案件やプロジェクトの進捗・課題を正確に集計してレポートにします。AIに数字を作らせません。</div>
+      </div>
+      <div class="mgmt-card">
+        <div class="mgmt-t">改善管理</div>
+        <div class="mgmt-f">分析・改善工場</div>
+        <div class="mgmt-d">改善提案を「提案 → 検討開始／見送り → 完了」の状態で追跡します。コスト超過や実行エラーなどのアラートも、ここに集約されます。</div>
+      </div>
+      <div class="mgmt-card">
+        <div class="mgmt-t">収益管理</div>
+        <div class="mgmt-f">収益化工場</div>
+        <div class="mgmt-d">実際の売上データを取り込み、収益源ごとに集計して、総売上・粗利などをKPIとして管制塔に反映します。AIの利用コストも並べて見られます。</div>
+      </div>
+    </div>
 
     <p class="prose-highlight"><mark>業務を「担当者ごとの属人的な作業」ではなく「AIと人が交互に手を入れる1本のライン」として捉える。</mark></p>
-    <p class="prose" style="margin-top:8px">それが、AI工場OSという名前に込めた考え方です。</p>
+    <p class="prose" style="margin-top:8px">それが、AI工場OSという名前に込めた考え方です。業務の種類ごとにこのラインを「工場」として並べ、1つの管制塔から横断して見ます。</p>
   </div>
 </section>
 
 <section class="section" id="dashboard">
   <div class="wrap">
     <div class="sec-tag">DASHBOARD</div>
-    <h2 class="sec-title">7つの業務を、1つの画面で見る。</h2>
+    <h2 class="sec-title">プロジェクト・改善・収益を、1つの画面で見る。</h2>
     <div class="fig-frame"><img src="fig_ai_factory_dashboard.png" alt="AI工場モニタのダッシュボード画面（実際の画面）。中央に管制塔、周囲に7つの工場が並ぶイラストマップと、右側に全体KPI・収益のミエルカ・AIからの提案・アラートが表示されている。金額は「金額を隠す」機能でマスクしている" class="fig" loading="lazy" width="1907" height="897"></div>
     <div class="kpi-chip-row">
       <span class="kpi-chip">今月売上</span>
@@ -377,56 +510,14 @@ img{max-width:100%}
 <section class="section alt" id="architecture">
   <div class="wrap">
     <div class="sec-tag">ARCHITECTURE</div>
-    <h2 class="sec-title">7つの工場と、1つの管制塔</h2>
-    <p class="sec-lead">業務領域ごとに独立した7つの「工場」が並び、それぞれがAgent（AIの担当者）・Task（実行単位）・Artifact（成果物）・Workflow（工程の連なり）という共通の部品で動きます。工場同士は直接依存せず、成果物を介してゆるやかに連携します。</p>
+    <h2 class="sec-title">循環を支える、7つの工場と1つの管制塔</h2>
+    <p class="sec-lead">業務領域ごとに独立した7つの「工場」が並び、それぞれがAgent（AIの担当者）・Task（実行単位）・Artifact（成果物）・Workflow（工程の連なり）という共通の部品で動きます。工場同士は直接依存せず、成果物を介してゆるやかに連携します。7つの工場は、「作る」「発信する」「分析する」「改善する」と3つの管理を、次のように分担しています。</p>
 
     <div class="phase">
-      <div class="phase-item">
-        <div class="phase-n">01 · CONTENT_SEO</div>
-        <div class="phase-t">コンテンツ・SEO工場</div>
-        <div class="phase-d">構成案→承認→本文執筆→承認→自社ブログへの公開まで。実際に本番ブログへ記事を公開しています。</div>
-        <span class="phase-tag">稼働中</span>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">02 · MARKETING_ACQUISITION</div>
-        <div class="phase-t">マーケティング・集客工場</div>
-        <div class="phase-d">営業・案件獲得の動きも含め、集客につながる施策の実行を担当します。</div>
-        <span class="phase-tag">稼働中</span>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">03 · AI_DEVELOPMENT</div>
-        <div class="phase-t">自社AI開発工場</div>
-        <div class="phase-d">自社プロダクトのアイデア評価から開発案件の推進までを担当する工場です。</div>
-        <span class="phase-tag">稼働中</span>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">04 · IOS_DEVELOPMENT</div>
-        <div class="phase-t">iOSアプリ開発工場</div>
-        <div class="phase-d">市場調査→企画評価→仕様設計までをAIが担当。実際にiOSアプリを開発し、実機での動作確認まで完了しています。</div>
-        <span class="phase-tag">稼働中</span>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">05 · PMO_PROJECT</div>
-        <div class="phase-t">PMO・案件管理工場</div>
-        <div class="phase-d">案件やプロジェクトの進行管理・課題管理を横断的に担当します。</div>
-        <span class="phase-tag">稼働中</span>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">06 · ANALYTICS_IMPROVEMENT</div>
-        <div class="phase-t">分析・改善工場</div>
-        <div class="phase-d">公開済みコンテンツのアクセス状況などを分析し、改善提案を作成します。</div>
-        <span class="phase-tag">稼働中</span>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">07 · MONETIZATION</div>
-        <div class="phase-t">収益化工場</div>
-        <div class="phase-d">収益データを一元管理し、KPIとして各工場・管制塔に反映します。</div>
-        <span class="phase-tag">稼働中</span>
-      </div>
-      <div class="phase-item">
+      <div class="phase-item span-full">
         <div class="phase-n">CONTROL TOWER</div>
-        <div class="phase-t">AI工場モニタ</div>
-        <div class="phase-d">総売上・粗利・稼働工場数・実行中Task・承認待ち・エラー件数・AI利用コストなどを1画面に集約する管制塔です。工場ではなく、7工場を横断して見るための共通ダッシュボードという位置づけです。</div>
+        <div class="phase-t">AI工場モニタ（管制塔）</div>
+        <div class="phase-d">総売上・粗利・稼働工場数・実行中Task・承認待ち・エラー件数・AI利用コストなどを1画面に集約します。工場ではなく、7工場を横断して見るための共通ダッシュボードです。</div>
         <span class="phase-tag">管制塔</span>
       </div>
     </div>
@@ -435,7 +526,7 @@ img{max-width:100%}
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">01</span><span class="feat-title">コンテンツ・SEO工場</span></div>
-      <p class="feat-d">素材収集から執筆、事実確認、公開まで、ブログ記事の制作を自動で進めています。クライアント向け記事は構成案の承認から本文の仕上げまで自動で進み、修正も対話形式で、どこがどう変わったかを確認しながら行えます。公開後もアクセスデータを取得し、リライト提案・動画化まで一気通貫でつながります。</p>
+      <p class="feat-d">素材収集から執筆、事実確認、公開まで、ブログ記事の制作を自動で進めています。クライアント向け記事は構成案の承認から本文の仕上げまで自動で進み、修正は対話形式で、どこがどう変わったかを確認しながら行えます。公開後はアクセスデータを取得して分析・改善工場に引き継ぎ、リライト提案・動画化までつながります。</p>
       <ol class="mini-steps">
         <li><strong>素材収集・事実抽出</strong> — 記事の元になる情報を集め、事実関係を整理します</li>
         <li><strong>検索意図・競合調査 → 本文執筆</strong> — Web検索を伴う調査をもとに、AIが本文を執筆します</li>
@@ -449,12 +540,12 @@ img{max-width:100%}
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">02</span><span class="feat-title">マーケティング・集客工場</span></div>
-      <p class="feat-d">「連絡への対応」と「発信・告知」の2種類を担当する工場です。Gmailを定期的に監視し、LPの問い合わせ・紹介・ランサーズ／クラウドワークス／Wantedly／LinkedInなどから届くメールを自動で検知。内容に応じて返信文・提案の骨子・料金の目安、または応募文の下書きをAIが作成します。あわせて、公開したブログ記事・Note・YouTube動画について、X・Threads・LinkedIn・Facebook・Instagramそれぞれの文体に合わせた告知文の下書きも作成します。実際の送信・投稿は人が行います。</p>
+      <p class="feat-d">制作したコンテンツを発信して見込み客を集め、案件につなげる工場です。公開した記事・Note・YouTube動画を、X・Threads・LinkedIn・Facebook・Instagramそれぞれの文体に合わせた告知文にして発信し、集客します。そこから届く問い合わせや、ランサーズ／クラウドワークス／Wantedly／LinkedInなどの案件メールはGmailの監視で自動検知し、返信文・提案の骨子・料金の目安、または応募文の下書きをAIが作成します。実際の送信・投稿は人が行います。</p>
       <ol class="mini-steps">
-        <li><strong>Gmailを定期的に監視</strong> — 対象の送信元からの新着メールを検知します（読み取り専用）</li>
+        <li><strong>公開コンテンツの告知文を作成</strong> — 「発信・告知Agent」が、記事・Note・動画をX・Threads・LinkedIn・Facebook・Instagram向けに書き分けます</li>
+        <li><strong>届いた連絡をGmailで検知</strong> — 問い合わせ・紹介・案件サイトの募集メールを定期的に監視します（読み取り専用）</li>
         <li><strong>内容に応じてAgentを振り分け</strong> — 問い合わせ・紹介は「提案・見積Agent」、クラウドソーシングの案件通知は「案件探し・応募Agent」が担当します</li>
         <li><strong>返信・提案・応募文の下書きを作成</strong> — 料金の目安は、公開中のLPに書かれている範囲だけを使います（無い金額は作りません）</li>
-        <li><strong>公開コンテンツの告知文も作成</strong> — 「発信・告知Agent」が、記事・Note・動画をX・Threads・LinkedIn・Facebook・Instagram向けに書き分けます</li>
         <li><strong>送信・投稿は人が行う</strong> — 下書きを確認し、実際の送信・応募・投稿は人が判断して行います</li>
       </ol>
       <div class="fig-frame"><img src="fig_ai_factory_marketing-acquisition.png" alt="マーケティング・集客工場の詳細画面。見込み客を集め案件につなげる工場として、Agent・Task・KPI（今月の取り込みメール件数）が表示されている" class="fig" loading="lazy" width="1536" height="900"></div>
@@ -463,11 +554,13 @@ img{max-width:100%}
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">03</span><span class="feat-title">自社AI開発工場</span></div>
-      <p class="feat-d">自社プロダクトのアイデアを整理し、検討状況を管理する工場です。思いついたアイデアはナレッジとして登録され、一覧で確認できます。AI工場OS自体の機能追加は、私たち（人）がClaude Codeで直接実装しています。</p>
+      <p class="feat-d">自社プロダクトの企画から、Claude Codeにそのまま渡せる「実装指示書」までを作る工場です。実装はClaude Code（AI）が担い、人は仕様書を承認するのが役目です。対象プロジェクトのソースの抜粋やデータベースの構成を踏まえて作るため、実際のプロダクトに合った指示書になります。</p>
       <ol class="mini-steps">
-        <li><strong>アイデアを登録</strong> — 思いついたプロダクトアイデア・改善案を起票します</li>
-        <li><strong>ナレッジとして一覧管理</strong> — 登録されたアイデアを一覧で確認できます</li>
-        <li><strong>検討・実装</strong> — 有望なアイデアから、人がClaude Codeを使って実装を進めます</li>
+        <li><strong>アイデアを登録</strong> — 思いついたときに、ダッシュボードや管制塔のiPhoneアプリからすぐに追加できます。対象のプロジェクトと紐づけて起票します</li>
+        <li><strong>企画・要件定義・設計</strong> — 実際のソースの抜粋やデータベースの構成を踏まえ、AIが下書きします</li>
+        <li><strong>実装指示書・テスト観点</strong> — Claude Codeに貼ればそのまま実装できる指示書と、確認すべきテスト観点を作成します</li>
+        <li><strong>リリース手順 → 承認</strong> — 本番への反映手順をまとめ、人が承認してから進みます</li>
+        <li><strong>自動でClaude Codeに渡して実装</strong> — 承認された指示書は自動でClaude Code（AI）に渡され、実装まで進みます。完了するとAI工場へ戻ります</li>
       </ol>
       <div class="fig-frame"><img src="fig_ai_factory_ai-development.png" alt="自社AI開発工場の詳細画面。自社プロダクトのアイデア評価から開発案件の推進までを担当するAgent・Task・KPIが表示されている" class="fig" loading="lazy" width="1536" height="900"></div>
       <p class="fig-cap">自社AI開発工場の詳細画面（実際の画面。数値はデモデータです）</p>
@@ -475,12 +568,13 @@ img{max-width:100%}
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">04</span><span class="feat-title">iOSアプリ開発工場</span></div>
-      <p class="feat-d">iOSアプリの企画をAIが担当する工場です。この工場の企画をもとに実際に作ったのが、管制塔のiPhoneアプリ（ホーム・工場・アラート・提案の4画面）。外出先からでもスマホで工場の稼働状況を確認でき、ログインして安全に利用できます。</p>
+      <p class="feat-d">iOSアプリの企画から、実装、実機での動作確認までを、この工場で行います。管制塔のiPhoneアプリも、この仕組みで作りました。</p>
       <ol class="mini-steps">
-        <li><strong>市場調査</strong> — Web検索で競合アプリ・ニーズをAIが調べます</li>
-        <li><strong>MVPスコープの評価</strong> — 最初に作るべき機能範囲をAIが整理します</li>
-        <li><strong>仕様設計</strong> — 画面構成や仕様をAIが下書きします（ここまでがAIによる自動化工程です）</li>
-        <li><strong>実装・実機確認</strong> — 上記の設計をもとに、人がClaude Codeで実装し、実際のiPhoneでの動作まで確認しました</li>
+        <li><strong>市場調査</strong> — Web検索で競合アプリやニーズをAIが調べます</li>
+        <li><strong>MVPスコープの評価</strong> — 最初に作るべき機能の範囲をAIが整理します</li>
+        <li><strong>仕様設計</strong> — 画面構成や仕様をAIが下書きし、人が承認します</li>
+        <li><strong>実装</strong> — 承認された仕様をもとに、Claude Code（AI）が実装します</li>
+        <li><strong>実機での動作確認</strong> — 実際のiPhoneにインストールし、動作を確認します</li>
       </ol>
       <div class="fig-frame"><img src="fig_ai_factory_ios-development.png" alt="iOSアプリ開発工場の詳細画面。市場調査から仕様設計、実機動作確認までを担当するAgent・Task・KPIが表示されている" class="fig" loading="lazy" width="1536" height="900"></div>
       <p class="fig-cap">iOSアプリ開発工場の詳細画面（実際の画面。数値はデモデータです）</p>
@@ -488,9 +582,9 @@ img{max-width:100%}
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">05</span><span class="feat-title">PMO・プロジェクト管理工場</span></div>
-      <p class="feat-d">案件やプロジェクトの進捗をコードで正確に集計し、レポートを作成する工場です。あわせて、思いついたことを自由入力するだけで、AIが「ナレッジ」「予定」「アプリの企画」のいずれかに振り分けて提案する『クイック入力』機能も、この工場が担当しています。</p>
+      <p class="feat-d">案件やプロジェクトの進捗を正確に集計し、レポートを作成する工場です。あわせて、思いついたことを自由入力するだけで、AIが「ナレッジ」「予定」「アプリの企画」のいずれかに振り分けて提案する『クイック入力』機能も、この工場が担当しています。</p>
       <ol class="mini-steps">
-        <li><strong>各工場の進捗・課題を横断集計</strong> — Task・Workflowの状況をコードで正確に集計します（AIに数字を作らせません）</li>
+        <li><strong>各工場の進捗・課題を横断集計</strong> — Task・Workflowの状況を正確に集計します（AIに数字を作らせません）</li>
         <li><strong>レポートを作成</strong> — 遅延・リスクをまとめた報告を作成します</li>
         <li><strong>クイック入力を受付</strong> — 「思いついたこと」を自由入力すると、AIが内容を読み取ります</li>
         <li><strong>内容に応じて提案</strong> — ナレッジ登録・予定・アプリ企画のいずれかを提案し、人が確認して登録します</li>
@@ -501,12 +595,13 @@ img{max-width:100%}
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">06</span><span class="feat-title">分析・改善工場</span></div>
-      <p class="feat-d">運転データ（実行状況・アラート・KPI・収益など）をコードで正確に集計し、そこから改善提案だけをAIが作成する工場です。集計自体はAIに任せず、コードで行います。</p>
+      <p class="feat-d">「分析」と「改善」を担う、循環の要の工場です。公開した記事の検索流入（Google Search Console）やインデックス状況、運転データ（実行状況・アラート・KPI・収益）を正確に集計し、そこから改善提案だけをAIが作成します。集計自体はAIに任せません。</p>
       <ol class="mini-steps">
-        <li><strong>運転データをコードで集計</strong> — 実行状況・エラー・KPI・収益などを正確に集めます</li>
-        <li><strong>集計結果をAIが分析</strong> — 傾向や変化をAIが読み取ります</li>
-        <li><strong>改善提案を作成</strong> — 具体的な改善アクションをAIが下書きします</li>
-        <li><strong>各工場にフィードバック</strong> — 「AIからの提案」として管制塔に表示されます</li>
+        <li><strong>公開後のデータを毎晩取得</strong> — 検索流入・Googleへの登録状況を自動で取得して集計します</li>
+        <li><strong>直す価値のある記事を抽出</strong> — 表示回数・クリック率・順位などの基準で、リライト候補をルールで絞り込みます</li>
+        <li><strong>AIが改善案を作成</strong> — 候補ごとに、タイトルや構成をどう直すかの具体案を下書きします（記事は書き換えません）</li>
+        <li><strong>検討開始／見送りを人が選ぶ</strong> — 提案は一覧で管理され、「AIからの提案」として管制塔にも表示されます</li>
+        <li><strong>承認を経てリライトを実行</strong> — 検討開始にした提案は、承認と二段階の確認を経て本番に反映する仕組みです</li>
       </ol>
       <div class="fig-frame"><img src="fig_ai_factory_analytics-improvement.png" alt="分析・改善工場の詳細画面。公開済みコンテンツのアクセス状況などを分析し改善提案を作成するAgent・Task・KPIが表示されている" class="fig" loading="lazy" width="1536" height="900"></div>
       <p class="fig-cap">分析・改善工場の詳細画面（実際の画面。数値はデモデータです）</p>
@@ -514,10 +609,10 @@ img{max-width:100%}
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">07</span><span class="feat-title">収益化工場</span></div>
-      <p class="feat-d">実際の売上データをコードで正確に集計し、収益化の状況を見える化する工場です。案件・業務委託、コンサル・顧問、Note販売、SaaS・ツールなど、収益源ごとの内訳をAI工場モニタに反映します。</p>
+      <p class="feat-d">実際の売上データを正確に集計し、収益化の状況を見える化する工場です。案件・業務委託、コンサル・顧問、Note販売、SaaS・ツールなど、収益源ごとの内訳をAI工場モニタに反映します。</p>
       <ol class="mini-steps">
         <li><strong>取引実績を取り込む</strong> — 案件・業務委託などの実売上データを取り込みます</li>
-        <li><strong>収益源ごとにコードで集計</strong> — 案件・コンサル・Note販売・SaaS等の内訳を正確に整理します</li>
+        <li><strong>収益源ごとに集計</strong> — 案件・コンサル・Note販売・SaaS等の内訳を正確に整理します</li>
         <li><strong>KPIとして管制塔に反映</strong> — 総売上・粗利などをAI工場モニタに表示します</li>
         <li><strong>コスト超過はアラートで通知</strong> — AI利用コストが上限に近づくと警告を出します</li>
       </ol>
@@ -625,13 +720,24 @@ img{max-width:100%}
     <p class="sec-lead">コンセプトの説明だけでなく、実際にAI工場OSが動かして生まれた成果物をご紹介します。</p>
 
     <div class="feat">
-      <div class="feat-h"><span class="feat-tag">コンテンツ・SEO工場</span><span class="feat-title">ブログ記事の自動生成・公開</span></div>
-      <p class="feat-d">Web検索を伴う構成案の作成から、承認、本文執筆、承認、自社ブログへの公開まで、実際に稼働させて複数記事を公開しています。クライアント向け記事制作にも同じラインを応用し、構成→承認→本文執筆の並行実行に対応しています。</p>
+      <div class="feat-h"><span class="feat-tag">一周の実例</span><span class="feat-title">記事を作って、発信して、分析して、改善する</span></div>
+      <p class="feat-d">1本の記事を起点に、循環を実際に一周させています。人が手を入れるのは、承認と、改善案を採るか見送るかの判断だけです。</p>
+      <ol class="mini-steps">
+        <li><strong>作る</strong> — Web検索を伴う調査と構成案づくりから、承認、本文執筆、事実確認までをAIが進め、承認された記事を自社ブログに公開しています</li>
+        <li><strong>発信する</strong> — 公開した記事を、X・Threads・LinkedIn・Facebook・Instagram向けの告知文に書き分けます。さらに記事をもとにYouTube動画とショート動画を作り、実際にチャンネルへ投稿しています</li>
+        <li><strong>分析する</strong> — 毎晩02:00の自動実行で、検索流入とGoogleへの登録状況を取得して集計します</li>
+        <li><strong>改善する</strong> — 直す価値のある記事を見つけてAIがリライト案を提案し、人が「検討開始」か「見送り」かを選びます</li>
+      </ol>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">コンテンツ・SEO工場</span><span class="feat-title">クライアント向け記事制作にも同じラインを応用</span></div>
+      <p class="feat-d">自社ブログと同じラインを、クライアント向け記事の制作にも使っています。構成→承認→本文執筆を、複数の記事で並行して実行できます。</p>
     </div>
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">連携先：動画制作</span><span class="feat-title">記事→YouTube動画→ショート動画への自動展開</span></div>
-      <p class="feat-d">公開した記事の内容をもとに、姉妹プロジェクトの動画生成基盤と連携してYouTube動画を自動生成し、実際にチャンネルへ投稿しています。ナレーション・字幕・シーン構成までを一気通貫で作成し、さらにInstagramリールやTikTok向けのショート動画まで自動で作成しています。</p>
+      <p class="feat-d">公開した記事の内容をもとに、姉妹プロジェクトの動画生成基盤と連携してYouTube動画を自動生成しています。ナレーション・字幕・シーン構成までを一気通貫で作成し、Instagramリールやショート動画向けの縦型動画も作れます。投稿は人が確認してから行います。</p>
     </div>
 
     <div class="feat">
@@ -640,8 +746,8 @@ img{max-width:100%}
     </div>
 
     <div class="feat">
-      <div class="feat-h"><span class="feat-tag">自社AI開発工場</span><span class="feat-title">自社プロダクトのアイデア管理</span></div>
-      <p class="feat-d">自社プロダクトのアイデアをナレッジとして登録・一覧管理しています。AI工場OS自体の機能追加は、私たちがClaude Codeを使って直接実装しており、自分たちが使うツールを自分たちで作り、使いながら直していくサイクルを実践しています。</p>
+      <div class="feat-h"><span class="feat-tag">自社AI開発工場</span><span class="feat-title">企画から「実装指示書」までをAIが作る</span></div>
+      <p class="feat-d">実際のソースの抜粋やデータベースの構成を踏まえて、企画・要件定義・設計・Claude Code向けの実装指示書・テスト観点・リリース手順までをAIが作成します。人が仕様書を承認すると、実装はClaude Code（AI）が進めます。AI工場OS自体の機能追加も同じ方法で行っており、自分たちが使うツールを、自分たちで作り、使いながら直していくサイクルを実践しています。</p>
     </div>
 
     <div class="feat">
@@ -705,6 +811,18 @@ img{max-width:100%}
 
     <div class="faq-list">
       <details class="faq-item">
+        <summary>一人（少人数）でも、本当にこれだけの業務を回せますか？</summary>
+        <div class="faq-a">私たち自身が、一人でこの仕組みを使って、記事・動画・営業・開発・管理を回しています。クリエイティブな作業も含めてAIが下書きまで進め、人は承認や判断の確認に集中する、という分担です。「AIが9割、人が1割」は実測値ではなく目指している分担です。</div>
+      </details>
+      <details class="faq-item">
+        <summary>AIが間違った内容を作ったら、どうなりますか？</summary>
+        <div class="faq-a">外部への公開・送信・本番への反映は、人が確認して承認しない限り実行されません。記事は事実確認の工程を通し、承認時には前の工程の成果物と並べて確認できます。却下や修正の指示も、対話形式で行えます。</div>
+      </details>
+      <details class="faq-item">
+        <summary>自社の業務にも当てはめられますか？まず何から始めればよいですか？</summary>
+        <div class="faq-a">業務の種類ごとに「工場」を分ける考え方なので、記事制作、営業の下書き、問い合わせ対応、レポート作成など、どの業務からでも始められます。まず1つの業務で「AIが下書き、人が承認」の流れを作り、うまくいけば広げていくのがおすすめです。具体的な進め方や期間は業務内容によって変わるため、無料相談でお聞かせください。</div>
+      </details>
+      <details class="faq-item">
         <summary>AI工場OSは外部の会社にも提供してもらえますか？</summary>
         <div class="faq-a">現時点ではパッケージ製品としての外部提供は行っていません。ただし、同じ考え方（AIが下書きし人が承認する、全実行をログに残す）で貴社専用の仕組みを構築するご相談は承っています。まずは無料相談からお気軽にお問い合わせください。</div>
       </details>
@@ -731,8 +849,8 @@ img{max-width:100%}
 <section class="cta-section" id="contact">
   <div class="wrap">
     <div class="sec-tag" style="text-align:center">CONTACT</div>
-    <h2 class="sec-title">同じような仕組みを、貴社専用に。</h2>
-    <p class="sec-lead" style="margin-left:auto;margin-right:auto;text-align:center">AI工場OSはパッケージ製品ではありませんが、「AIが下書きし人が承認する」「全実行を記録する」という設計思想は、業種を問わず応用できます。自社の業務自動化にご興味があれば、お気軽にご相談ください。</p>
+    <h2 class="sec-title">一人で回し切れない業務を、仕組みに。</h2>
+    <p class="sec-lead" style="margin-left:auto;margin-right:auto;text-align:center">AI工場OSはパッケージ製品ではありませんが、「AIが9割を下書きし、人が最後の確認をする」「全実行を記録する」という設計思想は、業種を問わず応用できます。同じ悩みをお持ちでしたら、お気軽にご相談ください。</p>
     <div class="cta-cards">
       <a href="https://shikou-ai.com/contact.html" class="cta-card">
         <div class="cta-card-icon">🔗</div>
@@ -745,7 +863,7 @@ img{max-width:100%}
 
 <footer class="site-footer">
   <div class="wrap">
-    SHIKOU × AI / AI工場OS — 自社の7業務をAIとオートメーションで動かす運用基盤 © 2026 ｜ <a href="https://shikou-ai.com/index.html">トップページに戻る</a>
+    SHIKOU × AI / AI工場OS — 一人で回し切れない業務を、AI 9割・人 1割で回す運用基盤 © 2026 ｜ <a href="https://shikou-ai.com/index.html">トップページに戻る</a>
   </div>
 </footer>
 
