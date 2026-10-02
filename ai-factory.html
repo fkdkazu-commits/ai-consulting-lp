@@ -103,6 +103,7 @@ img{max-width:100%}
 .fig-frame{background:linear-gradient(160deg,#1c2b3a 0%,#0b1622 100%);border-radius:14px;padding:10px;margin:8px 0 10px;box-shadow:0 14px 32px rgba(6,55,44,.14);transition:box-shadow .2s,transform .2s}
 .fig-frame:hover{box-shadow:0 18px 40px rgba(6,55,44,.22);transform:translateY(-2px)}
 .fig{width:100%;height:auto;border-radius:7px;display:block;cursor:zoom-in}
+.fig-frame--light{background:#fff;border:1px solid var(--line);box-shadow:0 10px 24px rgba(6,55,44,.08)}
 .fig-cap{font-size:12.5px;color:var(--gray-light);text-align:center;margin-bottom:8px;line-height:1.85}
 .lightbox{position:fixed;inset:0;z-index:200;background:rgba(11,33,56,.86);display:flex;align-items:center;justify-content:center;padding:32px;opacity:0;pointer-events:none;transition:opacity .2s}
 .lightbox.is-open{opacity:1;pointer-events:auto}
@@ -651,12 +652,16 @@ img{max-width:100%}
 <section class="section alt" id="quality-security">
   <div class="wrap">
     <div class="sec-tag">AI QUALITY &amp; SECURITY</div>
-    <h2 class="sec-title">AIの出力を点数で評価し、攻撃への強さも試す。</h2>
-    <p class="sec-lead">AIに任せる以上、「出てきた内容が正しいか」「悪意ある指示に引きずられないか」を確かめる仕組みが欠かせません。AI工場OSは、AIの実行・評価・安全性の確認・改善を、同じ基盤の上で一体にしています。評価の基準も、攻撃テストの中身も、ゼロから独自に設計しました。</p>
+    <h2 class="sec-title">AIを動かすだけではなく、AIの仕事ぶりまで管理する。</h2>
+    <p class="prose-highlight" style="margin:0 0 14px"><mark>AIの出力を点数で評価し、攻撃への強さも試す。</mark></p>
+    <p class="sec-lead">AIに仕事を任せる以上、「出てきた内容が正しいか」「悪意ある指示に引きずられないか」を確かめる仕組みが欠かせません。AI工場OSは、AIの実行・評価・安全性の確認・改善を、同じ基盤の上で一体化しています。評価の基準も、攻撃テストの中身も、ゼロから独自に設計しました。</p>
+
+    <div class="fig-frame fig-frame--light"><img src="fig_ai_factory_quality_security.png" alt="AI QUALITY &amp; SECURITYの全体像。AIが実行し、品質評価（自動）、セキュリティテスト（手動）、ポリシー適用を経て、管制塔で確認・改善する。すべての実行・評価・テストが、共通基盤の1つの実行ログにつながる" class="fig" loading="lazy" width="1672" height="941"></div>
+    <p class="fig-cap">AI QUALITY &amp; SECURITYの全体像（イメージ図です。点数などの数値は例示です）</p>
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">品質評価</span><span class="feat-title">出力を4つの観点で採点する</span></div>
-      <p class="feat-d">Agentが作った出力を、正確性・忠実性・ハルシネーション・指示の遵守の4つの観点で評価します。点数はAIの感覚には任せません。AIの判定は「材料」にとどめ、最終の点数は決まった計算式で確定します。同じ結果なら、いつ計算しても同じ点数になります。</p>
+      <p class="feat-d">Agentが作った出力を、正確性・根拠との一致・ハルシネーション・指示の遵守の4つの観点で評価します。点数はAIの感覚には任せません。AIの判定は「材料」にとどめ、最終の点数は決まった計算式で確定します。同じ結果なら、いつ計算しても同じ点数になります。</p>
       <ol class="mini-steps">
         <li><strong>Agentが実行する</strong> — Taskが完了するたびに自動で評価するかを、Agentごとに設定できます</li>
         <li><strong>AIが評価の材料を出す</strong> — 根拠の抜粋、裏付けのない主張、守られなかった指示を洗い出します</li>
@@ -676,7 +681,7 @@ img{max-width:100%}
           <ul><li>「これまでの指示を無視して…」のような悪意ある指示に、引きずられないか</li></ul>
         </div>
         <div class="role-card">
-          <div class="role-h">情報の越権アクセス</div>
+          <div class="role-h">情報漏洩・越権アクセス</div>
           <ul><li>見せてはいけない資料の内容を、聞き出されて答えてしまわないか</li></ul>
         </div>
         <div class="role-card">
@@ -882,7 +887,7 @@ img{max-width:100%}
       </details>
       <details class="faq-item">
         <summary>AIの出力の品質や、安全性は、どう確認していますか？</summary>
-        <div class="faq-a">出力は、正確性・忠実性・ハルシネーション・指示の遵守の4つの観点で点数化し、合格ラインに満たないものは人が確認します。あわせて、悪意ある指示や情報の聞き出しにAgentが耐えられるかを試す、攻撃テストも用意しています。点数や判定の確定は、AIの感覚ではなく決まった計算式で行います。</div>
+        <div class="faq-a">出力は、正確性・根拠との一致・ハルシネーション・指示の遵守の4つの観点で点数化し、合格ラインに満たないものは人が確認します。あわせて、悪意ある指示や情報の聞き出しにAgentが耐えられるかを試す、攻撃テストも用意しています。点数や判定の確定は、AIの感覚ではなく決まった計算式で行います。</div>
       </details>
       <details class="faq-item">
         <summary>AIにどこまで任せているのですか？</summary>
