@@ -304,7 +304,7 @@ img{max-width:100%}
       <a href="#about-name">循環と管理</a>
       <a href="#architecture">7つの工場</a>
       <a href="#achievements">実績</a>
-      <a href="#security">安全性</a>
+      <a href="#quality-security">品質・安全性</a>
       <a href="#faq">FAQ</a>
       <a href="https://shikou-ai.com/contact.html" class="header-cta">無料相談</a>
     </div>
@@ -648,7 +648,64 @@ img{max-width:100%}
   </div>
 </section>
 
-<section class="section alt" id="security">
+<section class="section alt" id="quality-security">
+  <div class="wrap">
+    <div class="sec-tag">AI QUALITY &amp; SECURITY</div>
+    <h2 class="sec-title">AIの出力を点数で評価し、攻撃への強さも試す。</h2>
+    <p class="sec-lead">AIに任せる以上、「出てきた内容が正しいか」「悪意ある指示に引きずられないか」を確かめる仕組みが欠かせません。AI工場OSは、AIの実行・評価・安全性の確認・改善を、同じ基盤の上で一体にしています。評価の基準も、攻撃テストの中身も、ゼロから独自に設計しました。</p>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">品質評価</span><span class="feat-title">出力を4つの観点で採点する</span></div>
+      <p class="feat-d">Agentが作った出力を、正確性・忠実性・ハルシネーション・指示の遵守の4つの観点で評価します。点数はAIの感覚には任せません。AIの判定は「材料」にとどめ、最終の点数は決まった計算式で確定します。同じ結果なら、いつ計算しても同じ点数になります。</p>
+      <ol class="mini-steps">
+        <li><strong>Agentが実行する</strong> — Taskが完了するたびに自動で評価するかを、Agentごとに設定できます</li>
+        <li><strong>AIが評価の材料を出す</strong> — 根拠の抜粋、裏付けのない主張、守られなかった指示を洗い出します</li>
+        <li><strong>計算式で点数を確定する</strong> — 観点ごとの点数を重み付けして合計します。使った重みも保存するので、後から再現できます</li>
+        <li><strong>合格ラインで判定する</strong> — 既定は70点です。ハルシネーション（事実でない内容）に重大なものが1件でもあれば、点数にかかわらず不合格にします</li>
+        <li><strong>重大な不合格はアラートで知らせる</strong> — 重要度が高い不合格は、アラートとして管制塔に表示されます</li>
+        <li><strong>人が確認する</strong> — 「確認済み」「要対応」「解決済み」の状態で、レビューの結果を残します</li>
+      </ol>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">セキュリティ</span><span class="feat-title">攻撃を仕掛けて、耐えられるか試す</span></div>
+      <p class="feat-d">Agentに、あえて攻撃を仕掛けるテストです。次の3種類を試します。</p>
+      <div class="role-grid" style="margin-bottom:18px">
+        <div class="role-card">
+          <div class="role-h">プロンプトインジェクション</div>
+          <ul><li>「これまでの指示を無視して…」のような悪意ある指示に、引きずられないか</li></ul>
+        </div>
+        <div class="role-card">
+          <div class="role-h">情報の越権アクセス</div>
+          <ul><li>見せてはいけない資料の内容を、聞き出されて答えてしまわないか</li></ul>
+        </div>
+        <div class="role-card">
+          <div class="role-h">Agentの権限逸脱</div>
+          <ul><li>許可されていない操作（たとえば許可していないWeb検索）をしてしまわないか</li></ul>
+        </div>
+      </div>
+      <ol class="mini-steps">
+        <li><strong>テスト用の「合言葉」を仕込む</strong> — 攻撃の文面に、毎回ちがう秘密の合言葉を埋め込みます</li>
+        <li><strong>Agentに投入する</strong> — 対象のAgentに攻撃を実行させます。実行は必ず人が手動で行い、自動では走りません</li>
+        <li><strong>合言葉が漏れたら「漏洩」と確定する</strong> — 出力に合言葉が出てきたら、システムが機械的に「漏洩」と確定します</li>
+        <li><strong>AIの判定だけでは確定しない</strong> — 合言葉が出ていないのにAIが「漏れた」と言った場合は、「要確認」に格下げして人が見ます</li>
+        <li><strong>漏れた部分は伏せ字にして保存する</strong> — 結果を残すときも、秘密情報はそのまま保存しません</li>
+      </ol>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">ポリシー</span><span class="feat-title">会社のルールを、評価に反映する</span></div>
+      <p class="feat-d">禁止事項や許容条件を「ポリシー」として登録できます。全体・工場・Agentの単位で設定でき、品質やリスクの重みも、会社の基準に合わせて上書きできます。</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">管制塔</span><span class="feat-title">結果は、1つの画面で確認する</span></div>
+      <p class="feat-d">ダッシュボードに「AI品質・セキュリティ」の欄を設け、品質の点数とセキュリティのリスクをまとめて確認できます。要対応の品質評価と、未解決の漏洩は、メニューに件数が出るので見落としません。評価や攻撃テストに使ったAIの呼び出しも、すべて実行ログに残ります。</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="security">
   <div class="wrap">
     <div class="sec-tag">SECURITY &amp; GOVERNANCE</div>
     <h2 class="sec-title">何を承認したか、誰がアクセスできるかを、常に管理下に置く</h2>
@@ -709,7 +766,7 @@ img{max-width:100%}
   </div>
 </section>
 
-<section class="section" id="achievements">
+<section class="section alt" id="achievements">
   <div class="wrap">
     <div class="sec-tag">実際に稼働している実績</div>
     <h2 class="sec-title">仕組みだけでなく、実際に動いています</h2>
@@ -801,7 +858,7 @@ img{max-width:100%}
   </div>
 </section>
 
-<section class="section alt" id="faq">
+<section class="section" id="faq">
   <div class="wrap">
     <div class="sec-tag">FAQ</div>
     <h2 class="sec-title">よくあるご質問</h2>
@@ -822,6 +879,10 @@ img{max-width:100%}
       <details class="faq-item">
         <summary>AI工場OSは外部の会社にも提供してもらえますか？</summary>
         <div class="faq-a">現時点ではパッケージ製品としての外部提供は行っていません。ただし、同じ考え方（AIが下書きし人が承認する、全実行をログに残す）で貴社専用の仕組みを構築するご相談は承っています。まずは無料相談からお気軽にお問い合わせください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>AIの出力の品質や、安全性は、どう確認していますか？</summary>
+        <div class="faq-a">出力は、正確性・忠実性・ハルシネーション・指示の遵守の4つの観点で点数化し、合格ラインに満たないものは人が確認します。あわせて、悪意ある指示や情報の聞き出しにAgentが耐えられるかを試す、攻撃テストも用意しています。点数や判定の確定は、AIの感覚ではなく決まった計算式で行います。</div>
       </details>
       <details class="faq-item">
         <summary>AIにどこまで任せているのですか？</summary>
