@@ -200,6 +200,15 @@ img{max-width:100%}
 .section-cta-arrow{font-size:16px;transition:transform .15s}
 .section-cta:hover .section-cta-arrow{transform:translateX(3px)}
 
+/* ヒーロー直下の帯 */
+.qs-band{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 24px;background:#0b2138;color:#fff;text-decoration:none;padding:16px 24px}
+.qs-band:hover .qs-band-more{text-decoration:underline}
+.qs-band-tag{font-size:12px;font-weight:900;letter-spacing:.14em;color:var(--teal2)}
+.qs-band-items{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;font-size:14px;font-weight:700}
+.qs-band-items span{display:inline-flex;align-items:center;gap:8px}
+.qs-band-items span::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange)}
+.qs-band-more{font-size:13px;font-weight:700;color:var(--orange)}
+
 /* 悩み → 解決（AI Work Observerページと同じ型） */
 .pain-list{display:flex;flex-direction:column;gap:14px;margin-top:28px}
 .pain-pair{display:grid;grid-template-columns:1fr 40px 1fr;align-items:stretch;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
@@ -330,6 +339,7 @@ img{max-width:100%}
         <div class="hero-point"><span class="hero-point-icon">1</span>作る → 発信する → 分析 → 改善を1つの循環に</div>
         <div class="hero-point"><span class="hero-point-icon">2</span>プロジェクト・改善・収益を1つの管制塔で管理</div>
         <div class="hero-point"><span class="hero-point-icon">3</span>人は承認するだけ。任せきりにならない</div>
+        <div class="hero-point"><span class="hero-point-icon">4</span>AIの出力は点数で評価し、攻撃への強さも試験</div>
       </div>
       <div class="hero-btns hero-btns--in-copy">
         <a href="https://shikou-ai.com/contact.html" class="btn btn-primary">無料で相談する</a>
@@ -346,6 +356,12 @@ img{max-width:100%}
     </div>
   </div>
 </section>
+
+<a href="#quality-security" class="qs-band">
+  <span class="qs-band-tag">AI QUALITY &amp; SECURITY</span>
+  <span class="qs-band-items"><span>品質を点数で評価</span><span>攻撃への強さを試験</span><span>すべて実行ログに記録</span></span>
+  <span class="qs-band-more">詳しく見る →</span>
+</a>
 
 <section class="section alt" id="pain" style="padding:64px 0 56px">
   <div class="wrap">
