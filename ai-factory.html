@@ -94,6 +94,7 @@ img{max-width:100%}
 .device-mockup-bar{display:flex;align-items:center;gap:6px;padding:2px 4px 14px}
 .device-mockup-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18)}
 .hero-shot{display:block;width:100%;height:auto;border-radius:8px;cursor:zoom-in}
+.hero-shot--desktop{border-radius:0;filter:drop-shadow(0 28px 36px rgba(11,33,56,.28))}
 .device-stand{width:150px;height:26px;margin:0 auto;background:linear-gradient(160deg,#1c2b3a 0%,#0b1622 100%);clip-path:polygon(40% 0,60% 0,78% 100%,22% 100%)}
 .device-base{width:280px;height:12px;margin:6px auto 0;background:#0b1622;border-radius:8px;opacity:.9}
 .mock-visual-note{margin-top:18px;font-size:11.5px;color:var(--gray-light);text-align:center}
@@ -335,14 +336,7 @@ img{max-width:100%}
       </div>
     </div>
     <div class="hero-visual">
-      <div class="device-mockup">
-        <div class="device-mockup-bar">
-          <span class="device-mockup-dot"></span><span class="device-mockup-dot"></span><span class="device-mockup-dot"></span>
-        </div>
-        <img class="hero-shot" src="fig_ai_factory_hero_image.png" width="1560" height="860" alt="AI工場モニタのイメージ図。7つの工場を1枚のマップで見渡し、右側にAIからの提案とアラートが並ぶ" loading="lazy">
-      </div>
-      <div class="device-stand" aria-hidden="true"></div>
-      <div class="device-base" aria-hidden="true"></div>
+      <img class="hero-shot hero-shot--desktop" src="fig_ai_factory_hero_desktop.png" width="1536" height="1024" alt="AI工場モニタのイメージ図。パソコンの画面に、7つの工場のマップと、AIからの提案・アラートが表示されている" loading="lazy">
       <p class="mock-visual-note">AI工場モニタのイメージ図です（実際の画面は下に掲載しています）</p>
       <div class="hero-btns hero-btns--in-visual">
         <a href="https://shikou-ai.com/contact.html" class="btn btn-primary">無料で相談する</a>
