@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0E5BXJ21KH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-0E5BXJ21KH");
+</script>
+<title>AI Work Observer｜PC操作を見てAIが業務を理解し改善案を出すツール（SHIKOU × AI）</title>
+<meta name="description" content="自分のPC操作をAIが観察し、業務フローを言語化して改善案を提示するツール「AI Work Observer」の紹介ページ。簡単な業務はその場で自動化、複雑な業務はClaude Code向けの実装仕様書まで作成します。">
+<meta property="og:title" content="AI Work Observer｜PC操作を見る。AIが業務を理解する。改善案を出す。">
+<meta property="og:description" content="自動化ありきではなく、必要性→廃止→簡略化→既存サービス→自動化→新規開発の順でAIが考える、業務理解・改善提案ツールです。">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#2f6fd0; --accent-dark:#204f9c;
+  --ink:#1a1a2e; --gray:#64748b; --gray-dark:#4a5568; --gray-light:#94a3b8;
+  --line:#dde5f2; --line2:#e4eaf4;
+  --bg:#f5f8fc; --card:#edf2fa; --white:#fff;
+  --orange:#f0a54a; --orange-dark:#c05621;
+  --teal:#7fb0ff; --teal2:#a9c9ff;
+  --footer:#0b2138;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--ink);line-height:1.8;font-variant-numeric:tabular-nums}
+a{color:inherit}
+img{max-width:100%}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.section{padding:72px 0}
+.section.alt{background:var(--white)}
+.sec-tag{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.14em;margin-bottom:10px}
+.sec-title{font-size:clamp(22px,3.2vw,34px);font-weight:900;line-height:1.35;margin-bottom:14px;letter-spacing:-.01em;text-wrap:balance}
+.sec-lead{font-size:15px;color:var(--gray-dark);line-height:1.9;margin-bottom:36px;max-width:700px}
+
+/* header */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line2)}
+.header-inner{position:relative;max-width:1080px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;border:0;background:none;cursor:pointer;padding:0;flex-shrink:0}
+.nav-toggle-bar{display:block;width:100%;height:2px;background:var(--ink);border-radius:2px;transition:transform .2s,opacity .2s}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.back-to-top{position:fixed;right:24px;bottom:24px;z-index:60;width:46px;height:46px;border-radius:50%;background:var(--ink);color:#fff;border:0;font-size:19px;line-height:1;cursor:pointer;box-shadow:0 10px 22px rgba(11,33,56,.24);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .2s,transform .2s}
+.back-to-top.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
+.back-to-top:hover{background:var(--accent)}
+@media (max-width:640px){.back-to-top{right:16px;bottom:16px;width:42px;height:42px;font-size:17px}}
+.logo{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:#0b2138}
+.logo img{height:28px;width:auto;display:block}
+.logo .logo-t{font-size:15px;font-weight:900;letter-spacing:.08em;color:#0b2138}
+.logo .x{color:#2f6fd0;font-weight:700;margin:0 .16em}
+.header-links{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.header-links a{font-size:13px;font-weight:700;color:var(--gray-dark);text-decoration:none}
+.header-links a:hover{color:var(--accent)}
+.header-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#eef3fb 0%,var(--bg) 68%);padding:60px 0 56px}
+.hero::before{content:'';position:absolute;top:-160px;right:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(47,111,208,.12) 0%,rgba(47,111,208,0) 70%);pointer-events:none;z-index:0}
+.hero-dotgrid{position:absolute;top:0;left:0;width:240px;height:240px;background-image:radial-gradient(rgba(47,111,208,.4) 1.6px,transparent 1.6px);background-size:16px 16px;-webkit-mask-image:radial-gradient(circle at top left,#000 35%,transparent 78%);mask-image:radial-gradient(circle at top left,#000 35%,transparent 78%);pointer-events:none;z-index:0}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:0.88fr 1.2fr;gap:40px;align-items:center}
+.hero-copy{min-width:0}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--accent-dark);background:#fff;border:1px solid var(--line);padding:7px 18px;border-radius:24px;margin-bottom:24px;letter-spacing:.04em;box-shadow:0 2px 10px rgba(11,33,56,.06)}
+.hero-wordmark{font-size:clamp(26px,3.6vw,46px);font-weight:900;letter-spacing:-.01em;line-height:1.1;margin-bottom:16px}
+.hero-wordmark .tone-a{color:var(--orange-dark)}
+.hero-wordmark .tone-b{color:var(--ink)}
+.hero-tagline{font-size:clamp(18px,2.2vw,22px);font-weight:800;color:var(--ink);letter-spacing:.01em;margin-bottom:12px}
+.hero-category{font-size:13px;font-weight:800;color:var(--accent-dark);letter-spacing:.06em;margin-bottom:20px}
+.hero-copy h1.hero-h1-sub{font-size:clamp(17px,2vw,21px);font-weight:700;line-height:1.6;letter-spacing:0;margin-bottom:18px;color:var(--gray-dark);text-wrap:balance}
+.hero-sub{font-size:15px;color:var(--gray-dark);line-height:2;margin-bottom:20px;max-width:520px}
+.hero-highlight{background:#0b2138;color:#fff;border-radius:12px;padding:16px 20px;font-size:14px;line-height:1.85;margin-bottom:24px;max-width:560px}
+.hero-highlight strong{color:var(--orange);font-weight:900}
+.hero-points{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.hero-point{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;color:var(--ink);line-height:1.5}
+.hero-point-icon{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.hero-btns--in-visual{margin-top:28px;justify-content:center}
+@media (max-width:860px){.hero-btns--in-visual{display:none}}
+@media (min-width:861px){.hero-btns--in-copy{display:none}}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:700;padding:15px 34px;border-radius:999px;text-decoration:none}
+.btn-primary{background:var(--orange);color:var(--ink);box-shadow:0 8px 22px rgba(240,165,74,.3)}
+.btn-ghost{border:1px solid var(--line);color:var(--ink);padding:15px 30px;background:#fff}
+
+/* hero visual */
+.hero-visual{position:relative;min-width:0;max-width:100%;overflow:hidden}
+.device-mockup{background:linear-gradient(160deg,#1c2b3a 0%,#0b1622 100%);border-radius:22px;padding:16px 16px 20px;box-shadow:0 40px 70px rgba(11,33,56,.35)}
+.device-mockup-bar{display:flex;align-items:center;gap:6px;padding:2px 4px 14px}
+.device-mockup-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18)}
+.hero-shot{display:block;width:100%;height:auto;border-radius:8px;cursor:zoom-in}
+.device-stand{width:150px;height:26px;margin:0 auto;background:linear-gradient(160deg,#1c2b3a 0%,#0b1622 100%);clip-path:polygon(40% 0,60% 0,78% 100%,22% 100%)}
+.device-base{width:280px;height:12px;margin:6px auto 0;background:#0b1622;border-radius:8px;opacity:.9}
+.mock-visual-note{margin-top:18px;font-size:11.5px;color:var(--gray-light);text-align:center}
+
+/* ヒーロー用モックUI（実画面ではなく、横長・高密度に見せるためのコンセプトイメージ） */
+.mui{display:flex;background:#f3f6fb;border-radius:9px;overflow:hidden;width:100%}
+.mui-sidebar{width:92px;flex-shrink:0;background:#0f1a2e;padding:14px 11px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.mui-brand{display:flex;align-items:center;gap:6px;min-width:0}
+.mui-brand-mark{width:20px;height:20px;border-radius:6px;background:var(--accent);color:#fff;font-size:9.5px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mui-brand-name{font-size:8.5px;font-weight:900;color:#fff;line-height:1.3}
+.mui-nav{display:flex;flex-direction:column;gap:2px;min-width:0}
+.mui-nav-item{font-size:7.5px;font-weight:700;color:rgba(255,255,255,.5);padding:6px 7px;border-radius:5px;display:flex;align-items:center;gap:5px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.mui-nav-item .dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.7;flex-shrink:0}
+.mui-nav-item.active{background:rgba(255,255,255,.1);color:#fff}
+.mui-main{flex:1;min-width:0;padding:13px 14px 14px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+
+.mui-banner{position:relative;border-radius:9px;overflow:hidden;padding:14px 16px;background:linear-gradient(135deg,#0b2138 0%,#17386a 48%,#2f6fd0 100%);display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0}
+.mui-banner::before{content:'';position:absolute;top:-45%;right:-8%;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18) 0%,rgba(255,255,255,0) 70%)}
+.mui-banner-copy{position:relative;z-index:1;min-width:0;overflow:hidden}
+.mui-banner-title{font-size:13.5px;font-weight:900;color:#fff;line-height:1.4}
+.mui-banner-sub{font-size:8px;color:rgba(255,255,255,.62);margin-top:6px;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mui-banner-kpis{position:relative;z-index:1;display:flex;gap:12px;flex-shrink:0}
+.mui-kpi{text-align:right}
+.mui-kpi-val{font-size:14px;font-weight:900;color:var(--orange);line-height:1.2;white-space:nowrap}
+.mui-kpi-label{font-size:7px;color:rgba(255,255,255,.58);margin-top:3px;white-space:nowrap}
+
+.mui-steps{display:flex;align-items:center;overflow:hidden}
+.mui-step{display:flex;align-items:center;gap:5px;font-size:8.5px;font-weight:700;color:var(--gray-light);white-space:nowrap;flex-shrink:0}
+.mui-step-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:7px;color:var(--gray-light);flex-shrink:0}
+.mui-step.done .mui-step-dot{background:var(--accent);border-color:var(--accent);color:#fff}
+.mui-step.done{color:var(--ink)}
+.mui-step.active .mui-step-dot{border-color:var(--accent);color:var(--accent)}
+.mui-step.active{color:var(--ink)}
+.mui-step-line{width:22px;height:1px;background:var(--line);margin:0 6px;flex-shrink:1;min-width:6px}
+
+.mui-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:8px;flex:1;min-height:0;min-width:0}
+.mui-panel{background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 10px;min-width:0;overflow:hidden}
+.mui-panel-title{font-size:8px;font-weight:900;color:var(--ink);margin-bottom:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mui-row{display:flex;align-items:center;justify-content:space-between;gap:5px;font-size:7.5px;color:var(--gray-dark);padding:5px 0;border-top:1px solid var(--line2);min-width:0}
+.mui-row:first-of-type{border-top:0}
+.mui-row-name{font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.mui-badge-mini{font-size:6.5px;font-weight:700;padding:2px 5px;border-radius:4px;flex-shrink:0;white-space:nowrap}
+.mui-badge-mini.done{background:#dcf7ef;color:#0f9d74}
+.mui-badge-mini.doing{background:#e4ecfb;color:var(--accent-dark)}
+
+.mui-donut{width:48px;height:48px;border-radius:50%;background:conic-gradient(var(--accent) 0% 72%, var(--line) 72% 100%);display:flex;align-items:center;justify-content:center;margin:2px auto 8px}
+.mui-donut-inner{width:35px;height:35px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;color:var(--ink)}
+.mui-donut-label{font-size:7px;color:var(--gray);text-align:center;line-height:1.5}
+
+.mui-chat-item{font-size:7px;font-weight:700;color:var(--accent-dark);background:var(--card);border-radius:5px;padding:5px 7px;margin-bottom:5px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mui-chat-item:last-child{margin-bottom:0}
+@media (max-width:480px){
+  .mui-banner{flex-wrap:wrap;row-gap:10px}
+  .mui-banner-kpis{gap:10px}
+  .mui-kpi:nth-child(3){display:none}
+  .mui-grid{grid-template-columns:1fr 1fr}
+  .mui-grid>.mui-panel:nth-child(3){display:none}
+}
+
+/* 画面キャプチャ */
+.fig-frame{background:linear-gradient(160deg,#1c2b3a 0%,#0b1622 100%);border-radius:14px;padding:10px;margin:8px 0 10px;box-shadow:0 14px 32px rgba(11,33,56,.14);transition:box-shadow .2s,transform .2s}
+.fig-frame:hover{box-shadow:0 18px 40px rgba(11,33,56,.22);transform:translateY(-2px)}
+.fig{width:100%;height:auto;border-radius:7px;display:block;cursor:zoom-in}
+.fig-cap{font-size:12.5px;color:var(--gray-light);text-align:center;margin-bottom:8px;line-height:1.85}
+.lightbox{position:fixed;inset:0;z-index:200;background:rgba(11,33,56,.86);display:flex;align-items:center;justify-content:center;padding:32px;opacity:0;pointer-events:none;transition:opacity .2s}
+.lightbox.is-open{opacity:1;pointer-events:auto}
+.lightbox img{max-width:min(1100px,92vw);max-height:88vh;width:auto;border-radius:8px;box-shadow:0 30px 80px rgba(0,0,0,.5);cursor:zoom-out}
+.lightbox-close{position:absolute;top:20px;right:24px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lightbox-close:hover{background:rgba(255,255,255,.18)}
+.lightbox-cap{position:absolute;left:0;right:0;bottom:20px;text-align:center;color:rgba(255,255,255,.78);font-size:13px;padding:0 24px}
+@media (prefers-reduced-motion:reduce){.lightbox,.fig{transition:none}}
+
+.kpi-chip-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px}
+.kpi-chip{font-size:12.5px;font-weight:700;color:var(--accent-dark);background:var(--card);padding:6px 14px;border-radius:999px}
+
+.control-tower{display:flex;align-items:center;justify-content:center;gap:16px;max-width:520px;margin:32px auto 0;background:#0b2138;border-radius:16px;padding:22px 28px;box-shadow:0 14px 32px rgba(11,33,56,.18)}
+.control-tower-icon{width:48px;height:48px;border-radius:50%;background:rgba(240,165,74,.18);color:var(--orange);font-size:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.control-tower-title{font-size:17px;font-weight:900;color:#fff}
+.control-tower-sub{font-size:12.5px;color:rgba(255,255,255,.65);margin-top:2px}
+@media (max-width:480px){.control-tower{flex-direction:column;text-align:center;gap:10px}}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:16px;margin-top:8px}
+.kpi-card{background:#0b2138;border-radius:14px;padding:26px 22px;text-align:center;box-shadow:0 10px 24px rgba(11,33,56,.16)}
+.kpi-label{font-size:12.5px;font-weight:700;color:rgba(255,255,255,.55);margin-bottom:10px;letter-spacing:.03em}
+.kpi-val{font-size:25px;font-weight:900;color:var(--teal2);line-height:1.2}
+.kpi-card--orange .kpi-val{color:var(--orange)}
+.kpi-card--white .kpi-val{color:#fff}
+.price-note{font-size:12px;color:var(--gray-light);margin-top:9px;line-height:1.7}
+
+/* prose */
+.prose{font-size:15px;color:var(--gray-dark);line-height:1.95;max-width:700px}
+.prose+.prose{margin-top:14px}
+.prose strong{color:var(--ink)}
+.prose-highlight{margin:28px 0 8px}
+.prose-highlight mark{background:linear-gradient(180deg,transparent 60%,rgba(47,111,208,.2) 60%);color:var(--ink);font-size:19px;font-weight:900;line-height:1.9;padding:0 2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+/* 4ステップの流れ */
+.phase{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:2px;background:var(--line);border:1px solid var(--line);margin-top:8px}
+.phase-item{background:#fff;padding:24px 22px}
+.phase-item.span-full{grid-column:1/-1}
+.phase-n{font-size:11.5px;font-weight:900;color:var(--accent);letter-spacing:.1em;margin-bottom:10px}
+.phase-t{font-size:16px;font-weight:900;line-height:1.5;margin-bottom:9px}
+.phase-d{font-size:13.5px;color:var(--gray);line-height:1.85}
+.phase-tag{display:inline-block;margin-top:10px;font-size:11.5px;font-weight:700;color:var(--accent-dark);background:var(--card);padding:3px 10px;border-radius:6px}
+.phase-tag.pending{color:var(--orange-dark);background:#fdf1e2}
+
+/* 優先順位リスト（必要性→廃止→…→新規開発） */
+.priority-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:22px}
+.priority-step{background:#fff;border:1px solid var(--line);color:var(--gray-dark);font-size:12.5px;font-weight:700;padding:10px 14px;border-radius:8px;white-space:nowrap}
+.priority-step.is-last{background:var(--accent);border-color:var(--accent);color:#fff}
+.priority-arrow{color:var(--gray-light);font-size:14px;flex-shrink:0}
+@media (max-width:640px){.priority-row{gap:6px}.priority-step{font-size:11.5px;padding:8px 10px}}
+
+.examples-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:14px;margin-top:20px}
+.examples-card{background:#0b2138;border-radius:14px;padding:18px 18px 20px;box-shadow:0 10px 24px rgba(11,33,56,.14)}
+.examples-card-head{display:flex;align-items:center;gap:9px;margin-bottom:13px}
+.examples-card-no{width:22px;height:22px;border-radius:50%;color:#0b2138;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.examples-card-title{font-size:14.5px;font-weight:900;color:#fff}
+.examples-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;margin:0}
+.examples-card li{font-size:12.5px;color:rgba(255,255,255,.86);background:rgba(255,255,255,.07);border-radius:6px;padding:6px 10px;line-height:1.4}
+.examples-note{font-size:12px;color:var(--gray-light);margin-top:14px}
+
+.feat{margin-bottom:46px}
+.feat:last-child{margin-bottom:0}
+.feat-h{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.feat-tag{font-size:10.5px;font-weight:900;color:#fff;background:var(--accent);padding:4px 11px;border-radius:5px;letter-spacing:.06em;flex-shrink:0}
+.feat-tag.is-paid{background:var(--orange-dark)}
+.feat-title{font-size:18px;font-weight:900;line-height:1.5}
+.feat-d{font-size:14px;color:var(--gray-dark);line-height:1.9;margin-bottom:16px;max-width:760px}
+
+.mini-steps{list-style:none;counter-reset:step;margin:0 0 16px;max-width:760px}
+.mini-steps li{position:relative;padding-left:34px;margin-bottom:12px;font-size:14px;color:var(--gray-dark);line-height:1.8}
+.mini-steps li:last-child{margin-bottom:0}
+.mini-steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.mini-steps strong{color:var(--ink)}
+
+.svc-list{display:flex;flex-wrap:wrap;gap:2px;background:var(--line);border:1px solid var(--line);margin:26px 0 6px}
+.svc-row{background:#fff;padding:18px 20px;flex:1 1 190px}
+.svc-layer{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.08em;margin-bottom:7px}
+.svc-name{font-size:14px;font-weight:900;line-height:1.5}
+.svc-role{font-size:12.5px;color:var(--gray);line-height:1.7;margin-top:5px}
+
+/* 2つの使い方（導入カード） */
+.usage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:18px;margin-top:30px}
+.usage-card{display:block;background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 26px;text-decoration:none;transition:box-shadow .2s,transform .2s}
+.usage-card:hover{box-shadow:0 16px 32px rgba(11,33,56,.12);transform:translateY(-3px)}
+.usage-card.is-accent{background:#0b2138;border-color:#0b2138}
+.usage-card-num{width:34px;height:34px;border-radius:50%;background:var(--card);color:var(--accent-dark);font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.usage-card.is-accent .usage-card-num{background:rgba(255,255,255,.12);color:var(--orange)}
+.usage-card-label{font-size:10.5px;font-weight:900;color:var(--accent);letter-spacing:.08em;margin-bottom:9px}
+.usage-card.is-accent .usage-card-label{color:var(--orange)}
+.usage-card-title{font-size:18px;font-weight:900;color:var(--ink);margin-bottom:11px;line-height:1.5}
+.usage-card.is-accent .usage-card-title{color:#fff}
+.usage-card-desc{font-size:13.5px;color:var(--gray-dark);line-height:1.85}
+.usage-card.is-accent .usage-card-desc{color:rgba(255,255,255,.75)}
+.usage-card-link{margin-top:16px;font-size:12.5px;font-weight:700;color:var(--accent-dark);display:inline-flex;align-items:center;gap:5px}
+.usage-card.is-accent .usage-card-link{color:var(--orange)}
+
+/* お悩み → 解決（Before/After） */
+.pain-list{display:flex;flex-direction:column;gap:14px;margin-top:28px}
+.pain-pair{display:grid;grid-template-columns:1fr 40px 1fr;align-items:stretch;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.pain-before,.pain-after{padding:20px 22px;display:flex;flex-direction:column;justify-content:center}
+.pain-before{background:#fff}
+.pain-after{background:#0b2138}
+.pain-label{display:block;font-size:10.5px;font-weight:900;letter-spacing:.08em;margin-bottom:8px}
+.pain-before .pain-label{color:var(--gray)}
+.pain-after .pain-label{color:var(--orange)}
+.pain-before p,.pain-after p{font-size:14px;line-height:1.75;margin:0}
+.pain-before p{color:var(--gray-dark)}
+.pain-after p{color:#fff}
+.pain-after strong{color:var(--teal2)}
+.pain-arrow{display:flex;align-items:center;justify-content:center;background:#fff;color:var(--accent);font-size:17px;font-weight:900}
+@media (max-width:700px){.pain-pair{grid-template-columns:1fr}.pain-arrow{padding:6px 0;background:var(--card)}}
+
+.gw-panel{background:#0b2138;border-radius:16px;padding:32px 28px;margin:28px 0}
+.gw-panel-title{color:#fff;font-size:20px;font-weight:900;margin-bottom:4px}
+.gw-panel-sub{color:rgba(255,255,255,.65);font-size:13px;margin-bottom:26px}
+.gw-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.gw-step{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12.5px;font-weight:700;padding:11px 14px;border-radius:8px;text-align:center;white-space:nowrap}
+.gw-step.gw-external{background:var(--accent);border-color:var(--accent)}
+.gw-step.gw-critical{background:var(--orange-dark);border-color:var(--orange-dark)}
+.gw-arrow{color:rgba(255,255,255,.35);font-size:14px;flex-shrink:0}
+@media (max-width:640px){.gw-panel{padding:24px 18px}}
+
+/* 料金プラン（問い合わせ導線型） */
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:18px;margin-top:28px}
+.plan-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 26px}
+.plan-card.is-paid{border-color:var(--orange);box-shadow:0 10px 26px rgba(240,165,74,.14)}
+.plan-badge{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.06em;padding:4px 11px;border-radius:5px;margin-bottom:14px}
+.plan-card:not(.is-paid) .plan-badge{background:var(--card);color:var(--accent-dark)}
+.plan-card.is-paid .plan-badge{background:#fdf1e2;color:var(--orange-dark)}
+.plan-name{font-size:19px;font-weight:900;margin-bottom:10px}
+.plan-price{font-size:13px;color:var(--gray);margin-bottom:18px}
+.plan-list{list-style:none;display:flex;flex-direction:column;gap:9px}
+.plan-list li{font-size:13.5px;color:var(--gray-dark);line-height:1.7;padding-left:20px;position:relative}
+.plan-list li::before{content:'✓';position:absolute;left:0;color:var(--accent);font-weight:900}
+.plan-list li.is-no::before{content:'—';color:var(--gray-light)}
+.plan-note{font-size:12px;color:var(--gray-light);margin-top:24px;line-height:1.8}
+
+/* ── 控えめなセクション内CTA ── */
+.section-cta{margin-top:26px;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;color:var(--accent-dark);text-decoration:none}
+.section-cta:hover{text-decoration:underline}
+.section-cta-arrow{font-size:16px;transition:transform .15s}
+.section-cta:hover .section-cta-arrow{transform:translateX(3px)}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:2px;background:var(--line);border:1px solid var(--line);margin-top:8px}
+.faq-item{background:#fff}
+.faq-item summary{list-style:none;cursor:pointer;padding:20px 24px;font-size:15px;font-weight:700;color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'+';font-size:22px;font-weight:400;color:var(--accent);flex-shrink:0;transition:transform .15s}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-a{padding:0 24px 20px;font-size:14px;color:var(--gray-dark);line-height:1.9;max-width:760px}
+
+/* cta */
+.cta-section{background:#fff;padding:72px 0;text-align:center}
+.cta-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:30px;text-align:left}
+.cta-card{background:var(--card);border-radius:14px;padding:22px;display:flex;align-items:center;gap:16px;text-decoration:none}
+.cta-card-icon{width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cta-card-label{font-size:12px;color:#718096;margin-bottom:2px}
+.cta-card-val{font-size:15px;font-weight:700;word-break:break-all}
+.cta-note{font-size:13px;color:var(--gray-light)}
+
+.site-footer{background:var(--footer);color:rgba(255,255,255,.6);padding:30px 0;font-size:13px;text-align:center}
+.site-footer a{color:var(--teal);text-decoration:none}
+
+@media (max-width:860px){
+  .nav-toggle{display:flex}
+  .header-links{position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid var(--line2);flex-direction:column;align-items:stretch;padding:0 24px;display:none;gap:0}
+  .header-links.is-open{display:flex}
+  .header-links a:not(.header-cta){padding:13px 0;border-top:1px solid var(--line2)}
+  .header-links a.header-cta{margin-top:14px;text-align:center}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-visual{order:-1;width:100%;max-width:420px;margin:0 auto 8px}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="https://shikou-ai.com/index.html" class="logo"><img src="logo-mark.png" alt="SHIKOU × AI"><span class="logo-t">SHIKOU<span class="x">×</span>AI</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="headerLinks">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <div class="header-links" id="headerLinks">
+      <a href="https://shikou-ai.com/index.html">トップ</a>
+      <a href="#about">できること</a>
+      <a href="#screens">画面を見る</a>
+      <a href="#plan">無料版・有料版</a>
+      <a href="#security">プライバシー</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://shikou-ai.com/contact.html" class="header-cta">無料相談</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-dotgrid" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="hero-tag">✦ 自分のPCで動く、業務理解ツール</div>
+      <div class="hero-wordmark"><span class="tone-a">AI</span> <span class="tone-b">Work Observer</span></div>
+      <div class="hero-tagline">PC操作を見る。AIが業務を理解する。改善案を出す。</div>
+      <div class="hero-category">自動化ありきでは考えない。</div>
+      <h1 class="hero-h1-sub">自分の業務を、AIが「業務フロー」として言語化し、やめる・減らす・自動化の順で改善案を出すツールです。</h1>
+      <p class="hero-sub">
+        日々のPC操作（アプリの切り替え・クリック・入力の種別）をローカルに記録し、AIが「何のための、どういう業務か」を整理します。簡単な作業はその場で自動化アプリを生成し、複雑な業務はClaude Code向けの実装仕様書まで作成します。
+      </p>
+      <div class="hero-highlight">
+        <strong>「とりあえず自動化」ではなく、本当にその作業が必要かから考えます。</strong><br>
+        必要性 → 廃止 → 簡略化 → 既存サービスの活用 → 自動化 → 新規開発、という優先順位でAIに判断させる設計です。
+      </div>
+      <div class="hero-points">
+        <div class="hero-point"><span class="hero-point-icon">1</span>PC操作を記録し、AIが業務フローを言語化</div>
+        <div class="hero-point"><span class="hero-point-icon">2</span>4種類の改善案（単発自動化・連続自動化・業務再設計・外部サービス連携）を提示</div>
+        <div class="hero-point"><span class="hero-point-icon">3</span>簡単な業務はその場で自動化、複雑な業務は実装仕様書を生成</div>
+      </div>
+      <div class="hero-btns hero-btns--in-copy">
+        <a href="https://shikou-ai.com/contact.html" class="btn btn-primary">無料で相談する</a>
+        <a href="#screens" class="btn btn-ghost">画面を見る</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="device-mockup">
+        <div class="device-mockup-bar">
+          <span class="device-mockup-dot"></span><span class="device-mockup-dot"></span><span class="device-mockup-dot"></span>
+        </div>
+        <div class="mui" role="img" aria-label="AI Work Observerのイメージ画面。業務フロー分析から改善案提示までを1つの画面で確認できるダッシュボードのコンセプトイメージ">
+          <div class="mui-sidebar">
+            <div class="mui-brand">
+              <div class="mui-brand-mark">AI</div>
+              <div class="mui-brand-name">AI Work<br>Observer</div>
+            </div>
+            <div class="mui-nav">
+              <div class="mui-nav-item"><span class="dot"></span>ダッシュボード</div>
+              <div class="mui-nav-item"><span class="dot"></span>PC操作の記録</div>
+              <div class="mui-nav-item active"><span class="dot"></span>セッション・業務分析</div>
+              <div class="mui-nav-item"><span class="dot"></span>設定</div>
+            </div>
+          </div>
+          <div class="mui-main">
+            <div class="mui-banner">
+              <div class="mui-banner-copy">
+                <div class="mui-banner-title">PC操作を見る。<br>AIが仕事を理解する。</div>
+                <div class="mui-banner-sub">From Observation to Improvement</div>
+              </div>
+              <div class="mui-banner-kpis">
+                <div class="mui-kpi"><div class="mui-kpi-val">12件</div><div class="mui-kpi-label">検出した繰り返し作業</div></div>
+                <div class="mui-kpi"><div class="mui-kpi-val">4種</div><div class="mui-kpi-label">改善案のタイプ</div></div>
+                <div class="mui-kpi"><div class="mui-kpi-val">2件</div><div class="mui-kpi-label">その場で自動化</div></div>
+              </div>
+            </div>
+            <div class="mui-steps">
+              <div class="mui-step done"><span class="mui-step-dot">✓</span>記録</div><div class="mui-step-line"></div>
+              <div class="mui-step done"><span class="mui-step-dot">✓</span>AI分析</div><div class="mui-step-line"></div>
+              <div class="mui-step active"><span class="mui-step-dot">●</span>改善案</div><div class="mui-step-line"></div>
+              <div class="mui-step"><span class="mui-step-dot"></span>実装</div>
+            </div>
+            <div class="mui-grid">
+              <div class="mui-panel">
+                <div class="mui-panel-title">セッション一覧</div>
+                <div class="mui-row"><span class="mui-row-name">顧客問い合わせ対応</span><span class="mui-badge-mini done">分析済み</span></div>
+                <div class="mui-row"><span class="mui-row-name">月次経費精算</span><span class="mui-badge-mini done">分析済み</span></div>
+                <div class="mui-row"><span class="mui-row-name">在庫チェック作業</span><span class="mui-badge-mini doing">記録中</span></div>
+              </div>
+              <div class="mui-panel" style="text-align:center">
+                <div class="mui-panel-title" style="text-align:left">改善インパクト</div>
+                <div class="mui-donut"><div class="mui-donut-inner">72%</div></div>
+                <div class="mui-donut-label">自動化・簡略化できる<br>工程の割合</div>
+              </div>
+              <div class="mui-panel">
+                <div class="mui-panel-title">AIアシスタント</div>
+                <div class="mui-chat-item">業務フローを分析して</div>
+                <div class="mui-chat-item">改善案を提示して</div>
+                <div class="mui-chat-item">実装仕様書を作って</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="device-stand" aria-hidden="true"></div>
+      <div class="device-base" aria-hidden="true"></div>
+      <p class="mock-visual-note">AI Work Observerのイメージ画面（コンセプトイメージ。実際の画面とは異なります）</p>
+      <div class="hero-btns hero-btns--in-visual">
+        <a href="https://shikou-ai.com/contact.html" class="btn btn-primary">無料で相談する</a>
+        <a href="#screens" class="btn btn-ghost">画面を見る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding:52px 0 56px">
+  <div class="wrap">
+    <div class="sec-tag" style="text-align:center">2つの使い方</div>
+    <h2 class="sec-title" style="text-align:center">ご自身の業務改善にも、お客様への提案にも。</h2>
+    <p class="sec-lead" style="margin-left:auto;margin-right:auto;text-align:center">AI Work Observerは、使う人によって2つの役割を持ちます。</p>
+    <div class="usage-grid">
+      <a href="#pain" class="usage-card">
+        <div class="usage-card-num">1</div>
+        <div class="usage-card-label">USE CASE 1</div>
+        <div class="usage-card-title">ご自身の業務を改善する</div>
+        <div class="usage-card-desc">日々の繰り返し作業をAIが発見し、やめる・減らす・自動化の順で、一緒に改善案を考えます。</div>
+        <div class="usage-card-link">詳しく見る ↓</div>
+      </a>
+      <a href="#pain-sales" class="usage-card is-accent">
+        <div class="usage-card-num">2</div>
+        <div class="usage-card-label">USE CASE 2</div>
+        <div class="usage-card-title">お客様への提案・営業ツールとして使う</div>
+        <div class="usage-card-desc">お客様自身も気づいていない「効率化できる作業」まであぶり出し、業務改善の提案・営業活動の武器にします。</div>
+        <div class="usage-card-link">詳しく見る ↓</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="pain" style="padding:64px 0 52px">
+  <div class="wrap">
+    <div class="sec-tag" style="text-align:center">ご自身の業務でお悩みの方へ</div>
+    <h2 class="sec-title" style="text-align:center">「この作業、もっと楽にできるはず」と思いながら、毎日続けていませんか。</h2>
+    <p class="sec-lead" style="margin-left:auto;margin-right:auto;text-align:center">業種・職種を問わず、バックオフィス・営業/マーケティング・カスタマー対応・製造/物流・開発/情シスなど、幅広い業務でよく聞くお悩みです。</p>
+
+    <div class="pain-list">
+      <div class="pain-pair">
+        <div class="pain-before"><span class="pain-label">よくあるお悩み</span><p>毎日同じExcel・システムへの転記作業に時間を取られている</p></div>
+        <div class="pain-arrow">→</div>
+        <div class="pain-after"><span class="pain-label">AI Work Observerなら</span><p>PC操作を見せるだけで、<strong>繰り返し作業をAIが自動で発見</strong>します</p></div>
+      </div>
+      <div class="pain-pair">
+        <div class="pain-before"><span class="pain-label">よくあるお悩み</span><p>業務が属人化していて、どこに無駄があるか自分でも整理できていない</p></div>
+        <div class="pain-arrow">→</div>
+        <div class="pain-after"><span class="pain-label">AI Work Observerなら</span><p>AIが業務フローを<strong>業務名・目的・入力/出力まで言語化</strong>。誰が見ても分かる形になります</p></div>
+      </div>
+      <div class="pain-pair">
+        <div class="pain-before"><span class="pain-label">よくあるお悩み</span><p>自動化ツールを調べても、結局どれが自分の業務に合うのか分からない</p></div>
+        <div class="pain-arrow">→</div>
+        <div class="pain-after"><span class="pain-label">AI Work Observerなら</span><p>「<strong>自動化ありき」にせず</strong>、廃止・簡略化・既存サービス活用まで含めて改善案を出します</p></div>
+      </div>
+      <div class="pain-pair">
+        <div class="pain-before"><span class="pain-label">よくあるお悩み</span><p>改善したい気持ちはあるが、エンジニアがおらず相談先がない</p></div>
+        <div class="pain-arrow">→</div>
+        <div class="pain-after"><span class="pain-label">AI Work Observerなら</span><p>簡単な業務は<strong>その場で自動化アプリを生成</strong>、複雑な業務は<strong>Claude Code向け実装仕様書</strong>まで用意します</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="pain-sales" style="padding:52px 0 64px">
+  <div class="wrap">
+    <div class="sec-tag" style="text-align:center">コンサル・SIer・営業の方へ</div>
+    <h2 class="sec-title" style="text-align:center">お客様への業務改善提案、こんなお悩みはありませんか。</h2>
+    <p class="sec-lead" style="margin-left:auto;margin-right:auto;text-align:center">SHIKOU × AI自身も、お客様への業務改善のご提案にAI Work Observerを活用しています。個人の業務改善だけでなく、提案・営業活動のツールとしてもお使いいただけます。</p>
+
+    <div class="pain-list">
+      <div class="pain-pair">
+        <div class="pain-before"><span class="pain-label">よくあるお悩み</span><p>お客様自身も「どこに無駄があるか」を実は把握できていないことが多い</p></div>
+        <div class="pain-arrow">→</div>
+        <div class="pain-after"><span class="pain-label">AI Work Observerなら</span><p>PC操作を記録するだけで、<strong>お客様自身も気づいていない非効率な作業まであぶり出せます</strong>。提案の説得力が変わります</p></div>
+      </div>
+      <div class="pain-pair">
+        <div class="pain-before"><span class="pain-label">よくあるお悩み</span><p>お客様に業務改善を提案したいが、ヒアリングだけでは現場の実態や無駄が見えにくい</p></div>
+        <div class="pain-arrow">→</div>
+        <div class="pain-after"><span class="pain-label">AI Work Observerなら</span><p>PC操作を記録させていただくだけで、<strong>AIが現状の業務フローを可視化</strong>。ヒアリングの手間を大きく減らせます</p></div>
+      </div>
+      <div class="pain-pair">
+        <div class="pain-before"><span class="pain-label">よくあるお悩み</span><p>提案のたびに、現状→改善後のフロー図やヒアリングメモをゼロから作っている</p></div>
+        <div class="pain-arrow">→</div>
+        <div class="pain-after"><span class="pain-label">AI Work Observerなら</span><p>改善案と一緒に<strong>現状/改善後のフロー比較が自動で生成</strong>されるので、そのまま提案資料のたたき台になります</p></div>
+      </div>
+      <div class="pain-pair">
+        <div class="pain-before"><span class="pain-label">よくあるお悩み</span><p>「自動化しましょう」という提案だけでは響かない。説得力のある根拠が欲しい</p></div>
+        <div class="pain-arrow">→</div>
+        <div class="pain-after"><span class="pain-label">AI Work Observerなら</span><p><strong>自動化ありきにせず</strong>、廃止・簡略化・外部サービス活用まで含めた複数案を提示するので、納得感のある提案になります</p></div>
+      </div>
+      <div class="pain-pair">
+        <div class="pain-before"><span class="pain-label">よくあるお悩み</span><p>お客様にはkintone・Salesforceなど、特定のツールを前提に提案したいのに、汎用的な改善案しか出せない</p></div>
+        <div class="pain-arrow">→</div>
+        <div class="pain-after"><span class="pain-label">AI Work Observerなら</span><p>提案で使う外部ツールを<strong>チェックボックスで選ぶだけ</strong>で、そのツールを使った改善案が中心になるよう提案を寄せられます（kintone・Salesforce・Microsoft 365・Slack など複数選択可、リストにない製品は自由入力で追加）。業務内容に合うものをAIが選んで提案します</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" style="padding:56px 0 44px">
+  <div class="wrap">
+    <div class="sec-tag" style="text-align:center">4つのステップ</div>
+    <h2 class="sec-title" style="text-align:center">記録 → 分析 → 改善案 → 実装</h2>
+    <div class="svc-list" style="margin-top:24px">
+      <div class="svc-row"><div class="svc-layer">STEP 1</div><div class="svc-name">PC操作の記録</div><div class="svc-role">アプリ切替・クリック・入力の種別を記録（入力内容そのものは記録しない）</div></div>
+      <div class="svc-row"><div class="svc-layer">STEP 2</div><div class="svc-name">AIが業務フローを分析</div><div class="svc-role">業務名・目的・入力/出力・利用システムを言語化（すべて編集可能）。レポートとしてMarkdownで出力でき、出力前に本文も編集できます</div></div>
+      <div class="svc-row"><div class="svc-layer">STEP 3</div><div class="svc-name">改善案を提示</div><div class="svc-role">単発自動化・連続自動化・業務再設計・外部サービス連携の4種類</div></div>
+      <div class="svc-row"><div class="svc-layer">STEP 4</div><div class="svc-name">実装</div><div class="svc-role">簡単な業務はその場で自動化、複雑な業務はClaude Code向け仕様書を生成</div></div>
+    </div>
+    <div class="control-tower">
+      <div class="control-tower-icon">◎</div>
+      <div>
+        <div class="control-tower-title">自由記述でも相談できます</div>
+        <div class="control-tower-sub">PC操作を記録しなくても、やりたいことを文章で書くだけでOK</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="sec-tag">基本思想</div>
+    <h2 class="sec-title">自動化は、最後の選択肢。</h2>
+    <p class="sec-lead prose-highlight" style="margin:0 0 28px"><mark>必要性 → 廃止 → 簡略化 → 既存サービス → 自動化 → 新規開発、の順で考える。</mark></p>
+
+    <p class="prose">業務改善ツールというと「とにかく自動化する」ものが多いですが、AI Work Observerはあえてそうしていません。「そもそもこの作業は必要か」「やめられないか」「今あるサービスで代替できないか」を先に検討し、最後の手段として自動化・新規開発を提案します。</p>
+    <p class="prose">AIの推定にはすべて「<strong>AIによる推定</strong>」というラベルを付けて表示し、利用者が内容を確認・修正できるようにしています。根拠のない「削減時間◯%」のような数値も主張しません。</p>
+
+    <div class="priority-row">
+      <div class="priority-step">必要性を見直す</div>
+      <div class="priority-arrow">→</div>
+      <div class="priority-step">廃止できないか</div>
+      <div class="priority-arrow">→</div>
+      <div class="priority-step">簡略化できないか</div>
+      <div class="priority-arrow">→</div>
+      <div class="priority-step">既存サービスで代替</div>
+      <div class="priority-arrow">→</div>
+      <div class="priority-step is-last">自動化・新規開発</div>
+    </div>
+
+    <p class="prose-highlight" style="margin-top:28px"><mark>簡単な業務は、その場でアプリを作って終わらせる。</mark></p>
+    <p class="prose" style="margin-top:8px">CSV・Excelの集計やファイル整理のような単純作業は、AIに自由にコードを書かせるのではなく、検証済みの処理部品を組み合わせて、その場でスタンドアロンの自動化アプリ（ZIP形式、ダブルクリックで起動）を生成します。複雑な業務は、Claude Code／Codex CLIにそのまま貼り付けられる実装仕様書を作成します。</p>
+  </div>
+</section>
+
+<section class="section alt" id="screens">
+  <div class="wrap">
+    <div class="sec-tag">SCREENS</div>
+    <h2 class="sec-title">実際の画面で見る、使い方</h2>
+    <p class="sec-lead">ローカル環境（127.0.0.1）で動くWebアプリです。画面の流れに沿って、実際にどんなことができるかをご紹介します。</p>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">01</span><span class="feat-title">ダッシュボード</span></div>
+      <p class="feat-d">記録中・分析済み・改善候補の件数と、最近のセッション一覧をひと目で確認できます。ここから各セッションの詳細（業務フロー・改善案）に入っていきます。</p>
+      <div class="fig-frame"><img src="fig_aiwo_dashboard.png" alt="AI Work Observerのダッシュボード画面。記録中・分析済み・改善候補の件数カードと、最近のセッション一覧が表示されている" class="fig" loading="lazy" width="1536" height="1024"></div>
+      <p class="fig-cap">ダッシュボード画面（実際の画面）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">02</span><span class="feat-title">PC操作の記録</span></div>
+      <p class="feat-d">「記録開始」を押すと、アプリの切り替え・クリック・入力の種別などの記録が始まります。パスワードや入力した文字そのものは記録しません。メール・電話番号・カード番号のようなPII（個人情報）らしき文字列は、保存前・AIへの送信前の両方でマスクされます。</p>
+      <div class="fig-frame"><img src="fig_aiwo_record.png" alt="PC操作の記録画面。セッション名を入力して「記録開始」ボタンを押すだけのシンプルな画面" class="fig" loading="lazy" width="1536" height="1024"></div>
+      <p class="fig-cap">PC操作の記録画面（実際の画面）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">03</span><span class="feat-title">自由記述で相談</span></div>
+      <p class="feat-d">PC操作を記録しなくても、やりたいことを文章で書くだけで業務として登録し、改善案の相談ができます。「経費精算のExcel入力を自動化したい」のように、思いついたことをそのまま書き込めます。</p>
+      <div class="fig-frame"><img src="fig_aiwo_freetext.png" alt="自由記述で相談する画面。テキストエリアに業務内容を自由に書き込み「送信内容を確認」ボタンを押す画面" class="fig" loading="lazy" width="1536" height="1024"></div>
+      <p class="fig-cap">自由記述で相談する画面（実際の画面）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">04</span><span class="feat-title">業務フロー（AI分析）</span></div>
+      <p class="feat-d">PC操作の記録（または自由記述）を1つのまとまりとしてAIに渡し、業務名・目的・工程（手順）・入力と出力・利用システム・業務ルールを推定します。推定結果には「AIによる推定」と表示され、業務名と目的はその場で修正できます。勝手な思い込みのまま進まない設計です。</p>
+      <ol class="mini-steps">
+        <li><strong>操作の読み取り</strong> — アプリ名・ウィンドウタイトル・操作の種類（クリック・画面切替・入力など）・操作対象の名称・Webのドメインを時系列に整理します。入力した文字の中身は分析に含みません</li>
+        <li><strong>業務の推定</strong> — 一連の操作から、業務名・目的・入力と出力・利用システム・頻度を推定します。同じ操作が繰り返されている工程は「繰り返しあり」と表示します（繰り返しは、AIが操作の流れから判断します）</li>
+        <li><strong>業務フローの表示</strong> — 工程を順番に並べ、各工程で使うアプリと内容を表示します。操作タイムラインで、元になった記録も確認できます</li>
+        <li><strong>確認と修正</strong> — 業務名と目的は直接修正できます。工程や業務ルールは、AIとの会話で変更できます。変更内容は、送信前のプレビューで確認してから反映されます</li>
+      </ol>
+      <p class="feat-d">1回の記録に複数の業務が含まれていれば、業務ごとに分けて推定します。結果は「業務①」「業務②」のようにタブで切り替えて、それぞれの業務フロー・改善案・レポートを確認できます。</p>
+      <div class="fig-frame"><img src="fig_aiwo_flow.png" alt="業務フロー・AI分析画面。業務名「顧客問い合わせの受付・登録・担当営業への連携業務」、目的、入力・出力・利用システムが表示され、AIによる推定バッジが付いている" class="fig" loading="lazy" width="1536" height="1024"></div>
+      <p class="fig-cap">業務フロー・AI分析画面（実際の画面。サンプルセッションです）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">05</span><span class="feat-title">改善案（4種類）</span></div>
+      <p class="feat-d">整理された業務フローをもとに、AIが改善案を提示します。「単発自動化」「連続自動化」「業務再設計」「外部サービス連携」の4タイプに分類され、それぞれ難易度・現状のフロー・改善後のフローが並べて表示されます。</p>
+      <div class="fig-frame"><img src="fig_aiwo_proposals.png" alt="改善案画面。4件の改善案があり、1件目は「業務再設計・難易度：低」の「Excel管理台帳を廃止しkintoneに一本化」。現状フローと改善後フローが矢印付きで並べて表示されている" class="fig" loading="lazy" width="1536" height="1024"></div>
+      <p class="fig-cap">改善案画面（実際の画面。サンプルセッションです）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag is-paid">06・有料版</span><span class="feat-title">Claude Code向け実装仕様書</span></div>
+      <p class="feat-d">自動化では対応できない複雑な業務について、要件・背景・目的などをまとめたMarkdown仕様書を生成します。コピーしてClaude CodeやCodex CLIのチャット欄に貼り付けるだけで、実装の相談を始められます。画面仕様・API仕様など、まだ分かっていない項目は「要ヒアリング」と明記されます。</p>
+      <div class="fig-frame"><img src="fig_aiwo_spec.png" alt="Claude Code向け実装仕様書の画面。requirements.mdとしてシステム概要・業務名・背景・目的が自動生成され、全文コピーやファイルを分けてのzipダウンロードができる" class="fig" loading="lazy" width="1536" height="1024"></div>
+      <p class="fig-cap">実装仕様書の画面（実際の画面。サンプルセッションです）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">設定</span><span class="feat-title">AIエンジンの選択・外部サービス連携</span></div>
+      <p class="feat-d">AIエンジンはClaude CLI（Claudeアカウント）とCodex CLI（ChatGPTアカウント）から選べます。いずれもAPIキー不要・従量課金なしで、サブスクリプション契約の範囲で利用できます。kintone・Salesforce・Google Workspace・Slackなど、普段使っている外部サービスをチェックしておくと、改善案がサービス名まで具体的になります。</p>
+      <div class="fig-frame"><img src="fig_aiwo_settings.png" alt="設定画面。AIエンジン（Claude CLI／Codex CLI）の選択と、kintone・Salesforce・Google Workspace等の外部サービスのチェックボックスが並んでいる" class="fig" loading="lazy" width="1536" height="1024"></div>
+      <p class="fig-cap">設定画面（実際の画面）</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="security">
+  <div class="wrap">
+    <div class="sec-tag">PRIVACY &amp; SECURITY</div>
+    <h2 class="sec-title">PC操作を記録する以上、プライバシーには特に配慮しています</h2>
+    <p class="sec-lead">「何でも記録してAIに送る」ツールではありません。記録する範囲を絞り、送信前に必ず確認できるようにしています。</p>
+
+    <div class="gw-panel">
+      <div class="gw-panel-title">AIへ送る前に、必ずプレビューを表示</div>
+      <div class="gw-panel-sub">記録 → マスク処理 → プレビュー確認 → 利用者が承認 → AIへ送信、という順番を必ず通る。</div>
+      <div class="gw-flow">
+        <div class="gw-step">PC操作を記録</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step gw-critical">PII文字列をマスク</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step">送信内容をプレビュー</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step gw-external">利用者が承認</div>
+        <div class="gw-arrow">→</div>
+        <div class="gw-step">AIへ送信</div>
+      </div>
+    </div>
+
+    <div class="svc-list">
+      <div class="svc-row">
+        <div class="svc-layer">記録する内容</div>
+        <div class="svc-name">アプリ切替・クリック・入力の種別のみ</div>
+        <div class="svc-role">パスワードや、実際に入力した文字そのものは記録しません。「入力した」というイベントの種別のみを記録します。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">自動でマスクする項目</div>
+        <div class="svc-name">次の7種類を、記録時とAI送信時の両方で伏せます</div>
+        <div class="svc-role">
+          <ul style="margin:6px 0 0 18px;padding:0">
+            <li>メールアドレス</li>
+            <li>電話番号（ハイフンあり・なし）</li>
+            <li>クレジットカード番号らしき数字（スペース・ハイフン区切りを含む）</li>
+            <li>APIキー（sk-、ghp_、AKIA、AIza などの形式）</li>
+            <li>アクセストークン（JWT形式）</li>
+            <li>パスワード・シークレット・トークン等の値（「password: ○○」「パスワード：○○」の形式）</li>
+            <li>Windowsのユーザー名（C:\Users\&lt;名前&gt; のパス部分）</li>
+          </ul>
+        </div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">自動では伏せないもの</div>
+        <div class="svc-name">氏名・会社名・取引先名など</div>
+        <div class="svc-role">送信前にプレビューで内容を確認し、個人情報と思われる部分は削除してください。氏名・会社名などの固有名詞は自動では伏せられないため、色付けで示します（目印のため、見逃しや誤りがあり得ます）。承認しない限り、AIへは送信されません。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">送信前の確認</div>
+        <div class="svc-name">プレビュー表示＋明示的な承認</div>
+        <div class="svc-role">AIに何を送るかを事前に確認し、承認したものだけが送信されます。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">動作環境</div>
+        <div class="svc-name">自分のPC内（127.0.0.1）で完結</div>
+        <div class="svc-role">バックエンド・フロントエンドともにローカルホストでのみ動作し、記録データはローカルのSQLiteに保存されます。</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">その場での自動化</div>
+        <div class="svc-name">安全なCSV/Excel処理のみ・任意コード実行なし</div>
+        <div class="svc-role">AIが任意のコードを実行することはなく、検証済みの処理部品だけを組み合わせて自動化アプリを生成します。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="plan">
+  <div class="wrap">
+    <div class="sec-tag">FREE / PAID</div>
+    <h2 class="sec-title">無料版と有料版</h2>
+    <p class="sec-lead">現在、個別のご相談ベースでご案内している段階です（正式な料金プランとしての一般公開は準備中です）。想定している無料版・有料版の違いは次のとおりです。</p>
+
+    <div class="plan-grid">
+      <div class="plan-card">
+        <span class="plan-badge">FREE</span>
+        <div class="plan-name">無料版</div>
+        <div class="plan-price">まずはお試しいただける範囲</div>
+        <ul class="plan-list">
+          <li>PC操作の記録・自由記述での相談</li>
+          <li>AIによる業務フロー分析（分析結果の確認・修正）</li>
+          <li>改善案の概要（タイプ・タイトル・説明）</li>
+          <li>送信前の確認（個人情報と思われる箇所の色付き・削除）</li>
+          <li>レポート出力（分析結果と改善案の概要）</li>
+          <li class="is-no">改善案の詳細（対象工程・根拠・候補サービス・難易度・効果の見積もり）</li>
+          <li class="is-no">自動化アプリの生成</li>
+          <li class="is-no">Claude Code向け実装仕様書の生成</li>
+        </ul>
+      </div>
+      <div class="plan-card is-paid">
+        <span class="plan-badge">PAID</span>
+        <div class="plan-name">有料版</div>
+        <div class="plan-price">料金はお問い合わせください</div>
+        <ul class="plan-list">
+          <li>無料版の機能をすべて含む</li>
+          <li>改善案の詳細（対象工程・根拠・候補サービス・難易度・効果の見積もり）</li>
+          <li>自動化アプリの生成</li>
+          <li>Claude Code向け実装仕様書の生成</li>
+          <li>複雑な業務・外部サービス連携を伴う改善の相談</li>
+        </ul>
+      </div>
+    </div>
+    <p class="price-note">無料版のレポートには、分析結果と改善案の概要を含みます。改善案の詳細は有料版でご覧いただけます。具体的な料金・提供形態は現在検討中のため、ご興味があればお問い合わせの際にご相談ください。</p>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="sec-tag">FAQ</div>
+    <h2 class="sec-title">よくあるご質問</h2>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>今すぐ使えますか？</summary>
+        <div class="faq-a">現時点では一般公開しているアプリではなく、個別にご案内している段階です。導入をご検討の場合は、まず無料相談からお問い合わせください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>PC操作の記録は、会社のパソコンでも安全に使えますか？</summary>
+        <div class="faq-a">記録するのはアプリの切り替え・クリック・入力の種別のみで、入力した文字そのものやパスワードは記録しません。個人情報らしき文字列は自動でマスクされ、AIへ送信する内容は必ず事前にプレビュー・承認してから送信されます。すべてご自身のPC内（127.0.0.1）で完結し、外部のサーバーに常時送信されることはありません。</div>
+      </details>
+      <details class="faq-item">
+        <summary>その場で自動化とは、具体的に何をしてくれるのですか？</summary>
+        <div class="faq-a">CSV・Excelの集計やファイル整理のような、安全性が確認できる処理に限って、検証済みの処理部品を組み合わせたスタンドアロンのアプリ（ZIP形式）を生成します。AIが任意のコードを自由に書いて実行する仕組みではありません。</div>
+      </details>
+      <details class="faq-item">
+        <summary>複雑な業務の自動化には対応していますか？</summary>
+        <div class="faq-a">その場での自動化対象外と判定された業務については、Claude Code／Codex CLI向けの実装仕様書を生成します（有料版の機能です）。生成した仕様書をそのまま貼り付けて、本格的な開発の相談を始められます。</div>
+      </details>
+      <details class="faq-item">
+        <summary>どのAIを使っていますか？費用はどれくらいですか？</summary>
+        <div class="faq-a">Claude CLI（Claudeアカウント）またはCodex CLI（ChatGPTアカウント）のサブスクリプション契約を利用する設計で、APIキー・従量課金は不要です。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="wrap">
+    <div class="sec-tag" style="text-align:center">CONTACT</div>
+    <h2 class="sec-title">AI Work Observerにご興味があれば</h2>
+    <p class="sec-lead" style="margin-left:auto;margin-right:auto;text-align:center">現在は個別にご案内している段階です。導入のご相談、ご自身の業務での具体的な活用方法など、お気軽にお問い合わせください。</p>
+    <div class="cta-cards">
+      <a href="https://shikou-ai.com/contact.html" class="cta-card">
+        <div class="cta-card-icon">🔗</div>
+        <div><div class="cta-card-label">お問い合わせフォーム</div><div class="cta-card-val">無料相談を申し込む</div></div>
+      </a>
+    </div>
+    <p class="cta-note">通常1営業日以内にご返信させていただきます</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    SHIKOU × AI / AI Work Observer — PC操作を見てAIが業務を理解し改善案を出すツール © 2026 ｜ <a href="https://shikou-ai.com/index.html">トップページに戻る</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="画像の拡大表示">
+  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="閉じる">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <p class="lightbox-cap" id="lightbox-cap"></p>
+</div>
+<button type="button" class="back-to-top" id="backToTop" aria-label="ページの先頭に戻る">↑</button>
+<script>
+(function(){
+  var lightbox = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightbox-img');
+  var lbCap = document.getElementById('lightbox-cap');
+  var lastFocused = null;
+
+  function openLightbox(img){
+    lastFocused = document.activeElement;
+    lbImg.src = img.currentSrc || img.src;
+    lbImg.alt = img.alt || '';
+    lbCap.textContent = img.alt || '';
+    lightbox.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lightbox-close').focus();
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('is-open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+    if (lastFocused) lastFocused.focus();
+  }
+
+  document.querySelectorAll('img.fig, img.hero-shot').forEach(function(img){
+    img.setAttribute('tabindex', '0');
+    img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', '画像を拡大表示: ' + (img.alt || ''));
+    img.addEventListener('click', function(){ openLightbox(img); });
+    img.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openLightbox(img); }
+    });
+  });
+
+  lightbox.addEventListener('click', function(e){
+    if (e.target === lightbox || e.target === lbImg) closeLightbox();
+  });
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+  });
+
+  var navToggle = document.getElementById('navToggle');
+  var headerLinks = document.getElementById('headerLinks');
+  if (navToggle && headerLinks) {
+    navToggle.addEventListener('click', function(){
+      var isOpen = headerLinks.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    headerLinks.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        headerLinks.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  var backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    window.addEventListener('scroll', function(){
+      backToTop.classList.toggle('is-visible', window.scrollY > 500);
+    });
+    backToTop.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
