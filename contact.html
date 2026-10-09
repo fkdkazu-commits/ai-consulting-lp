@@ -260,6 +260,7 @@
           <option value="" disabled selected>選択してください</option>
           <option value="サービス内容について">サービス内容について</option>
           <option value="料金・見積もりについて">料金・見積もりについて</option>
+          <option value="導入相談・製品デモを申し込む">導入相談・製品デモを申し込む</option>
           <option value="導入事例・実績について">導入事例・実績について</option>
           <option value="その他">その他</option>
         </select>
@@ -288,6 +289,12 @@
   </div>
 </div>
 
+<script>
+  // ?type=demo で「導入相談・製品デモを申し込む」を初期選択
+  if (new URLSearchParams(location.search).get('type') === 'demo') {
+    document.querySelector('select[name="category"]').value = '導入相談・製品デモを申し込む';
+  }
+</script>
 <script>
   document.getElementById('contactForm').addEventListener('submit', async function(e) {
     e.preventDefault();

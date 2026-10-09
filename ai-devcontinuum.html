@@ -301,6 +301,14 @@ img{max-width:100%}
 .wbs.compare th:not(:first-child),.wbs.compare td:not(:first-child){width:22%}
 
 /* cta */
+.consult-box{margin-top:30px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--orange-dark);border-radius:14px;padding:26px 28px;max-width:760px;box-shadow:0 4px 16px rgba(6,55,44,.06)}
+.consult-title{font-size:clamp(17px,2vw,21px);font-weight:900;line-height:1.5;color:var(--ink);margin-bottom:10px}
+.consult-text{font-size:14px;line-height:1.9;color:var(--gray-dark);margin-bottom:18px}
+.consult-list{list-style:none;display:inline-block;text-align:left;margin:22px auto 8px;padding:0}
+.consult-list li{position:relative;padding-left:26px;margin-bottom:10px;font-size:15px;font-weight:700;color:var(--ink);line-height:1.6}
+.consult-list li::before{content:"✓";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%;background:#2f6fd0;color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.consult-lead{font-size:15px;font-weight:700;margin:14px 0 20px}
+.consult-btn{margin-bottom:34px}
 .cta-section{background:#fff;padding:72px 0;text-align:center}
 .cta-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:30px;text-align:left}
 .cta-card{background:var(--card);border-radius:14px;padding:22px;display:flex;align-items:center;gap:16px;text-decoration:none}
@@ -525,7 +533,11 @@ img{max-width:100%}
         <div class="phase-tag">→ 品質ダッシュボードで一元把握（WBS・進捗管理は専用画面で提供、ダッシュボード統合は今後）</div>
       </div>
     </div>
-    <a href="https://shikou-ai.com/contact.html" class="section-cta">このような課題に当てはまる場合、相談する<span class="section-cta-arrow">→</span></a>
+    <div class="consult-box">
+      <h3 class="consult-title">自社の開発プロセスに、AIをどう組み込めばいいのか？</h3>
+      <p class="consult-text">要求定義・設計・実装・テスト・品質管理の現状をお伺いし、AI-DevContinuumを活用できる工程と、段階的な導入方法をご提案します。</p>
+      <a href="https://shikou-ai.com/contact.html?type=demo" class="btn btn-primary">導入相談・製品デモを申し込む</a>
+    </div>
   </div>
 </section>
 
@@ -1288,6 +1300,14 @@ img{max-width:100%}
     <p class="sec-lead">導入をご検討いただく際によくいただく質問です。ここに無い点は無料相談で直接お尋ねください。</p>
     <div class="faq-list">
       <details class="faq-item">
+        <summary>Claude CodeなどのAIコーディングツールを使った開発と、AI-DevContinuumは何が違うのですか？</summary>
+        <p class="faq-a">Claude CodeなどのAIコーディングツールは、AIによるコード生成や修正、テストの実行などを支援し、開発者個人の生産性を高めるための強力なツールです。<br><br>一方、AI-DevContinuumは、AIを活用した開発プロセス全体を管理・統制するための基盤です。<br><br>要求定義から設計、実装、テスト、品質分析、リリース判定までをつなぎ、成果物間の整合性やトレーサビリティを確保するとともに、AIが生成した成果物を人間が確認・承認する仕組みを提供します。<br><br>両者は競合するものではなく、組み合わせて活用することも可能です。AIコーディングツールによる開発効率の向上に加え、組織全体で品質と開発プロセスを管理したい企業に、AI-DevContinuumは適しています。</p>
+      </details>
+      <details class="faq-item">
+        <summary>AI-DevContinuumを導入すれば、開発工程のすべてをAIで自動化できますか？</summary>
+        <p class="faq-a">AI-DevContinuumは、すべての工程を無条件に自動化することを目的としたものではありません。AIによる成果物の生成や品質確認を支援しながら、人間によるレビュー・承認と組み合わせて開発を進めます。<br><br>また、最初から全工程を導入する必要はありません。まずは要求定義や設計など、効果を検証しやすい工程から始め、検証結果を踏まえて段階的に適用範囲を広げることが可能です。</p>
+      </details>
+      <details class="faq-item">
         <summary>既存の開発フローに途中から組み込めますか？</summary>
         <p class="faq-a">はい。全工程を一度に導入する必要はありません。要求定義・設計だけといった一部工程からの導入も可能で、Phase 1・2だけ動かして効果を見てから段階的なカスタマイズにも対応させていただきます。</p>
       </details>
@@ -1324,9 +1344,17 @@ img{max-width:100%}
     <div class="sec-tag">CONTACT</div>
     <h2 class="sec-title">まずは、今の状況を聞かせてください</h2>
     <p class="sec-lead" style="margin-left:auto;margin-right:auto">
-      全工程をまとめて変える必要はありません。
-      今の開発フロー・使っているツールをお伺いし、どこから始めるかを一緒に決めていきます。
+      AI駆動開発は、最初から全工程を変える必要はありません。<br><br>
+      現在の開発体制や課題をお伺いし、AI-DevContinuumを活用できる工程、導入の進め方、検証方法をご提案します。
     </p>
+    <ul class="consult-list">
+      <li>AI駆動開発をどこから始めるべきか相談したい</li>
+      <li>自社の開発フローに適用できるか確認したい</li>
+      <li>実際の画面や機能をデモで見たい</li>
+      <li>小規模なPoCから導入を検討したい</li>
+    </ul>
+    <p class="consult-lead">まずはお気軽にご相談ください。</p>
+    <div class="consult-btn"><a href="https://shikou-ai.com/contact.html?type=demo" class="btn btn-primary">導入相談・製品デモを申し込む</a></div>
     <div class="cta-cards">
       <a href="mailto:fkdkazu@gmail.com" class="cta-card">
         <div class="cta-card-icon">✉</div>
