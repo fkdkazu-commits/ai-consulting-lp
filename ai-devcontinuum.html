@@ -301,9 +301,11 @@ img{max-width:100%}
 .wbs.compare th:not(:first-child),.wbs.compare td:not(:first-child){width:22%}
 
 /* cta */
-.consult-box{margin-top:30px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--orange-dark);border-radius:14px;padding:26px 28px;max-width:760px;box-shadow:0 4px 16px rgba(6,55,44,.06)}
-.consult-title{font-size:clamp(17px,2vw,21px);font-weight:900;line-height:1.5;color:var(--ink);margin-bottom:10px}
-.consult-text{font-size:14px;line-height:1.9;color:var(--gray-dark);margin-bottom:18px}
+.consult-box{margin-top:28px;background:#0b2138;color:#fff;border-radius:14px;padding:26px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px 40px;flex-wrap:wrap}
+.consult-body{flex:1 1 420px;min-width:0}
+.consult-title{font-size:clamp(17px,2vw,21px);font-weight:900;line-height:1.5;color:#fff;margin-bottom:8px}
+.consult-text{font-size:14px;line-height:1.9;color:rgba(255,255,255,.82);margin:0}
+.consult-box .btn{flex-shrink:0}
 .consult-list{list-style:none;display:inline-block;text-align:left;margin:22px auto 8px;padding:0}
 .consult-list li{position:relative;padding-left:26px;margin-bottom:10px;font-size:15px;font-weight:700;color:var(--ink);line-height:1.6}
 .consult-list li::before{content:"✓";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%;background:#2f6fd0;color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center}
@@ -534,8 +536,10 @@ img{max-width:100%}
       </div>
     </div>
     <div class="consult-box">
-      <h3 class="consult-title">自社の開発プロセスに、AIをどう組み込めばいいのか？</h3>
-      <p class="consult-text">要求定義・設計・実装・テスト・品質管理の現状をお伺いし、AI-DevContinuumを活用できる工程と、段階的な導入方法をご提案します。</p>
+      <div class="consult-body">
+        <h3 class="consult-title">自社の開発プロセスに、AIをどう組み込めばいいのか？</h3>
+        <p class="consult-text">要求定義・設計・実装・テスト・品質管理の現状をお伺いし、AI-DevContinuumを活用できる工程と、段階的な導入方法をご提案します。</p>
+      </div>
       <a href="https://shikou-ai.com/contact.html?type=demo" class="btn btn-primary">導入相談・製品デモを申し込む</a>
     </div>
   </div>
