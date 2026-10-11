@@ -258,6 +258,7 @@
         <label>お問合せ種別 <span class="required">必須</span></label>
         <select name="category" required>
           <option value="" disabled selected>選択してください</option>
+          <option value="資料請求（会社紹介・実績など）">資料請求（会社紹介・実績など）</option>
           <option value="サービス内容について">サービス内容について</option>
           <option value="料金・見積もりについて">料金・見積もりについて</option>
           <option value="導入相談・製品デモを申し込む">導入相談・製品デモを申し込む</option>
@@ -284,15 +285,22 @@
       <div class="success-icon">✅</div>
       <h2>送信完了しました</h2>
       <p>お問合せありがとうございます。<br>ご入力のメールアドレスに受付確認メールをお送りしました。<br>通常2営業日以内にご返信いたします。</p>
+      <div id="downloadBox" style="display:none;margin-bottom:24px">
+        <p style="margin-bottom:12px">資料のダウンロードが始まらない場合は、こちらのボタンからダウンロードしてください。</p>
+        <a href="shikou-ai-service-guide.pdf" download class="back-btn" style="background:#2d3748">📄 資料をダウンロード</a>
+      </div>
       <a href="index.html" class="back-btn">トップページに戻る</a>
     </div>
   </div>
 </div>
 
 <script>
-  // ?type=demo で「導入相談・製品デモを申し込む」を初期選択
-  if (new URLSearchParams(location.search).get('type') === 'demo') {
+  // ?type=demo で「導入相談・製品デモを申し込む」、?type=document で「資料請求」を初期選択
+  const initType = new URLSearchParams(location.search).get('type');
+  if (initType === 'demo') {
     document.querySelector('select[name="category"]').value = '導入相談・製品デモを申し込む';
+  } else if (initType === 'document') {
+    document.querySelector('select[name="category"]').value = '資料請求（会社紹介・実績など）';
   }
 </script>
 <script>
@@ -323,6 +331,15 @@
       if (json.success) {
         document.getElementById('contactForm').style.display = 'none';
         document.getElementById('successMsg').style.display = 'block';
+        if (data.category === '資料請求（会社紹介・実績など）') {
+          document.getElementById('downloadBox').style.display = 'block';
+          const dl = document.createElement('a');
+          dl.href = 'shikou-ai-service-guide.pdf';
+          dl.download = 'SHIKOU_AI_会社紹介資料.pdf';
+          document.body.appendChild(dl);
+          dl.click();
+          dl.remove();
+        }
       } else {
         throw new Error('送信失敗');
       }
