@@ -113,9 +113,11 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdro
 }
 
 /* ヒーロー：写真＋単色オーバーレイ（グラデーションを使わない） */
-.hero{position:relative;background:#0b2138 url('https://images.unsplash.com/photo-1785474445369-409f6acec42b?w=1800&q=80') center/cover no-repeat;color:#fff}
+.hero{position:relative;overflow:hidden;background:#0b2138;color:#fff}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1785474445369-409f6acec42b?w=1800&q=80') center/cover no-repeat;animation:kenburns 26s ease-in-out infinite alternate}
 .hero::before{content:'';position:absolute;inset:0;background:rgba(9,26,44,.80)}
-.hero-in{position:relative;max-width:1040px;margin:0 auto;padding:118px 24px 104px}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08)}}
+.hero-in{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:118px 24px 104px}
 .hero .kicker{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.12em;padding:7px 16px;border:1px solid rgba(255,255,255,.34);border-radius:4px;margin-bottom:30px}
 .hero h1{font-size:clamp(30px,5.2vw,54px);font-weight:900;line-height:1.35;letter-spacing:-.02em;margin-bottom:26px}
 .hero h1 .u{border-bottom:4px solid var(--accent);padding-bottom:2px}
@@ -128,6 +130,19 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdro
 .btn-main{background:var(--accent);color:#fff}
 .btn-line{border:1px solid rgba(255,255,255,.45);color:#fff}
 .hero-note{margin-top:34px;font-size:13px;color:rgba(255,255,255,.6)}
+/* ヒーロー要素の順次フェードイン */
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.hero .kicker,.hero h1,.hero-cred,.hero-in>p:not(.hero-note),.hero-btns,.hero-note{opacity:0;animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+.hero .kicker{animation-delay:.05s}
+.hero h1{animation-delay:.15s}
+.hero-cred{animation-delay:.25s}
+.hero-in>p:not(.hero-note){animation-delay:.35s}
+.hero-btns{animation-delay:.45s}
+.hero-note{animation-delay:.55s}
+@media(prefers-reduced-motion:reduce){
+  .hero-bg{animation:none}
+  .hero .kicker,.hero h1,.hero-cred,.hero-in>p:not(.hero-note),.hero-btns,.hero-note{animation:none;opacity:1}
+}
 
 /* ステートメント：課題を文章で畳みかける */
 .stmt-item{padding:34px 0;border-top:1px solid var(--line)}
@@ -289,6 +304,7 @@ footer a{color:#7fb2f0;text-decoration:none}
 
 <!-- HERO -->
 <section class="hero" id="top">
+  <div class="hero-bg"></div>
   <div class="hero-in">
     <span class="kicker">AI × 業務改善 × 開発</span>
     <h1>AIで業務と開発を変える。<br><span class="u">技術と現場</span>、両方わかるAIコンサル。</h1>
