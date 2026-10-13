@@ -144,6 +144,10 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdro
   .hero .kicker,.hero h1,.hero-cred,.hero-in>p:not(.hero-note),.hero-btns,.hero-note{animation:none;opacity:1}
 }
 
+/* スクロールで画面に入ったら下からふわっと表示（JSで.revealを付与） */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.is-visible{opacity:1;transform:translateY(0)}
+
 /* ステートメント：課題を文章で畳みかける */
 .stmt-item{padding:34px 0;border-top:1px solid var(--line)}
 .stmt-item:last-child{border-bottom:1px solid var(--line)}
@@ -154,8 +158,10 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdro
 
 /* サービス */
 .svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:52px 36px}
-.svc-card{text-decoration:none;color:inherit;display:block}
-.svc-card img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:4px;background:var(--ink)}
+.svc-card{text-decoration:none;color:inherit;display:block;transition:transform .25s ease}
+.svc-card:hover{transform:translateY(-4px)}
+.svc-card img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:4px;background:var(--ink);transition:box-shadow .25s ease}
+.svc-card:hover img{box-shadow:0 14px 30px rgba(11,33,56,.18)}
 .svc-meta{display:flex;align-items:baseline;gap:12px;margin:20px 0 10px;flex-wrap:wrap}
 .svc-no{font-size:12px;font-weight:900;color:var(--accent);letter-spacing:.1em}
 .svc-price{font-size:13px;font-weight:700;color:var(--gray)}
@@ -189,7 +195,8 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdro
 .res-card{background:#fff;padding:30px 28px;text-decoration:none;color:inherit;display:flex;flex-direction:column}
 .res-card:last-child:nth-child(3n+1){grid-column:1/-1}
 .res-card:last-child:nth-child(3n+1) .res-d{max-width:62ch}
-.res-card:hover{background:#fbfcfe}
+.res-card{transition:background .2s ease,box-shadow .2s ease}
+.res-card:hover{background:#fbfcfe;box-shadow:inset 0 0 0 1px var(--line),0 10px 22px rgba(11,33,56,.08)}
 .res-cat{font-size:11.5px;font-weight:700;color:var(--accent);letter-spacing:.08em;margin-bottom:12px}
 .res-t{font-size:17px;font-weight:900;line-height:1.55;margin-bottom:12px}
 .res-d{font-size:13.5px;color:var(--gray);flex:1}
@@ -199,8 +206,8 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdro
 .res-more{margin-top:34px;text-align:center}
 .res-more a{font-size:14.5px;font-weight:700;color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:3px}
 .res-mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;background:var(--line);border:1px solid var(--line);margin-top:24px}
-.res-mini-card{background:#fff;padding:18px 20px;text-decoration:none;color:inherit;display:block}
-.res-mini-card:hover{background:#fbfcfe}
+.res-mini-card{background:#fff;padding:18px 20px;text-decoration:none;color:inherit;display:block;transition:background .2s ease,box-shadow .2s ease}
+.res-mini-card:hover{background:#fbfcfe;box-shadow:inset 0 0 0 1px var(--line),0 10px 22px rgba(11,33,56,.08)}
 .res-mini-cat{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.08em;margin-bottom:6px}
 .res-mini-t{font-size:14px;font-weight:900;line-height:1.5;margin-bottom:6px}
 .res-mini-n{font-size:12px;color:var(--gray)}
@@ -861,6 +868,23 @@ footer a{color:#7fb2f0;text-decoration:none}
         if (i >= 6) card.classList.toggle('is-hidden', !isOpen);
       });
     });
+  }
+
+  // スクロールで画面に入ったセクション見出し・カードをふわっと表示
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const revealTargets = document.querySelectorAll(
+      '.sec .label, .sec h2, .sec .lead, .svc-card, .res-card, .res-mini-card, .news-card, .why > div, .flow-i, .pf-item, .q, .ps'
+    );
+    revealTargets.forEach(el => el.classList.add('reveal'));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealTargets.forEach(el => io.observe(el));
   }
 </script>
 
