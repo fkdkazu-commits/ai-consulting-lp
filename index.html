@@ -115,7 +115,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdro
 /* ヒーロー：写真＋単色オーバーレイ（グラデーションを使わない） */
 .hero{position:relative;overflow:hidden;background:#0b2138;color:#fff}
 .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1785474445369-409f6acec42b?w=1800&q=80') center/cover no-repeat;animation:kenburns 26s ease-in-out infinite alternate}
-.hero::before{content:'';position:absolute;inset:0;background:rgba(9,26,44,.80)}
+.hero::after{content:'';position:absolute;inset:0;background:rgba(9,26,44,.80)}
 @keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.08)}}
 .hero-in{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:118px 24px 104px}
 .hero .kicker{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.12em;padding:7px 16px;border:1px solid rgba(255,255,255,.34);border-radius:4px;margin-bottom:30px}
