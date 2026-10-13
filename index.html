@@ -148,6 +148,20 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdro
 .svc-d{font-size:14.5px;color:var(--gray)}
 .svc-more{display:inline-block;margin-top:14px;font-size:13.5px;font-weight:700;color:var(--accent);border-bottom:1px solid currentColor}
 
+/* プロダクト */
+.ps{border-top:1px solid var(--line);padding:56px 0}
+.ps:first-of-type{border-top:0;padding-top:0}
+.ps-head{display:flex;align-items:baseline;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.ps-no{font-size:12px;font-weight:900;color:#fff;background:var(--ink);padding:4px 11px;border-radius:4px;letter-spacing:.08em}
+.ps-title{font-size:26px;font-weight:900;letter-spacing:-.01em;flex:1;min-width:200px}
+.ps-link{font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;white-space:nowrap}
+.ps-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center}
+.ps-h{font-size:clamp(20px,2.2vw,25px);font-weight:900;line-height:1.6;margin-bottom:18px;letter-spacing:-.01em}
+.ps-d{font-size:14px;color:var(--gray);line-height:1.9;margin-bottom:26px}
+.ps-cta{display:inline-block;font-size:13.5px;font-weight:700;color:var(--accent);border-bottom:1px solid currentColor}
+.ps-img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px}
+@media(max-width:760px){.ps-grid{grid-template-columns:1fr}.ps-img{order:-1}}
+
 /* 理由（dark） */
 .why{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:44px 40px}
 .why-n{font-size:13px;font-weight:900;color:#7fb2f0;letter-spacing:.14em;margin-bottom:14px}
@@ -372,6 +386,63 @@ footer a{color:#7fb2f0;text-decoration:none}
         <p class="svc-d">作る→発信する→分析→改善を、AIが9割・人が最後の確認の1割で回し、プロジェクト・改善・収益まで管理する運用基盤です。一人で実際に自社の仕事を回しています。貴社の業務に合わせてフルカスタマイズします。</p>
         <span class="svc-more">詳しく見る</span>
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="sec tint" id="products">
+  <div class="wrap">
+    <div class="label">PRODUCTS</div>
+    <h2>自社開発プロダクト</h2>
+    <p class="lead">相談で終わらせず、自社の業務で実際に動かしながらつくっています。</p>
+
+    <div class="ps">
+      <div class="ps-head">
+        <span class="ps-no">01</span>
+        <h3 class="ps-title">AI-DevContinuum</h3>
+        <a href="ai-devcontinuum.html" class="ps-link">AI-DevContinuumについて</a>
+      </div>
+      <div class="ps-grid">
+        <div>
+          <div class="ps-h">開発するほど、<br>企業の開発力が高まる<br>AI開発OS。</div>
+          <p class="ps-d">要求ヒアリングから設計・実装・品質分析・PMまでをAIでつなぐ、貴社専用の開発基盤。要求管理→設計→実装→テスト→品質分析まで、開発のすべてをひとつの基盤でつなぎます。</p>
+          <a href="ai-devcontinuum.html" class="ps-cta">くわしく見る →</a>
+        </div>
+        <img class="ps-img" src="ai-devcontinuum-release-banner.png" alt="企業専用AI開発OS AI-DevContinuum。要求管理から品質分析まで開発のすべてをつなぐ" loading="lazy">
+      </div>
+    </div>
+
+    <div class="ps">
+      <div class="ps-head">
+        <span class="ps-no">02</span>
+        <h3 class="ps-title">AI工場OS</h3>
+        <a href="ai-factory.html" class="ps-link">AI工場OSについて</a>
+      </div>
+      <div class="ps-grid">
+        <div>
+          <div class="ps-h">一人で回しているのに、<br>チームのように動く<br>運用基盤。</div>
+          <p class="ps-d">作る→発信する→分析→改善を、AIが9割・人が最後の確認の1割で回す運用基盤です。一人で実際に自社の仕事を回しながら、プロジェクト・改善・収益まで管理しています。</p>
+          <a href="ai-factory.html" class="ps-cta">くわしく見る →</a>
+        </div>
+        <img class="ps-img" src="ai-factory-release-banner.png" alt="AI工場OS。一人で回しているのに、チームのように動く。作る・発信する・分析・改善を1つの基盤で回し、品質とセキュリティも評価する運用基盤" loading="lazy">
+      </div>
+    </div>
+
+    <div class="ps">
+      <div class="ps-head">
+        <span class="ps-no">03</span>
+        <h3 class="ps-title">AI Work Observer</h3>
+        <a href="ai-work-observer.html" class="ps-link">AI Work Observerについて</a>
+      </div>
+      <div class="ps-grid">
+        <div>
+          <div class="ps-h">PC操作を見るだけで、<br>業務の全体像が<br>見えてくる。</div>
+          <p class="ps-d">PC操作を記録し、AIが業務フローを整理。「やめる・減らす・自動化」の順で改善案を提示します。自動化ありきでは考えず、見える化してから手を打つためのツールです。</p>
+          <a href="ai-work-observer.html" class="ps-cta">くわしく見る →</a>
+        </div>
+        <img class="ps-img" src="ai-work-observer-release-banner.png" alt="AI Work Observer。PC操作を見るだけで業務の全体像が見えてくる。記録・分析・改善案・実装の4ステップ" loading="lazy">
+      </div>
     </div>
   </div>
 </section>
