@@ -183,6 +183,12 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdro
 .res-n small{font-size:12.5px;font-weight:700;color:var(--gray);margin-left:6px}
 .res-more{margin-top:34px;text-align:center}
 .res-more a{font-size:14.5px;font-weight:700;color:var(--accent);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:3px}
+.res-mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;background:var(--line);border:1px solid var(--line);margin-top:24px}
+.res-mini-card{background:#fff;padding:18px 20px;text-decoration:none;color:inherit;display:block}
+.res-mini-card:hover{background:#fbfcfe}
+.res-mini-cat{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.08em;margin-bottom:6px}
+.res-mini-t{font-size:14px;font-weight:900;line-height:1.5;margin-bottom:6px}
+.res-mini-n{font-size:12px;color:var(--gray)}
 
 /* 新着情報 */
 .news-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:44px}
@@ -504,6 +510,24 @@ footer a{color:#7fb2f0;text-decoration:none}
         <p class="res-d">iPhoneに相談しながら、PC上の複数のAI開発プロジェクトをClaude Code・Codexが同時進行で実装まで進めます。判断が要る場面は会話で決めます。</p>
         <div class="res-note">近日 Apple Store 公開予定</div>
         <div class="res-n">会話だけ<small>で開発が進む</small></div>
+      </a>
+    </div>
+
+    <div class="res-mini">
+      <a href="salon-media-sync.html" class="res-mini-card">
+        <div class="res-mini-cat">SEO・コンテンツ運用</div>
+        <div class="res-mini-t">店舗情報AI自動更新システム</div>
+        <div class="res-mini-n">400記事以上の鮮度を自動維持</div>
+      </a>
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/internal-link-agent.html" target="_blank" rel="noopener" class="res-mini-card">
+        <div class="res-mini-cat">SEO対策</div>
+        <div class="res-mini-t">内部リンク構築AIエージェント</div>
+        <div class="res-mini-n">約200記事を約50分で処理</div>
+      </a>
+      <a href="https://fkdkazu-commits.github.io/ai-efficiency-article/hearing-mock.html" target="_blank" rel="noopener" class="res-mini-card">
+        <div class="res-mini-cat">業務効率化</div>
+        <div class="res-mini-t">AIヒアリング→モックアップ自動生成</div>
+        <div class="res-mini-n">ヒアリングから画面案まで一気通貫</div>
       </a>
     </div>
 
