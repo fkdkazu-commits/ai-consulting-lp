@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0E5BXJ21KH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-0E5BXJ21KH");
+</script>
+<title>店舗情報AI自動更新システム｜比較メディアの鮮度を自動で守る（SHIKOU × AI）</title>
+<meta name="description" content="400記事以上に散らばる店舗情報を、情報源サイトを正として自動で最新に保つ仕組みを構築。巡回・差分検知・承認・記事反映までを自動化します。眉毛サロン比較メディアでの構築実績。">
+<meta property="og:title" content="店舗情報AI自動更新システム｜比較メディアの鮮度を自動で守る">
+<meta property="og:description" content="情報源サイトを正として店舗マスタを構築し、400記事以上への反映・差分検知・承認フローまでを自動化します。">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="logo-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Noto Sans JP', sans-serif; background: #f6faf8; color: #1a1a2e; line-height: 1.8; }
+a { color: inherit; }
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 72px 0; }
+.section.alt { background: #fff; }
+.sec-tag { font-size: 12px; font-weight: 700; color: #047857; letter-spacing: 0.14em; margin-bottom: 10px; }
+.sec-title { font-size: clamp(22px, 3.2vw, 34px); font-weight: 900; line-height: 1.35; margin-bottom: 14px; letter-spacing: -0.01em; }
+.sec-lead { font-size: 15px; color: #4a5568; line-height: 1.9; margin-bottom: 36px; }
+
+/* ── ヘッダー ── */
+.site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid #e2ece8; }
+.header-inner { max-width: 1080px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:#0b2138}
+.logo img{height:28px;width:auto;display:block}
+.logo .logo-t{font-size:15px;font-weight:900;letter-spacing:.08em;color:#0b2138}
+.logo .x{color:#2f6fd0;font-weight:700;margin:0 .16em}
+.header-links { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.header-links a { font-size: 13px; font-weight: 700; color: #4a5568; text-decoration: none; }
+.header-links a:hover { color: #047857; }
+.header-cta { background: #047857; color: #fff !important; padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none; }
+
+/* ── ヒーロー ── */
+.hero {
+  position: relative; overflow: hidden;
+  background: url('https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=1800&q=80') center/cover no-repeat;
+  padding: 84px 0 96px; color: #fff;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(100deg, rgba(5,50,40,0.97) 0%, rgba(8,84,66,0.92) 44%, rgba(6,58,46,0.62) 100%);
+}
+.hero-inner { position: relative; z-index: 1; }
+.hero-tag { display: inline-block; font-size: 12px; font-weight: 700; color: #99f6e4; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.22); padding: 6px 20px; border-radius: 24px; margin-bottom: 26px; letter-spacing: 0.05em; }
+.hero h1 { font-size: clamp(28px, 5vw, 52px); font-weight: 900; line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 20px; }
+.hero h1 em { font-style: normal; color: #5eead4; }
+.hero-sub { font-size: clamp(14px, 1.9vw, 18px); color: rgba(255,255,255,0.86); line-height: 1.95; margin-bottom: 34px; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 56px; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #f0a54a; color: #1a1a2e; font-size: 15px; font-weight: 700; padding: 15px 34px; border-radius: 999px; text-decoration: none; box-shadow: 0 8px 22px rgba(240,165,74,0.25); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.4); color: #fff; font-size: 15px; font-weight: 700; padding: 15px 30px; border-radius: 999px; text-decoration: none; }
+.hero-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; }
+.hero-num-val { font-size: 42px; font-weight: 900; color: #f0a54a; line-height: 1; margin-bottom: 8px; }
+.hero-num-val small { font-size: 18px; }
+.hero-num-label { font-size: 13px; color: rgba(255,255,255,0.72); }
+
+/* ── グリッド ── */
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+
+.problem-card { background: #eef3f1; border-radius: 14px; padding: 24px 22px; }
+.problem-head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.problem-icon { font-size: 24px; line-height: 1; flex-shrink: 0; }
+.problem-title { font-size: 15px; font-weight: 700; line-height: 1.6; }
+.problem-desc { font-size: 13px; color: #64748b; line-height: 1.85; }
+
+/* ── 3ツール ── */
+.layer { display: flex; align-items: center; gap: 18px; background: #fff; border: 1px solid #dcebe5; border-radius: 14px; padding: 22px 24px; margin-bottom: 14px; }
+.layer-no { width: 46px; height: 46px; border-radius: 12px; background: #047857; color: #fff; font-size: 16px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.layer-title { font-size: 16px; font-weight: 900; margin-bottom: 4px; }
+.layer-desc { font-size: 13px; color: #64748b; line-height: 1.85; }
+
+/* ── 機能 ── */
+.feat-item { display: flex; gap: 14px; background: #fff; border: 1px solid #dcebe5; border-radius: 14px; padding: 20px 22px; }
+.feat-icon { font-size: 22px; line-height: 1.3; flex-shrink: 0; }
+.feat-title { font-size: 15px; font-weight: 900; margin-bottom: 4px; }
+.feat-desc { font-size: 12.5px; color: #64748b; line-height: 1.8; }
+
+/* ── フロー ── */
+.steps { display: flex; align-items: stretch; gap: 10px; flex-wrap: wrap; }
+.step-card { flex: 1 1 175px; background: #fff; border: 1px solid #dcebe5; border-radius: 14px; padding: 24px 16px; text-align: center; }
+.step-no { width: 44px; height: 44px; border-radius: 50%; background: #047857; color: #fff; font-size: 19px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+.step-title { font-size: 15px; font-weight: 900; margin-bottom: 8px; }
+.step-desc { font-size: 12.5px; color: #64748b; line-height: 1.8; }
+.step-arrow { display: flex; align-items: center; color: #10b981; font-size: 22px; font-weight: 900; }
+
+/* ── FAQ ── */
+.faq-item { background: #eef3f1; border-radius: 12px; padding: 22px 24px; margin-bottom: 14px; }
+.faq-q { font-size: 15px; font-weight: 900; margin-bottom: 10px; display: flex; gap: 10px; }
+.faq-q span { color: #047857; }
+.faq-a { font-size: 13.5px; color: #64748b; line-height: 1.95; padding-left: 26px; }
+
+/* ── 次のアクション ── */
+.next-card { background: #fff; border: 1px solid #dcebe5; border-radius: 14px; padding: 24px 26px; text-decoration: none; display: block; }
+.next-label { font-size: 11px; font-weight: 700; color: #718096; letter-spacing: 0.1em; margin-bottom: 8px; }
+.next-title { font-size: 17px; font-weight: 900; margin-bottom: 8px; }
+.next-desc { font-size: 13px; color: #64748b; line-height: 1.85; }
+
+/* ── CTA ── */
+.cta-section { background: #fff; padding: 72px 0; text-align: center; }
+.cta-title { font-size: clamp(22px, 3.4vw, 34px); font-weight: 900; margin-bottom: 12px; }
+.cta-lead { font-size: 15px; color: #4a5568; margin-bottom: 34px; }
+.cta-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 30px; }
+.cta-card { background: #eef3f1; border-radius: 14px; padding: 22px; display: flex; align-items: center; gap: 16px; text-align: left; text-decoration: none; }
+.cta-card-icon { width: 48px; height: 48px; border-radius: 50%; background: #047857; color: #fff; font-size: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.cta-card-label { font-size: 12px; color: #718096; margin-bottom: 2px; }
+.cta-card-val { font-size: 15px; font-weight: 700; word-break: break-all; }
+.cta-note { font-size: 13px; color: #94a3b8; }
+
+.site-footer { background: #06372c; color: rgba(255,255,255,0.6); padding: 30px 0; font-size: 13px; text-align: center; }
+.site-footer a { color: #5eead4; text-decoration: none; }
+
+@media (max-width: 860px) {
+  .step-arrow { display: none; }
+  .header-links a:not(.header-cta) { display: none; }
+}
+</style>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yk0mhqg55j");
+</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo"><img src="logo-mark.png" alt="SHIKOU × AI"><span class="logo-t">SHIKOU<span class="x">×</span>AI</span></a>
+    <div class="header-links">
+      <a href="index.html">トップ</a>
+      <a href="#flow">仕組みの流れ</a>
+      <a href="#pricing">導入のご相談</a>
+      <a href="#faq">よくある質問</a>
+      <a href="contact.html" class="header-cta">無料相談</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-tag">✦ 比較メディア運営者向け ／ Claude Code × スクレイピング × LLM</div>
+    <h1>店舗情報の鮮度を、<em>自動で守る</em>。</h1>
+    <p class="hero-sub">
+      400記事以上に散らばる店舗情報を、情報源サイトを正として自動で最新に保つ仕組みを構築しました。<br>
+      巡回・差分検知から記事への反映まで、担当者の承認を挟みながら自動化します。
+    </p>
+    <div class="hero-btns">
+      <a href="contact.html" class="btn-primary">✉ まずは無料相談</a>
+      <a href="#flow" class="btn-ghost">仕組みを見る</a>
+    </div>
+    <div class="hero-nums">
+      <div>
+        <div class="hero-num-val">400<small>記事+</small></div>
+        <div class="hero-num-label">対象とする記事規模</div>
+      </div>
+      <div>
+        <div class="hero-num-val">800<small>店舗+</small></div>
+        <div class="hero-num-label">店舗マスタへの登録実績</div>
+      </div>
+      <div>
+        <div class="hero-num-val">3<small>ツール</small></div>
+        <div class="hero-num-label">取得・検知・反映を一気通貫</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-tag">PROBLEM</div>
+    <h2 class="sec-title">こんなお悩みはありませんか</h2>
+    <p class="sec-lead">掲載店舗数・記事数が増えるほど、情報の鮮度は人力では維持できなくなります。</p>
+    <div class="grid-3">
+      <div class="problem-card">
+        <div class="problem-head"><span class="problem-icon">🗂</span><div class="problem-title">店舗マスタが存在せず<br>記事ごとに手入力</div></div>
+        <p class="problem-desc">正となるデータがないため、記事間で表記揺れや情報の食い違いが発生します。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-head"><span class="problem-icon">⏰</span><div class="problem-title">情報源が変わっても<br>記事側は気づかない</div></div>
+        <p class="problem-desc">変更に気づく仕組みがなく、営業時間や料金が古いまま放置されがちです。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-head"><span class="problem-icon">📋</span><div class="problem-title">数百記事規模の更新は<br>人力では限界</div></div>
+        <p class="problem-desc">記事の構造もバラバラで一括更新ができず、確認漏れや誤更新のリスクも残ります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-tag">SOLUTION</div>
+    <h2 class="sec-title">情報源を正とする、3つのツールで一元管理</h2>
+    <p class="sec-lead">情報源サイトを第一情報源（正）とし、不足項目のみ公式サイト等で補完した店舗マスタを構築。そこから記事への反映までを3つのツールで分担します。</p>
+    <div class="layer">
+      <div class="layer-no">A</div>
+      <div>
+        <div class="layer-title">店舗マスタを構築する</div>
+        <p class="layer-desc">情報源サイトを巡回し、店舗情報・料金情報をAIで抽出。不足項目のみ公式サイトで補完し、スプレッドシート上の店舗マスタへ一元化します。</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-no">A'</div>
+      <div>
+        <div class="layer-title">記事側を統一フォーマットへ反映する</div>
+        <p class="layer-desc">既存記事内の店舗情報部分をAIが特定し、店舗マスタの最新情報に合わせて統一フォーマットへ置換。紹介文など他の部分は変更しません。</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-no">B</div>
+      <div>
+        <div class="layer-title">差分を検知し、承認を経て反映する</div>
+        <p class="layer-desc">情報源を定期巡回して変更を検知・記録。担当者が承認した項目だけを、該当記事へ自動で反映します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section class="section alt" id="flow">
+  <div class="wrap">
+    <div class="sec-tag">FLOW</div>
+    <h2 class="sec-title">変更が記事に反映されるまでの5ステップ</h2>
+    <p class="sec-lead">検知から反映まで、必ず人の承認を挟みながら進みます。</p>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-no">1</div>
+        <div class="step-title">巡回・抽出</div>
+        <p class="step-desc">情報源サイトを巡回し、店舗情報をAIで抽出します。</p>
+      </div>
+      <div class="step-arrow">›</div>
+      <div class="step-card">
+        <div class="step-no">2</div>
+        <div class="step-title">差分検知</div>
+        <p class="step-desc">店舗マスタの現在値と比較し、変更箇所をハイライトします。</p>
+      </div>
+      <div class="step-arrow">›</div>
+      <div class="step-card">
+        <div class="step-no">3</div>
+        <div class="step-title">変更履歴に記録</div>
+        <p class="step-desc">日時・項目・旧値・新値を記録し、承認待ちの状態にします。</p>
+      </div>
+      <div class="step-arrow">›</div>
+      <div class="step-card">
+        <div class="step-no">4</div>
+        <div class="step-title">担当者が承認</div>
+        <p class="step-desc">内容を確認し、記事へ反映してよい項目だけを承認します。</p>
+      </div>
+      <div class="step-arrow">›</div>
+      <div class="step-card">
+        <div class="step-no">5</div>
+        <div class="step-title">記事へ自動反映</div>
+        <p class="step-desc">承認された項目だけを、該当記事へWordPress経由で反映します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-tag">FEATURES</div>
+    <h2 class="sec-title">構築する主な機能</h2>
+    <p class="sec-lead">情報の正確性を保ちながら、承認の手間を最小限にするための工夫を組み込んでいます。</p>
+    <div class="grid-2">
+      <div class="feat-item"><span class="feat-icon">🔍</span><div><div class="feat-title">情報源の優先順位付け</div><p class="feat-desc">第一情報源を優先し、不足項目のみ別ソースで補完。優先順位を機械的に適用し、情報源間の食い違いを防ぎます</p></div></div>
+      <div class="feat-item"><span class="feat-icon">🧹</span><div><div class="feat-title">表記ゆれを変更として検出しない</div><p class="feat-desc">全角半角や記号の違いなど表記だけの差は変更として扱わず、不要な承認を増やしません</p></div></div>
+      <div class="feat-item"><span class="feat-icon">📉</span><div><div class="feat-title">情報が減る更新は不採用</div><p class="feat-desc">取得した値が既存より情報が少ない場合は自動採用せず、既存の値を守ります</p></div></div>
+      <div class="feat-item"><span class="feat-icon">🟡</span><div><div class="feat-title">差分のハイライトと変更履歴</div><p class="feat-desc">変更箇所をハイライトし、日時・項目・旧値・新値を記録。後から追跡・検証できます</p></div></div>
+      <div class="feat-item"><span class="feat-icon">✅</span><div><div class="feat-title">承認フローを挟んだ安全な反映</div><p class="feat-desc">担当者の承認を経てから記事に反映。完全自動化はせず、誤反映のリスクを抑えます</p></div></div>
+      <div class="feat-item"><span class="feat-icon">🏪</span><div><div class="feat-title">閉店の誤判定を防ぐ設計</div><p class="feat-desc">アクセスエラーや掲載終了だけでは閉店と判定せず、店舗自身の発信がある場合に限り候補とします</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENT -->
+<section class="section alt" id="pricing">
+  <div class="wrap">
+    <div class="sec-tag">ENGAGEMENT</div>
+    <h2 class="sec-title">導入のご相談</h2>
+    <p class="sec-lead">
+      対象記事数・店舗数、CMSの構成（本件はWordPress／ブロックエディタ）によって設計が変わるため、個別にお見積もりします。<br>
+      単発のスポット開発でも、差分検知・承認フローまで含めた継続的な業務委託支援でも対応可能です。
+    </p>
+    <div class="hero-btns" style="margin-bottom:0">
+      <a href="contact.html" class="btn-primary" style="color:#1a1a2e">✉ まずは無料相談</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="sec-tag">FAQ</div>
+    <h2 class="sec-title">よくあるご質問</h2>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>眉毛サロン以外の業種でも対応できますか？</div>
+      <p class="faq-a">対応できます。比較・まとめ系メディアであれば、美容室・ネイルサロンなど他業種へも、業種固有のロジックを設定ファイル側に分離することで横展開できる設計にしています。</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>情報源となるサイトに指定はありますか？</div>
+      <p class="faq-a">必須ではありません。今回は比較対象の性質上、特定の予約サイトを正としていますが、利用規約・robots.txtの範囲内でアクセスできるサイトであれば、別のサイトを正にする設計も可能です。</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>記事は自動で公開されてしまいますか？</div>
+      <p class="faq-a">いいえ。検知した変更内容は、担当者が変更履歴を確認し承認してから初めて記事に反映されます。完全自動化はせず、人の確認を必須にしています。</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>既存記事の紹介文まで書き換わりませんか？</div>
+      <p class="faq-a">店舗情報部分のみを対象にした置換ロジックのため、紹介文など他の部分は変更しません。</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>大量の記事を一度に移行して大丈夫ですか？</div>
+      <p class="faq-a">ローカル環境での動作確認→数記事での下書きテスト→全記事展開、という3段階を踏んでから本番展開するため、本番環境にいきなり反映することはありません。</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Q.</span>閉店した店舗はどう扱われますか？</div>
+      <p class="faq-a">アクセスエラーや掲載期間終了だけでは閉店と判定しません。店舗自身の発信で閉店が明言されている場合のみ候補とし、承認後に記事側を「閉店しました」の表示へ置き換えます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-tag">RELATED</div>
+    <h2 class="sec-title">関連するご支援サービス</h2>
+    <div class="grid-3">
+      <a href="spot-development.html" class="next-card">
+        <div class="next-label">SPOT DEVELOPMENT</div>
+        <div class="next-title">Claude Code・Codex スポット開発支援</div>
+        <p class="next-desc">単発で1本つくって渡すところまで。まず1つ試したい方に。</p>
+      </a>
+      <a href="retainer.html" class="next-card">
+        <div class="next-label">MONTHLY RETAINER</div>
+        <div class="next-title">Claude Code・Codex 業務委託支援</div>
+        <p class="next-desc">構築後の改善・運用も含めて継続的にご支援します。</p>
+      </a>
+      <a href="index.html#results" class="next-card">
+        <div class="next-label">RESULTS</div>
+        <div class="next-title">その他の導入実績</div>
+        <p class="next-desc">経理・SEO・採用・CRMなど、他の自動化事例もご覧いただけます。</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="wrap">
+    <h2 class="cta-title">まずは気軽にご相談ください</h2>
+    <p class="cta-lead">「この部分だけ自動化したい」といったご相談だけでも大歓迎です。</p>
+    <div class="cta-cards">
+      <a href="mailto:fkdkazu@gmail.com" class="cta-card">
+        <div class="cta-card-icon">✉</div>
+        <div><div class="cta-card-label">メール</div><div class="cta-card-val">fkdkazu@gmail.com</div></div>
+      </a>
+      <a href="https://x.com/Marketer_kazuf" target="_blank" rel="noopener" class="cta-card">
+        <div class="cta-card-icon">𝕏</div>
+        <div><div class="cta-card-label">X（DM）</div><div class="cta-card-val">@Marketer_kazuf</div></div>
+      </a>
+      <a href="contact.html" class="cta-card">
+        <div class="cta-card-icon">🔗</div>
+        <div><div class="cta-card-label">お問い合わせフォーム</div><div class="cta-card-val">無料相談を申し込む</div></div>
+      </a>
+    </div>
+    <p class="cta-note">通常1営業日以内にご返信します</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    SHIKOU × AI / AI業務自動化支援 © 2026 ｜ <a href="index.html">トップページに戻る</a>
+  </div>
+</footer>
+
+</body>
+</html>
