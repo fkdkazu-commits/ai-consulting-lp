@@ -68,7 +68,16 @@ a { color: inherit; }
 
 /* ── スクリーンショット ── */
 .shot { margin: 0; }
-.shot img { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid #dcebe5; box-shadow: 0 10px 40px rgba(6,55,44,0.16); background: #fff; }
+.shot img { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid #dcebe5; box-shadow: 0 10px 40px rgba(6,55,44,0.16); background: #fff; cursor: zoom-in; }
+
+/* ── 画像拡大（ライトボックス） ── */
+.lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(11,33,56,.86); display: flex; align-items: center; justify-content: center; padding: 32px; opacity: 0; pointer-events: none; transition: opacity .2s; }
+.lightbox.is-open { opacity: 1; pointer-events: auto; }
+.lightbox img { max-width: min(1100px,92vw); max-height: 88vh; width: auto; border-radius: 8px; box-shadow: 0 30px 80px rgba(0,0,0,.5); cursor: zoom-out; }
+.lightbox-close { position: absolute; top: 20px; right: 24px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.08); color: #fff; font-size: 22px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.lightbox-close:hover { background: rgba(255,255,255,.18); }
+.lightbox-cap { position: absolute; left: 0; right: 0; bottom: 20px; text-align: center; color: rgba(255,255,255,.78); font-size: 13px; padding: 0 24px; }
+@media (prefers-reduced-motion: reduce) { .lightbox { transition: none; } }
 .shot figcaption { font-size: 12.5px; color: #94a3b8; margin-top: 14px; text-align: center; line-height: 1.85; }
 
 /* ── グリッド ── */
@@ -409,6 +418,54 @@ a { color: inherit; }
     SHIKOU × AI / AI業務自動化支援 © 2026 ｜ <a href="index.html">トップページに戻る</a>
   </div>
 </footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="画像の拡大表示">
+  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="閉じる">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <p class="lightbox-cap" id="lightbox-cap"></p>
+</div>
+<script>
+(function(){
+  var lightbox = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightbox-img');
+  var lbCap = document.getElementById('lightbox-cap');
+  var lastFocused = null;
+
+  function openLightbox(img){
+    lastFocused = document.activeElement;
+    lbImg.src = img.currentSrc || img.src;
+    lbImg.alt = img.alt || '';
+    lbCap.textContent = img.alt || '';
+    lightbox.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lightbox-close').focus();
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('is-open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+    if (lastFocused) lastFocused.focus();
+  }
+
+  document.querySelectorAll('.shot img').forEach(function(img){
+    img.setAttribute('tabindex', '0');
+    img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', '画像を拡大表示: ' + (img.alt || ''));
+    img.addEventListener('click', function(){ openLightbox(img); });
+    img.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openLightbox(img); }
+    });
+  });
+
+  lightbox.addEventListener('click', function(e){
+    if (e.target === lightbox || e.target === lbImg) closeLightbox();
+  });
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+  });
+})();
+</script>
 
 </body>
 </html>
