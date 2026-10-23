@@ -153,6 +153,16 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);backdro
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
 .reveal.is-visible{opacity:1;transform:translateY(0)}
 
+/* 画像拡大（ライトボックス）：リンクと連動していない画像のみ対象 */
+.zoomable{cursor:zoom-in}
+.lightbox{position:fixed;inset:0;z-index:200;background:rgba(11,33,56,.86);display:flex;align-items:center;justify-content:center;padding:32px;opacity:0;pointer-events:none;transition:opacity .2s}
+.lightbox.is-open{opacity:1;pointer-events:auto}
+.lightbox img{max-width:min(1100px,92vw);max-height:88vh;width:auto;border-radius:8px;box-shadow:0 30px 80px rgba(0,0,0,.5);cursor:zoom-out}
+.lightbox-close{position:absolute;top:20px;right:24px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lightbox-close:hover{background:rgba(255,255,255,.18)}
+.lightbox-cap{position:absolute;left:0;right:0;bottom:20px;text-align:center;color:rgba(255,255,255,.78);font-size:13px;padding:0 24px}
+@media(prefers-reduced-motion:reduce){.lightbox{transition:none}}
+
 /* ステートメント：課題を文章で畳みかける */
 .stmt-item{padding:34px 0;border-top:1px solid var(--line)}
 .stmt-item:last-child{border-bottom:1px solid var(--line)}
@@ -419,7 +429,7 @@ footer a{color:#7fb2f0;text-decoration:none}
     <div class="label">PRODUCTS</div>
     <h2>自社開発プロダクト</h2>
     <p class="lead">業務分析・業務再設計から、AI駆動開発によるシステム開発、SEO・マーケティングまで。企業・個人の業務と事業の変革を一気通貫で支援します。</p>
-    <img src="fig_products-overview.png" alt="SHIKOU AIが支援する3つの領域（業務分析・業務再設計・自動化／AI駆動開発・システム開発支援／SEO・マーケティング×AI）と、その中核にあるAI Work Observer・AI工場OS・AI-DevContinuumの位置づけを示した図" loading="lazy" class="products-overview-img">
+    <img src="fig_products-overview.png" alt="SHIKOU AIが支援する3つの領域（業務分析・業務再設計・自動化／AI駆動開発・システム開発支援／SEO・マーケティング×AI）と、その中核にあるAI Work Observer・AI工場OS・AI-DevContinuumの位置づけを示した図" loading="lazy" class="products-overview-img zoomable">
 
     <div class="ps">
       <div class="ps-head">
@@ -436,7 +446,7 @@ footer a{color:#7fb2f0;text-decoration:none}
             <a href="https://note.com/shikou_ai/n/n4605a2d29566?sub_rt=share_pw" target="_blank" rel="noopener" class="ps-cta">無料ダウンロード：業務整理機能 →</a>
           </div>
         </div>
-        <img class="ps-img" src="ai-work-observer-release-banner.png" alt="AI Work Observer。PC操作を見るだけで業務の全体像が見えてくる。記録・分析・改善案・実装の4ステップ" loading="lazy">
+        <img class="ps-img zoomable" src="ai-work-observer-release-banner.png" alt="AI Work Observer。PC操作を見るだけで業務の全体像が見えてくる。記録・分析・改善案・実装の4ステップ" loading="lazy">
       </div>
     </div>
 
@@ -452,7 +462,7 @@ footer a{color:#7fb2f0;text-decoration:none}
           <p class="ps-d">要求ヒアリングから設計・実装・品質分析・PMまでをAIでつなぐ、貴社専用の開発基盤。要求管理→設計→実装→テスト→品質分析まで、開発のすべてをひとつの基盤でつなぎます。</p>
           <a href="ai-devcontinuum.html" class="ps-cta">くわしく見る →</a>
         </div>
-        <img class="ps-img" src="ai-devcontinuum-release-banner.png" alt="企業専用AI開発OS AI-DevContinuum。要求管理から品質分析まで開発のすべてをつなぐ" loading="lazy">
+        <img class="ps-img zoomable" src="ai-devcontinuum-release-banner.png" alt="企業専用AI開発OS AI-DevContinuum。要求管理から品質分析まで開発のすべてをつなぐ" loading="lazy">
       </div>
     </div>
 
@@ -468,7 +478,7 @@ footer a{color:#7fb2f0;text-decoration:none}
           <p class="ps-d">作る→発信する→分析→改善を、AIが9割・人が最後の確認の1割で回す運用基盤です。一人で実際に自社の仕事を回しながら、プロジェクト・改善・収益まで管理しています。</p>
           <a href="ai-factory.html" class="ps-cta">くわしく見る →</a>
         </div>
-        <img class="ps-img" src="ai-factory-release-banner.png" alt="AI工場OS。一人で回しているのに、チームのように動く。作る・発信する・分析・改善を1つの基盤で回し、品質とセキュリティも評価する運用基盤" loading="lazy">
+        <img class="ps-img zoomable" src="ai-factory-release-banner.png" alt="AI工場OS。一人で回しているのに、チームのように動く。作る・発信する・分析・改善を1つの基盤で回し、品質とセキュリティも評価する運用基盤" loading="lazy">
       </div>
     </div>
   </div>
@@ -775,7 +785,7 @@ footer a{color:#7fb2f0;text-decoration:none}
     <h2>担当するのは、一人です</h2>
     <div class="pf">
       <div class="pf-card">
-        <img src="profile.png" alt="福田 和弘">
+        <img src="profile.png" alt="福田 和弘" class="zoomable">
         <div class="pf-n">福田 和弘</div>
         <div class="pf-r">AI/DX推進支援 ・ SEO全般 ・ 法人／個別サポート</div>
       </div>
@@ -851,6 +861,12 @@ footer a{color:#7fb2f0;text-decoration:none}
   SHIKOU × AI / AI業務自動化支援 © 2026
 </footer>
 
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="画像の拡大表示">
+  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="閉じる">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <p class="lightbox-cap" id="lightbox-cap"></p>
+</div>
+
 <script>
   // スマホ：ハンバーガーメニューの開閉
   const burger = document.getElementById('burger');
@@ -898,6 +914,48 @@ footer a{color:#7fb2f0;text-decoration:none}
     }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
     revealTargets.forEach(el => io.observe(el));
   }
+
+  // 画像拡大（リンクと連動していない画像のみ）
+  (function(){
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbCap = document.getElementById('lightbox-cap');
+    let lastFocused = null;
+
+    function openLightbox(img){
+      lastFocused = document.activeElement;
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt || '';
+      lbCap.textContent = img.alt || '';
+      lightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('lightbox-close').focus();
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('is-open');
+      document.body.style.overflow = '';
+      lbImg.src = '';
+      if (lastFocused) lastFocused.focus();
+    }
+
+    document.querySelectorAll('img.zoomable').forEach(img => {
+      img.setAttribute('tabindex', '0');
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', '画像を拡大表示: ' + (img.alt || ''));
+      img.addEventListener('click', () => openLightbox(img));
+      img.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openLightbox(img); }
+      });
+    });
+
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox || e.target === lbImg) closeLightbox();
+    });
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+    });
+  })();
 </script>
 
 </body>
