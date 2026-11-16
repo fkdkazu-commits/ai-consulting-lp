@@ -501,6 +501,13 @@ img{max-width:100%}
     </div>
 
     <div class="feat">
+      <div class="feat-h"><span class="feat-tag">デモ実行</span><span class="feat-title">統括エージェントによる同時委任（デモ：納期遅延の早期警告）</span></div>
+      <p class="feat-d">統括エージェントが、依頼内容を担当範囲ごとに切り分け、複数のエージェントへ同時に依頼します。製造業向けデモ組織での実行例（納期遅延の早期警告）では、営業管理・生産管理・納期管理・出荷管理・予算分析の5体へ同時に依頼し、各担当が自分の持ち場のデータから分析した結果を、経営レポート担当が1つのレポートへ集約しました。</p>
+      <img src="fig_agentos_demo_delegation.png" alt="事例2・納期遅延の連鎖の実行画面。統括エージェントから営業管理・生産管理・納期管理・出荷管理・予算分析の5体へ同時に依頼が送られている様子と、右側に依頼内容の詳細が表示されている" class="fig" loading="lazy" width="1341" height="835">
+      <p class="fig-cap">マルチエージェント委任の実行画面（実際のデモ実行データ）</p>
+    </div>
+
+    <div class="feat">
       <div class="feat-h"><span class="feat-tag">品質ゲート</span><span class="feat-title">エージェント評価</span></div>
       <p class="feat-d">生成したエージェントを、本番に入れる前に検証します。定義・権限・コストの検査と、隔離した試験実行（無効のまま、1回だけ）はプログラムが判定します。AIはコメントを付けるだけで、合否には使いません。不合格のエージェントは、本番登録を要求できない設計です。</p>
       <img src="fig_agentos_evaluations.png" alt="エージェント評価画面。本番稼働中のエージェント一覧（直近スコア100%）と、合格待ちのエージェント一覧（評価回数・再評価ボタンつき）が表示されている" class="fig" loading="lazy" width="1400" height="1000">
@@ -549,10 +556,8 @@ img{max-width:100%}
       <p class="feat-d">チャット可能なキャラクター型のエージェントを、デスクトップ上に表示できます。ペアリングコードで接続し、キャラクターをクリックするとチャット欄が開いて、依頼した内容がそのまま実行エンジンで処理されます。OS起動時の自動起動は、利用者が明示的に有効化した場合のみです。</p>
       <img src="fig_agentos_companion.png" alt="PCコンパニオン画面。デスクトップに秘書を表示するボタン、ペアリングコード発行ボタン、接続済み端末の一覧が表示されている" class="fig" loading="lazy" width="1400" height="1000">
       <p class="fig-cap">PCコンパニオンの設定画面（実際の接続データ）</p>
-      <div class="feat-future">
-        <span class="feat-future-badge">✦ 未検証</span>
-        <span class="feat-future-text">コンパニオンの画面表示そのものは未検証です（ビルドと内部ロジックのみ検証済み）</span>
-      </div>
+      <img src="fig_agentos_companion_desktop.png" alt="デスクトップ上に表示された複数のキャラクターと、チャット欄を開いた統括エージェント（ユナ）とのやり取り画面" class="fig" loading="lazy" width="1660" height="1102">
+      <p class="fig-cap">デスクトップに表示されたキャラクターとチャット画面（実際の表示結果）</p>
     </div>
   </div>
 </section>
@@ -607,7 +612,7 @@ img{max-width:100%}
       <div class="phase-item">
         <div class="phase-n">未検証</div>
         <div class="phase-t">実Claude CLIでの長時間運用 / 本番ビルド</div>
-        <div class="phase-d">実際のClaude Code CLIでの継続実行、コンパニオンのGUI表示、実PostgreSQLでの運用、本番ビルドのCSP設定は、現時点では未検証です。</div>
+        <div class="phase-d">実際のClaude Code CLIでの継続実行、実PostgreSQLでの運用、本番ビルドのCSP設定は、現時点では未検証です。PCコンパニオンのデスクトップ表示は、実際にキャラクターが表示されチャットできることを確認済みです。</div>
       </div>
       <div class="phase-item">
         <div class="phase-n">検証環境</div>
