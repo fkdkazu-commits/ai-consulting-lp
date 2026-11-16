@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0E5BXJ21KH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-0E5BXJ21KH");
+</script>
+<title>AI Agent OS｜AIエージェント・組織・ナレッジをつなぐ業務基盤（SHIKOU × AI）</title>
+<meta name="description" content="AIエージェントに専門知識とスキルを与え、組織として接続して業務を実行・評価・改善するプラットフォーム。Claude Code CLI経由でのみAIを実行し、エージェント評価・改善提案・ナレッジ・外部連携・PC常駐キャラクターまでを1つの基盤でつなぎます。">
+<meta property="og:title" content="AI Agent OS｜AIエージェント・組織・ナレッジをつなぐ業務基盤">
+<meta property="og:description" content="AIエージェントを作成し、組織として接続して業務を実行・評価・改善するプラットフォームです。Claude Code CLI経由でのみAIを実行します。">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="logo-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AI Agent OS",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "AI Agent Orchestration Platform",
+  "operatingSystem": "Web",
+  "description": "AIエージェントに専門知識とスキルを与え、組織として接続して業務を実行・評価・改善するプラットフォーム。Claude Code CLI経由でのみAIを実行します。",
+  "provider": {
+    "@type": "Organization",
+    "name": "SHIKOU × AI",
+    "url": "https://shikou-ai.com/index.html"
+  }
+}
+</script>
+<style>
+:root{
+  --accent:#4338ca; --accent-dark:#312e81;
+  --ink:#1a1a2e; --gray:#64748b; --gray-dark:#4a5568; --gray-light:#94a3b8;
+  --line:#e0e1f5; --line2:#e5e6f7;
+  --bg:#f7f7fc; --card:#edeefa; --white:#fff;
+  --orange:#f0a54a; --orange-dark:#c05621;
+  --teal:#a5b4fc; --teal2:#c7d2fe;
+  --footer:#1e1b4b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--ink);line-height:1.8;font-variant-numeric:tabular-nums}
+a{color:inherit}
+img{max-width:100%}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.section{padding:72px 0}
+.section.alt{background:var(--white)}
+.sec-tag{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.14em;margin-bottom:10px}
+.sec-title{font-size:clamp(22px,3.2vw,34px);font-weight:900;line-height:1.35;margin-bottom:14px;letter-spacing:-.01em;text-wrap:balance}
+.sec-lead{font-size:15px;color:var(--gray-dark);line-height:1.9;margin-bottom:36px;max-width:700px}
+
+/* header */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line2)}
+.header-inner{position:relative;max-width:1080px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;border:0;background:none;cursor:pointer;padding:0;flex-shrink:0}
+.nav-toggle-bar{display:block;width:100%;height:2px;background:var(--ink);border-radius:2px;transition:transform .2s,opacity .2s}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.back-to-top{position:fixed;right:24px;bottom:24px;z-index:60;width:46px;height:46px;border-radius:50%;background:var(--ink);color:#fff;border:0;font-size:19px;line-height:1;cursor:pointer;box-shadow:0 10px 22px rgba(30,27,75,.24);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .2s,transform .2s}
+.back-to-top.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
+.back-to-top:hover{background:var(--accent)}
+@media (max-width:640px){.back-to-top{right:16px;bottom:16px;width:42px;height:42px;font-size:17px}}
+.logo{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:#0b2138}
+.logo img{height:28px;width:auto;display:block}
+.logo .logo-t{font-size:15px;font-weight:900;letter-spacing:.08em;color:#0b2138}
+.logo .x{color:#2f6fd0;font-weight:700;margin:0 .16em}
+.header-links{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.header-links a{font-size:13px;font-weight:700;color:var(--gray-dark);text-decoration:none}
+.header-links a:hover{color:var(--accent)}
+.header-cta{background:var(--accent);color:#fff!important;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#f0f0fb 0%,var(--bg) 68%);padding:60px 0 0}
+.hero::before{content:'';position:absolute;top:-160px;right:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(67,56,202,.11) 0%,rgba(67,56,202,0) 70%);pointer-events:none;z-index:0}
+.hero-dotgrid{position:absolute;top:0;left:0;width:240px;height:240px;background-image:radial-gradient(rgba(67,56,202,.35) 1.6px,transparent 1.6px);background-size:16px 16px;-webkit-mask-image:radial-gradient(circle at top left,#000 35%,transparent 78%);mask-image:radial-gradient(circle at top left,#000 35%,transparent 78%);pointer-events:none;z-index:0}
+.hero-watermark{position:absolute;right:-30px;bottom:-30px;width:280px;height:auto;opacity:.06;z-index:0;pointer-events:none}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:start;padding-bottom:56px}
+.hero-copy,.hero-visual{min-width:0}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--accent-dark);background:#fff;border:1px solid var(--line);padding:7px 18px;border-radius:24px;margin-bottom:24px;letter-spacing:.04em;box-shadow:0 2px 10px rgba(30,27,75,.06)}
+.hero-wordmark{font-size:clamp(28px,4vw,50px);font-weight:900;letter-spacing:-.01em;line-height:1.05;margin-bottom:16px}
+.hero-wordmark .tone-a{color:var(--accent)}
+.hero-wordmark .tone-b{color:var(--ink)}
+.hero-tagline{font-size:clamp(17px,2vw,21px);font-weight:800;color:var(--ink);letter-spacing:.01em;margin-bottom:12px}
+.hero-category{font-size:13px;font-weight:800;color:var(--accent-dark);letter-spacing:.06em;margin-bottom:20px}
+.hero-copy h1.hero-h1-sub{font-size:clamp(17px,2vw,21px);font-weight:700;line-height:1.6;letter-spacing:0;margin-bottom:18px;color:var(--gray-dark);text-wrap:balance}
+.hero-highlight{background:#0b2138;color:#fff;border-radius:12px;padding:16px 20px;font-size:14px;line-height:1.85;margin-bottom:24px;max-width:560px}
+.hero-highlight strong{color:var(--teal2);font-weight:900}
+.hero-points{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.hero-point{display:flex;align-items:flex-start;gap:9px;font-size:13px;font-weight:700;color:var(--ink);line-height:1.6}
+.hero-point-icon{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:700;padding:15px 34px;border-radius:999px;text-decoration:none}
+.btn-primary{background:var(--orange);color:var(--ink);box-shadow:0 8px 22px rgba(240,165,74,.3)}
+.btn-ghost{border:1px solid var(--line);color:var(--ink);padding:15px 30px;background:#fff}
+
+.hero-visual{position:relative}
+.hero-shot{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;filter:drop-shadow(0 20px 30px rgba(30,27,75,.18));cursor:zoom-in}
+.hero-visual-cap{font-size:12.5px;color:var(--gray-light);margin-top:10px;text-align:center;line-height:1.8}
+
+.prose-highlight{margin:28px 0 8px}
+.prose-highlight mark{background:linear-gradient(180deg,transparent 60%,rgba(67,56,202,.16) 60%);color:var(--ink);font-size:19px;font-weight:900;line-height:1.9;padding:0 2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+/* grids / cards */
+.phase{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:2px;background:var(--line);border:1px solid var(--line);margin-top:8px}
+.phase.four{grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))}
+.phase-item{background:#fff;padding:24px 22px}
+.phase-item.span-2{grid-column:span 2}
+.phase-n{font-size:11.5px;font-weight:900;color:var(--accent);letter-spacing:.1em;margin-bottom:10px}
+.phase-t{font-size:16px;font-weight:900;line-height:1.5;margin-bottom:9px}
+.phase-d{font-size:13.5px;color:var(--gray);line-height:1.85}
+.phase-tag{display:inline-block;margin-top:10px;font-size:11.5px;font-weight:700;color:var(--accent-dark);background:var(--card);padding:3px 10px;border-radius:6px}
+
+.feat{margin-bottom:46px}
+.feat:last-child{margin-bottom:0}
+.feat-h{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.feat-tag{font-size:10.5px;font-weight:900;color:#fff;background:var(--accent);padding:4px 11px;border-radius:5px;letter-spacing:.06em;flex-shrink:0}
+.feat-title{font-size:18px;font-weight:900;line-height:1.5}
+.feat-d{font-size:14px;color:var(--gray-dark);line-height:1.9;margin-bottom:16px;max-width:760px}
+.feat-future{display:flex;align-items:flex-start;gap:12px;margin:6px 0 16px;padding-top:14px;border-top:1px dashed var(--line);max-width:760px}
+.feat-future-badge{flex-shrink:0;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:var(--orange-dark);background:#fdf1e2;padding:5px 12px;border-radius:999px;letter-spacing:.02em;white-space:nowrap;margin-top:1px}
+.feat-future-text{font-size:13px;color:var(--gray-dark);line-height:1.8}
+
+.mini-steps{list-style:none;counter-reset:step;margin:0 0 16px;max-width:760px}
+.mini-steps li{position:relative;padding-left:34px;margin-bottom:12px;font-size:14px;color:var(--gray-dark);line-height:1.8}
+.mini-steps li:last-child{margin-bottom:0}
+.mini-steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.mini-steps strong{color:var(--ink)}
+
+.fig{width:100%;height:auto;border:1px solid var(--line);border-radius:10px;margin:8px 0 10px;display:block;box-shadow:0 10px 30px rgba(30,27,75,.08);cursor:zoom-in;transition:box-shadow .2s,transform .2s}
+.fig:hover{box-shadow:0 14px 36px rgba(30,27,75,.16);transform:translateY(-2px)}
+.fig-cap{font-size:12.5px;color:var(--gray-light);text-align:center;margin-bottom:8px;line-height:1.85}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;z-index:200;background:rgba(11,33,56,.86);display:flex;align-items:center;justify-content:center;padding:32px;opacity:0;pointer-events:none;transition:opacity .2s}
+.lightbox.is-open{opacity:1;pointer-events:auto}
+.lightbox img{max-width:min(1100px,92vw);max-height:88vh;width:auto;border-radius:8px;box-shadow:0 30px 80px rgba(0,0,0,.5);cursor:zoom-out}
+.lightbox-close{position:absolute;top:20px;right:24px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lightbox-close:hover{background:rgba(255,255,255,.18)}
+.lightbox-cap{position:absolute;left:0;right:0;bottom:20px;text-align:center;color:rgba(255,255,255,.78);font-size:13px;padding:0 24px}
+@media (prefers-reduced-motion:reduce){.lightbox,.fig{transition:none}}
+
+.svc-list{display:flex;flex-wrap:wrap;gap:2px;background:var(--line);border:1px solid var(--line);margin:26px 0 6px}
+.svc-row{background:#fff;padding:18px 20px;flex:1 1 190px}
+.svc-layer{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.08em;margin-bottom:7px}
+.svc-name{font-size:14px;font-weight:900;line-height:1.5}
+.svc-role{font-size:12.5px;color:var(--gray);line-height:1.7;margin-top:5px}
+
+.consult-box{margin-top:28px;background:#0b2138;color:#fff;border-radius:14px;padding:26px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px 40px;flex-wrap:wrap}
+.consult-body{flex:1 1 420px;min-width:0}
+.consult-title{font-size:clamp(17px,2vw,21px);font-weight:900;line-height:1.5;color:#fff;margin-bottom:8px}
+.consult-text{font-size:14px;line-height:1.9;color:rgba(255,255,255,.82);margin:0}
+.consult-box .btn{flex-shrink:0}
+.consult-list{list-style:none;display:inline-block;text-align:left;margin:22px auto 8px;padding:0}
+.consult-list li{position:relative;padding-left:26px;margin-bottom:10px;font-size:15px;font-weight:700;color:var(--ink);line-height:1.6}
+.consult-list li::before{content:"✓";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%;background:#2f6fd0;color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.consult-lead{font-size:15px;font-weight:700;margin:14px 0 20px}
+.consult-btn{margin-bottom:34px}
+.cta-section{background:#fff;padding:72px 0;text-align:center}
+.cta-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:30px;text-align:left}
+.cta-card{background:var(--card);border-radius:14px;padding:22px;display:flex;align-items:center;gap:16px;text-decoration:none}
+.cta-card-icon{width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cta-card-label{font-size:12px;color:#718096;margin-bottom:2px}
+.cta-card-val{font-size:15px;font-weight:700;word-break:break-all}
+.cta-note{font-size:13px;color:var(--gray-light)}
+
+/* ── FAQ ── */
+.faq-list{display:flex;flex-direction:column;gap:2px;background:var(--line);border:1px solid var(--line);margin-top:8px}
+.faq-item{background:#fff}
+.faq-item summary{list-style:none;cursor:pointer;padding:20px 24px;font-size:15px;font-weight:700;color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'+';font-size:22px;font-weight:400;color:var(--accent);flex-shrink:0;transition:transform .15s}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-a{padding:0 24px 20px;font-size:14px;color:var(--gray-dark);line-height:1.9;max-width:760px}
+
+.prose{font-size:15px;color:var(--gray-dark);line-height:1.95;max-width:700px}
+.prose+.prose{margin-top:14px}
+.prose strong{color:var(--ink)}
+
+.site-footer{background:var(--footer);color:rgba(255,255,255,.6);padding:30px 0;font-size:13px;text-align:center}
+.site-footer a{color:var(--teal);text-decoration:none}
+
+@media (max-width:860px){
+  .nav-toggle{display:flex}
+  .header-links{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;align-items:stretch;gap:0;
+    background:#fff;border-bottom:1px solid var(--line2);
+    padding:4px 24px 18px;box-shadow:0 16px 28px rgba(30,27,75,.1);
+  }
+  .header-links.is-open{display:flex}
+  .header-links a:not(.header-cta){padding:13px 0;border-top:1px solid var(--line2)}
+  .header-links a.header-cta{margin-top:14px;text-align:center}
+  .hero-grid{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .phase-item.span-2{grid-column:auto}
+}
+</style>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yk0mhqg55j");
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="https://shikou-ai.com/index.html" class="logo"><img src="logo-mark.png" alt="SHIKOU × AI"><span class="logo-t">SHIKOU<span class="x">×</span>AI</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="headerLinks">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <div class="header-links" id="headerLinks">
+      <a href="https://shikou-ai.com/index.html">トップ</a>
+      <a href="#background">課題</a>
+      <a href="#architecture">仕組み</a>
+      <a href="#features">機能</a>
+      <a href="#security">セキュリティ</a>
+      <a href="#status">現在の対応状況</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://shikou-ai.com/contact.html" class="header-cta">無料相談</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-dotgrid" aria-hidden="true"></div>
+  <img class="hero-watermark" src="logo-mark.png" alt="" aria-hidden="true">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="hero-tag">✦ 社内業務の自動化・AI秘書基盤</div>
+      <div class="hero-wordmark"><span class="tone-a">AI</span><span class="tone-b"> Agent OS</span></div>
+      <div class="hero-tagline">AI秘書・エージェント基盤</div>
+      <h1 class="hero-h1-sub">AIエージェントを作成し、専門知識（ナレッジ）とスキルを与え、組織として接続して業務を実行・評価・改善するプラットフォームです。</h1>
+      <div class="hero-highlight">
+        <strong>AI実行はClaude Code CLI経由のみ。</strong><br>
+        Claude APIを直接は呼び出しません。CLI未設定でも、結果が「[MOCK]」で始まるモックモードで全機能をお試しいただけます。
+      </div>
+      <div class="hero-points">
+        <div class="hero-point"><span class="hero-point-icon">✓</span>自然言語で業務の目的を書くと、AIが必要なエージェントと組織の構成案を作る（Agent Factory）</div>
+        <div class="hero-point"><span class="hero-point-icon">✓</span>エージェントは品質評価に合格し、人が承認してから本番稼働する</div>
+        <div class="hero-point"><span class="hero-point-icon">✓</span>改善提案は差分を確認して承認・適用。いつでも元のバージョンへ戻せる</div>
+        <div class="hero-point"><span class="hero-point-icon">✓</span>Gmail・Googleカレンダー等の外部連携は読み取り専用・エージェントごとの承認制</div>
+        <div class="hero-point"><span class="hero-point-icon">✓</span>PCに常駐するキャラクター型エージェントに、チャットで直接依頼できる</div>
+      </div>
+      <div class="hero-btns">
+        <a href="https://shikou-ai.com/contact.html" class="btn btn-primary">無料で相談する</a>
+        <a href="#architecture" class="btn btn-ghost">仕組みを見る</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img class="hero-shot fig" src="fig_agentos_dashboard.png" alt="AI Agent OSのダッシュボード画面。承認待ち・失敗・完了・実行中件数、AI組織数・エージェント数・処理中のチャット依頼・PCコンパニオン接続状況、最近の実行一覧が表示されている" loading="lazy" width="1060" height="1000">
+      <p class="hero-visual-cap">実際の稼働画面です（クリックで拡大できます）</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about-name">
+  <div class="wrap">
+    <div class="sec-tag">ABOUT</div>
+    <h2 class="sec-title">AI Agent OSとは</h2>
+    <p class="sec-lead">1つのAIチャットに業務をまとめて丸投げするのではなく、<strong style="color:var(--ink)">役割ごとのAIエージェントを作り、組織として連携させ、実行した結果を評価・改善し続ける</strong>ための基盤です。</p>
+    <p class="prose">AI秘書・エージェント基盤という位置づけで、個人のPC常駐キャラクターから、複数エージェントが連携する組織的な業務実行まで、同じ基盤の上で扱います。</p>
+    <p class="prose">エージェントを作って終わりにせず、「評価に合格したものだけ本番稼働する」「実行結果を見て改善提案を出す」「改善は差分を確認してから承認する」という流れを組み込んでいるのが特徴です。</p>
+    <p class="prose-highlight"><mark>作って終わりではなく、動かしながら鍛える基盤。</mark></p>
+  </div>
+</section>
+
+<section class="section alt" id="background">
+  <div class="wrap">
+    <div class="sec-tag">BACKGROUND</div>
+    <h2 class="sec-title">1つのAIチャットに、業務が集中していませんか</h2>
+    <p class="sec-lead">複数の業務をAIに任せようとすると、チャット任せの運用にはいくつかの壁があります。AI Agent OSの機能が、それぞれに応えます。</p>
+    <div class="phase four">
+      <div class="phase-item">
+        <div class="phase-n">01</div>
+        <div class="phase-t">業務ごとにAIへの指示がバラバラになる</div>
+        <div class="phase-d">毎回ゼロから前提を説明し直すことになり、担当業務の違いや権限の違いを都度言葉で伝える必要がある。</div>
+        <div class="phase-tag">→ 役割・ナレッジ・スキルを持つエージェントとして組織化</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">02</div>
+        <div class="phase-t">作ったAIの質がバラバラで、そのまま使ってしまう</div>
+        <div class="phase-d">試しに作ったエージェントの出来を機械的にチェックする仕組みがなく、品質にばらつきが出たまま運用に乗ってしまう。</div>
+        <div class="phase-tag">→ エージェント評価（定義・権限・コスト検査＋隔離環境での試験実行）</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">03</div>
+        <div class="phase-t">改善してもその場限りで、ナレッジが残らない</div>
+        <div class="phase-d">うまくいった工夫、失敗した原因がチャット履歴の中に埋もれ、次に活かされない。</div>
+        <div class="phase-tag">→ 改善提案（差分承認・ロールバック可）＋ナレッジ登録</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">04</div>
+        <div class="phase-t">メール・カレンダー等の確認が、結局人の手作業になる</div>
+        <div class="phase-d">外部サービスとの連携がなく、結局「確認してAIに伝える」という手作業が残ってしまう。</div>
+        <div class="phase-tag">→ Gmail・カレンダー等の外部連携（読み取り専用・承認制）</div>
+      </div>
+    </div>
+    <div class="consult-box">
+      <div class="consult-body">
+        <h3 class="consult-title">自社の業務に、どう組み込めばいいのか？</h3>
+        <p class="consult-text">現在の業務の進め方をお伺いし、AI Agent OSの考え方を活用できる範囲と、段階的な試し方をご提案します。</p>
+      </div>
+      <a href="https://shikou-ai.com/contact.html?type=demo" class="btn btn-primary">導入相談・製品デモを申し込む</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="architecture">
+  <div class="wrap">
+    <div class="sec-tag">ARCHITECTURE</div>
+    <h2 class="sec-title">組織ビルダーで、エージェントの連携をつなぐ</h2>
+    <p class="sec-lead">キャラクター（エージェント）同士をドラッグでつなぐだけで、誰が誰に依頼できるかという組織構造を作れます。矢印の向きが依頼できる方向です。実行順序は、この接続だけで決まります。</p>
+    <img src="fig_agentos_org_builder.png" alt="AI Agent OSの組織ビルダー画面。統括エージェントを起点に、営業管理担当・生産管理担当・納期管理担当・出荷管理担当・予算分析担当・経営レポート担当・レポート点検担当のキャラクターが矢印でつながり、依頼できる方向を表している" class="fig" loading="lazy" width="1400" height="1200">
+    <p class="fig-cap">実際の組織ビルダー画面（製造業向けデモ組織）。依頼の流れがそのまま実行順序になる</p>
+
+    <h3 style="font-size:19px;font-weight:900;margin:34px 0 12px">扱っている範囲</h3>
+    <div class="svc-list">
+      <div class="svc-row">
+        <div class="svc-layer">組織設計</div>
+        <div class="svc-name">Agent Factory / 組織ビルダー</div>
+        <div class="svc-role">自然言語での組織提案、またはドラッグ&ドロップで役割と連携を設計する</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">品質ゲート</div>
+        <div class="svc-name">エージェント評価</div>
+        <div class="svc-role">定義・権限・コストの検査と、隔離した試験実行（無効のまま1回だけ）をプログラムが判定する</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">実行</div>
+        <div class="svc-name">タスク実行 / 成果物 / 定期実行</div>
+        <div class="svc-role">Claude Code CLI経由で実行し、成果物・使用量・ログを記録する</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">継続改善</div>
+        <div class="svc-name">改善提案 / 自己進化</div>
+        <div class="svc-role">実行履歴・組織構成を分析し、承認・適用・ロールバックできる差分として提案する</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">知識・権限</div>
+        <div class="svc-name">ナレッジ / スキル・権限管理</div>
+        <div class="svc-role">文書を登録してエージェントに割り当て、使えるスキルは許可リスト方式で管理する</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">ガバナンス</div>
+        <div class="svc-name">承認 / 監査ログ</div>
+        <div class="svc-role">人の確認が必要な操作は承認制とし、誰が・いつ・何をしたかを記録する（秘密情報らしき文字列は自動で伏せる）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="features">
+  <div class="wrap">
+    <div class="sec-tag">FEATURES</div>
+    <h2 class="sec-title">主な機能</h2>
+    <p class="sec-lead">「作る」「実行する」「評価する」「良くする」のサイクルを、それぞれ別の画面と記録として持っています。</p>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">組織設計</span><span class="feat-title">Agent Factory（自然言語で組織を設計）</span></div>
+      <p class="feat-d">実現したい業務の目的を日本語で書くと、AIが業務を分析し、必要なエージェントと組織の構成案を作ります。内容を確認して承認すると、エージェントと組織が作られます。ここで作られたエージェントは、評価に合格して承認されるまで実行されません（無効の状態で止まります）。</p>
+      <img src="fig_agentos_factory.png" alt="Agent Factory画面。業務の目的を入力する欄と「分析して構成案を作る」ボタン、過去の生成履歴（生成済み8体・6体など）が表示されている" class="fig" loading="lazy" width="1400" height="1000">
+      <p class="fig-cap">Agent Factoryの画面（実際の生成履歴）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">実行</span><span class="feat-title">タスク実行とエージェントごとの記録</span></div>
+      <p class="feat-d">組織を選んでタスクを依頼すると、接続順にエージェントが実行されます。実行履歴には、CLI実行回数・入出力トークン数・コストが記録され、タスク名から実行詳細に進むとエージェントごとの出力をすべて確認できます。</p>
+      <img src="fig_agentos_runs.png" alt="タスク実行画面。組織選択・タスク名・タスク内容の入力欄と、実行履歴の一覧（完了/実CLI/コスト/実行日時つき）が表示されている" class="fig" loading="lazy" width="1400" height="1000">
+      <p class="fig-cap">タスク実行・実行履歴の画面（実際の実行データ）</p>
+      <img src="fig_agentos_run_detail.png" alt="実行詳細画面。CLI実行8回・入力16トークン・出力16006トークン・コスト0.4309ドルという実績値と、エージェントごとの実行結果（分析内容・前提条件・確認事項）が表示されている" class="fig" loading="lazy" width="1400" height="900">
+      <p class="fig-cap">実行詳細の画面（実際の実行結果。製造業向けデモ組織での試算）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">品質ゲート</span><span class="feat-title">エージェント評価</span></div>
+      <p class="feat-d">生成したエージェントを、本番に入れる前に検証します。定義・権限・コストの検査と、隔離した試験実行（無効のまま、1回だけ）はプログラムが判定します。AIはコメントを付けるだけで、合否には使いません。不合格のエージェントは、本番登録を要求できない設計です。</p>
+      <img src="fig_agentos_evaluations.png" alt="エージェント評価画面。本番稼働中のエージェント一覧（直近スコア100%）と、合格待ちのエージェント一覧（評価回数・再評価ボタンつき）が表示されている" class="fig" loading="lazy" width="1400" height="1000">
+      <p class="fig-cap">エージェント評価の画面（実際の評価データ）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">継続改善</span><span class="feat-title">改善提案（差分承認・ロールバック可）</span></div>
+      <p class="feat-d">提案は承認されるまで組織に反映されません。適用前にサーバー側で再検証され、適用後は元のバージョンへ戻せます。実行履歴の分析と、役割の重複・直列の独立工程・孤立ノード・負荷集中・品質不足・滞留・権限といった観点での構成分析の、2つの切り口から改善点を見つけます。</p>
+      <img src="fig_agentos_improvements.png" alt="改善提案画面。組織を選択して「実行履歴を分析」または「構成分析を実行」を行う操作画面" class="fig" loading="lazy" width="1400" height="1000">
+      <p class="fig-cap">改善提案の操作画面。適用後もバージョンを戻せる設計</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">知識</span><span class="feat-title">ナレッジ（PDF・TXT・Markdown・DOCX対応）</span></div>
+      <p class="feat-d">対応形式はPDF・TXT・Markdown・DOCX（10MBまで）です。登録した文書はチャンク化され、エージェントへの割り当てと承認を経て、実行時に検索・参照されます。検索は語彙ベースで、類義語・言い換えは拾えない点はそのまま案内しています。</p>
+      <img src="fig_agentos_knowledge.png" alt="ナレッジ画面。ファイルアップロード欄・検索テスト欄と、登録済みドキュメントの一覧（チャンク数・意味検索の準備状況・割り当てエージェント数・承認状態つき）が表示されている" class="fig" loading="lazy" width="1400" height="1000">
+      <p class="fig-cap">ナレッジ画面（実際の登録データ）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">権限</span><span class="feat-title">スキル・権限管理（許可リスト方式）</span></div>
+      <p class="feat-d">エージェントごとの利用許可は、各エージェントの「設定」で与える許可リスト方式です。任意のシェルコマンドは実行できません。ブラウザ操作系のスキルも、使い捨ての空のブラウザでログイン情報は使わず、パスワード欄には入力できない設計にしています。</p>
+      <img src="fig_agentos_skills.png" alt="スキル画面。成果物レビュー・ブラウザでページを操作する・ブラウザでページを読む・チェックリスト検証・CSV集計・期日計算・文書比較・経費精算チェックなど、スキルごとの説明と有効化トグルの一覧" class="fig" loading="lazy" width="1400" height="1000">
+      <p class="fig-cap">スキル一覧の画面。各スキルの処理範囲と安全上の制約を明記</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">外部連携</span><span class="feat-title">外部サービス連携（読み取り専用・承認制）</span></div>
+      <p class="feat-d">Gmail・Googleカレンダー・Googleドライブ・GitHub・Slack・Notion・Dropbox・Web検索に対応しています（Claude Code CLIにログイン済みのアカウントのコネクタを使用）。許可はすべて読み取り専用で、エージェントごとに承認が必要です。メール・予定の本文は「第三者が書いたデータ」としてAIに渡し、中に書かれた指示には従わせません。</p>
+      <img src="fig_agentos_integrations.png" alt="外部サービス連携画面。Google(Gmail/カレンダー/ドライブ)・GitHub・Slack・Notion・Dropbox・Web検索が、いずれも読み取り専用のバッジとともにカテゴリ別に並んでいる" class="fig" loading="lazy" width="1400" height="1000">
+      <p class="fig-cap">外部サービス連携の画面（実際の連携設定）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">ガバナンス</span><span class="feat-title">承認・監査ログ</span></div>
+      <p class="feat-d">外部ツールの有効化や組織の変更など、人の確認が必要な操作は「承認」画面に集約されます。「監査ログ」には、誰が・いつ・何を操作したかが記録され、秘密情報らしき文字列は伏せて保存されます。</p>
+      <img src="fig_agentos_approval.png" alt="承認画面。「本番登録: 生成した8体のエージェントと組織」という承認済みの申請内容と、承認すると起きる影響の説明が表示されている" class="fig" loading="lazy" width="1400" height="480">
+      <p class="fig-cap">承認画面（実際の承認履歴）</p>
+      <img src="fig_agentos_audit.png" alt="監査ログ画面。日時・実行者・操作・対象・詳細の列を持つログ一覧が時系列で表示されている" class="fig" loading="lazy" width="1400" height="1000">
+      <p class="fig-cap">監査ログの画面（実際の記録）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">PC常駐</span><span class="feat-title">PCコンパニオン（デスクトップキャラクター）</span></div>
+      <p class="feat-d">チャット可能なキャラクター型のエージェントを、デスクトップ上に表示できます。ペアリングコードで接続し、キャラクターをクリックするとチャット欄が開いて、依頼した内容がそのまま実行エンジンで処理されます。OS起動時の自動起動は、利用者が明示的に有効化した場合のみです。</p>
+      <img src="fig_agentos_companion.png" alt="PCコンパニオン画面。デスクトップに秘書を表示するボタン、ペアリングコード発行ボタン、接続済み端末の一覧が表示されている" class="fig" loading="lazy" width="1400" height="1000">
+      <p class="fig-cap">PCコンパニオンの設定画面（実際の接続データ）</p>
+      <div class="feat-future">
+        <span class="feat-future-badge">✦ 未検証</span>
+        <span class="feat-future-text">コンパニオンの画面表示そのものは未検証です（ビルドと内部ロジックのみ検証済み）</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="security">
+  <div class="wrap">
+    <div class="sec-tag">SECURITY</div>
+    <h2 class="sec-title">セキュリティへの考え方</h2>
+    <p class="sec-lead">AIに何でも許可するのではなく、「人が確認する前提」を基盤側の設計で支えています。現時点での制約も、そのままお伝えします。</p>
+    <div class="phase four">
+      <div class="phase-item">
+        <div class="phase-n">01</div>
+        <div class="phase-t">AI実行はClaude Code CLI経由のみ</div>
+        <div class="phase-d">組み込みツール（ファイル操作・コマンド実行）を無効化し、ユーザー設定を読まず、許可していないツールは自動で拒否する設定でCLIを起動します。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">02</div>
+        <div class="phase-t">外部連携は読み取り専用・承認制</div>
+        <div class="phase-d">メールの送信・返信・削除、予定の変更などの書き込み系ツールは許可されません。新しい外部ツールの有効化も承認制です。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">03</div>
+        <div class="phase-t">ローカル前提の待受</div>
+        <div class="phase-d">サーバーは127.0.0.1で待ち受け、ローカル以外のHost・別オリジンからの状態変更は拒否します。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">04</div>
+        <div class="phase-t">認証は現時点で開発用モック</div>
+        <div class="phase-d">現在の認証は単一ユーザー向けの開発用モックです。本番運用・複数ユーザーでの利用には、認証基盤の導入が別途必要です。</div>
+      </div>
+    </div>
+    <p class="prose" style="margin-top:28px">APIキー等の秘密情報はこのアプリのフォルダには置かず、CLI側の認証情報管理に委ねています。SaaSとして提供する場合は、Claude Code CLIの利用条件がご利用中の契約に適合するか、事前の確認が必要です。</p>
+  </div>
+</section>
+
+<section class="section alt" id="status">
+  <div class="wrap">
+    <div class="sec-tag">CURRENT STATUS</div>
+    <h2 class="sec-title">現在の対応状況（正直にお伝えします）</h2>
+    <p class="sec-lead">自社で開発・運用しているMVP（実用最小限の製品）です。良く見せるための誇張はせず、できること・まだのことをそのまま記載します。</p>
+    <div class="phase four">
+      <div class="phase-item">
+        <div class="phase-n">未実装</div>
+        <div class="phase-t">ベクトル検索 / ループを含む組織の実行</div>
+        <div class="phase-d">ナレッジ検索は現状語彙ベースで、類義語・言い換えには弱い構成です。反復（ループ）を含む組織の実行や、承認待ちで実行を一時停止する制御、エージェントが自律的にスキルを呼び出す仕組みも未実装です。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">次段階以降</div>
+        <div class="phase-t">書き込み系の外部連携 / バックグラウンド実行 / 課金</div>
+        <div class="phase-d">外部サービスへの書き込み、ブラウザ・PC画面の本格的な操作、バックグラウンド・定期実行の強化、課金機能は、現時点の仕様では次段階以降としています。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">未検証</div>
+        <div class="phase-t">実Claude CLIでの長時間運用 / 本番ビルド</div>
+        <div class="phase-d">実際のClaude Code CLIでの継続実行、コンパニオンのGUI表示、実PostgreSQLでの運用、本番ビルドのCSP設定は、現時点では未検証です。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">検証環境</div>
+        <div class="phase-t">単体/結合テスト151件・E2E16シナリオ</div>
+        <div class="phase-d">型チェックと単体・結合テスト151件、Playwright によるE2Eテスト16シナリオを用意し、継続的に検証しながら開発しています。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="sec-tag">FAQ</div>
+    <h2 class="sec-title">よくある質問</h2>
+    <p class="sec-lead">ここに無い点は無料相談で直接お尋ねください。</p>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Claude Codeを直接使うのと何が違うのですか？</summary>
+        <p class="faq-a">Claude Codeは、開発者がコードを書く作業を支援するツールです。AI Agent OSは、役割を持つ複数のAIエージェントを組織として接続し、実行・評価・改善のサイクルを基盤として管理するためのプラットフォームです。AI実行そのものはClaude Code CLIに委ねており、競合するものではありません。</p>
+      </details>
+      <details class="faq-item">
+        <summary>Claude(Anthropic)のAPIキーは必要ですか？</summary>
+        <p class="faq-a">いいえ。AI実行はClaude Code CLI経由のみで、Claude APIを直接は呼び出しません。CLI未設定でも、結果が「[MOCK]」で始まるモックモードで全機能をお試しいただけます。実CLIで実行する場合は、Claude Code CLIがPATHにあり、ログイン済みであることが前提です。</p>
+      </details>
+      <details class="faq-item">
+        <summary>いきなりAIに全部任せることになりますか？</summary>
+        <p class="faq-a">いいえ。エージェントは評価に合格して承認されるまで本番稼働せず、外部ツールの有効化や組織の変更は承認制です。改善提案も、差分を確認して承認してから適用され、適用後はいつでも元のバージョンへ戻せます。</p>
+      </details>
+      <details class="faq-item">
+        <summary>メールやカレンダーの内容がそのまま外部へ送信されませんか？</summary>
+        <p class="faq-a">Gmail・Googleカレンダー等の連携は読み取り専用で、エージェントごとに承認が必要です。送信・返信・削除・予定変更などの書き込み系ツールは許可されません。メール・予定の本文は「第三者が書いたデータ」としてAIに渡し、中に書かれた指示には従わせない設計です。なお、連携を使うと内容はClaude Code CLI経由でClaudeに送信され、実行結果はこのアプリのローカルDBに保存されます。</p>
+      </details>
+      <details class="faq-item">
+        <summary>今すぐ商用のSaaSとして使えますか？</summary>
+        <p class="faq-a">現時点では、個人・社内利用を想定したMVPです。認証は単一ユーザー向けの開発用モックのため、複数ユーザーでの本番運用には認証基盤の導入が別途必要です。詳しくは「現在の対応状況」をご覧ください。</p>
+      </details>
+      <details class="faq-item">
+        <summary>業種・用途は限定されますか？</summary>
+        <p class="faq-a">限定していません。本ページの画面例は製造業向けのデモ組織やSEO記事制作の組織ですが、Agent Factoryに業務の目的を伝えれば、営業・人事・経理・カスタマーサポートなど幅広い業務の組織構成を提案できます。</p>
+      </details>
+      <details class="faq-item">
+        <summary>導入・カスタマイズの相談はできますか？</summary>
+        <p class="faq-a">はい。現状の業務内容をお伺いし、AI Agent OSの考え方をどう当てはめられるか、個別にご提案します。固定の料金プランは設けておらず、スポット開発支援・業務委託支援のいずれの形でもご相談いただけます。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section cta-section">
+  <div class="wrap">
+    <div class="sec-tag">CONTACT</div>
+    <h2 class="sec-title">まずは、今の業務の進め方を聞かせてください</h2>
+    <p class="sec-lead" style="margin-left:auto;margin-right:auto">
+      最初から大きく変える必要はありません。<br><br>
+      現在の業務の進め方や課題をお伺いし、AI Agent OSの考え方を活用できる範囲と、試し方をご提案します。
+    </p>
+    <ul class="consult-list">
+      <li>どの業務からAIエージェントに任せられるか相談したい</li>
+      <li>実際の画面や動きをデモで見たい</li>
+      <li>自社の業務に合わせたカスタマイズを相談したい</li>
+      <li>小さく試してから広げたい</li>
+    </ul>
+    <p class="consult-lead">まずはお気軽にご相談ください。</p>
+    <div class="consult-btn"><a href="https://shikou-ai.com/contact.html?type=demo" class="btn btn-primary">導入相談・製品デモを申し込む</a></div>
+    <div class="cta-cards">
+      <a href="mailto:fkdkazu@gmail.com" class="cta-card">
+        <div class="cta-card-icon">✉</div>
+        <div><div class="cta-card-label">メール</div><div class="cta-card-val">fkdkazu@gmail.com</div></div>
+      </a>
+      <a href="https://x.com/Marketer_kazuf" target="_blank" rel="noopener" class="cta-card">
+        <div class="cta-card-icon">𝕏</div>
+        <div><div class="cta-card-label">X（DM）</div><div class="cta-card-val">@Marketer_kazuf</div></div>
+      </a>
+      <a href="https://shikou-ai.com/contact.html" class="cta-card">
+        <div class="cta-card-icon">🔗</div>
+        <div><div class="cta-card-label">お問い合わせフォーム</div><div class="cta-card-val">無料相談を申し込む</div></div>
+      </a>
+    </div>
+    <p class="cta-note">通常1営業日以内にご返信させていただきます</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    SHIKOU × AI / AI Agent OS — AIエージェント・組織・ナレッジをつなぐ業務基盤 © 2026 ｜ <a href="https://shikou-ai.com/index.html">トップページに戻る</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="画像の拡大表示">
+  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="閉じる">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <p class="lightbox-cap" id="lightbox-cap"></p>
+</div>
+<button type="button" class="back-to-top" id="backToTop" aria-label="ページの先頭に戻る">↑</button>
+<script>
+(function(){
+  var lightbox = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightbox-img');
+  var lbCap = document.getElementById('lightbox-cap');
+  var lastFocused = null;
+
+  function openLightbox(img){
+    lastFocused = document.activeElement;
+    lbImg.src = img.currentSrc || img.src;
+    lbImg.alt = img.alt || '';
+    lbCap.textContent = img.alt || '';
+    lightbox.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lightbox-close').focus();
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('is-open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+    if (lastFocused) lastFocused.focus();
+  }
+
+  document.querySelectorAll('img.fig, img.hero-shot').forEach(function(img){
+    img.setAttribute('tabindex', '0');
+    img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', '画像を拡大表示: ' + (img.alt || ''));
+    img.addEventListener('click', function(){ openLightbox(img); });
+    img.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openLightbox(img); }
+    });
+  });
+
+  lightbox.addEventListener('click', function(e){
+    if (e.target === lightbox || e.target === lbImg) closeLightbox();
+  });
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+  });
+  var navToggle = document.getElementById('navToggle');
+  var headerLinks = document.getElementById('headerLinks');
+  if (navToggle && headerLinks) {
+    navToggle.addEventListener('click', function(){
+      var isOpen = headerLinks.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    headerLinks.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        headerLinks.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  var backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    window.addEventListener('scroll', function(){
+      backToTop.classList.toggle('is-visible', window.scrollY > 500);
+    });
+    backToTop.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
