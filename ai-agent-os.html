@@ -231,7 +231,6 @@ img{max-width:100%}
       <a href="#architecture">仕組み</a>
       <a href="#features">機能</a>
       <a href="#security">セキュリティ</a>
-      <a href="#status">現在の対応状況</a>
       <a href="#faq">FAQ</a>
       <a href="https://shikou-ai.com/contact.html" class="header-cta">無料相談</a>
     </div>
@@ -593,37 +592,7 @@ img{max-width:100%}
   </div>
 </section>
 
-<section class="section alt" id="status">
-  <div class="wrap">
-    <div class="sec-tag">CURRENT STATUS</div>
-    <h2 class="sec-title">現在の対応状況（正直にお伝えします）</h2>
-    <p class="sec-lead">自社で開発・運用しているMVP（実用最小限の製品）です。良く見せるための誇張はせず、できること・まだのことをそのまま記載します。</p>
-    <div class="phase four">
-      <div class="phase-item">
-        <div class="phase-n">未実装</div>
-        <div class="phase-t">ベクトル検索 / ループを含む組織の実行</div>
-        <div class="phase-d">ナレッジ検索は現状語彙ベースで、類義語・言い換えには弱い構成です。反復（ループ）を含む組織の実行や、承認待ちで実行を一時停止する制御、エージェントが自律的にスキルを呼び出す仕組みも未実装です。</div>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">次段階以降</div>
-        <div class="phase-t">書き込み系の外部連携 / バックグラウンド実行 / 課金 / 他AIモデル対応</div>
-        <div class="phase-d">外部サービスへの書き込み、ブラウザ・PC画面の本格的な操作、バックグラウンド・定期実行の強化、課金機能は、現時点の仕様では次段階以降としています。実行エンジンは現在Claude Code CLIとMicrosoft 365 Copilotの2つに対応しており、ローカルLLMや他社AIモデルへの対応拡大は、今後の構想として検討中です。</div>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">未検証</div>
-        <div class="phase-t">実Claude CLIでの長時間運用 / 本番ビルド</div>
-        <div class="phase-d">実際のClaude Code CLIでの継続実行、実PostgreSQLでの運用、本番ビルドのCSP設定は、現時点では未検証です。PCコンパニオンのデスクトップ表示は、実際にキャラクターが表示されチャットできることを確認済みです。</div>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">検証環境</div>
-        <div class="phase-t">単体/結合テスト151件・E2E16シナリオ</div>
-        <div class="phase-d">型チェックと単体・結合テスト151件、Playwright によるE2Eテスト16シナリオを用意し、継続的に検証しながら開発しています。</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="faq">
+<section class="section alt" id="faq">
   <div class="wrap">
     <div class="sec-tag">FAQ</div>
     <h2 class="sec-title">よくある質問</h2>
