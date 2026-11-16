@@ -83,7 +83,7 @@ img{max-width:100%}
 .hero::before{content:'';position:absolute;top:-160px;right:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(67,56,202,.11) 0%,rgba(67,56,202,0) 70%);pointer-events:none;z-index:0}
 .hero-dotgrid{position:absolute;top:0;left:0;width:240px;height:240px;background-image:radial-gradient(rgba(67,56,202,.35) 1.6px,transparent 1.6px);background-size:16px 16px;-webkit-mask-image:radial-gradient(circle at top left,#000 35%,transparent 78%);mask-image:radial-gradient(circle at top left,#000 35%,transparent 78%);pointer-events:none;z-index:0}
 .hero-watermark{position:absolute;right:-30px;bottom:-30px;width:280px;height:auto;opacity:.06;z-index:0;pointer-events:none}
-.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:start;padding-bottom:56px}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center;padding-bottom:56px}
 .hero-copy,.hero-visual{min-width:0}
 .hero-tag{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--accent-dark);background:#fff;border:1px solid var(--line);padding:7px 18px;border-radius:24px;margin-bottom:24px;letter-spacing:.04em;box-shadow:0 2px 10px rgba(30,27,75,.06)}
 .hero-wordmark{font-size:clamp(28px,4vw,50px);font-weight:900;letter-spacing:-.01em;line-height:1.05;margin-bottom:16px}
@@ -228,7 +228,7 @@ img{max-width:100%}
     <div class="header-links" id="headerLinks">
       <a href="https://shikou-ai.com/index.html">トップ</a>
       <a href="#background">課題</a>
-      <a href="#architecture">仕組み</a>
+      <a href="#domains">仕組み</a>
       <a href="#features">機能</a>
       <a href="#security">セキュリティ</a>
       <a href="#faq">FAQ</a>
@@ -255,7 +255,7 @@ img{max-width:100%}
       </div>
       <div class="hero-btns">
         <a href="https://shikou-ai.com/contact.html" class="btn btn-primary">無料で相談する</a>
-        <a href="#architecture" class="btn btn-ghost">仕組みを見る</a>
+        <a href="#domains" class="btn btn-ghost">仕組みを見る</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -301,11 +301,74 @@ img{max-width:100%}
         <div class="phase-d">トラブル時の対応が不安、企業としてのサポートが限定的。</div>
         <div class="phase-tag">→ 導入・カスタマイズを個別にご相談いただける体制（スポット開発支援／業務委託支援）</div>
       </div>
+      <div class="phase-item">
+        <div class="phase-n">06</div>
+        <div class="phase-t">エージェントの誤動作・暴走への不安</div>
+        <div class="phase-d">想定外の操作をしてしまうのでは、という懸念。</div>
+        <div class="phase-tag">→ 評価に合格し、人が承認するまで本番稼働しない設計。不合格のエージェントは本番登録を要求できない</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">07</div>
+        <div class="phase-t">既存システムとの連携の複雑さ</div>
+        <div class="phase-d">社内のツールやサービスとどうつながるのか分からない。</div>
+        <div class="phase-tag">→ Gmail・カレンダー・ドライブ・GitHub・Slack・Notion・Dropbox・Web検索に対応（読み取り専用・承認制）</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">08</div>
+        <div class="phase-t">特定のAIベンダーへの依存（ロックイン）</div>
+        <div class="phase-d">1社のAIモデル次第で、運用が左右されてしまうことへの懸念。</div>
+        <div class="phase-tag">→ 実行エンジンはClaude Code CLIとMicrosoft 365 Copilotから選択可能。他社AIモデルへの対応拡大も構想中</div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="about-name">
+<section class="section" id="domains">
+  <div class="wrap">
+    <div class="sec-tag">OVERVIEW</div>
+    <h2 class="sec-title">7つの領域で、AI組織を設計・構築・運用・改善する</h2>
+    <p class="sec-lead">AI Agent OSは、以下7つの領域を1つの基盤として統合しています。このページも、この7つの領域に沿って機能を紹介していきます。</p>
+    <div class="phase">
+      <div class="phase-item">
+        <div class="phase-n">01</div>
+        <div class="phase-t">ソリューション設計・アーキテクチャ</div>
+        <div class="phase-d">AI組織設計・エージェント構成・ワークフロー設計。Agent Factory（自然言語での組織提案）と組織ビルダー（ドラッグ&ドロップでの設計）を提供。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">02</div>
+        <div class="phase-t">AIモデル・プロンプト・コンテキスト管理</div>
+        <div class="phase-d">実行エンジンはClaude Code CLIとMicrosoft 365 Copilotの2つに対応（設定画面で切替可）。ナレッジ・スキルの割り当ても、この領域で管理する。ローカルLLMは画面上の予約枠で、現時点では未提供。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">03</div>
+        <div class="phase-t">外部システム連携</div>
+        <div class="phase-d">Gmail・カレンダー・ドライブ・GitHub・Slack・Notion・Dropbox・Web検索に対応（読み取り専用・エージェントごとの承認制）。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">04</div>
+        <div class="phase-t">評価・テスト・最適化</div>
+        <div class="phase-d">定義・権限・コストの検査と、隔離した試験実行をプログラムが判定するエージェント評価。実行履歴・構成分析にもとづく改善提案。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">05</div>
+        <div class="phase-t">AIガバナンス・セキュリティ</div>
+        <div class="phase-d">人の確認が必要な操作は承認制とし、誰が・いつ・何をしたかを監査ログに記録（秘密情報らしき文字列は自動で伏せる）。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">06</div>
+        <div class="phase-t">ステークホルダー・ライフサイクル管理</div>
+        <div class="phase-d">文書をナレッジとして登録・エージェントへ割り当て、承認を経て運用。改善提案は差分を確認して承認・適用し、いつでも元のバージョンへ戻せる。</div>
+      </div>
+      <div class="phase-item span-2">
+        <div class="phase-n">07</div>
+        <div class="phase-t">開発生産性・運用支援</div>
+        <div class="phase-d">単体/結合テスト151件・E2E16シナリオで継続的に検証しながら開発。PCコンパニオンから、日常的な依頼を直接実行エンジンへ渡せる。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="about-name">
   <div class="wrap">
     <div class="sec-tag">ABOUT</div>
     <h2 class="sec-title">AI Agent OSとは</h2>
@@ -342,10 +405,36 @@ img{max-width:100%}
         <div class="svc-role">評価と改善提案のサイクルで、AI組織を育てていく</div>
       </div>
     </div>
+
+    <h3 style="font-size:19px;font-weight:900;margin:34px 0 4px">他の自律型AIエージェントとの違い</h3>
+    <p class="prose">Grok Bot（xAI）やDots（OpenAI）など、目的と制約を伝えると常時稼働で自律的にタスクを進め続けるAIエージェントが、各社から登場しています。AI Agent OSも同じ「AIエージェント」ですが、スピードよりも「人が確認してから進める」ことを優先した設計です。</p>
+    <div class="svc-list" style="margin-top:20px">
+      <div class="svc-row">
+        <div class="svc-layer">実行前</div>
+        <div class="svc-name">評価に合格するまで本番稼働しない</div>
+        <div class="svc-role">生成したエージェントは、定義・権限・コストの検査と試験実行に合格し、人が承認して初めて動く</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">外部接続</div>
+        <div class="svc-name">読み取り専用・承認制</div>
+        <div class="svc-role">メール・カレンダー等の外部連携は読み取り専用。書き込み系ツールの有効化には人の承認が必要</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">改善</div>
+        <div class="svc-name">差分承認・ロールバック可</div>
+        <div class="svc-role">AIが出す改善提案も、差分を確認して承認してから適用。合わなければ元のバージョンへ戻せる</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">記録</div>
+        <div class="svc-name">操作を監査ログに記録</div>
+        <div class="svc-role">誰が・いつ・何をしたかを記録し、秘密情報らしき文字列は自動的に伏せて保存</div>
+      </div>
+    </div>
+    <p class="prose" style="margin-top:14px">どちらが優れているというより、設計思想の違いです。社内の業務で使う以上、スピードよりも「間違いに早く気づけること」「差し戻せること」を優先しました。</p>
   </div>
 </section>
 
-<section class="section alt" id="background">
+<section class="section" id="background">
   <div class="wrap">
     <div class="sec-tag">BACKGROUND</div>
     <h2 class="sec-title">1つのAIチャットに、業務が集中していませんか</h2>
@@ -427,46 +516,6 @@ img{max-width:100%}
     <p class="sec-lead">キャラクター（エージェント）同士をドラッグでつなぐだけで、誰が誰に依頼できるかという組織構造を作れます。矢印の向きが依頼できる方向です。実行順序は、この接続だけで決まります。</p>
     <img src="fig_agentos_org_builder.png" alt="AI Agent OSの組織ビルダー画面。統括エージェントを起点に、営業管理担当・生産管理担当・納期管理担当・出荷管理担当・予算分析担当・経営レポート担当・レポート点検担当のキャラクターが矢印でつながり、依頼できる方向を表している" class="fig" loading="lazy" width="1400" height="1200">
     <p class="fig-cap">実際の組織ビルダー画面（製造業向けデモ組織）。依頼の流れがそのまま実行順序になる</p>
-
-    <h3 style="font-size:19px;font-weight:900;margin:34px 0 12px">7つの領域で、AI組織を設計・構築・運用・改善する</h3>
-    <p class="prose" style="margin-bottom:8px">AI Agent OSは、以下7つの領域を1つの基盤として統合しています。それぞれの実体は、下の「主な機能」で実際の画面とあわせて確認できます。</p>
-    <div class="phase">
-      <div class="phase-item">
-        <div class="phase-n">01</div>
-        <div class="phase-t">ソリューション設計・アーキテクチャ</div>
-        <div class="phase-d">AI組織設計・エージェント構成・ワークフロー設計。Agent Factory（自然言語での組織提案）と組織ビルダー（ドラッグ&ドロップでの設計）を提供。</div>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">02</div>
-        <div class="phase-t">AIモデル・プロンプト・コンテキスト管理</div>
-        <div class="phase-d">実行エンジンはClaude Code CLIとMicrosoft 365 Copilotの2つに対応（設定画面で切替可）。ナレッジ・スキルの割り当ても、この領域で管理する。ローカルLLMは画面上の予約枠で、現時点では未提供。</div>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">03</div>
-        <div class="phase-t">外部システム連携</div>
-        <div class="phase-d">Gmail・カレンダー・ドライブ・GitHub・Slack・Notion・Dropbox・Web検索に対応（読み取り専用・エージェントごとの承認制）。</div>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">04</div>
-        <div class="phase-t">評価・テスト・最適化</div>
-        <div class="phase-d">定義・権限・コストの検査と、隔離した試験実行をプログラムが判定するエージェント評価。実行履歴・構成分析にもとづく改善提案。</div>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">05</div>
-        <div class="phase-t">AIガバナンス・セキュリティ</div>
-        <div class="phase-d">人の確認が必要な操作は承認制とし、誰が・いつ・何をしたかを監査ログに記録（秘密情報らしき文字列は自動で伏せる）。</div>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">06</div>
-        <div class="phase-t">ステークホルダー・ライフサイクル管理</div>
-        <div class="phase-d">文書をナレッジとして登録・エージェントへ割り当て、承認を経て運用。改善提案は差分を確認して承認・適用し、いつでも元のバージョンへ戻せる。</div>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">07</div>
-        <div class="phase-t">開発生産性・運用支援</div>
-        <div class="phase-d">単体/結合テスト151件・E2E16シナリオで継続的に検証しながら開発。PCコンパニオンから、日常的な依頼を直接実行エンジンへ渡せる。</div>
-      </div>
-    </div>
   </div>
 </section>
 
