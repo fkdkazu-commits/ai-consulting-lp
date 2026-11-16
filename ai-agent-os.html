@@ -323,13 +323,7 @@ img{max-width:100%}
   </div>
 </section>
 
-<section class="section" id="domains">
-  <div class="wrap">
-    <img src="fig_agentos_domains_overview.png" alt="7つの領域で、AI組織を設計・構築・運用・改善する。ソリューション設計・アーキテクチャ／AIモデル・プロンプト・コンテキスト管理／外部システム連携／評価・テスト・最適化／AIガバナンス・セキュリティ／ステークホルダー・ライフサイクル管理／開発生産性・運用支援の7領域を1つの基盤として統合している" class="fig" loading="lazy" width="1542" height="1020">
-  </div>
-</section>
-
-<section class="section alt" id="about-name">
+<section class="section" id="about-name">
   <div class="wrap">
     <div class="sec-tag">ABOUT</div>
     <h2 class="sec-title">AI Agent OSとは</h2>
@@ -395,7 +389,7 @@ img{max-width:100%}
   </div>
 </section>
 
-<section class="section" id="background">
+<section class="section alt" id="background">
   <div class="wrap">
     <div class="sec-tag">BACKGROUND</div>
     <h2 class="sec-title">1つのAIチャットに、業務が集中していませんか</h2>
@@ -436,7 +430,7 @@ img{max-width:100%}
   </div>
 </section>
 
-<section class="section alt" id="use-cases">
+<section class="section" id="use-cases">
   <div class="wrap">
     <div class="sec-tag">USE CASES</div>
     <h2 class="sec-title">活用イメージ（業種・部門は限定しません）</h2>
@@ -467,6 +461,15 @@ img{max-width:100%}
         <div class="phase-d">情報収集・分析、実験データの整理、レポート作成</div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="section alt" id="domains">
+  <div class="wrap">
+    <div class="sec-tag">STRUCTURE</div>
+    <h2 class="sec-title">7つの領域で、AI組織を設計・構築・運用・改善する</h2>
+    <p class="sec-lead">AI Agent OSは、「ソリューション設計・アーキテクチャ」「AIモデル・プロンプト・コンテキスト管理」「外部システム連携」「評価・テスト・最適化」「AIガバナンス・セキュリティ」「ステークホルダー・ライフサイクル管理」「開発生産性・運用支援」の7領域を、1つの基盤として統合しています。ここから、領域ごとに実現している内容を紹介します。</p>
+    <img src="fig_agentos_domains_overview.png" alt="7つの領域で、AI組織を設計・構築・運用・改善する。ソリューション設計・アーキテクチャ／AIモデル・プロンプト・コンテキスト管理／外部システム連携／評価・テスト・最適化／AIガバナンス・セキュリティ／ステークホルダー・ライフサイクル管理／開発生産性・運用支援の7領域を1つの基盤として統合している" class="fig" loading="lazy" width="1542" height="1020" style="margin-top:28px">
   </div>
 </section>
 
@@ -581,31 +584,6 @@ img{max-width:100%}
       <img src="fig_agentos_audit.png" alt="監査ログ画面。日時・実行者・操作・対象・詳細の列を持つログ一覧が時系列で表示されている" class="fig" loading="lazy" width="1400" height="1000">
       <p class="fig-cap">監査ログの画面（実際の記録）</p>
     </div>
-
-    <h3 style="font-size:19px;font-weight:900;margin:34px 0 12px">現時点での制約（そのままお伝えします）</h3>
-    <div class="phase four">
-      <div class="phase-item">
-        <div class="phase-n">01</div>
-        <div class="phase-t">AI実行はClaude Code CLI経由のみ</div>
-        <div class="phase-d">組み込みツール（ファイル操作・コマンド実行）を無効化し、ユーザー設定を読まず、許可していないツールは自動で拒否する設定でCLIを起動します。</div>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">02</div>
-        <div class="phase-t">外部連携は読み取り専用・承認制</div>
-        <div class="phase-d">メールの送信・返信・削除、予定の変更などの書き込み系ツールは許可されません。新しい外部ツールの有効化も承認制です。</div>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">03</div>
-        <div class="phase-t">ローカル前提の待受</div>
-        <div class="phase-d">サーバーは127.0.0.1で待ち受け、ローカル以外のHost・別オリジンからの状態変更は拒否します。</div>
-      </div>
-      <div class="phase-item">
-        <div class="phase-n">04</div>
-        <div class="phase-t">認証は現時点で開発用モック</div>
-        <div class="phase-d">現在の認証は単一ユーザー向けの開発用モックです。本番運用・複数ユーザーでの利用には、認証基盤の導入が別途必要です。</div>
-      </div>
-    </div>
-    <p class="prose" style="margin-top:28px">APIキー等の秘密情報はこのアプリのフォルダには置かず、CLI側の認証情報管理に委ねています。SaaSとして提供する場合は、Claude Code CLIの利用条件がご利用中の契約に適合するか、事前の確認が必要です。</p>
   </div>
 </section>
 
