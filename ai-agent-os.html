@@ -104,6 +104,8 @@ img{max-width:100%}
 
 .hero-visual{position:relative}
 .hero-shot{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;filter:drop-shadow(0 20px 30px rgba(30,27,75,.18));cursor:zoom-in}
+.hero-shot--desktop{border:0;border-radius:0;filter:drop-shadow(0 28px 36px rgba(30,27,75,.28))}
+.mock-visual-note{margin-top:14px;font-size:11.5px;color:var(--gray-light);text-align:center}
 .hero-visual-cap{font-size:12.5px;color:var(--gray-light);margin-top:10px;text-align:center;line-height:1.8}
 
 .prose-highlight{margin:28px 0 8px}
@@ -243,12 +245,8 @@ img{max-width:100%}
     <div class="hero-copy">
       <div class="hero-tag">✦ 社内業務の自動化・AI秘書基盤</div>
       <div class="hero-wordmark"><span class="tone-a">AI</span><span class="tone-b"> Agent OS</span></div>
-      <div class="hero-tagline">AI秘書・エージェント基盤</div>
-      <h1 class="hero-h1-sub">AIエージェントを作成し、専門知識（ナレッジ）とスキルを与え、組織として接続して業務を実行・評価・改善するプラットフォームです。</h1>
-      <div class="hero-highlight">
-        <strong>AI実行はClaude Code CLI経由のみ。</strong><br>
-        Claude APIを直接は呼び出しません。CLI未設定でも、結果が「[MOCK]」で始まるモックモードで全機能をお試しいただけます。
-      </div>
+      <div class="hero-tagline">企業のAI活用を、もっと安全に、もっと自由に。</div>
+      <h1 class="hero-h1-sub">AIエージェントを作成し、専門知識（ナレッジ）とスキルを与え、組織として接続して業務を実行・評価・改善するプラットフォームです。AIを、「使う」から「任せる」へ。</h1>
       <div class="hero-points">
         <div class="hero-point"><span class="hero-point-icon">✓</span>自然言語で業務の目的を書くと、AIが必要なエージェントと組織の構成案を作る（Agent Factory）</div>
         <div class="hero-point"><span class="hero-point-icon">✓</span>エージェントは品質評価に合格し、人が承認してから本番稼働する</div>
@@ -262,8 +260,48 @@ img{max-width:100%}
       </div>
     </div>
     <div class="hero-visual">
-      <img class="hero-shot fig" src="fig_agentos_dashboard.png" alt="AI Agent OSのダッシュボード画面。承認待ち・失敗・完了・実行中件数、AI組織数・エージェント数・処理中のチャット依頼・PCコンパニオン接続状況、最近の実行一覧が表示されている" loading="lazy" width="1060" height="1000">
-      <p class="hero-visual-cap">実際の稼働画面です（クリックで拡大できます）</p>
+      <img class="hero-shot hero-shot--desktop" src="fig_agentos_hero_desktop.png" width="1536" height="1024" alt="AI Agent OSのイメージ図。パソコンの画面に、統括エージェントを中心としたAI組織（コンテンツ・SEO／マーケティング・集客／自社AI開発／アプリ開発／PMO・案件管理／分析・改善／収益化の7エージェント）と、稼働エージェント数・実行中タスク・自動化率・コスト・承認待ち・本日完了件数、AIからの提案・アラートが表示されている" loading="lazy">
+      <p class="mock-visual-note">AI Agent OSのイメージ図です（実際の画面は下に掲載しています）</p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="concerns">
+  <div class="wrap">
+    <div class="sec-tag">WHY NOW</div>
+    <h2 class="sec-title">AIエージェントの導入に、慎重になる理由</h2>
+    <p class="sec-lead">社内でAIエージェントの活用を検討すると、よくこうした不安の声を聞きます。AI Agent OSは、それぞれに具体的な機能で応えます。</p>
+    <div class="phase">
+      <div class="phase-item">
+        <div class="phase-n">01</div>
+        <div class="phase-t">セキュリティ・情報漏洩のリスク</div>
+        <div class="phase-d">機密情報が外部に送信される可能性や、社内データの学習利用への懸念。</div>
+        <div class="phase-tag">→ 外部連携は読み取り専用・承認制。秘密情報らしき文字列は監査ログで自動的に伏せる</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">02</div>
+        <div class="phase-t">ガバナンス・コンプライアンスの不安</div>
+        <div class="phase-d">利用範囲や権限の管理ができない、監査やログの取得が難しい。</div>
+        <div class="phase-tag">→ 承認・監査ログ機能と、スキルごとの許可リスト方式の権限管理</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">03</div>
+        <div class="phase-t">業務への適合性</div>
+        <div class="phase-d">自社の業務フローに合わない、カスタマイズができない。</div>
+        <div class="phase-tag">→ Agent Factoryが業務の目的から組織構成を提案。業種・用途は限定しない</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">04</div>
+        <div class="phase-t">コストの不透明さ</div>
+        <div class="phase-d">利用料の増加リスクやROIが見えにくい。</div>
+        <div class="phase-tag">→ 実行ごとにCLI実行回数・トークン数・コストを記録し、画面で確認できる</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">05</div>
+        <div class="phase-t">運用・サポート体制の不足</div>
+        <div class="phase-d">トラブル時の対応が不安、企業としてのサポートが限定的。</div>
+        <div class="phase-tag">→ 導入・カスタマイズを個別にご相談いただける体制（スポット開発支援／業務委託支援）</div>
+      </div>
     </div>
   </div>
 </section>
@@ -276,6 +314,35 @@ img{max-width:100%}
     <p class="prose">AI秘書・エージェント基盤という位置づけで、個人のPC常駐キャラクターから、複数エージェントが連携する組織的な業務実行まで、同じ基盤の上で扱います。</p>
     <p class="prose">エージェントを作って終わりにせず、「評価に合格したものだけ本番稼働する」「実行結果を見て改善提案を出す」「改善は差分を確認してから承認する」という流れを組み込んでいるのが特徴です。</p>
     <p class="prose-highlight"><mark>作って終わりではなく、動かしながら鍛える基盤。</mark></p>
+
+    <h3 style="font-size:19px;font-weight:900;margin:34px 0 4px">AI Agent OSで実現できること</h3>
+    <div class="svc-list">
+      <div class="svc-row">
+        <div class="svc-layer">運用</div>
+        <div class="svc-name">企業のルールに基づく安全な運用</div>
+        <div class="svc-role">権限・承認・監査ログで、コンプライアンスを徹底する</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">組織化</div>
+        <div class="svc-name">AIエージェントの自律的な生成・編成</div>
+        <div class="svc-role">業務の目的から、必要なエージェントと組織の構成をAIが提案する</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">成長</div>
+        <div class="svc-name">AI組織の成長・改善</div>
+        <div class="svc-role">実行実績を分析し、エージェントやスキルの構成を見直す</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">データ活用</div>
+        <div class="svc-name">企業データを安全に活用</div>
+        <div class="svc-role">登録したナレッジをエージェントに割り当て、実行時に参照する</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-layer">継続運用</div>
+        <div class="svc-name">評価・改善提案による継続的な進化</div>
+        <div class="svc-role">評価と改善提案のサイクルで、AI組織を育てていく</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -320,6 +387,40 @@ img{max-width:100%}
   </div>
 </section>
 
+<section class="section alt" id="use-cases">
+  <div class="wrap">
+    <div class="sec-tag">USE CASES</div>
+    <h2 class="sec-title">活用イメージ（業種・部門は限定しません）</h2>
+    <p class="sec-lead">Agent Factoryに業務の目的を伝えると、部門や業種を問わず組織構成を提案します。想定している活用イメージの一例です。</p>
+    <div class="phase">
+      <div class="phase-item">
+        <div class="phase-t">営業・マーケティング</div>
+        <div class="phase-d">市場調査・分析、提案資料作成、顧客対応・フォロー</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-t">生産・製造</div>
+        <div class="phase-d">生産計画の最適化、品質管理、設備保全の予測</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-t">人事・総務</div>
+        <div class="phase-d">採用業務の効率化、社内問合せ対応、勤怠・労務管理</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-t">経営・企画</div>
+        <div class="phase-d">経営分析・レポート作成、戦略立案の支援、意思決定の高度化</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-t">カスタマーサポート</div>
+        <div class="phase-d">問い合わせ対応、FAQの自動生成、顧客満足度の向上</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-t">研究・開発</div>
+        <div class="phase-d">情報収集・分析、実験データの整理、レポート作成</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="architecture">
   <div class="wrap">
     <div class="sec-tag">ARCHITECTURE</div>
@@ -328,37 +429,43 @@ img{max-width:100%}
     <img src="fig_agentos_org_builder.png" alt="AI Agent OSの組織ビルダー画面。統括エージェントを起点に、営業管理担当・生産管理担当・納期管理担当・出荷管理担当・予算分析担当・経営レポート担当・レポート点検担当のキャラクターが矢印でつながり、依頼できる方向を表している" class="fig" loading="lazy" width="1400" height="1200">
     <p class="fig-cap">実際の組織ビルダー画面（製造業向けデモ組織）。依頼の流れがそのまま実行順序になる</p>
 
-    <h3 style="font-size:19px;font-weight:900;margin:34px 0 12px">扱っている範囲</h3>
-    <div class="svc-list">
-      <div class="svc-row">
-        <div class="svc-layer">組織設計</div>
-        <div class="svc-name">Agent Factory / 組織ビルダー</div>
-        <div class="svc-role">自然言語での組織提案、またはドラッグ&ドロップで役割と連携を設計する</div>
+    <h3 style="font-size:19px;font-weight:900;margin:34px 0 12px">7つの領域で、AI組織を設計・構築・運用・改善する</h3>
+    <p class="prose" style="margin-bottom:8px">AI Agent OSは、以下7つの領域を1つの基盤として統合しています。それぞれの実体は、下の「主な機能」で実際の画面とあわせて確認できます。</p>
+    <div class="phase">
+      <div class="phase-item">
+        <div class="phase-n">01</div>
+        <div class="phase-t">ソリューション設計・アーキテクチャ</div>
+        <div class="phase-d">AI組織設計・エージェント構成・ワークフロー設計。Agent Factory（自然言語での組織提案）と組織ビルダー（ドラッグ&ドロップでの設計）を提供。</div>
       </div>
-      <div class="svc-row">
-        <div class="svc-layer">品質ゲート</div>
-        <div class="svc-name">エージェント評価</div>
-        <div class="svc-role">定義・権限・コストの検査と、隔離した試験実行（無効のまま1回だけ）をプログラムが判定する</div>
+      <div class="phase-item">
+        <div class="phase-n">02</div>
+        <div class="phase-t">AIモデル・プロンプト・コンテキスト管理</div>
+        <div class="phase-d">実行エンジンはClaude Code CLIとMicrosoft 365 Copilotの2つに対応（設定画面で切替可）。ナレッジ・スキルの割り当ても、この領域で管理する。ローカルLLMは画面上の予約枠で、現時点では未提供。</div>
       </div>
-      <div class="svc-row">
-        <div class="svc-layer">実行</div>
-        <div class="svc-name">タスク実行 / 成果物 / 定期実行</div>
-        <div class="svc-role">Claude Code CLI経由で実行し、成果物・使用量・ログを記録する</div>
+      <div class="phase-item">
+        <div class="phase-n">03</div>
+        <div class="phase-t">外部システム連携</div>
+        <div class="phase-d">Gmail・カレンダー・ドライブ・GitHub・Slack・Notion・Dropbox・Web検索に対応（読み取り専用・エージェントごとの承認制）。</div>
       </div>
-      <div class="svc-row">
-        <div class="svc-layer">継続改善</div>
-        <div class="svc-name">改善提案 / 自己進化</div>
-        <div class="svc-role">実行履歴・組織構成を分析し、承認・適用・ロールバックできる差分として提案する</div>
+      <div class="phase-item">
+        <div class="phase-n">04</div>
+        <div class="phase-t">評価・テスト・最適化</div>
+        <div class="phase-d">定義・権限・コストの検査と、隔離した試験実行をプログラムが判定するエージェント評価。実行履歴・構成分析にもとづく改善提案。</div>
       </div>
-      <div class="svc-row">
-        <div class="svc-layer">知識・権限</div>
-        <div class="svc-name">ナレッジ / スキル・権限管理</div>
-        <div class="svc-role">文書を登録してエージェントに割り当て、使えるスキルは許可リスト方式で管理する</div>
+      <div class="phase-item">
+        <div class="phase-n">05</div>
+        <div class="phase-t">AIガバナンス・セキュリティ</div>
+        <div class="phase-d">人の確認が必要な操作は承認制とし、誰が・いつ・何をしたかを監査ログに記録（秘密情報らしき文字列は自動で伏せる）。</div>
       </div>
-      <div class="svc-row">
-        <div class="svc-layer">ガバナンス</div>
-        <div class="svc-name">承認 / 監査ログ</div>
-        <div class="svc-role">人の確認が必要な操作は承認制とし、誰が・いつ・何をしたかを記録する（秘密情報らしき文字列は自動で伏せる）</div>
+      <div class="phase-item">
+        <div class="phase-n">06</div>
+        <div class="phase-t">ステークホルダー・ライフサイクル管理</div>
+        <div class="phase-d">文書をナレッジとして登録・エージェントへ割り当て、承認を経て運用。改善提案は差分を確認して承認・適用し、いつでも元のバージョンへ戻せる。</div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-n">07</div>
+        <div class="phase-t">開発生産性・運用支援</div>
+        <div class="phase-d">単体/結合テスト151件・E2E16シナリオで継続的に検証しながら開発。PCコンパニオンから、日常的な依頼を直接実行エンジンへ渡せる。</div>
       </div>
     </div>
   </div>
@@ -369,6 +476,13 @@ img{max-width:100%}
     <div class="sec-tag">FEATURES</div>
     <h2 class="sec-title">主な機能</h2>
     <p class="sec-lead">「作る」「実行する」「評価する」「良くする」のサイクルを、それぞれ別の画面と記録として持っています。</p>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">全体把握</span><span class="feat-title">ダッシュボード（組織・実行状況を一画面で）</span></div>
+      <p class="feat-d">承認待ち・失敗・完了・実行中の件数、AI組織数・エージェント数、処理中のチャット依頼、PCコンパニオンの接続状況、最近の実行一覧を1画面で確認できます。</p>
+      <img src="fig_agentos_dashboard.png" alt="AI Agent OSのダッシュボード画面。承認待ち・失敗・完了・実行中件数、AI組織数・エージェント数・処理中のチャット依頼・PCコンパニオン接続状況、最近の実行一覧が表示されている" class="fig" loading="lazy" width="1060" height="1000">
+      <p class="fig-cap">ダッシュボードの画面（実際の稼働データ）</p>
+    </div>
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">組織設計</span><span class="feat-title">Agent Factory（自然言語で組織を設計）</span></div>
@@ -487,8 +601,8 @@ img{max-width:100%}
       </div>
       <div class="phase-item">
         <div class="phase-n">次段階以降</div>
-        <div class="phase-t">書き込み系の外部連携 / バックグラウンド実行 / 課金</div>
-        <div class="phase-d">外部サービスへの書き込み、ブラウザ・PC画面の本格的な操作、バックグラウンド・定期実行の強化、課金機能は、現時点の仕様では次段階以降としています。</div>
+        <div class="phase-t">書き込み系の外部連携 / バックグラウンド実行 / 課金 / 他AIモデル対応</div>
+        <div class="phase-d">外部サービスへの書き込み、ブラウザ・PC画面の本格的な操作、バックグラウンド・定期実行の強化、課金機能は、現時点の仕様では次段階以降としています。実行エンジンは現在Claude Code CLIとMicrosoft 365 Copilotの2つに対応しており、ローカルLLMや他社AIモデルへの対応拡大は、今後の構想として検討中です。</div>
       </div>
       <div class="phase-item">
         <div class="phase-n">未検証</div>
@@ -517,6 +631,10 @@ img{max-width:100%}
       <details class="faq-item">
         <summary>Claude(Anthropic)のAPIキーは必要ですか？</summary>
         <p class="faq-a">いいえ。AI実行はClaude Code CLI経由のみで、Claude APIを直接は呼び出しません。CLI未設定でも、結果が「[MOCK]」で始まるモックモードで全機能をお試しいただけます。実CLIで実行する場合は、Claude Code CLIがPATHにあり、ログイン済みであることが前提です。</p>
+      </details>
+      <details class="faq-item">
+        <summary>Claude以外のAIモデル（OpenAI・Gemini等）にも対応しますか？</summary>
+        <p class="faq-a">現在対応している実行エンジンは、Claude Code CLIとMicrosoft 365 Copilotの2つです。画面上には「ローカルLLM」の予約枠も表示していますが、今回のリリースでは未提供です。OpenAI・Gemini等を含む他社AIモデルへの対応拡大は、今後の構想として検討しています。</p>
       </details>
       <details class="faq-item">
         <summary>いきなりAIに全部任せることになりますか？</summary>
