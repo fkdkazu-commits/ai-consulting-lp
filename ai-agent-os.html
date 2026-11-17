@@ -155,6 +155,7 @@ img{max-width:100%}
 .svc-layer{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.08em;margin-bottom:7px}
 .svc-name{font-size:14px;font-weight:900;line-height:1.5}
 .svc-role{font-size:12.5px;color:var(--gray);line-height:1.7;margin-top:5px}
+.svc-badge{display:inline-block;font-size:9px;font-weight:900;color:#fff;background:var(--orange-dark);border-radius:20px;padding:3px 8px;letter-spacing:.02em;white-space:nowrap;margin-bottom:8px}
 
 .consult-box{margin-top:28px;background:#0b2138;color:#fff;border-radius:14px;padding:26px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px 40px;flex-wrap:wrap}
 .consult-body{flex:1 1 420px;min-width:0}
@@ -333,16 +334,18 @@ img{max-width:100%}
     <p class="prose-highlight"><mark>作って終わりではなく、動かしながら鍛える基盤。</mark></p>
 
     <h3 style="font-size:19px;font-weight:900;margin:34px 0 4px">AI Agent OSで実現できること</h3>
-    <div class="svc-list">
+    <p class="prose">Grok Bot（xAI）やDots（OpenAI）など、目的と制約を伝えると常時稼働で自律的にタスクを進め続けるAIエージェントが、各社から登場しています。AI Agent OSも同じ「AIエージェント」ですが、スピードよりも「人が確認してから進める」ことを優先した設計です。<strong style="color:var(--ink)">「AI Agent OSだけの機能」</strong>の印がある項目が、そうした他の自律型AIエージェントにはない、この設計思想ならではの機能です。</p>
+    <div class="svc-list" style="margin-top:20px">
       <div class="svc-row">
         <div class="svc-layer">運用</div>
         <div class="svc-name">企業のルールに基づく安全な運用</div>
         <div class="svc-role">権限・承認・監査ログで、コンプライアンスを徹底する</div>
       </div>
       <div class="svc-row">
+        <span class="svc-badge">AI Agent OSだけの機能</span>
         <div class="svc-layer">組織化</div>
-        <div class="svc-name">AIエージェントの自律的な生成・編成</div>
-        <div class="svc-role">業務の目的から、必要なエージェントと組織の構成をAIが提案する</div>
+        <div class="svc-name">自然言語で業務の目的を書くだけで、組織構成をAIが提案</div>
+        <div class="svc-role">Agent Factoryが業務を分析し、必要なエージェントと組織の構成案を作る</div>
       </div>
       <div class="svc-row">
         <div class="svc-layer">成長</div>
@@ -359,30 +362,34 @@ img{max-width:100%}
         <div class="svc-name">評価・改善提案による継続的な進化</div>
         <div class="svc-role">評価と改善提案のサイクルで、AI組織を育てていく</div>
       </div>
-    </div>
-
-    <h3 style="font-size:19px;font-weight:900;margin:34px 0 4px">他の自律型AIエージェントとの違い</h3>
-    <p class="prose">Grok Bot（xAI）やDots（OpenAI）など、目的と制約を伝えると常時稼働で自律的にタスクを進め続けるAIエージェントが、各社から登場しています。AI Agent OSも同じ「AIエージェント」ですが、スピードよりも「人が確認してから進める」ことを優先した設計です。</p>
-    <div class="svc-list" style="margin-top:20px">
       <div class="svc-row">
+        <span class="svc-badge">AI Agent OSだけの機能</span>
         <div class="svc-layer">実行前</div>
-        <div class="svc-name">評価に合格するまで本番稼働しない</div>
+        <div class="svc-name">評価に合格し、人が承認してから本番稼働</div>
         <div class="svc-role">生成したエージェントは、定義・権限・コストの検査と試験実行に合格し、人が承認して初めて動く</div>
       </div>
       <div class="svc-row">
+        <span class="svc-badge">AI Agent OSだけの機能</span>
         <div class="svc-layer">外部接続</div>
         <div class="svc-name">読み取り専用・承認制</div>
-        <div class="svc-role">メール・カレンダー等の外部連携は読み取り専用。書き込み系ツールの有効化には人の承認が必要</div>
+        <div class="svc-role">Gmail・カレンダー等の外部連携は読み取り専用。書き込み系ツールの有効化には人の承認が必要</div>
       </div>
       <div class="svc-row">
+        <span class="svc-badge">AI Agent OSだけの機能</span>
         <div class="svc-layer">改善</div>
-        <div class="svc-name">差分承認・ロールバック可</div>
-        <div class="svc-role">AIが出す改善提案も、差分を確認して承認してから適用。合わなければ元のバージョンへ戻せる</div>
+        <div class="svc-name">差分を確認して承認・適用。ロールバックも可能</div>
+        <div class="svc-role">AIが出す改善提案は、差分を確認して承認してから適用。合わなければ元のバージョンへ戻せる</div>
       </div>
       <div class="svc-row">
         <div class="svc-layer">記録</div>
         <div class="svc-name">操作を監査ログに記録</div>
         <div class="svc-role">誰が・いつ・何をしたかを記録し、秘密情報らしき文字列は自動的に伏せて保存</div>
+      </div>
+      <div class="svc-row">
+        <span class="svc-badge">AI Agent OSだけの機能</span>
+        <div class="svc-layer">常駐</div>
+        <div class="svc-name">PC常駐のキャラクター型エージェントに直接依頼</div>
+        <div class="svc-role">PCに常駐するキャラクター型エージェントへ、チャットでそのまま依頼できる</div>
       </div>
     </div>
     <p class="prose" style="margin-top:14px">どちらが優れているというより、設計思想の違いです。社内の業務で使う以上、スピードよりも「間違いに早く気づけること」「差し戻せること」を優先しました。</p>
@@ -627,7 +634,17 @@ img{max-width:100%}
   </div>
 </section>
 
-<section class="section alt" id="case-studies">
+<section class="section alt" id="deployment">
+  <div class="wrap">
+    <div class="sec-tag">DEPLOYMENT</div>
+    <h2 class="sec-title">企業のニーズに合わせた構成で構築できます</h2>
+    <p class="sec-lead">標準でご提供するのは、すぐに使える標準SaaS型です。社内システムとの連携やセキュリティ要件、機密データの扱いに応じて、オンプレ連携型・専用AWS型・ローカルLLM型・ハイブリッド型といった構成へのカスタマイズにも、個別のご相談のうえ対応します。</p>
+    <img src="fig_agentos_deployment_models.png" alt="AI Agent OSの5つの提供形態（導入モデル）の比較。標準SaaS型・オンプレ連携型・専用AWS型・ローカルLLM型・ハイブリッド型（クラウド×ローカル）を、導入のしやすさ・セキュリティ・データの管理場所・拡張性・既存システム連携・ランニングコスト目安で比較する表と、AIエージェントごとにClaude/GPT/Gemini/ローカルLLMなど最適なLLMを選択するイメージ図" class="fig" loading="lazy" width="1672" height="941" style="margin-top:28px">
+    <p class="prose" style="margin-top:20px">比較表のランニングコストは構成の目安であり、確定額ではありません。実際の費用・構成は、現在の環境やセキュリティ要件をヒアリングしたうえでご案内します。</p>
+  </div>
+</section>
+
+<section class="section" id="case-studies">
   <div class="wrap">
     <div class="sec-tag">CASE STUDIES</div>
     <h2 class="sec-title">AI Agent OSの導入例</h2>
@@ -654,7 +671,7 @@ img{max-width:100%}
   </div>
 </section>
 
-<section class="section" id="faq">
+<section class="section alt" id="faq">
   <div class="wrap">
     <div class="sec-tag">FAQ</div>
     <h2 class="sec-title">よくある質問</h2>
@@ -696,7 +713,7 @@ img{max-width:100%}
   </div>
 </section>
 
-<section class="section alt" id="onboarding">
+<section class="section" id="onboarding">
   <div class="wrap">
     <div class="sec-tag">GETTING STARTED</div>
     <h2 class="sec-title">AI Agent OSの導入をご希望の方へ</h2>
