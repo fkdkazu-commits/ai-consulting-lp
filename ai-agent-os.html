@@ -143,6 +143,12 @@ img{max-width:100%}
 .video-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:10px;overflow:hidden;margin-top:14px}
 .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
+/* 目次ナビ */
+.page-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--white);border:1px solid var(--line);border-radius:10px;padding:16px 22px;margin:34px auto 0;max-width:1100px}
+.page-nav-label{font-size:11px;font-weight:900;color:var(--gray-light);letter-spacing:.08em;margin-right:6px;white-space:nowrap}
+.page-nav a{font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;padding:6px 14px;border-radius:20px;background:var(--card);transition:background .2s,color .2s;white-space:nowrap}
+.page-nav a:hover{background:var(--accent);color:#fff}
+
 /* lightbox */
 .lightbox{position:fixed;inset:0;z-index:200;background:rgba(11,33,56,.86);display:flex;align-items:center;justify-content:center;padding:32px;opacity:0;pointer-events:none;transition:opacity .2s}
 .lightbox.is-open{opacity:1;pointer-events:auto}
@@ -267,6 +273,19 @@ img{max-width:100%}
     </div>
   </div>
 </section>
+
+<nav class="page-nav" aria-label="このページの目次">
+  <span class="page-nav-label">このページの内容</span>
+  <a href="#concerns">課題</a>
+  <a href="#about-name">AI Agent OSとは</a>
+  <a href="#background">乗り越える壁</a>
+  <a href="#use-cases">活用イメージ</a>
+  <a href="#domains">7つの領域</a>
+  <a href="#deployment">提供形態</a>
+  <a href="#case-studies">導入例</a>
+  <a href="#faq">よくある質問</a>
+  <a href="#onboarding">導入の流れ</a>
+</nav>
 
 <section class="section alt" id="concerns">
   <div class="wrap">
