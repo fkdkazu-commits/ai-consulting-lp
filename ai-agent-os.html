@@ -158,12 +158,16 @@ img{max-width:100%}
 .lightbox-cap{position:absolute;left:0;right:0;bottom:20px;text-align:center;color:rgba(255,255,255,.78);font-size:13px;padding:0 24px}
 @media (prefers-reduced-motion:reduce){.lightbox,.fig{transition:none}}
 
-.svc-list{display:flex;flex-wrap:wrap;gap:2px;background:var(--line);border:1px solid var(--line);margin:26px 0 6px}
-.svc-row{background:#fff;padding:18px 20px;flex:1 1 190px}
-.svc-layer{font-size:11px;font-weight:900;color:var(--accent);letter-spacing:.08em;margin-bottom:7px}
-.svc-name{font-size:14px;font-weight:900;line-height:1.5}
-.svc-role{font-size:12.5px;color:var(--gray);line-height:1.7;margin-top:5px}
-.svc-badge{display:inline-block;font-size:9px;font-weight:900;color:#fff;background:var(--orange-dark);border-radius:20px;padding:3px 8px;letter-spacing:.02em;white-space:nowrap;margin-bottom:8px}
+.svc-badge{display:inline-block;font-size:9px;font-weight:900;color:#fff;background:var(--orange-dark);border-radius:20px;padding:3px 8px;letter-spacing:.02em;white-space:nowrap;margin-bottom:6px}
+
+.feat-table-wrap{overflow-x:auto;margin:26px 0 6px;border:1px solid var(--line);border-radius:10px}
+.feat-table{width:100%;min-width:640px;border-collapse:collapse;font-size:13px}
+.feat-table thead th{background:var(--card);color:var(--accent);font-weight:900;font-size:11.5px;letter-spacing:.04em;text-align:left;padding:12px 16px;white-space:nowrap;border-bottom:1px solid var(--line)}
+.feat-table td{padding:14px 16px;border-bottom:1px solid var(--line2);vertical-align:top;line-height:1.75}
+.feat-table tbody tr:last-child td{border-bottom:0}
+.feat-table tbody tr:nth-child(even){background:var(--bg)}
+.feat-table td.feat-area{white-space:nowrap;color:var(--gray-light);font-size:11.5px;font-weight:700;line-height:1.5}
+.feat-table td.feat-name{font-weight:900;color:var(--ink);white-space:nowrap}
 
 .consult-box{margin-top:28px;background:#0b2138;color:#fff;border-radius:14px;padding:26px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px 40px;flex-wrap:wrap}
 .consult-body{flex:1 1 420px;min-width:0}
@@ -358,62 +362,104 @@ img{max-width:100%}
 
     <h3 style="font-size:19px;font-weight:900;margin:34px 0 4px">AI Agent OSで実現できること</h3>
     <p class="prose">Grok Bot（xAI）やDots（OpenAI）など、目的と制約を伝えると常時稼働で自律的にタスクを進め続けるAIエージェントが、各社から登場しています。AI Agent OSも同じ「AIエージェント」ですが、スピードよりも「人が確認してから進める」ことを優先した設計です。<strong style="color:var(--ink)">「AI Agent OSだけの機能」</strong>の印がある項目が、そうした他の自律型AIエージェントにはない、この設計思想ならではの機能です。</p>
-    <div class="svc-list" style="margin-top:20px">
-      <div class="svc-row">
-        <div class="svc-layer">運用</div>
-        <div class="svc-name">企業のルールに基づく安全な運用</div>
-        <div class="svc-role">権限・承認・監査ログで、コンプライアンスを徹底する</div>
-      </div>
-      <div class="svc-row">
-        <span class="svc-badge">AI Agent OSだけの機能</span>
-        <div class="svc-layer">組織化</div>
-        <div class="svc-name">自然言語で業務の目的を書くだけで、組織構成をAIが提案</div>
-        <div class="svc-role">Agent Factoryが業務を分析し、必要なエージェントと組織の構成案を作る</div>
-      </div>
-      <div class="svc-row">
-        <div class="svc-layer">成長</div>
-        <div class="svc-name">AI組織の成長・改善</div>
-        <div class="svc-role">実行実績を分析し、エージェントやスキルの構成を見直す</div>
-      </div>
-      <div class="svc-row">
-        <div class="svc-layer">データ活用</div>
-        <div class="svc-name">企業データを安全に活用</div>
-        <div class="svc-role">登録したナレッジをエージェントに割り当て、実行時に参照する</div>
-      </div>
-      <div class="svc-row">
-        <div class="svc-layer">継続運用</div>
-        <div class="svc-name">評価・改善提案による継続的な進化</div>
-        <div class="svc-role">評価と改善提案のサイクルで、AI組織を育てていく</div>
-      </div>
-      <div class="svc-row">
-        <span class="svc-badge">AI Agent OSだけの機能</span>
-        <div class="svc-layer">実行前</div>
-        <div class="svc-name">評価に合格し、人が承認してから本番稼働</div>
-        <div class="svc-role">生成したエージェントは、定義・権限・コストの検査と試験実行に合格し、人が承認して初めて動く</div>
-      </div>
-      <div class="svc-row">
-        <span class="svc-badge">AI Agent OSだけの機能</span>
-        <div class="svc-layer">外部接続</div>
-        <div class="svc-name">読み取り専用・承認制</div>
-        <div class="svc-role">Gmail・カレンダー等の外部連携は読み取り専用。書き込み系ツールの有効化には人の承認が必要</div>
-      </div>
-      <div class="svc-row">
-        <span class="svc-badge">AI Agent OSだけの機能</span>
-        <div class="svc-layer">改善</div>
-        <div class="svc-name">差分を確認して承認・適用。ロールバックも可能</div>
-        <div class="svc-role">AIが出す改善提案は、差分を確認して承認してから適用。合わなければ元のバージョンへ戻せる</div>
-      </div>
-      <div class="svc-row">
-        <div class="svc-layer">記録</div>
-        <div class="svc-name">操作を監査ログに記録</div>
-        <div class="svc-role">誰が・いつ・何をしたかを記録し、秘密情報らしき文字列は自動的に伏せて保存</div>
-      </div>
-      <div class="svc-row">
-        <span class="svc-badge">AI Agent OSだけの機能</span>
-        <div class="svc-layer">常駐</div>
-        <div class="svc-name">PC常駐のキャラクター型エージェントに直接依頼</div>
-        <div class="svc-role">PCに常駐するキャラクター型エージェントへ、チャットでそのまま依頼できる</div>
-      </div>
+    <div class="feat-table-wrap">
+      <table class="feat-table">
+        <thead>
+          <tr><th>領域</th><th>機能</th><th>概要</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feat-area">ソリューション設計<br>・アーキテクチャ</td>
+            <td class="feat-name">ダッシュボード</td>
+            <td>承認待ち・失敗・完了・実行中件数、AI組織数・エージェント数、処理中のチャット依頼、PCコンパニオンの接続状況、実行履歴を1画面で確認できる</td>
+          </tr>
+          <tr>
+            <td class="feat-area">ソリューション設計<br>・アーキテクチャ</td>
+            <td class="feat-name"><span class="svc-badge">AI Agent OSだけの機能</span><div>Agent Factory（自然言語で組織を設計）</div></td>
+            <td>業務の目的を日本語で書くと、AIが業務を分析し、必要なエージェントと組織の構成案を作る</td>
+          </tr>
+          <tr>
+            <td class="feat-area">ソリューション設計<br>・アーキテクチャ</td>
+            <td class="feat-name">組織ビルダー</td>
+            <td>エージェント同士をドラッグでつなぎ、依頼できる方向＝実行順序を設計する</td>
+          </tr>
+          <tr>
+            <td class="feat-area">ソリューション設計<br>・アーキテクチャ</td>
+            <td class="feat-name">マルチエージェント委任</td>
+            <td>統括エージェントが依頼内容を担当範囲ごとに切り分け、複数のエージェントへ同時に依頼し、結果を集約する</td>
+          </tr>
+          <tr>
+            <td class="feat-area">AIモデル・プロンプト<br>・コンテキスト管理</td>
+            <td class="feat-name">ナレッジ管理（PDF・TXT・Markdown・DOCX）</td>
+            <td>登録した文書をチャンク化し、エージェントへの割り当てと承認を経て、実行時に検索・参照する</td>
+          </tr>
+          <tr>
+            <td class="feat-area">AIモデル・プロンプト<br>・コンテキスト管理</td>
+            <td class="feat-name">スキル・権限管理（許可リスト方式）</td>
+            <td>エージェントごとに利用許可を設定。任意のシェルコマンドは実行不可、ブラウザ操作スキルは使い捨て環境でパスワード入力不可</td>
+          </tr>
+          <tr>
+            <td class="feat-area">外部システム連携</td>
+            <td class="feat-name"><span class="svc-badge">AI Agent OSだけの機能</span><div>外部サービス連携（読み取り専用・承認制）</div></td>
+            <td>Gmail・カレンダー・ドライブ・GitHub・Slack・Notion・Dropbox・Web検索に対応。書き込み系ツールの有効化には人の承認が必要</td>
+          </tr>
+          <tr>
+            <td class="feat-area">外部システム連携</td>
+            <td class="feat-name">外部データへの指示混入対策</td>
+            <td>Webページやナレッジ文書など外部由来のデータを専用タグで区切り、その中の指示には従わせない（基盤側の強制ではなく注意喚起）</td>
+          </tr>
+          <tr>
+            <td class="feat-area">評価・テスト<br>・最適化</td>
+            <td class="feat-name"><span class="svc-badge">AI Agent OSだけの機能</span><div>エージェント評価（品質ゲート）</div></td>
+            <td>定義・権限・コストの検査と隔離した試験実行をプログラムが判定。評価に合格し、人が承認してから初めて本番稼働する</td>
+          </tr>
+          <tr>
+            <td class="feat-area">評価・テスト<br>・最適化</td>
+            <td class="feat-name">実行履歴・コストの記録</td>
+            <td>CLI実行回数・入出力トークン数・コストをタスクごとに記録し、最適化に活用する</td>
+          </tr>
+          <tr>
+            <td class="feat-area">ガバナンス<br>・セキュリティ</td>
+            <td class="feat-name">自律性4段階の設定</td>
+            <td>「読み取りのみ」「下書きまで」「承認必須（標準）」「自動実行」の4段階をエージェントごとに設定できる</td>
+          </tr>
+          <tr>
+            <td class="feat-area">ガバナンス<br>・セキュリティ</td>
+            <td class="feat-name">自動実行の回数・時間帯の上限</td>
+            <td>自動実行に設定したエージェントでも、1日の回数上限（既定20回）と許可された時間帯の範囲内でのみ自動的に許可される</td>
+          </tr>
+          <tr>
+            <td class="feat-area">ガバナンス<br>・セキュリティ</td>
+            <td class="feat-name">承認・監査ログ</td>
+            <td>誰が・いつ・何をしたかを記録し、秘密情報らしき文字列は自動的に伏せて保存する</td>
+          </tr>
+          <tr>
+            <td class="feat-area">ステークホルダー<br>・ライフサイクル管理</td>
+            <td class="feat-name"><span class="svc-badge">AI Agent OSだけの機能</span><div>改善提案（差分承認・ロールバック）</div></td>
+            <td>実行履歴・構成分析から改善点を見つけ、差分を確認して承認してから適用。合わなければ元のバージョンへ戻せる</td>
+          </tr>
+          <tr>
+            <td class="feat-area">開発生産性<br>・運用支援</td>
+            <td class="feat-name"><span class="svc-badge">AI Agent OSだけの機能</span><div>PCコンパニオン</div></td>
+            <td>PCに常駐するキャラクター型エージェントへ、チャットでそのまま依頼できる</td>
+          </tr>
+          <tr>
+            <td class="feat-area">開発生産性<br>・運用支援</td>
+            <td class="feat-name">継続的な検証体制</td>
+            <td>単体・結合テスト151件、E2Eテスト16シナリオで継続的に検証しながら開発している</td>
+          </tr>
+          <tr>
+            <td class="feat-area">提供形態</td>
+            <td class="feat-name">5つの導入形態からカスタマイズ</td>
+            <td>オンプレ型・ハイブリッド型・ローカルLLM型・標準SaaS型・専用AWS型から、企業のIT環境・セキュリティ要件に応じて構築する</td>
+          </tr>
+          <tr>
+            <td class="feat-area">導入例</td>
+            <td class="feat-name">複数AI組織の併設</td>
+            <td>1つの企業内に、目的ごとに複数のAI組織（営業AI組織・経理AI組織など）を独立して構築・運用できる</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <p class="prose" style="margin-top:14px">どちらが優れているというより、設計思想の違いです。社内の業務で使う以上、スピードよりも「間違いに早く気づけること」「差し戻せること」を優先しました。</p>
   </div>
