@@ -89,15 +89,13 @@ img{max-width:100%}
 .hero-wordmark{font-size:clamp(28px,4vw,50px);font-weight:900;letter-spacing:-.01em;line-height:1.05;margin-bottom:16px}
 .hero-wordmark .tone-a{color:var(--accent)}
 .hero-wordmark .tone-b{color:var(--ink)}
-.hero-tagline{font-size:clamp(17px,2vw,21px);font-weight:800;color:var(--ink);letter-spacing:.01em;margin-bottom:12px}
+.hero-tagline{font-size:clamp(17px,2vw,21px);font-weight:800;color:var(--ink);letter-spacing:.01em;margin-bottom:10px}
+.hero-subcopy{font-size:clamp(14.5px,1.6vw,17px);font-weight:700;color:var(--accent-dark);margin-bottom:14px}
 .hero-category{font-size:13px;font-weight:800;color:var(--accent-dark);letter-spacing:.06em;margin-bottom:20px}
 .hero-copy h1.hero-h1-sub{font-size:clamp(17px,2vw,21px);font-weight:700;line-height:1.6;letter-spacing:0;margin-bottom:18px;color:var(--gray-dark);text-wrap:balance}
 .hero-highlight{background:#0b2138;color:#fff;border-radius:12px;padding:16px 20px;font-size:14px;line-height:1.85;margin-bottom:24px;max-width:560px}
 .hero-highlight strong{color:var(--teal2);font-weight:900}
-.hero-points{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
-.hero-point{display:flex;align-items:flex-start;gap:9px;font-size:13px;font-weight:700;color:var(--ink);line-height:1.6}
-.hero-point-icon{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:2px}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
 .btn{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:700;padding:15px 34px;border-radius:999px;text-decoration:none}
 .btn-primary{background:var(--orange);color:var(--ink);box-shadow:0 8px 22px rgba(240,165,74,.3)}
 .btn-ghost{border:1px solid var(--line);color:var(--ink);padding:15px 30px;background:#fff}
@@ -163,6 +161,22 @@ img{max-width:100%}
 @media (prefers-reduced-motion:reduce){.lightbox,.fig{transition:none}}
 
 .svc-badge{display:inline-block;font-size:9px;font-weight:900;color:#fff;background:var(--orange-dark);border-radius:20px;padding:3px 8px;letter-spacing:.02em;white-space:nowrap;margin-bottom:6px}
+
+/* 4つの特徴（pillars） */
+.pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:8px}
+.pillar-card{position:relative;overflow:hidden;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:26px 22px 22px;display:flex;flex-direction:column;gap:12px;transition:transform .2s,box-shadow .2s}
+.pillar-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--pillar-color)}
+.pillar-card:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(30,27,75,.09)}
+.pillar-icon{width:44px;height:44px;border-radius:12px;background:var(--pillar-soft);color:var(--pillar-color);display:flex;align-items:center;justify-content:center}
+.pillar-icon svg{width:24px;height:24px}
+.pillar-n{font-size:11px;font-weight:900;color:var(--pillar-color);letter-spacing:.1em}
+.pillar-title{font-size:17px;font-weight:900;line-height:1.4;margin:0}
+.pillar-d{font-size:13px;color:var(--gray);line-height:1.85}
+.pillar-feats{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:12px;border-top:1px solid var(--line2)}
+.pillar-feat{font-size:10.5px;font-weight:700;color:var(--gray-dark);background:var(--bg);padding:4px 9px;border-radius:12px;white-space:nowrap}
+@media (max-width:900px){.pillars-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.pillars-grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.pillar-card{transition:none}}
 
 .feat-table-wrap{overflow-x:auto;margin:26px 0 6px;border:1px solid var(--line);border-radius:10px}
 .feat-table{width:100%;min-width:640px;border-collapse:collapse;font-size:13px}
@@ -259,19 +273,14 @@ img{max-width:100%}
   <img class="hero-watermark" src="logo-mark.png" alt="" aria-hidden="true">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <div class="hero-tag">✦ 企業専用AI組織の構築・運用プラットフォーム</div>
+      <div class="hero-tag">✦ 企業専用 AI組織構築・運用プラットフォーム</div>
       <div class="hero-wordmark"><span class="tone-a">AI</span><span class="tone-b"> Agent OS</span></div>
       <div class="hero-tagline">「AIを使う」から、「AIに組織で任せる」へ。</div>
-      <h1 class="hero-h1-sub">企業専用のAI組織を、自動で構築・運用。業務に必要なAIエージェントを自動設計し、専門知識・スキル・ツールを組み合わせて組織化。人の承認と品質管理のもとで業務を実行・評価・改善します。</h1>
-      <div class="hero-points">
-        <div class="hero-point"><span class="hero-point-icon">✓</span>自然言語で業務を伝えるだけ。AIが組織を自動設計</div>
-        <div class="hero-point"><span class="hero-point-icon">✓</span>専門知識・スキル・ツールを組み合わせて業務を実行</div>
-        <div class="hero-point"><span class="hero-point-icon">✓</span>品質評価・人の承認・権限管理で安全に運用</div>
-        <div class="hero-point"><span class="hero-point-icon">✓</span>実行結果を評価し、改善・バージョン管理まで対応</div>
-      </div>
+      <div class="hero-subcopy">AI組織の構築から、業務実行・統制・改善まで。</div>
+      <h1 class="hero-h1-sub">業務の目的を伝えると、AIが必要なエージェントを設計・組織化。専門知識・スキル・ツールを組み合わせ、人の承認と品質管理のもとで複数のAIが連携して業務を遂行します。実行結果を分析し、継続的な改善も支援します。</h1>
       <div class="hero-btns">
-        <a href="https://shikou-ai.com/contact.html" class="btn btn-primary">無料相談</a>
-        <a href="#customer-demo" class="btn btn-ghost">実際のデモを見る</a>
+        <a href="https://shikou-ai.com/contact.html" class="btn btn-primary">無料で相談する</a>
+        <a href="#customer-demo" class="btn btn-ghost">実際の画面・デモを見る</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -284,6 +293,7 @@ img{max-width:100%}
 <nav class="page-nav" aria-label="このページの目次">
   <span class="page-nav-label">このページの内容</span>
   <ol class="page-nav-list">
+    <li><a href="#pillars">4つの特徴</a></li>
     <li><a href="#concerns">課題</a></li>
     <li><a href="#about-name">AI Agent OSとは</a></li>
     <li><a href="#background">乗り越える壁</a></li>
@@ -297,6 +307,71 @@ img{max-width:100%}
     <li><a href="#onboarding">導入の流れ</a></li>
   </ol>
 </nav>
+
+<section class="section" id="pillars">
+  <div class="wrap">
+    <div class="sec-tag">4 PILLARS</div>
+    <h2 class="sec-title">AI Agent OSが実現する、4つの価値</h2>
+    <p class="sec-lead">AI組織を作るだけでは終わらない。業務の実行から安全な運用、継続的な改善までを一元管理します。</p>
+    <div class="pillars-grid">
+
+      <div class="pillar-card" style="--pillar-color:#4338ca;--pillar-soft:#edeefa">
+        <div class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.3"/><circle cx="5" cy="19" r="2.3"/><circle cx="19" cy="19" r="2.3"/><path d="M12 7.3V12M12 12 6.8 17M12 12l5.2 5"/></svg></div>
+        <div class="pillar-n">01｜構築</div>
+        <h3 class="pillar-title">AI組織を自動構築</h3>
+        <p class="pillar-d">業務の目的を伝えると、AIが必要なエージェントと役割・組織構成を設計。専門スキルやナレッジを組み合わせた企業専用のAI組織を構築できます。</p>
+        <div class="pillar-feats">
+          <span class="pillar-feat">Agent Factory</span>
+          <span class="pillar-feat">エージェント作成ウィザード</span>
+          <span class="pillar-feat">組織ビルダー</span>
+          <span class="pillar-feat">ナレッジ・スキル管理</span>
+        </div>
+      </div>
+
+      <div class="pillar-card" style="--pillar-color:#2f6fd0;--pillar-soft:#e8f0fc">
+        <div class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="6" height="5" rx="1.2"/><rect x="15" y="4" width="6" height="5" rx="1.2"/><rect x="9" y="15" width="6" height="5" rx="1.2"/><path d="M6 9v2a2 2 0 0 0 2 2h1M18 9v2a2 2 0 0 1-2 2h-1"/></svg></div>
+        <div class="pillar-n">02｜実行</div>
+        <h3 class="pillar-title">AI組織が連携して業務を実行</h3>
+        <p class="pillar-d">統括エージェントが依頼内容を担当範囲ごとに分解し、複数のエージェントへ委任。結果を集約して業務を遂行します。外部サービス連携や定期実行にも対応します。</p>
+        <div class="pillar-feats">
+          <span class="pillar-feat">マルチエージェント委任</span>
+          <span class="pillar-feat">チャットでの依頼</span>
+          <span class="pillar-feat">外部サービス連携</span>
+          <span class="pillar-feat">定期実行</span>
+          <span class="pillar-feat">成果物管理</span>
+        </div>
+      </div>
+
+      <div class="pillar-card" style="--pillar-color:#c05621;--pillar-soft:#fdf1e2">
+        <div class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 19 6v5c0 5-3.1 8.1-7 9.8-3.9-1.7-7-4.8-7-9.8V6l7-2.8Z"/><path d="M9 12.2l2 2 4-4.2"/></svg></div>
+        <div class="pillar-n">03｜統制</div>
+        <h3 class="pillar-title">人が管理できる安全な運用</h3>
+        <p class="pillar-d">エージェントごとに権限と自律性を設定。品質評価、承認フロー、監査ログによって、AIに任せる範囲を適切にコントロールできます。</p>
+        <div class="pillar-feats">
+          <span class="pillar-feat">エージェント評価（品質ゲート）</span>
+          <span class="pillar-feat">自律性4段階の設定</span>
+          <span class="pillar-feat">スキル・権限管理</span>
+          <span class="pillar-feat">承認・監査ログ</span>
+          <span class="pillar-feat">自動実行の上限設定</span>
+        </div>
+      </div>
+
+      <div class="pillar-card" style="--pillar-color:#0d9488;--pillar-soft:#e0f5f3">
+        <div class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9 11l4 4 8-9"/><path d="M15 6h5v5"/></svg></div>
+        <div class="pillar-n">04｜改善</div>
+        <h3 class="pillar-title">AI組織を継続的に改善</h3>
+        <p class="pillar-d">実行履歴や稼働状況を分析して改善案を提示。変更内容を確認・承認してから適用し、必要に応じて以前のバージョンへ戻すこともできます。</p>
+        <div class="pillar-feats">
+          <span class="pillar-feat">改善提案</span>
+          <span class="pillar-feat">差分承認</span>
+          <span class="pillar-feat">ロールバック</span>
+          <span class="pillar-feat">自己進化</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <section class="section alt" id="concerns">
   <div class="wrap">
