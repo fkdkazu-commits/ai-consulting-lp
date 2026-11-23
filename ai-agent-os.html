@@ -500,6 +500,11 @@ img{max-width:100%}
           </tr>
           <tr>
             <td class="feat-area">AIモデル・プロンプト<br>・コンテキスト管理</td>
+            <td class="feat-name">エージェントごとのAIモデル選択（今後対応予定）</td>
+            <td>Claude・GPT・Gemini・ローカルLLMなど、エージェントごとに最適なAIモデルを選べるようにする構想です。現時点の実行エンジンはClaude Code CLIのみで、未提供です</td>
+          </tr>
+          <tr>
+            <td class="feat-area">AIモデル・プロンプト<br>・コンテキスト管理</td>
             <td class="feat-name">スキル・権限管理（許可リスト方式）</td>
             <td>エージェントごとに利用許可を設定。任意のシェルコマンドは実行不可、ブラウザ操作スキルは使い捨て環境でパスワード入力不可</td>
           </tr>
@@ -512,6 +517,11 @@ img{max-width:100%}
             <td class="feat-area">外部システム連携</td>
             <td class="feat-name">外部データへの指示混入対策</td>
             <td>Webページやナレッジ文書など外部由来のデータを専用タグで区切り、その中の指示には従わせない（基盤側の強制ではなく注意喚起）</td>
+          </tr>
+          <tr>
+            <td class="feat-area">外部システム連携</td>
+            <td class="feat-name">リモート会議への参加（今後対応）</td>
+            <td>Zoom・Teams・Google Meetなどの会議にAIが参加し、議事録・決定事項を整理する構想です。現時点では未提供で、実現方式を調査している段階です</td>
           </tr>
           <tr>
             <td class="feat-area">評価・テスト<br>・最適化</td>
@@ -570,12 +580,17 @@ img{max-width:100%}
           </tr>
           <tr>
             <td class="feat-area">開発生産性<br>・運用支援</td>
+            <td class="feat-name">音声入力・読み上げ</td>
+            <td>PCコンパニオンのマイクボタンで話しかけると、PC内のローカル音声認識で文字にして依頼し、返事の要点を読み上げる。音声・文字とも外部へは送信しない</td>
+          </tr>
+          <tr>
+            <td class="feat-area">開発生産性<br>・運用支援</td>
             <td class="feat-name">継続的な検証体制</td>
             <td>単体・結合テスト151件、E2Eテスト16シナリオで継続的に検証しながら開発している</td>
           </tr>
           <tr>
             <td class="feat-area">提供形態</td>
-            <td class="feat-name">5つの導入形態からカスタマイズ</td>
+            <td class="feat-name"><span class="svc-badge">AI Agent OSだけの機能</span><div>5つの導入形態からカスタマイズ</div></td>
             <td>オンプレ型・ハイブリッド型・ローカルLLM型・標準SaaS型・専用AWS型から、企業のIT環境・セキュリティ要件に応じて構築する</td>
           </tr>
           <tr>
@@ -840,7 +855,7 @@ img{max-width:100%}
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">PC常駐</span><span class="feat-title">PCコンパニオン（デスクトップキャラクター）</span></div>
-      <p class="feat-d">チャット可能なキャラクター型のエージェントを、デスクトップ上に表示できます。ペアリングコードで接続し、キャラクターをクリックするとチャット欄が開いて、依頼した内容がそのまま実行エンジンで処理されます。OS起動時の自動起動は、利用者が明示的に有効化した場合のみです。</p>
+      <p class="feat-d">チャット可能なキャラクター型のエージェントを、デスクトップ上に表示できます。ペアリングコードで接続し、キャラクターをクリックするとチャット欄が開いて、依頼した内容がそのまま実行エンジンで処理されます。マイクボタンを押して話しかけることもでき、音声はこのPC内のローカル音声認識で文字にし、返事の要点を読み上げます（音声・文字とも外部へは送信しません）。OS起動時の自動起動は、利用者が明示的に有効化した場合のみです。</p>
       <img src="fig_agentos_companion.png" alt="PCコンパニオン画面。デスクトップに秘書を表示するボタン、ペアリングコード発行ボタン、接続済み端末の一覧が表示されている" class="fig" loading="lazy" width="1400" height="1000">
       <p class="fig-cap">PCコンパニオンの設定画面（実際の接続データ）</p>
       <img src="fig_agentos_companion_desktop.png" alt="デスクトップ上に表示された複数のキャラクターと、チャット欄を開いた統括エージェント（ユナ）とのやり取り画面" class="fig" loading="lazy" width="1660" height="1102">
@@ -934,16 +949,25 @@ img{max-width:100%}
 <section class="section" id="customer-demo">
   <div class="wrap">
     <div class="sec-tag">CUSTOMER DEMO</div>
-    <h2 class="sec-title">実際の導入デモ：調剤薬局の業務改善</h2>
-    <p class="sec-lead">これまでExcelで行っていた一連の管理業務を、Agent Factoryで約10分のうちにAIエージェント化し、複数のエージェントをAI組織として組み立てたデモです。</p>
+    <h2 class="sec-title">導入デモ：調剤薬局の業務改善と製造業のAI組織構築</h2>
+    <p class="sec-lead">調剤薬局での実際の導入事例と、製造業の業務シーンを想定したデモ組織でのAI組織自動構築の様子を、動画でご覧いただけます。</p>
 
     <div class="feat">
-      <div class="feat-h"><span class="feat-tag">調剤薬局</span><span class="feat-title">Excel管理業務のAIエージェント化・組織化</span></div>
+      <div class="feat-h"><span class="feat-tag">調剤薬局（実例）</span><span class="feat-title">Excel管理業務のAIエージェント化・組織化</span></div>
       <p class="feat-d">クライアント企業（調剤薬局）で実際にExcelで行っていた一連の管理業務を題材に、Agent Factoryで業務をAIエージェント化し、複数のエージェントをAI組織として組み立てる様子のデモです。</p>
       <div class="video-wrap">
         <iframe src="https://www.youtube-nocookie.com/embed/a6s30AftpuE" title="調剤薬局の業務改善デモ動画" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
       <p class="fig-cap">実際のクライアント導入デモ（調剤薬局、業務改善の様子）</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-h"><span class="feat-tag">製造業（デモ組織）</span><span class="feat-title">製造業の業務シーンを想定したAI組織の自動構築</span></div>
+      <p class="feat-d">製造業の業務シーンを想定したデモ組織を題材に、Agent Factoryが業務の目的からAI組織を自動構築する様子のデモです。</p>
+      <div class="video-wrap">
+        <iframe src="https://www.youtube-nocookie.com/embed/Kbq2JYMb6QA" title="製造業向けAI組織自動構築デモ動画" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <p class="fig-cap">製造業を想定したデモ組織でのAI組織自動構築（Agent Factory）</p>
     </div>
 
     <p class="prose" style="margin-top:20px">この動画は、現在の業務がAIエージェントにどう置き換わるかを再現したデモです。出力の形式やキャラクターの見た目といった表現面もカスタマイズでき、実際の導入では、その業務で使うナレッジを登録し、必要に応じてスキルを更新・チューニングしながら現場に合わせていきます。</p>
