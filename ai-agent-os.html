@@ -129,6 +129,22 @@ img{max-width:100%}
 .feat-future-badge{flex-shrink:0;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:var(--orange-dark);background:#fdf1e2;padding:5px 12px;border-radius:999px;letter-spacing:.02em;white-space:nowrap;margin-top:1px}
 .feat-future-text{font-size:13px;color:var(--gray-dark);line-height:1.8}
 
+.estimate-box{display:flex;gap:16px;align-items:flex-start;margin-top:16px;padding:20px 24px;border-radius:14px;border:1px solid var(--line);max-width:760px}
+.estimate-box.c-indigo{background:linear-gradient(135deg,var(--card),#fff);border-left:5px solid var(--accent)}
+.estimate-box.c-orange{background:linear-gradient(135deg,#fdf1e2,#fff);border-left:5px solid var(--orange)}
+.estimate-icon{font-size:26px;line-height:1.3;flex-shrink:0}
+.estimate-label{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.estimate-box.c-indigo .estimate-label{color:var(--accent)}
+.estimate-box.c-orange .estimate-label{color:var(--orange-dark)}
+.estimate-text{font-size:13px;color:var(--gray-dark);line-height:1.8;margin-bottom:10px;font-weight:700}
+.estimate-value{font-size:30px;font-weight:900;color:var(--ink);line-height:1.3;margin-bottom:10px}
+.estimate-value small{font-size:13.5px;font-weight:700;color:var(--gray)}
+.estimate-value .arrow{font-size:20px;font-weight:700;color:var(--gray-light);margin:0 8px}
+.estimate-pct{display:inline-block;font-size:14px;font-weight:900;padding:5px 14px;border-radius:999px;margin-bottom:10px}
+.estimate-box.c-indigo .estimate-pct{color:#fff;background:var(--accent)}
+.estimate-box.c-orange .estimate-pct{color:#fff;background:var(--orange-dark)}
+.estimate-note{font-size:11px;color:var(--gray-light);margin-top:4px;line-height:1.7}
+
 .mini-steps{list-style:none;counter-reset:step;margin:0 0 16px;max-width:760px}
 .mini-steps li{position:relative;padding-left:34px;margin-bottom:12px;font-size:14px;color:var(--gray-dark);line-height:1.8}
 .mini-steps li:last-child{margin-bottom:0}
@@ -959,7 +975,16 @@ img{max-width:100%}
         <iframe src="https://www.youtube-nocookie.com/embed/a6s30AftpuE" title="調剤薬局の業務改善デモ動画" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
       <p class="fig-cap">実際のクライアント導入デモ（調剤薬局、業務改善の様子）</p>
-      <p class="feat-d" style="margin-top:12px"><strong>削減予想工数（目安）：</strong>約10シートに及ぶ受払・請求突合・日別集計・レポート作成にかかる作業は、人手で行う場合、月あたり1日程度（6〜8時間程度）かかることが多く、AI組織による自動化で数分〜十数分程度に短縮できると見込まれます。※あくまで一般的な目安であり、実際の効果は業務量や環境によって変わります。</p>
+      <div class="estimate-box c-indigo">
+        <div class="estimate-icon">⏱️</div>
+        <div>
+          <div class="estimate-label">削減予想工数（目安）</div>
+          <p class="estimate-text">受払・請求突合・日別集計・レポート作成</p>
+          <div class="estimate-value">6〜8時間<span class="arrow">→</span>5〜10分</div>
+          <div class="estimate-pct">約97〜99%削減</div>
+          <p class="estimate-note">月次業務・約10シートを対象とした試算。※あくまで一般的な目安であり、実際の効果は業務量や環境によって変わります。</p>
+        </div>
+      </div>
     </div>
 
     <div class="feat">
@@ -969,7 +994,16 @@ img{max-width:100%}
         <iframe src="https://www.youtube-nocookie.com/embed/Kbq2JYMb6QA" title="製造業向け購買・生産管理デモ動画" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
       <p class="fig-cap">製造業を想定したデモ組織での購買・生産管理業務のAIエージェント化・組織化</p>
-      <p class="feat-d" style="margin-top:12px"><strong>削減予想工数（目安）：</strong>材料調達状況や請求内容の突合、納期への影響分析、レポート作成にかかる確認・分析作業は、人手で行う場合、1回あたり6〜8時間程度かかることが多く、AI組織による自動化で数分〜十数分程度に短縮できると見込まれます。※あくまで一般的な目安であり、実際の効果は業務量や環境によって変わります。</p>
+      <div class="estimate-box c-orange">
+        <div class="estimate-icon">⏱️</div>
+        <div>
+          <div class="estimate-label">削減予想工数（目安）</div>
+          <p class="estimate-text">材料調達状況・請求突合・納期影響分析</p>
+          <div class="estimate-value">10〜12時間<span class="arrow">→</span>15〜30分</div>
+          <div class="estimate-pct">約95〜98%削減</div>
+          <p class="estimate-note">調達情報の収集・照合・影響分析を含む1回あたりの試算。※あくまで一般的な目安であり、実際の効果は業務量や環境によって変わります。</p>
+        </div>
+      </div>
     </div>
 
     <p class="prose" style="margin-top:20px">この動画は、現在の業務がAIエージェントにどう置き換わるかを再現したデモです。出力の形式やキャラクターの見た目といった表現面もカスタマイズでき、実際の導入では、その業務で使うナレッジを登録し、必要に応じてスキルを更新・チューニングしながら現場に合わせていきます。</p>
