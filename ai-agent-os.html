@@ -229,6 +229,11 @@ img{max-width:100%}
 .faq-item summary::after{content:'+';font-size:22px;font-weight:400;color:var(--accent);flex-shrink:0;transition:transform .15s}
 .faq-item[open] summary::after{transform:rotate(45deg)}
 .faq-a{padding:0 24px 20px;font-size:14px;color:var(--gray-dark);line-height:1.9;max-width:760px}
+.faq-a p{margin:0 0 12px}
+.faq-a p:last-child{margin-bottom:0}
+.faq-a ul{margin:0 0 12px;padding-left:20px}
+.faq-a ul:last-child{margin-bottom:0}
+.faq-a li{margin-bottom:4px}
 
 .prose{font-size:15px;color:var(--gray-dark);line-height:1.95;max-width:700px}
 .prose+.prose{margin-top:14px}
@@ -435,13 +440,13 @@ img{max-width:100%}
         <div class="phase-n">07</div>
         <div class="phase-t">既存システムとの連携の複雑さ</div>
         <div class="phase-d">社内のツールやサービスとどうつながるのか分からない。</div>
-        <div class="phase-tag">→ Gmail・カレンダー・ドライブ・GitHub・Slack・Notion・Dropbox・Web検索に対応（読み取り専用・承認制）</div>
+        <div class="phase-tag">→ Gmail・カレンダー・ドライブ・GitHub・Slack・Notion・Dropbox・Web検索に対応（読み取り専用・承認制、順次拡大中）</div>
       </div>
       <div class="phase-item">
         <div class="phase-n">08</div>
         <div class="phase-t">特定のAIベンダーへの依存（ロックイン）</div>
         <div class="phase-d">1社のAIモデル次第で、運用が左右されてしまうことへの懸念。</div>
-        <div class="phase-tag">→ 現在の実行エンジンはClaude Code CLI。Microsoft 365 Copilotや他社AIモデルへの対応拡大は構想中</div>
+        <div class="phase-tag">→ 標準の実行エンジンはClaude Code CLI。Microsoft 365 Copilotや他社AIモデルへの対応は、ご要望に応じて個別にご提案</div>
       </div>
     </div>
   </div>
@@ -516,8 +521,8 @@ img{max-width:100%}
           </tr>
           <tr>
             <td class="feat-area">AIモデル・プロンプト<br>・コンテキスト管理</td>
-            <td class="feat-name">エージェントごとのAIモデル選択（今後対応予定）</td>
-            <td>Claude・GPT・Gemini・ローカルLLMなど、エージェントごとに最適なAIモデルを選べるようにする構想です。現時点の実行エンジンはClaude Code CLIのみで、未提供です</td>
+            <td class="feat-name">エージェントごとのAIモデル選択</td>
+            <td>Claude Code CLIが標準ですが、ローカルLLMも含め、他のAIモデルも選択可能です</td>
           </tr>
           <tr>
             <td class="feat-area">AIモデル・プロンプト<br>・コンテキスト管理</td>
@@ -527,7 +532,7 @@ img{max-width:100%}
           <tr>
             <td class="feat-area">外部システム連携</td>
             <td class="feat-name"><span class="svc-badge">AI Agent OSだけの機能</span><div>外部サービス連携（読み取り専用・承認制）</div></td>
-            <td>Gmail・カレンダー・ドライブ・GitHub・Slack・Notion・Dropbox・Web検索に対応。書き込み系ツールの有効化には人の承認が必要</td>
+            <td>Gmail・カレンダー・ドライブ・GitHub・Slack・Notion・Dropbox・Web検索に対応。書き込み系ツールの有効化には人の承認が必要。対応サービスは順次拡大中です</td>
           </tr>
           <tr>
             <td class="feat-area">外部システム連携</td>
@@ -536,8 +541,8 @@ img{max-width:100%}
           </tr>
           <tr>
             <td class="feat-area">外部システム連携</td>
-            <td class="feat-name">リモート会議への参加（今後対応）</td>
-            <td>Zoom・Teams・Google Meetなどの会議にAIが参加し、議事録・決定事項を整理する構想です。現時点では未提供で、実現方式を調査している段階です</td>
+            <td class="feat-name">リモート会議への参加（カスタム対応）</td>
+            <td>Zoom・Teams・Google Meetなどの会議にAIが参加し、議事録・決定事項を整理する機能です。ご要望に応じて実現方式を個別に検討し、構築します</td>
           </tr>
           <tr>
             <td class="feat-area">評価・テスト<br>・最適化</td>
@@ -592,17 +597,12 @@ img{max-width:100%}
           <tr>
             <td class="feat-area">開発生産性<br>・運用支援</td>
             <td class="feat-name"><span class="svc-badge">AI Agent OSだけの機能</span><div>PCコンパニオン</div></td>
-            <td>PCに常駐するキャラクター型エージェントへ、チャットでそのまま依頼できる。見た目は公式8キャラクターから選び、名前・サイズ・表示位置・吹き出しの有無を自由に設定できる</td>
+            <td>PCに常駐するキャラクター型エージェントへ、チャットでそのまま依頼できる。名前・サイズ・表示位置・吹き出しの有無を自由に設定でき、キャラクターのデザインもお客様のご要望に応じて追加できる</td>
           </tr>
           <tr>
             <td class="feat-area">開発生産性<br>・運用支援</td>
             <td class="feat-name">音声入力・読み上げ</td>
             <td>PCコンパニオンのマイクボタンで話しかけると、PC内のローカル音声認識で文字にして依頼し、返事の要点を読み上げる。音声・文字とも外部へは送信しない</td>
-          </tr>
-          <tr>
-            <td class="feat-area">開発生産性<br>・運用支援</td>
-            <td class="feat-name">継続的な検証体制</td>
-            <td>単体・結合テスト151件、E2Eテスト16シナリオで継続的に検証しながら開発している</td>
           </tr>
           <tr>
             <td class="feat-area">提供形態</td>
@@ -753,7 +753,7 @@ img{max-width:100%}
   <div class="wrap">
     <div class="sec-tag">DOMAIN 02 / 07</div>
     <h2 class="sec-title">AIモデル・プロンプト・コンテキスト管理</h2>
-    <p class="sec-lead">現在の実行エンジンはClaude Code CLIです。画面上にはMicrosoft 365 Copilot・ローカルLLMの予約枠も表示していますが、いずれも現時点では未提供です。ナレッジ・スキルの割り当ても、この領域で管理します。</p>
+    <p class="sec-lead">現在の標準実行エンジンはClaude Code CLIです。Microsoft 365 Copilot・ローカルLLMなど、異なる実行環境への対応についても、ご要望に応じて個別にご提案します。ナレッジ・スキルの割り当ても、この領域で管理します。</p>
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">知識</span><span class="feat-title">ナレッジ（PDF・TXT・Markdown・DOCX対応）</span></div>
@@ -775,7 +775,7 @@ img{max-width:100%}
   <div class="wrap">
     <div class="sec-tag">DOMAIN 03 / 07</div>
     <h2 class="sec-title">外部システム連携</h2>
-    <p class="sec-lead">Gmail・カレンダー・ドライブ・GitHub・Slack・Notion・Dropbox・Web検索に対応（読み取り専用・エージェントごとの承認制）。</p>
+    <p class="sec-lead">Gmail・カレンダー・ドライブ・GitHub・Slack・Notion・Dropbox・Web検索に対応（読み取り専用・エージェントごとの承認制）。対応サービスは順次拡大中です。</p>
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">外部連携</span><span class="feat-title">外部サービス連携（読み取り専用・承認制）</span></div>
@@ -867,7 +867,7 @@ img{max-width:100%}
   <div class="wrap">
     <div class="sec-tag">DOMAIN 07 / 07</div>
     <h2 class="sec-title">開発生産性・運用支援</h2>
-    <p class="sec-lead">単体/結合テスト151件・E2E16シナリオで継続的に検証しながら開発。PCコンパニオンから、日常的な依頼を直接実行エンジンへ渡せます。</p>
+    <p class="sec-lead">PCコンパニオンから、日常的な依頼を直接実行エンジンへ渡せます。</p>
 
     <div class="feat">
       <div class="feat-h"><span class="feat-tag">PC常駐</span><span class="feat-title">PCコンパニオン（デスクトップキャラクター）</span></div>
@@ -877,8 +877,6 @@ img{max-width:100%}
       <img src="fig_agentos_companion_desktop.png" alt="デスクトップ上に表示された複数のキャラクターと、チャット欄を開いた統括エージェント（ユナ）とのやり取り画面" class="fig" loading="lazy" width="1660" height="1102">
       <p class="fig-cap">デスクトップに表示されたキャラクターとチャット画面（実際の表示結果）</p>
     </div>
-
-    <p class="prose">開発側では、型チェックと単体・結合テスト151件、Playwright によるE2Eテスト16シナリオを用意し、継続的に検証しながら開発しています。</p>
   </div>
 </section>
 
@@ -1018,35 +1016,105 @@ img{max-width:100%}
     <div class="faq-list">
       <details class="faq-item">
         <summary>Claude Codeを直接使うのと何が違うのですか？</summary>
-        <p class="faq-a">Claude Codeは、開発者がコードを書く作業を支援するツールです。AI Agent OSは、役割を持つ複数のAIエージェントを組織として接続し、実行・評価・改善のサイクルを基盤として管理するためのプラットフォームです。AI実行そのものはClaude Code CLIに委ねており、競合するものではありません。</p>
+        <div class="faq-a">
+          <p>Claude Codeは、主に開発者がコードの作成や修正、開発作業を効率化するためのAIツールです。</p>
+          <p>一方、AI Agent OSは、複数のAIエージェントを企業の業務に合わせて組織化し、業務の実行・管理・評価・改善までを一元管理するプラットフォームです。</p>
+          <p>統括エージェントによる業務の分担、担当エージェント間の連携、専門スキルやナレッジの管理、実行権限や承認フロー、監査ログなど、企業でAIを組織的に活用するための仕組みを備えています。</p>
+          <p>AIの実行エンジンにはClaude Code CLIを採用しており、Claude Codeの実行能力を活用しながら、企業専用のAI組織として運用できる点が大きな違いです。</p>
+        </div>
       </details>
       <details class="faq-item">
-        <summary>Claude(Anthropic)のAPIキーは必要ですか？</summary>
-        <p class="faq-a">いいえ。AI実行はClaude Code CLI経由のみで、Claude APIを直接は呼び出しません。</p>
+        <summary>Claude（Anthropic）のAPIキーは必要ですか？</summary>
+        <div class="faq-a">
+          <p>いいえ。AIの実行にはClaude Code CLIを使用するため、AnthropicのAPIキーを別途用意する必要はありません。</p>
+          <p>Claude Code CLIのインストールと認証設定を行うことで、AIエージェントの実行が可能になります。</p>
+          <p>Claude Code CLIの利用契約・認証条件・利用上限については、Anthropicの提供条件に準拠します。</p>
+        </div>
       </details>
       <details class="faq-item">
-        <summary>Claude以外のAIモデル（OpenAI・Gemini等）にも対応しますか？</summary>
-        <p class="faq-a">現在対応している実行エンジンは、Claude Code CLIのみです。画面上には「Microsoft 365 Copilot」「ローカルLLM」の予約枠も表示していますが、いずれも今回のリリースでは未提供です。OpenAI・Gemini等を含む他社AIモデルへの対応拡大は、今後の構想として検討しています。</p>
+        <summary>Claude以外のAIモデル（OpenAI・Gemini等）にも対応していますか？</summary>
+        <div class="faq-a">
+          <p>現在の標準実行エンジンはClaude Code CLIです。</p>
+          <p>Microsoft 365 CopilotやローカルLLMなど、異なる実行環境についても選択肢として位置付けていますが、現行の標準提供範囲とは区別しています。</p>
+          <p>他社モデルや実行エンジンへの対応が必要な場合は、利用目的・セキュリティ要件・システム構成を確認したうえで、個別に対応方針をご提案します。</p>
+        </div>
       </details>
       <details class="faq-item">
         <summary>いきなりAIに全部任せることになりますか？</summary>
-        <p class="faq-a">いいえ。エージェントは評価に合格して承認されるまで本番稼働せず、外部ツールの有効化や組織の変更は承認制です。改善提案も、差分を確認して承認してから適用され、適用後はいつでも元のバージョンへ戻せます。</p>
+        <div class="faq-a">
+          <p>いいえ。AI Agent OSでは、エージェントごとに自律性を4段階で設定できます。</p>
+          <ul>
+            <li>読み取りのみ</li>
+            <li>下書きまで</li>
+            <li>承認必須（標準）</li>
+            <li>自動実行</li>
+          </ul>
+          <p>業務内容やリスクに応じて、人が管理する範囲とAIに任せる範囲を調整できます。</p>
+          <p>また、エージェントの品質評価、外部ツールの利用承認、実行履歴の記録、改善提案の差分確認など、AIの動作を管理するためのガバナンス機能を備えています。</p>
+          <p>AIに任せる範囲を段階的に広げながら運用できます。</p>
+        </div>
       </details>
       <details class="faq-item">
         <summary>メールやカレンダーの内容がそのまま外部へ送信されませんか？</summary>
-        <p class="faq-a">Gmail・Googleカレンダー等の連携は読み取り専用で、エージェントごとに承認が必要です。送信・返信・削除・予定変更などの書き込み系ツールは許可されません。メール・予定の本文は「第三者が書いたデータ」としてAIに渡し、中に書かれた指示には従わせない設計です。なお、連携を使うと内容はClaude Code CLI経由でClaudeに送信され、実行結果はこのアプリのローカルDBに保存されます。</p>
+        <div class="faq-a">
+          <p>Gmail・Googleカレンダー・Google Driveなどの外部サービス連携は、読み取り専用を基本とし、エージェントごとの承認制で管理します。</p>
+          <p>メールの送信・返信、予定変更、削除などの書き込み系操作は、標準の読み取り専用連携では実行されません。</p>
+          <p>また、メール本文やWebページ、ナレッジ文書などの外部由来データは、第三者が作成した情報として区別し、その中に含まれる指示にAIが従わないよう対策しています。</p>
+          <p>なお、連携データをAI処理に利用する場合、その内容は実行エンジンであるClaude Code CLIを通じてClaudeに送信されます。実行結果や業務データは、導入環境に応じたデータ保存先・管理方針に従って取り扱います。</p>
+          <p>データの取り扱いや外部送信の範囲については、導入時に確認・設計します。</p>
+        </div>
       </details>
       <details class="faq-item">
-        <summary>今すぐ商用のSaaSとして使えますか？</summary>
-        <p class="faq-a">はい。お客様の利用人数・権限設計・既存の認証基盤との連携状況などをお伺いし、環境に応じて認証基盤を含めて構築したうえでご提供します。</p>
+        <summary>商用利用や企業への導入はできますか？</summary>
+        <div class="faq-a">
+          <p>はい。企業の業務環境やセキュリティ要件に応じて、AI Agent OSの導入・構築・カスタマイズをご提供しています。</p>
+          <p>導入形態は、以下の5種類から選択できます。</p>
+          <ul>
+            <li>オンプレミス型</li>
+            <li>ハイブリッド型</li>
+            <li>ローカルLLM型</li>
+            <li>標準SaaS型</li>
+            <li>専用AWS型</li>
+          </ul>
+          <p>既存のIT環境、利用するAI実行エンジン、データ管理方針、セキュリティ要件などを確認し、適切な構成をご提案します。</p>
+          <p>具体的な利用人数や認証・アクセス管理の要件についても、導入構成に合わせて設計します。</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>個人事業主や個人でも利用できますか？</summary>
+        <div class="faq-a">
+          <p>はい。法人企業だけでなく、個人事業主や個人のお客様にも対応可能です。</p>
+          <p>個人向けの場合は、オンプレミス環境での提供となり、構築できるAI組織は1組織に限定されます。</p>
+          <p>お客様の業務内容やご要望に合わせて、必要なAIエージェントを設計・生成し、専門スキルやナレッジを組み込んだ専用のAI組織を構築してご提供します。</p>
+          <p>例えば、情報収集・資料作成・マーケティング・経理・スケジュール管理など、日常業務や事業運営を支援するAIエージェントを組み合わせることができます。</p>
+          <p>個人の業務スタイルや利用目的に合わせた、自分専用のAI組織を構築できますので、お気軽にご相談ください。</p>
+        </div>
       </details>
       <details class="faq-item">
         <summary>業種・用途は限定されますか？</summary>
-        <p class="faq-a">限定していません。本ページの画面例は製造業向けのデモ組織やSEO記事制作の組織ですが、Agent Factoryに業務の目的を伝えれば、営業・人事・経理・カスタマーサポートなど幅広い業務の組織構成を提案できます。</p>
+        <div class="faq-a">
+          <p>業種を限定せず、さまざまな企業業務への適用を想定しています。</p>
+          <p>例えば、以下のようなAI組織を構築できます。</p>
+          <ul>
+            <li>営業AI組織：顧客情報の整理、営業資料作成、提案支援</li>
+            <li>マーケティングAI組織：市場調査、競合分析、コンテンツ制作</li>
+            <li>経理AI組織：請求書情報の整理、経費データの集計、帳票作成支援</li>
+            <li>人事AI組織：採用情報の整理、求人原稿作成、応募者情報の管理支援</li>
+            <li>カスタマーサポートAI組織：問い合わせ分類、回答案作成、対応履歴の整理</li>
+            <li>製造業AI組織：設計情報の整理、技術文書の作成、品質管理支援</li>
+          </ul>
+          <p>Agent Factoryに業務の目的を入力することで、必要なエージェントや組織構成を設計できます。</p>
+          <p>また、企業独自の業務ルールや専門知識をナレッジ・スキルとして組み込むことで、業務に適したAI組織へカスタマイズできます。</p>
+        </div>
       </details>
       <details class="faq-item">
         <summary>導入・カスタマイズの相談はできますか？</summary>
-        <p class="faq-a">はい。現状の業務内容をお伺いし、AI Agent OSの考え方をどう当てはめられるか、個別にご提案します。固定の料金プランは設けておらず、スポット開発支援・業務委託支援のいずれの形でもご相談いただけます。</p>
+        <div class="faq-a">
+          <p>はい。AI Agent OSの導入から、企業独自のAI組織構築、業務自動化、外部システム連携までご相談いただけます。</p>
+          <p>まずは現在の業務内容や課題、利用中のシステム、セキュリティ要件などをお伺いし、AI Agent OSを活用した改善方法をご提案します。</p>
+          <p>導入形態や開発範囲に応じて個別にお見積もりいたします。</p>
+          <p>製品導入だけでなく、AIを活用した業務改善・自動化の設計や実装についても対応しています。</p>
+        </div>
       </details>
     </div>
   </div>
